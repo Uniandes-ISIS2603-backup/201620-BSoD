@@ -1,6 +1,7 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.MesaDTO;
 import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
@@ -13,80 +14,80 @@ import java.util.logging.Logger;
  * Mock del recurso Cliente.
  * @author jdguz
  */
-public class MockClientes 
+public class MockMesas 
 {	
     // Objeto para presentar logs de las operaciones
-    private final static Logger logger = Logger.getLogger(MockClientes.class.getName());
+    private final static Logger logger = Logger.getLogger(MockMesas.class.getName());
 	
     // Arreglo de clientes.
-    private static ArrayList<ClienteDTO> clientes;
+    private static ArrayList<MesaDTO> mesas;
     
     /**
      * Constructor.
      */
-    public MockClientes() 
+    public MockMesas() 
     {
-    	if (clientes == null) 
+    	if (mesas == null) 
         {
-            clientes = new ArrayList<ClienteDTO>();
-            clientes.add(new ClienteDTO(1L, "Ignacio1", "Arboleda1", "DireccionPereira1", 1));
-            clientes.add(new ClienteDTO(2L, "Ignacio2", "Arboleda2", "DireccionPereira2", 1));
-            clientes.add(new ClienteDTO(3L, "Ignacio3", "Arboleda3", "DireccionPereira3", 1));
-            clientes.add(new ClienteDTO(4L, "Ignacio4", "Arboleda4", "DireccionPereira4", 1));
+            mesas = new ArrayList<MesaDTO>();
+            mesas.add(new MesaDTO(1, 1, 4 , false));
+            mesas.add(new MesaDTO(2, 1, 4 , false));
+            mesas.add(new MesaDTO(3, 1, 4 , false));
+            mesas.add(new MesaDTO(4, 1, 4 , true));
         }
         
     	// Indica que se muestren todos los mensajes
     	logger.setLevel(Level.INFO);
     	
     	// Muestra información 
-    	logger.info("Inicializada la lista de clientes");
-    	logger.info("Clientes:\n" + clientes );
+    	logger.info("Inicializada la lista de mesas");
+    	logger.info("Mesas:\n" + mesas );
     }    
     
     /**
-    * Obtiene el listado de clientes. 
-    * @return Lista de clientes.
+    * Obtiene el listado de mesas. 
+    * @return Lista de mesas.
     * @throws LogicaRestauranteException cuando no existe la lista en memoria  
     */    
-    public List<ClienteDTO> darClientes() throws LogicaRestauranteException 
+    public List<MesaDTO> darMesas() throws LogicaRestauranteException 
     {
-        logger.info("Recibiendo solicitud de dar todos los clientes.");
+        logger.info("Recibiendo solicitud de dar todas las mesas.");
         
-    	if (clientes == null) 
+    	if (mesas == null) 
         {
-    		logger.severe("Error interno: lista de clientes no existe.");
-    		throw new LogicaRestauranteException("Error interno: lista de clientes no existe.");    		
+    		logger.severe("Error interno: lista de mesas no existe.");
+    		throw new LogicaRestauranteException("Error interno: lista de mesas no existe.");    		
     	}
-    	logger.info("Retornando todos los clientes.");
-    	return clientes;
+    	logger.info("Retornando todas las mesas.");
+    	return mesas;
     }
     
-    /**
-    * Obtiene el cliente con el id que entra por parametro. 
-    * @param pId Id del cliente que se busca.
-    * @return ClienteDTO Cliente buscado.
-    * @throws LogicaRestauranteException Cuando no existe un cliente con el id buscado.  
+        /**
+    * Obtiene la mesa con el id que entra por parametro. 
+    * @param pId Id de la mesa que se busca.
+    * @return MesaDTO Mesa buscada.
+    * @throws LogicaRestauranteException Cuando no existe una mesa con el id buscado.  
     */    
-    public ClienteDTO darCliente(Long pId) throws LogicaRestauranteException 
+    public MesaDTO darMesa(Long pId) throws LogicaRestauranteException 
     {
-        logger.info("Recibiendo solicitud de dar el cliente con id "+pId+".");
+        logger.info("Recibiendo solicitud de dar la mesa con id "+pId+".");
         
-    	if (clientes == null) 
+    	if (mesas == null) 
         {
-    		logger.severe("Error interno: lista de clientes no existe.");
-    		throw new LogicaRestauranteException("Error interno: lista de clientes no existe.");    		
+    		logger.severe("Error interno: lista de mesas no existe.");
+    		throw new LogicaRestauranteException("Error interno: lista de mesas no existe.");    		
     	}
         
-        for(ClienteDTO cliente:clientes)
+        for(MesaDTO mesa:mesas)
         {
-            if(cliente.getId().equals(pId))
+            if(mesa.getId()==(pId))
             {
-                logger.info("Retornando el cliente.");
-                return cliente;
+                logger.info("Retornando la mesa.");
+                return mesa;
             }
         }
-    	logger.severe("Error de uso: Se pidio un cliente que no existe.");
-    	throw new LogicaRestauranteException("Error de uso: Se pidio un cliente que no existe.");
+    	logger.severe("Error de uso: Se pidio una mesa que no existe.");
+    	throw new LogicaRestauranteException("Error de uso: Se pidio una mesa que no existe.");
     }
 
     /**
@@ -115,6 +116,7 @@ public class MockClientes
         return nuevoCliente;
     }
 
+
     /**
      * Recibe un cliente y lo actualiza en el sistema.
      * @param nuevoCliente Cliente a agregar.
@@ -128,7 +130,7 @@ public class MockClientes
        
        
        // Se busca el cliente a actualizar
-        for (ClienteDTO cliente : clientes) 
+        for (ClienteDTO cliente : mesas) 
         {
             if(cliente.getId().equals(id))
             {
@@ -169,12 +171,12 @@ public class MockClientes
        boolean eliminado = false;
        
         // Se busca el cliente a eliminar
-        for (int i = 0; i< clientes.size() && !eliminado; i++) 
+        for (int i = 0; i< mesas.size() && !eliminado; i++) 
         {
-            ClienteDTO cliente = clientes.get(i);
+            ClienteDTO cliente = mesas.get(i);
             if(cliente.getId().equals(pId))
             {
-                clientes.remove(i);
+                mesas.remove(i);
                 eliminado = true;
             }
         }

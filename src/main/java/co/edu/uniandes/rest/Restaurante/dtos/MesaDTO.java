@@ -11,6 +11,8 @@ package co.edu.uniandes.rest.Restaurante.dtos;
  */
 public class MesaDTO 
 {
+    private int id;
+    
     private int piso;
     
     private int sillas;
@@ -20,12 +22,23 @@ public class MesaDTO
     public MesaDTO()
     {   }
     
-    public MesaDTO(int pPiso, int pSillas, boolean pEstado)
+    public MesaDTO(int pId, int pPiso, int pSillas, boolean pEstado)
     {
         super();
+        this.id = pId;
         this.piso = pPiso;
         this.sillas = pSillas;
         this.estado = pEstado;
+    }
+    
+    public int getId() 
+    {
+        return id;
+    }
+
+    public void setId(int id) 
+    {
+        this.id = id;
     }
     
     public int getPiso() 
@@ -65,7 +78,7 @@ public class MesaDTO
     @Override
     public String toString() 
     {
-    	return "{ piso : " + piso +", sillas : \""+ sillas + ", estado : \""+estado+"\" }" ;  
+    	return "{  id : " + id +", piso : " + piso +", sillas : \""+ sillas + ", estado : \""+estado+"\" }" ;  
     }
     
 }
