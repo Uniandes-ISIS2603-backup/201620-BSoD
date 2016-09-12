@@ -24,13 +24,14 @@ public class ClienteDTO
     public ClienteDTO()
     {   }
     
-    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion)
+    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion, int pTelefono)
     {
         super();
         this.id = pId;
         this.nombre = pNombre;
         this.apellidos = pApellidos;
         this.direccion = pDireccion;
+        this.telefono = pTelefono;
     }
 
     public Long getId() 
@@ -78,7 +79,7 @@ public class ClienteDTO
         return telefono;
     }
     
-    public void setTeelefono(int telefono)
+    public void setTelefono(int telefono)
     {
         this.telefono = telefono;
     }
@@ -91,7 +92,7 @@ public class ClienteDTO
     public String toString() 
     {
     	return "{ id : " + id +", nombre : \""+ nombre +"\", apellidos : \""+apellidos+"\", "
-                +", telefono : \""+ telefono + ", direccion : \""+direccion+"\" }" ;  
+                +", direccion : \""+ direccion + ", telefono : \""+telefono+"\" }" ;  
     }
     
 }
