@@ -81,8 +81,8 @@ public class TarjetaPuntosDTO
     @Override
     public String toString() 
     {
-    	return "{ id : " + id +", nombre : \""+ nombre +"\", apellidos : \""+apellidos+"\", "
-                +", direccion : \""+ direccion + ", telefono : \""+telefono+"\" }" ;  
+    	return "{ id : " + id +", fechaCaducidad : \""+ fechaCaducidad +"\", acumulado : \""+acumulado+"\", "
+                +" idUsuario : \""+idUsuario+"\" }" ;  
     }
     
 }
