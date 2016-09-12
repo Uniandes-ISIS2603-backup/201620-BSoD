@@ -3,7 +3,6 @@
     app.constant("sucursalContext", "api/sucursales");
     app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/sucursal/';
-            $urlRouterProvider.otherwise("/RestauranteElSabor");
      
             $stateProvider.state('sucursalList', {
                 url: '/sucursal',

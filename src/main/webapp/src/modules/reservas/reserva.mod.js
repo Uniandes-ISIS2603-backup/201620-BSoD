@@ -10,7 +10,6 @@
     mod.constant("reservaContext", "api/reservas");
        mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/reservas/';
-            $urlRouterProvider.otherwise("/reservaList");
      
             $stateProvider.state('reservaList', {
                 url: '/reservas',

@@ -8,7 +8,6 @@
      mod.constant("medioContext", "api/medio");
         mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
              var basePath = 'src/modules/medio/';
-             $urlRouterProvider.otherwise("/medioList");
 
              $stateProvider.state('medioList', {
                  url: '/medio',

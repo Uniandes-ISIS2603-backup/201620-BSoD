@@ -8,7 +8,6 @@
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) 
         {
             var basePath = 'src/modules/cliente/';
-            $urlRouterProvider.otherwise("/clienteList");
   
             $stateProvider.state('clienteList', 
             {
