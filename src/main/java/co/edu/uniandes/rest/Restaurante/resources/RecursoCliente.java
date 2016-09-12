@@ -56,7 +56,7 @@ public class RecursoCliente
     
      /**
      * Crea un cliente con la información enviada como parámetro.
-     * @param pNuevoCliente La instancia cliente que se quiere eliminar.
+     * @param pNuevoCliente La instancia cliente que se quiere buscar.
      * @return ClienteDTO cliente creado.
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
