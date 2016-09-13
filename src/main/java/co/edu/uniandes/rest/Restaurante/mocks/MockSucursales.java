@@ -100,7 +100,29 @@ public class MockSucursales
     {
     	logger.info("Recibiendo solicitud de agregar sucursal.");
         Long idSucursalAAgregar = nuevaSucursal.getId();
-        
+        if ( nuevaSucursal.getId() != null ) 
+        {
+	    	for (SucursalDTO suc : sucursales) 
+                {
+	            if (Objects.equals(suc.getId(), nuevaSucursal.getId()))
+                    {
+	            	logger.severe("Ya existe una domicilio con ese id");
+	                throw new LogicaRestauranteException("Ya existe una domicilio con ese id");
+	            }
+	        }
+	        
+    	} else 
+        {
+    		logger.info("Generando id para un nuevo domicilio");
+    		long newId = 1;
+	        for (SucursalDTO suc : sucursales) 
+                {
+	            if (newId <= suc.getId()){
+	                newId =  suc.getId() + 1;
+	            }
+	        }
+	        nuevaSucursal.setId(newId);
+    	}
     	// Se busca que no exista un sucursal con ese id.
 	for (SucursalDTO sucursal : sucursales) 
         {

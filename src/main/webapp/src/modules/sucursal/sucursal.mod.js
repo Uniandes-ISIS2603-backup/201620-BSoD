@@ -9,7 +9,7 @@
                 views: {
                     'mainView': {
                         controller: 'sucursalCtrl',
-                        controllerAs: 'sucursalCtrl',
+                        controllerAs: 'ctrl',
                         templateUrl: basePath + 'sucursal.list.html'
                     }
                 }
