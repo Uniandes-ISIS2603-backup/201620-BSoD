@@ -2,56 +2,71 @@
     <h1>Nuevo Medio</h1>
     <p>Escribir texto aca agregar medio.</p>
 </div>
-        
-   
+
+
 <div class="container well">
-        
-        <h2>Ingresa los datos</h2>
 
-        <form novalidate name ="form" id="formaMedio" role="form" class="form-horizontal" ng-submit="form.$valid && medioCtrl.saveRecord(currentRecord.id)">
-            <fieldset>
-                
-                <div class="form-group">
-                    <label for ="id" class="control-label col-sm-2">Identificacion:</label>
-                    <div class="col-sm-5">
-                        <input type="text" class="form-control" id="id" placeholder="Documento con el cual se identifica" ng-model="currentRecord.id" ng-init="currentRecord.id" required />
-                    </div>
+    <h2>Ingresa los datos</h2>
+       <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="medioCtrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
+    <form novalidate name ="form" id="formaMedio" role="form" class="form-horizontal" ng-submit="medioCtrl.saveRecord(currentRecord.id)">
+        <fieldset>
+            
+            <div id="idMedio" ng-init="{{$index + 1 }}" ng-model="currentRecord.id" ></div>
+            <!--aqui inicia el EFECTIVO -->
+            <div class="form-group">
+                <label class="control-label col-sm-3">Efectivo: <font style="color:red">(Solo si no pagas con tarjeta)</font></label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="idEfectivoMedio" height="400px" ng-model="currentRecord.efectivo" placeholder="Con cuanto pagas">
                 </div>
-        
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Nombre:</label>
-                    <div class="col-sm-5"> 
-                        <input type="text" class="form-control" id="nombre" placeholder="Su nombre"  ng-model="currentRecord.nombre" ng-init="currentRecord.nombre" required >
-                    </div>
-                </div>
+            </div>
 
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Apellidos:</label>
-                    <div class="col-sm-5"> 
-                        <input type="text" class="form-control" id="apellidos" placeholder="Sus apellidos"  ng-model="currentRecord.apellidos" ng-init="currentRecord.apellidos" required >
-                    </div>
+            <!--aqui inicia la DESCRIPCION DE LA TARJETA -->
+            <div class="form-group">
+                <label class="control-label col-sm-3">Tarjeta:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="tarjetaMedio" placeholder="Descripcion de tarjeta Medio de pago" ng-model="currentRecord.tarjeta" ng-init="currentRecord.tarjeta">
                 </div>
-      
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Direccion:</label>
-                    <div class="col-sm-5"> 
-                        <input type="text" class="form-control" id="direccion" placeholder="Su direccion"  ng-model="currentRecord.direccion" ng-init="currentRecord.direccion" required >
-                    </div>
+            </div>
+
+            <!--aqui inician los NUMEROS DE LA TARJETA -->
+            <div class="form-group">
+                <label class="control-label col-sm-3">NumerosTarjeta:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="numerosTarjetaMedio" placeholder="Numeros Tarjeta de Medio de Pago" ng-model="currentRecord.numerosTarjeta" ng-init="currentRecord.numerosTarjeta">
                 </div>
-                
-                <div class="form-group">
-                    <label class="control-label col-sm-2">Telefono:</label>
-                    <div class="col-sm-5"> 
-                        <input type="text" class="form-control" id="telefono" placeholder="Su telefono"  ng-model="currentRecord.telefono" ng-init="currentRecord.telefono" required >
-                    </div>
+            </div>
+
+            <!--aqui inicia FECHA DE VENCIMIENTO DE LA TARJETA -->
+            <div class="form-group">
+                <label class="control-label col-sm-3">FechaVencimiento:</label>
+                <div class="col-sm-5">
+                    <input type="date" class="form-control" id="fechaVencimientoMedio" ng-model="currentRecord.fechaVencimiento" ng-init="currentRecord.fechaVencimiento">
                 </div>
-           
-                <div class="form-group"> 
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Agregar</button>
-                    </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label col-sm-3">CodigoDeSeguridad:</label>
+                <div class="col-sm-5">
+                    <input type="number" class="form-control" id="codigoDeSeguridadMedio" placeholder="Codigo de seguridad de medio de pago" ng-model="currentRecord.codigoSeguridad" ng-init="currentRecord.codigoSeguridad">
                 </div>
-            </fieldset>>
-        </form>
-        
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-3">Franquicia:</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="franquiciaMedio" placeholder="Franquicia de medio de pago" ng-model="currentRecord.franquicia" ng-init="currentRecord.franquicia">
+                </div>
+            </div>
+
+            <div class="form-group"> 
+                <div class="col-sm-offset-3 col-sm-4">
+                    <button type="submit" class="btn btn-default">Agregar</button>
+                    <button type="button" class="btn btn-default" data-ui-sref="medioList" >Cancelar</button>
+
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
 </div>

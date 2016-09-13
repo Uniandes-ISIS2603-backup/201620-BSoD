@@ -5,24 +5,28 @@
     <table class="table table-bordered table-hover">            <!--Tabla-->
         <thead>                                                     <!--Headers de la tabla-->
             <tr>
-                <th>Id</th>
-                <th>Nottttmbre</th>
-                <th>Apellidos</th>
-                <th>Direccion</th>
-                <th>Numero_Tarjeta</th>
+                <th>ID</th>
+                <th>Efectivo</th>
+                <th>Tarjeta</th>
+                <th>NumerosTarjeta</th>
+                <th>FechaVencimiento</th>
+                <th>CodigoSeguridad</th>
+                <th>Franquicia</th>
             </tr>
         </thead>
         
         <tbody>                                                     <!--Cuerpo de la tabla-->
             <tr ng-repeat="record in records">
-                <td id="{{$index}}-id">{{record.id}}</td>
-                <td id="{{$index}}-nombre">{{record.nombre}}</td>
-                <td id="{{$index}}-apellidos">{{record.apellidos}}</td>
-                <td id="{{$index}}-direccion">{{record.direccion}}</td>
-                <td id="{{$index}}-numerostarjeta">{{record.numerostarjeta}}</td>
+                <td id = "{{$index}}-id">{{record.id}}</td>
+                <td id = "{{$index}}-efectivo">{{record.efectivo}}</td>
+                <td id = "{{$index}}-tarjeta">{{record.tarjeta}}</td>
+                <td id = "{{$index}}-numerosTarjeta">{{record.numerosTarjeta}}</td>
+                <td id = "{{$index}}-fechaVencimiento">{{record.fechaVencimiento}}</td>
+                <td id = "{{$index}}-codigoSeguridad">{{record.codigoSeguridad}}</td>
+                <td id = "{{$index}}-franquicia">{{record.franquicia}}</td>
                 <td>
-                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="medioEdit({medioId: record.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                    <button id="{{$index}}-medio-delete-btn" class="btn btn-default btn-sm" ng-click="medioCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span>Eliminar</button>
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" data-ui-sref="medioEdit({medioId: record.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="medioCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
                 </td>
         </tr>
         
