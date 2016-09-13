@@ -19,9 +19,9 @@ public class MedioDTO
 
     //ATRIBUTOS ATRIBUTOS ATRIBUTOS ATRIBUTOS ----------
 
-    private Integer id;
+    private Long id;
 
-    private Boolean efectivo;
+    private Integer efectivo;
 
     private String tarjeta;
 
@@ -38,7 +38,7 @@ public class MedioDTO
 
     //CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR-----------
 
-    public MedioDTO(Integer pId, Boolean pEfectivo, String pTarjeta, Integer pNumerosTarjeta, Date pFechaVencimiento, Integer pCodigoSeguridad, String pFranquicia )
+    public MedioDTO(Long pId, Integer pEfectivo, String pTarjeta, Integer pNumerosTarjeta, Date pFechaVencimiento, Integer pCodigoSeguridad, String pFranquicia )
     {
         super();
         this.id = pId;
@@ -52,11 +52,11 @@ public class MedioDTO
 
     //ASIGNAR ASIGNAR ASIGNAR ASIGNAR---------------------
 
-    public void setId(Integer pId)
+    public void setId(Long pId)
     {
         id = pId;
     }
-    public void setEfectivo(Boolean pEfectivo)
+    public void setEfectivo(Integer pEfectivo)
     {
       efectivo=pEfectivo;
     }
@@ -84,10 +84,10 @@ public class MedioDTO
 
     //DAR DAR DAR DAR DAR----------------------------------
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public Boolean getEfectivo(){
+    public Integer getEfectivo(){
       return efectivo;
     }
     public String getTarjeta(){

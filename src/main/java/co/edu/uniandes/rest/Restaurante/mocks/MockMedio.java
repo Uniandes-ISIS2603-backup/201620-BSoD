@@ -37,10 +37,10 @@ public class MockMedio
             try{
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             medios = new ArrayList<MedioDTO>();
-            medios.add(new MedioDTO(1, false,"descripcion1", 1234567890 ,df.parse("02/07/2018"),123,"visa"));
-            medios.add(new MedioDTO(2, false,"descripcion2",234567890,df.parse("07/11/2019"),234,"mastercard"));
-            medios.add(new MedioDTO(3, false,"descripcion3",345678901,df.parse("07/01/2020"),345,"diners"));
-            medios.add(new MedioDTO(4, false,"descripcion4",456789012,df.parse("01/01/2017"),456,"visa"));       
+            medios.add(new MedioDTO(1L, 0 ,"descripcion1", 1234567890 ,df.parse("02/07/2018"),123,"visa"));
+            medios.add(new MedioDTO(2L, 0,"descripcion2",234567890,df.parse("07/11/2019"),234,"mastercard"));
+            medios.add(new MedioDTO(3L, 0,"descripcion3",345678901,df.parse("07/01/2020"),345,"diners"));
+            medios.add(new MedioDTO(4L, 0,"descripcion4",456789012,df.parse("01/01/2017"),456,"visa"));       
             }
             catch(ParseException e){
                 
@@ -108,21 +108,28 @@ public class MockMedio
      */
     public MedioDTO crearMedio(MedioDTO nuevoMedio) throws LogicaRestauranteException
     {
-    	logger.info("Recibiendo solicitud de agregar medio de pago.");
-        Integer idMedioAAgregar = nuevoMedio.getId();
-
-    	// Se busca que no exista un medio de pago con ese id.
-	for (MedioDTO medio : medios)
-        {
-            if(medio.getId().equals(idMedioAAgregar))
-            {
-                logger.severe("Error de uso: Se intento crear un medio de pago con un id "+idMedioAAgregar+" que ya existia.");
-                throw new LogicaRestauranteException("Error de uso: Se intento crear un medio de pago con un id "+idMedioAAgregar+" que ya existia.");
-            }
-	}
-
-        // Se Agrega el medio de pago.
-    	logger.info("Agregando medio de pago: " + nuevoMedio);
+    	logger.info("recibiendo solicitud de agregar medio " + nuevoMedio);
+    	
+       	if ( nuevoMedio.getId() != null ) {
+	    	for (MedioDTO med : medios) {
+	            if (Objects.equals(med.getId(), nuevoMedio.getId())){
+	            	logger.severe("Ya existe un medio con ese id");
+	                throw new LogicaRestauranteException("Ya existe un medio con ese id");
+	            }
+	        }
+	        
+    	} else {
+    		logger.info("Generando id para el nuevo medio");
+    		long newId = 1;
+	        for (MedioDTO med : medios) {
+	            if (newId <= med.getId()){
+	                newId =  med.getId() + 1;
+	            }
+	        }
+	        nuevoMedio.setId(newId);
+    	}
+    	
+    	logger.info("agregando medio " + nuevoMedio);
         medios.add(nuevoMedio);
         return nuevoMedio;
     }
@@ -130,14 +137,14 @@ public class MockMedio
   public MedioDTO actualizarMedio(MedioDTO medioActualizado) throws LogicaRestauranteException
    {
        logger.info("Recibiendo solicitud de actualizar medio de pago.");
-       Integer id = medioActualizado.getId();
+       Long id = medioActualizado.getId();
 
        // Se busca el medio de pago a actualizar
         for (MedioDTO medio : medios)
         {
             if(medio.getId().equals(id))
             {
-                boolean efectivo=medioActualizado.getEfectivo();
+                Integer efectivo=medioActualizado.getEfectivo();
                 String tarjeta = medioActualizado.getTarjeta();
                 Integer numerosTarjeta=medioActualizado.getNumerosTarjeta();
                 Date fechaVencimiento=medioActualizado.getFechaVencimiento();

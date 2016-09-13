@@ -109,10 +109,10 @@ public class ClienteDTO
     {
     	return "{ id : " + id +
                 ", nombre : \""+ nombre +
-                "\", apellidos : \""+apellidos+"\", "
-                +", direccion : \""+ direccion +
-                ", tarjetaPuntos : \""+ tarjetaPuntos +
-                ", telefono : \""+telefono+"\" }" ;  
+                "\", apellidos : \""+apellidos
+                +"\", direccion : \""+ direccion +
+                "\", tarjetaPuntos : "+ tarjetaPuntos +
+                ", telefono : "+telefono+" }" ;  
     }
     
 }

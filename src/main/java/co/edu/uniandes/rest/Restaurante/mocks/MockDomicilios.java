@@ -62,7 +62,7 @@ public class MockDomicilios {
     }
     
     /**
-     * Obtener el domicilio con el id dado pro parámetro.
+     * Obtener el domicilio con el id dado por parámetro.
      * @param id
      * @return domicilio con el id dado.
      * @throws LogicaRestauranteException 

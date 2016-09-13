@@ -100,16 +100,31 @@ public class MockPlato
     {
     	logger.info("Recibiendo solicitud de agregar un plato.");
         Long idPlatoAgregar = nuevoPlato.getId();
-        
-    	// Se busca que no exista un cliente con ese id.
-	for (PlatoDTO plato : platos) 
+        if ( nuevoPlato.getId() != null ) 
         {
-            if(plato.getId().equals(idPlatoAgregar))
-            {
-                logger.severe("Error de uso: Se intento crear un plato con un id "+idPlatoAgregar+" que ya existia.");
-                throw new LogicaRestauranteException("Error de uso: Se intento crear un plato con un id "+idPlatoAgregar+" que ya existia.");
-            }
-	}
+	    	for (PlatoDTO domi : platos) 
+                {
+	            if (Objects.equals(domi.getId(), nuevoPlato.getId()))
+                    {
+	            	logger.severe("Ya existe una domicilio con ese id");
+	                throw new LogicaRestauranteException("Ya existe una domicilio con ese id");
+	            }
+	        }
+	        
+    	} else 
+        {
+    		logger.info("Generando id para un nuevo domicilio");
+    		long newId = 1;
+	        for (PlatoDTO domi : platos) 
+                {
+	            if (newId <= domi.getId()){
+	                newId =  domi.getId() + 1;
+	            }
+	        }
+	        nuevoPlato.setId(newId);
+    	}
+    	// Se busca que no exista un cliente con ese id.
+	
 	
         // Se Agrega el cliente.
     	logger.info("Agregando Plato: " + nuevoPlato);
