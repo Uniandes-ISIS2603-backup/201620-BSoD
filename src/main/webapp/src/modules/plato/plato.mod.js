@@ -14,7 +14,7 @@
                 views: {
                     'mainView': {
                         controller: 'platoCtrl',
-                        controllerAs: 'ctrl',
+                        controllerAs: 'platoCtrl',
                         templateUrl: basePath + 'plato.list.html'
                     }
                 }
@@ -38,18 +38,6 @@
                         controller: 'platoCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'plato.create.html'
-                    }
-                }
-            }).state('platoDelete', {
-                url: '/platos/:platoId',
-                param: {
-                    platoId: null
-                },
-                views:{
-                    'mainView': {
-                        controller: 'platoCtrl',
-                        controllerAs: 'ctrl',
-                        templateUrl: basePath + 'plato.delete.html'
                     }
                 }
             });
