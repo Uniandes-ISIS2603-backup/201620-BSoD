@@ -107,8 +107,12 @@ public class ClienteDTO
     @Override
     public String toString() 
     {
-    	return "{ id : " + id +", nombre : \""+ nombre +"\", apellidos : \""+apellidos+"\", "
-                +", direccion : \""+ direccion +", tarjetaPuntos : \""+ tarjetaPuntos + ", telefono : \""+telefono+"\" }" ;  
+    	return "{ id : " + id +
+                ", nombre : \""+ nombre +
+                "\", apellidos : \""+apellidos+"\", "
+                +", direccion : \""+ direccion +
+                ", tarjetaPuntos : \""+ tarjetaPuntos +
+                ", telefono : \""+telefono+"\" }" ;  
     }
     
 }
