@@ -131,7 +131,8 @@ public class MockTarjetasPuntos
         {
             if(tarjetaPuntos.getId()==(id))
             {
-               tarjetaPuntos = tarjetaPuntosActualizada;
+                tarjetaPuntos.setAcumulado(tarjetaPuntosActualizada.getAcumulado());
+                tarjetaPuntos.setFechaCaducidad(tarjetaPuntosActualizada.getFechaCaducidad());
                 logger.info("Actualizada satisfactoriamente."); 
                 return tarjetaPuntos;
             }
