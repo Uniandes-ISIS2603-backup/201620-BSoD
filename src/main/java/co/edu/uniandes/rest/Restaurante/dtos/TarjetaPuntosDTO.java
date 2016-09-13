@@ -19,19 +19,15 @@ public class TarjetaPuntosDTO
     
     int acumulado;
     
-    // Relación a un cliente
-    private long idUsuario;
-    
     public TarjetaPuntosDTO()
     {   }
     
-    public TarjetaPuntosDTO(int pId, Date pFechaCaducidad,int pAcumulado, long pIdUsuario)
+    public TarjetaPuntosDTO(int pId, Date pFechaCaducidad,int pAcumulado, ClienteDTO pCLiente)
     {
         super();
         this.id = pId;
         this.fechaCaducidad = pFechaCaducidad;
         this.acumulado = pAcumulado;
-        this.idUsuario = pIdUsuario;
     }
 
     public int getId() 
@@ -63,16 +59,6 @@ public class TarjetaPuntosDTO
     {
         this.acumulado = acumulado;
     }
-
-    public long getIdUsuario() 
-    {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(long idUsuario) 
-    {
-        this.idUsuario = idUsuario;
-    }
         
     /**
      * Representacion JSON de una tarjeta de puntos.
@@ -81,8 +67,8 @@ public class TarjetaPuntosDTO
     @Override
     public String toString() 
     {
-    	return "{ id : " + id +", fechaCaducidad : \""+ fechaCaducidad +"\", acumulado : \""+acumulado+"\", "
-                +" idUsuario : \""+idUsuario+"\" }" ;  
+    	return "{ id : " + id +", fechaCaducidad : \""+ fechaCaducidad
+                +", acumulado: \""+acumulado+"\" }" ;  
     }
     
 }

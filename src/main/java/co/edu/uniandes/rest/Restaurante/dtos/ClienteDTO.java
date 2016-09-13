@@ -21,10 +21,13 @@ public class ClienteDTO
     
     private int telefono;
     
+    // Asociacion a tarjeta de puntos
+    private TarjetaPuntosDTO tarjetaPuntos;
+    
     public ClienteDTO()
     {   }
     
-    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion, int pTelefono)
+    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion, int pTelefono, TarjetaPuntosDTO pTarjetaPuntos)
     {
         super();
         this.id = pId;
@@ -32,6 +35,7 @@ public class ClienteDTO
         this.apellidos = pApellidos;
         this.direccion = pDireccion;
         this.telefono = pTelefono;
+        this.tarjetaPuntos = pTarjetaPuntos;
     }
 
     public Long getId() 
@@ -83,6 +87,18 @@ public class ClienteDTO
     {
         this.telefono = telefono;
     }
+
+    public TarjetaPuntosDTO getTarjetaPuntos() 
+    {
+        return tarjetaPuntos;
+    }
+
+    public void setTarjetaPuntos(TarjetaPuntosDTO tarjetaPuntos) 
+    {
+        this.tarjetaPuntos = tarjetaPuntos;
+    }
+    
+    
         
     /**
      * Representacion JSON de un cliente
@@ -92,7 +108,7 @@ public class ClienteDTO
     public String toString() 
     {
     	return "{ id : " + id +", nombre : \""+ nombre +"\", apellidos : \""+apellidos+"\", "
-                +", direccion : \""+ direccion + ", telefono : \""+telefono+"\" }" ;  
+                +", direccion : \""+ direccion +", tarjetaPuntos : \""+ tarjetaPuntos + ", telefono : \""+telefono+"\" }" ;  
     }
     
 }

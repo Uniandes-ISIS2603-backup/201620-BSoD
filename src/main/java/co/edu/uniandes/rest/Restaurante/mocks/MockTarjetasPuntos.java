@@ -31,8 +31,8 @@ public class MockTarjetasPuntos
     	if (tarjetasPuntos == null) 
         {
             tarjetasPuntos = new ArrayList<TarjetaPuntosDTO>();
-            tarjetasPuntos.add(new TarjetaPuntosDTO(1, new Date(), 0, 1L));
-            tarjetasPuntos.add(new TarjetaPuntosDTO(2, new Date(), 0, 2L));
+            tarjetasPuntos.add(new TarjetaPuntosDTO(1, new Date(), 0, null));
+            tarjetasPuntos.add(new TarjetaPuntosDTO(2, new Date(), 0, null));
         }
         
     	// Indica que se muestren todos los mensajes
@@ -98,8 +98,7 @@ public class MockTarjetasPuntos
     public TarjetaPuntosDTO crearTarjetaPuntos(TarjetaPuntosDTO nuevaTarjetaPuntos) throws LogicaRestauranteException
     {
         int idTarjetaPuntosAAgregar = nuevaTarjetaPuntos.getId();
-    	Long idClienteTarjetaPuntosAAgregar = nuevaTarjetaPuntos.getIdUsuario();
-        logger.info("Recibiendo solicitud de agregar tarjeta de puntos con id "+idTarjetaPuntosAAgregar+" al cliente "+idClienteTarjetaPuntosAAgregar+".");
+        logger.info("Recibiendo solicitud de agregar tarjeta de puntos con id "+idTarjetaPuntosAAgregar+".");
         
     	// Se busca que no exista un cliente con ese id.
 	for (TarjetaPuntosDTO tarjetaPuntos: tarjetasPuntos) 
@@ -132,14 +131,7 @@ public class MockTarjetasPuntos
         {
             if(tarjetaPuntos.getId()==(id))
             {
-                if(tarjetaPuntos.getIdUsuario()!=tarjetaPuntosActualizada.getIdUsuario())
-                {
-                    logger.severe("Error de uso: Se intento modificar el usuario de la tarjeta de puntos "+
-                            tarjetaPuntos.getIdUsuario()+" por " +tarjetaPuntosActualizada.getIdUsuario()+".");
-                    throw new LogicaRestauranteException("Error de uso: Se intento modificar el usuario de la tarjeta de puntos "+
-                            tarjetaPuntos.getIdUsuario()+" por " +tarjetaPuntosActualizada.getIdUsuario()+".");
-                }
-
+               tarjetaPuntos = tarjetaPuntosActualizada;
                 logger.info("Actualizada satisfactoriamente."); 
                 return tarjetaPuntos;
             }

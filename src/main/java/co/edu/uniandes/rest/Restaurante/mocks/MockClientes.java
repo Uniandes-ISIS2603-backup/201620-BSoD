@@ -1,9 +1,11 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -29,10 +31,10 @@ public class MockClientes
     	if (clientes == null) 
         {
             clientes = new ArrayList<ClienteDTO>();
-            clientes.add(new ClienteDTO(1L, "Ignacio1", "Arboleda1", "DireccionPereira1", 1));
-            clientes.add(new ClienteDTO(2L, "Ignacio2", "Arboleda2", "DireccionPereira2", 1));
-            clientes.add(new ClienteDTO(3L, "Ignacio3", "Arboleda3", "DireccionPereira3", 1));
-            clientes.add(new ClienteDTO(4L, "Ignacio4", "Arboleda4", "DireccionPereira4", 1));
+            clientes.add(new ClienteDTO(1L, "Ignacio1", "Arboleda1", "DireccionPereira1", 1, null));
+            clientes.add(new ClienteDTO(2L, "Ignacio2", "Arboleda2", "DireccionPereira2", 1, null));
+            clientes.add(new ClienteDTO(3L, "Ignacio3", "Arboleda3", "DireccionPereira3", 1, null));
+            clientes.add(new ClienteDTO(4L, "Ignacio4", "Arboleda4", "DireccionPereira4", 1, null));
         }
         
     	// Indica que se muestren todos los mensajes
