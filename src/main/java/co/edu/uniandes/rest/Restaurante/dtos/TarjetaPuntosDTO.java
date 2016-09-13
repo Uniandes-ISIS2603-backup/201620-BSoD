@@ -68,7 +68,7 @@ public class TarjetaPuntosDTO
     public String toString() 
     {
     	return "{ id : " + id +", fechaCaducidad : \""+ fechaCaducidad
-                +", acumulado: \""+acumulado+"\" }" ;  
+                +", acumulado: "+acumulado+" }" ;  
     }
     
 }

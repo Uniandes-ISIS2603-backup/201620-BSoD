@@ -49,7 +49,7 @@
                  <div class="form-group" ng-class="{'has-success': form.tarjetaPuntos.$valid && form.tarjetaPuntos.$dirty, 'has-error': form.tarjetaPuntos.$invalid && (form.tarjetaPuntos.$dirty || form.$submitted)}" >
                     <label for="tarjetaPuntos" class="control-label col-sm-2">Tarjeta Puntos</label>
                     <div class="col-sm-5">
-                    <select id="tarjetaPuntos" name="tarjetasPuntos" ng-options="rc.id for rc in tarjetasPuntos" class="form-control" type="text" ng-model="currentRecord.tarjetaPuntos" ></select>
+                    <select id="tarjetaPuntos" name="tarjetasPuntos" ng-options="rc.id for rc in tarjetasPuntos" class="form-control" type="text" ng-model="currentRecord.tarjetaPuntos.id" ></select>
                     </div>
                 </div>
                 
