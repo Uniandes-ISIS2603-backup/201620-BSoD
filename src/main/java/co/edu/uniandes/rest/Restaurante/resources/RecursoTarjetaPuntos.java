@@ -4,9 +4,6 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.rest.Restaurante.resources;
-
-import co.edu.uniandes.rest.Restaurante.mocks.MockClientes;
-import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.mocks.MockTarjetasPuntos;
 import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
@@ -25,7 +22,7 @@ import javax.ws.rs.Produces;
  *
  * @author jdguz
  */
-@Path("tarjetaPuntos")
+@Path("tarjetasPuntos")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoTarjetaPuntos 
