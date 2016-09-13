@@ -1,47 +1,37 @@
 
-<div class="container">
-  <h2>Lista de sucursales</h2>
+<head>
+    <title>Sucursales</title>
 
-  <table class="table table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Ciudad</th>
-        <th>Direccion</th>
-        <th>Mesas</th>
-        <th>Calificacion</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Medellin</td>
-        <td>Carrera 1 0-2</td>
-        <td>4</td>
-        <td>5</td>
-        <td><button  class="btn btn-default">Editar</button><button  class="btn btn-default">Eliminar</button></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Bogota</td>
-        <td>Calle 27S #14A-40</td>
-        <td>10</td>
-        <td>3</td>
-        <td><button  class="btn btn-default">Editar</button><button  class="btn btn-default">Eliminar</button></td>
+</head>
+<div>
+    <div class="container">
+        <h2>Lista de sucursales</h2>
 
-      </tr>
-     <tr>
-        <td>3</td>
-        <td>Cali</td>
-        <td>Calle 41 #32a-16</td>
-        <td>12</td>
-        <td>1</td>
-        <td><button  class="btn btn-default">Editar</button><button  class="btn btn-default">Eliminar</button></td>
+        <table class="table table-striped" class="col-md-6">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ciudad</th>
+                    <th>Direccion</th>
+                    <th>Mesas</th>
+                    <th>Calificacion</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
 
-      </tr>
-      
-      
-    </tbody>
-  </table>
+                <tr ng-repeat="record in records">
+                    <td id ="{{$index}}-id">{{record.id}}</td>
+                    <td id ="{{$index}}-ciudad">{{record.ciudad}}</td>
+                    <td id ="{{$index}}-direccion">{{record.direccion}}</td>
+                    <td id ="{{$index}}-mesas">{{record.mesas}}</td>
+                    <td id ="{{$index}}-calificacion">{{record.calificacion}}</td>
+
+                    <td><button  id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="sucursalEdit({sucursalId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>
+                        <button  id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="sucursalCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span>Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
