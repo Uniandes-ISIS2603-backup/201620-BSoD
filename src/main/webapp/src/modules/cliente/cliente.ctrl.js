@@ -5,7 +5,8 @@
 {
     var mod = ng.module("clienteModule");
     
-    mod.controller("clienteCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', function ($scope, $state, $stateParams, $http, context) 
+    mod.controller("clienteCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext',
+        function ($scope, $state, $stateParams, $http, context) 
     {
         $scope.records = {};                            // La lista de clientes no contiene ninguno.
         
@@ -33,11 +34,17 @@
                 nombre: '',
                 precio: undefined,
                 direccion: '',
-                telefono: undefined
+                telefono: undefined,
+                tarjetaPuntos: {}
             };
              
             $scope.alerts = [];
         }
+        
+ //       $http.get(tarjetaPuntosContext).then(function(response)
+ //       {
+ //          $scope.tarjetasPuntos = response.data;
+ //     });
         
         this.saveRecord = function () 
         {
