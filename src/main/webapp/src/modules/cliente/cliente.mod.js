@@ -36,7 +36,7 @@
 
             }).state('clienteEdit', 
             {
-                url: '/{clienteId:int}/edit',
+                url: 'clientes/{clienteId:int}/edit',
                 param: 
                 {
                     //  TODO: AVERIGUAR COMO SE PASAN PARAMETROS
