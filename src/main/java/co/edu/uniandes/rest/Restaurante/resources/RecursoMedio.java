@@ -6,7 +6,7 @@
 package co.edu.uniandes.rest.Restaurante.resources;
 
 import co.edu.uniandes.rest.Restaurante.dtos.MedioDTO;
-import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
+import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import co.edu.uniandes.rest.Restaurante.mocks.MockMedio;
 import java.util.List;
 import javax.ws.rs.Consumes;

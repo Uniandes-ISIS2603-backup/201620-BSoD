@@ -1,7 +1,7 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.MedioDTO;
-import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
+import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
