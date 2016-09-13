@@ -32,6 +32,7 @@ public class MockClientes
         { 
             clientes = new ArrayList<ClienteDTO>();
             clientes.add(new ClienteDTO(1L, "Ignacio1", "Arboleda1", "DireccionPereira1", 1, null));
+            clientes.add(new ClienteDTO(1L, "Ignacio", "Arboleda", "TODOPEREIRA", 1, null));
             clientes.add(new ClienteDTO(2L, "Ignacio2", "Arboleda2", "DireccionPereira2", 1, null));
             clientes.add(new ClienteDTO(3L, "Ignacio3", "Arboleda3", "DireccionPereira3", 1, null));
             clientes.add(new ClienteDTO(4L, "Ignacio4", "Arboleda4", "DireccionPereira4", 1, null));
