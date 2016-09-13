@@ -33,7 +33,7 @@
             }).state('reservaEdit', {
                 url: '/reservas/:reservaId',
                 param: {
-                    platoId: null
+                    reservaId: null
                 },
                 views: {
                     'mainView': {
