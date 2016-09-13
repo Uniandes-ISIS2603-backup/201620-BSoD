@@ -69,13 +69,19 @@
             
             
              this.deleteRecord = function (id) {
-                currentRecord = $scope.currentRecord;
-                $http.delete(context + "/" + currentRecord.id)
+                   currentRecord = $scope.currentRecord;
+                if(id!=null)
+                {            
+                    // ejecuta delete en el recurso REST
+                    return $http.delete(context + "/" + id,currentRecord)
                         .then(function () {
-                            // $http.put es una promesa
-                            // cuando termine bien, cambie de estado
+                            $scope.records = {};
+                            $http.get(context).then(function(response){
+                                $scope.records = response.data;    
+                            }, responseError);
                             $state.go('platoList');
-                        }, responseError);
+                        }, responseError); 
+                }
                         
               };
 
