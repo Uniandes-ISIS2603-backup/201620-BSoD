@@ -1,4 +1,4 @@
-package co.edu.uniandes.rest.cities.exceptions;
+package co.edu.uniandes.rest.Restaurante.exceptions;
 
 /**
  * Excepcion en la logica del restaurante

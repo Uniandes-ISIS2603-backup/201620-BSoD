@@ -1,6 +1,6 @@
-package co.edu.uniandes.rest.cities.mappers;
+package co.edu.uniandes.rest.Resturante.mappers;
 
-import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
+import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;

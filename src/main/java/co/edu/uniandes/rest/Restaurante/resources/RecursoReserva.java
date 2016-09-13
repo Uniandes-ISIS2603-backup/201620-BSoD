@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
-import DTOs.ReservaDTO;
-import co.edu.uniandes.rest.cities.exceptions.LogicaRestauranteException;
+import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;        
+import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import co.edu.uniandes.rest.Restaurante.mocks.MockReserva;
 
 import java.util.List;
