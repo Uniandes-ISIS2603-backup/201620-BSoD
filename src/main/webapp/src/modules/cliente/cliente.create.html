@@ -46,12 +46,12 @@
                     </div>
                 </div>
                 
-                 <div class="form-group">
-                    <label class="control-label col-sm-2">Tarjeta de puntos:</label>
-                    <div class="col-sm-5"> 
-                        <input type="text" class="form-control" id="telefono" ng-model="currentRecord.tarjetaPuntos" ng-init="currentRecord.tarjetaPuntos" required >
+                   <div class="form-group col-md-6" ng-class="{'has-success': form.tarjetaPuntos.$valid && form.tarjetaPuntos.$dirty, 'has-error': form.tarjetaPuntos.$invalid && (form.tarjetaPuntos.$dirty || form.$submitted)}" >
+                    <label for="editorial" class="col-md-2 control-label">Tarjeta Puntos</label>
+                    <div class="col-md-10">
+                    <select id="editorial" name="tarjetasPuntos" ng-options="rc.name for rc in tarjetasPuntos track by rc.id" class="form-control" type="text" ng-model="currentRecord.tarjetaPuntos" ></select>
                     </div>
-                </div>
+  </div>
                 
                 <div class="form-group"> 
                     <div class="col-sm-offset-2 col-sm-10">

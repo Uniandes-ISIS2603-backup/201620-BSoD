@@ -22,7 +22,7 @@ public class TarjetaPuntosDTO
     public TarjetaPuntosDTO()
     {   }
     
-    public TarjetaPuntosDTO(int pId, Date pFechaCaducidad,int pAcumulado, ClienteDTO pCLiente)
+    public TarjetaPuntosDTO(int pId, Date pFechaCaducidad,int pAcumulado)
     {
         super();
         this.id = pId;

@@ -31,8 +31,8 @@ public class MockTarjetasPuntos
     	if (tarjetasPuntos == null) 
         {
             tarjetasPuntos = new ArrayList<TarjetaPuntosDTO>();
-            tarjetasPuntos.add(new TarjetaPuntosDTO(1, new Date(), 0, null));
-            tarjetasPuntos.add(new TarjetaPuntosDTO(2, new Date(), 0, null));
+            tarjetasPuntos.add(new TarjetaPuntosDTO(1, new Date(), 0));
+            tarjetasPuntos.add(new TarjetaPuntosDTO(2, new Date(), 0));
         }
         
     	// Indica que se muestren todos los mensajes
@@ -67,7 +67,7 @@ public class MockTarjetasPuntos
     * @return TarjetaPuntosDTO Tarjeta de puntos buscada.
     * @throws LogicaRestauranteException Cuando no existe una tarjeta de puntos con el id buscado.  
     */    
-    public TarjetaPuntosDTO darTarjetaPuntos(Long pId) throws LogicaRestauranteException 
+    public TarjetaPuntosDTO darTarjetaPuntos(int pId) throws LogicaRestauranteException 
     {
         logger.info("Recibiendo solicitud de dar la tarjeta de puntos con id "+pId+".");
         
@@ -146,7 +146,7 @@ public class MockTarjetasPuntos
      * @param pId Identificacion de la tarjeta de puntos que se quiere eliminar.
      * @throws LogicaRestauranteException Cuando no existe una tarjeta de puntos con el id que se quiere eliminar. 
      */
-      public void eliminarTarjetaPuntos(Long pId) throws LogicaRestauranteException
+      public void eliminarTarjetaPuntos(int pId) throws LogicaRestauranteException
    {
        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos con id: " + pId+".");
        boolean eliminado = false;
