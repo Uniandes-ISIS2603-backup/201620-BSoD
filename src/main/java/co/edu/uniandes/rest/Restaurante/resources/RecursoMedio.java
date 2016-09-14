@@ -49,7 +49,7 @@ public class RecursoMedio
      */
     @GET
     @Path("{id: \\d+}")
-      public MedioDTO darMedio(@PathParam("id") Integer pId) throws LogicaRestauranteException
+      public MedioDTO darMedio(@PathParam("id") Long pId) throws LogicaRestauranteException
     {
         return mockMedio.darMedio(pId);
     }
@@ -84,7 +84,7 @@ public class RecursoMedio
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void eliminarMedio(@PathParam("id") Integer pId) throws LogicaRestauranteException
+    public void eliminarMedio(@PathParam("id") Long pId) throws LogicaRestauranteException
     {
         mockMedio.eliminarMedio(pId);
     }

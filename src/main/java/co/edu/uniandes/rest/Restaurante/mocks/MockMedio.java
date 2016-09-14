@@ -79,7 +79,7 @@ public class MockMedio
     * @return MedioDTO Medio De Pago buscado.
     * @throws LogicaRestauranteException Cuando no existe un medio de pago con el id buscado.
     */
-    public MedioDTO darMedio(Integer pId) throws LogicaRestauranteException
+    public MedioDTO darMedio(Long pId) throws LogicaRestauranteException
     {
         logger.info("Recibiendo solicitud de dar el medio de pago con id "+pId+".");
 
@@ -172,7 +172,7 @@ public class MockMedio
         throw new LogicaRestauranteException("Error de uso: Se pidio actualizar un medio que no existe.");
    }
 
-      public void eliminarMedio(Integer pId) throws LogicaRestauranteException
+      public void eliminarMedio(Long pId) throws LogicaRestauranteException
    {
        boolean eliminado = false;
 
