@@ -7,6 +7,7 @@ package co.edu.uniandes.rest.Restaurante.resources;
 
 import co.edu.uniandes.rest.Restaurante.mocks.MockClientes;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import java.util.List;
@@ -87,5 +88,26 @@ public class RecursoCliente
     public void eliminarCliente(@PathParam("id") Long pId) throws LogicaRestauranteException 
     {
         mockClientes.eliminarCliente(pId);
+    }
+    
+    @GET
+    @Path("{id: \\+d}/tarjetaPuntos")
+    public TarjetaPuntosDTO darTarjetaPuntosCliente(@PathParam("id") Long pId) throws LogicaRestauranteException
+    {
+        return mockClientes.darTarjetaPuntosCliente(pId);
+    }
+    
+    @GET
+    @Path("{id: \\+d}/prueba")
+    public String prueba(@PathParam("id") Long pId)
+    {
+        return "ENTROOOo";
+    }
+ 
+    @GET
+    @Path("prueba")
+    public String prueba2()
+    {
+        return "ENTROOOwo";
     }
 }

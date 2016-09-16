@@ -190,4 +190,19 @@ public class MockClientes
         }
         logger.info("Eliminado satisfactoriamente.");
    }
+      
+      public TarjetaPuntosDTO darTarjetaPuntosCliente(Long pId ) throws LogicaRestauranteException
+      {
+                 logger.info("Recibiendo solicitud de dar la tarjeta de puntos del cliente : " + pId+".");
+        for(ClienteDTO cliente:clientes)
+        {
+            if(cliente.getId().equals(pId))
+            {
+                logger.info("Retornando la tarjeta de puntos.");
+                return cliente.getTarjetaPuntos();
+            }
+        }
+        logger.severe("Error de uso: Se pidio la tarjeta de puntos de un cliente que no existe.");
+        throw new LogicaRestauranteException("Error de uso: Se pidio la tarjeta de puntos de un cliente que no existe.");
+      }
 }
