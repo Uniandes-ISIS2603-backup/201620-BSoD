@@ -65,6 +65,7 @@ public class RecursoCliente
     @POST
     public ClienteDTO crearCliente(ClienteDTO pNuevoCliente) throws LogicaRestauranteException
     {
+        pNuevoCliente.setTarjetaPuntos(null);
         return mockClientes.crearCliente(pNuevoCliente);
     }
     
@@ -86,7 +87,7 @@ public class RecursoCliente
      */
     @DELETE
     @Path("{idCliente}")
-    public void eliminarCliente(@PathParam("id") Long pId) throws LogicaRestauranteException 
+    public void eliminarCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
     {
         mockClientes.eliminarCliente(pId);
     }

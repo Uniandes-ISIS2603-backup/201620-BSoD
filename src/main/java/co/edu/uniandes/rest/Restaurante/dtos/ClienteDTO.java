@@ -27,7 +27,7 @@ public class ClienteDTO
     public ClienteDTO()
     {   }
     
-    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion, int pTelefono, TarjetaPuntosDTO pTarjetaPuntos)
+    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion, int pTelefono)
     {
         super();
         this.id = pId;
@@ -35,7 +35,7 @@ public class ClienteDTO
         this.apellidos = pApellidos;
         this.direccion = pDireccion;
         this.telefono = pTelefono;
-        this.tarjetaPuntos = pTarjetaPuntos;
+        this.tarjetaPuntos = null;
     }
 
     public Long getId() 

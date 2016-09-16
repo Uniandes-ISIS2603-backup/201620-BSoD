@@ -41,12 +41,7 @@
             $scope.alerts = [];
         }
         
- //       $http.get(tarjetaPuntosContext).then(function(response)
- //       {
- //          $scope.tarjetasPuntos = response.data;
- //     });
-        
-        this.saveRecord = function () 
+        this.agregarCliente = function () 
         {
             currentRecord = $scope.currentRecord;        
             
@@ -59,7 +54,7 @@
              
         };
         
-        this.deleteRecord = function(id)
+        this.eliminarCliente = function(id)
         {
             return $http.delete(context+"/"+ id).then(function() 
             {
@@ -67,7 +62,7 @@
             }, responseError);
         };
         
-        this.editRecord = function()
+        this.editarCliente = function()
         {
             currentRecord = $scope.currentRecord;
             id = $stateParams.clienteId;
