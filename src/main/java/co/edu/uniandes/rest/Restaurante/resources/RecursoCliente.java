@@ -49,8 +49,8 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe un cliente con el identificador dado.
      */
     @GET
-    @Path("{id: \\d+}")
-    public ClienteDTO darCliente(@PathParam("id") Long pId) throws LogicaRestauranteException 
+    @Path("{idCliente}")
+    public ClienteDTO darCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
     {
         return mockClientes.darCliente(pId);
     }
@@ -84,30 +84,24 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe ningun cliente con el id dado.
      */
     @DELETE
-    @Path("{id: \\d+}")
+    @Path("{idCliente}")
     public void eliminarCliente(@PathParam("id") Long pId) throws LogicaRestauranteException 
     {
         mockClientes.eliminarCliente(pId);
     }
     
     @GET
-    @Path("{id: \\+d}/tarjetaPuntos")
-    public TarjetaPuntosDTO darTarjetaPuntosCliente(@PathParam("id") Long pId) throws LogicaRestauranteException
+    @Path("{idCliente}/tarjetaPuntos")
+    public TarjetaPuntosDTO darTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
     {
         return mockClientes.darTarjetaPuntosCliente(pId);
     }
     
-    @GET
-    @Path("{id: \\+d}/prueba")
-    public String prueba(@PathParam("id") Long pId)
+    @POST
+    @Path("{idCliente}/tarjetaPuntos")
+    public void darTarjetaPuntosCliente(@PathParam("idCliente") Long pId, TarjetaPuntosDTO pTarjetaPuntos) throws LogicaRestauranteException
     {
-        return "ENTROOOo";
+        mockClientes.asignarTarjetaPuntosCliente(pId, pTarjetaPuntos);
     }
- 
-    @GET
-    @Path("prueba")
-    public String prueba2()
-    {
-        return "ENTROOOwo";
-    }
+    
 }

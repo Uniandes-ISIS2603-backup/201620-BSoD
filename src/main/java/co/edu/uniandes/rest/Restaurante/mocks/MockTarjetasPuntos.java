@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 /**
  * Mock del recurso TarjetaPuntos.
  * @author jdguz
+ * NO UTILIZAR
  */
 public class MockTarjetasPuntos 
 {	
