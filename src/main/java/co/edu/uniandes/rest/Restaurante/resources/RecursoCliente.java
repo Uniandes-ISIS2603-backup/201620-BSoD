@@ -101,9 +101,9 @@ public class RecursoCliente
     
     @POST
     @Path("{idCliente}/tarjetaPuntos")
-    public ClienteDTO asignarTarjetaPuntosCliente(@PathParam("idCliente") Long pId, TarjetaPuntosDTO pTarjetaPuntos) throws LogicaRestauranteException
+    public ClienteDTO agregarTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
     {
-        return asignarTarjetaPuntosCliente(pId, pTarjetaPuntos);
+        return mockClientes.agregarTarjetaPuntosCliente(pId);
     }
     
     @DELETE

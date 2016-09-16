@@ -21,9 +21,10 @@
                 <td id="{{$index}}-direccion">{{record.direccion}}</td>
                 <td id="{{$index}}-telefono">{{record.telefono}}</td>
                 <td id="{{$index}}-tarjetaPuntos">{{(record.tarjetaPuntos!=null)?record.tarjetaPuntos.id:'No tiene'}}
-                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span> Ver</button>
-                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                    <button ng-show="record.tarjetaPuntos==null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-credit-card"></span> Registrar</button>   
+                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Ver</button>
+                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Sumar puntos</button>
+                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
+                    <button ng-show="record.tarjetaPuntos==null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.agregarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-credit-card"></span>Crear</button>
                 </td>
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>

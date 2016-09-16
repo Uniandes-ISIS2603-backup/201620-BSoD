@@ -210,7 +210,7 @@ public class MockClientes
         throw new LogicaRestauranteException("Error de uso: Se pidio la tarjeta de puntos de un cliente que no existe.");
       }
       
-      public ClienteDTO asignarTarjetaPuntosCliente(Long pId, TarjetaPuntosDTO pTarjetaPuntos)throws LogicaRestauranteException
+      public ClienteDTO agregarTarjetaPuntosCliente(Long pId)throws LogicaRestauranteException
       {
         logger.info("Recibiendo solicitud de asignar tarjeta de puntos al cliente : " + pId+".");
         
@@ -223,7 +223,9 @@ public class MockClientes
                     logger.severe("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que ya tenia una asignada.");
                     throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que ya tenia una asignada.");
                 }
-                cliente.setTarjetaPuntos(pTarjetaPuntos);
+                double aleatorioDouble = 10000000*Math.random();
+                int aleatorioInt = (int)aleatorioDouble;
+                cliente.setTarjetaPuntos(new TarjetaPuntosDTO(aleatorioInt, new Date(), 0));
                 return cliente;
             }
         }

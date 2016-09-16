@@ -73,7 +73,22 @@
                     }, responseError);
         }
         
+        this.agregarTarjetaPuntosCliente = function(id)
+        {
+            return $http.post(context+"/"+ id+"/tarjetaPuntos").then(function() 
+            {
+                $state.reload();
+            }, responseError);
+        };
 
+        this.eliminarTarjetaPuntosCliente = function(id)
+        {
+            return $http.delete(context+"/"+ id+"/tarjetaPuntos").then(function() 
+            {
+                $state.reload();
+            }, responseError);
+        };
+        
      // -----------------------------------------------------------------
      // Funciones para manejra los mensajes en la aplicación
 
