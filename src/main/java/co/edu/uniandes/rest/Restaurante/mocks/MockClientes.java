@@ -7,7 +7,6 @@ import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -221,7 +220,6 @@ public class MockClientes
                     logger.severe("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que ya tenia una asignada.");
                     throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que ya tenia una asignada.");
                 }
-                
                 cliente.setTarjetaPuntos(pTarjetaPuntos);
             }
         }
@@ -232,4 +230,30 @@ public class MockClientes
             throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que no existe.");
         }
       }
+      
+      public void eliminarTarjetaPuntosCliente(Long pId) throws LogicaRestauranteException
+      {
+        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos al cliente : " + pId+".");
+        boolean eliminado = false;
+            
+        for(ClienteDTO cliente:clientes)
+        {
+            if(cliente.getId().equals(pId))
+            {
+                if(cliente.getTarjetaPuntos()==null)
+                {
+                    logger.severe("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no tenia.");
+                    throw new LogicaRestauranteException("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no tenia.");
+                }
+                cliente.setTarjetaPuntos(null);
+                eliminado = true;
+            }
+        }
+        
+        if(!eliminado)
+        {
+            logger.severe("Error de uso: Se pidio eliminar tarjeta de puntos de un cliente que no existe.");
+            throw new LogicaRestauranteException("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no existe.");
+        }
+    }
 }

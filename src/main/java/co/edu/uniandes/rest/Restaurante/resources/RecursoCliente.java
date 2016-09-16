@@ -104,4 +104,11 @@ public class RecursoCliente
         mockClientes.asignarTarjetaPuntosCliente(pId, pTarjetaPuntos);
     }
     
+    @DELETE
+    @Path("{idCliente}/tarjetaPuntos")
+    public void eliminarTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
+    {
+        mockClientes.eliminarTarjetaPuntosCliente(pId);
+    }
+    
 }
