@@ -39,7 +39,6 @@
                 url: 'clientes/{clienteId:int}/edit',
                 param: 
                 {
-                    //  TODO: AVERIGUAR COMO SE PASAN PARAMETROS
                     clienteId: 'clienteId'
                 },
                 views: 
