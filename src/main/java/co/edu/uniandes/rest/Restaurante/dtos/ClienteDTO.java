@@ -97,8 +97,6 @@ public class ClienteDTO
     {
         this.tarjetaPuntos = tarjetaPuntos;
     }
-    
-    
         
     /**
      * Representacion JSON de un cliente

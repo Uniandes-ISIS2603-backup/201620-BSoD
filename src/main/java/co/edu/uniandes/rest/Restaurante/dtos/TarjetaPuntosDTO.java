@@ -59,6 +59,12 @@ public class TarjetaPuntosDTO
     {
         this.acumulado = acumulado;
     }
+    
+    public void sumarAcumulado(int pCompra)
+    {
+        int suma = pCompra/10000;
+        this.acumulado += suma;
+    }
         
     /**
      * Representacion JSON de una tarjeta de puntos.

@@ -19,6 +19,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -99,16 +100,22 @@ public class RecursoCliente
     
     @POST
     @Path("{idCliente}/tarjetaPuntos")
-    public void darTarjetaPuntosCliente(@PathParam("idCliente") Long pId, TarjetaPuntosDTO pTarjetaPuntos) throws LogicaRestauranteException
+    public ClienteDTO asignarTarjetaPuntosCliente(@PathParam("idCliente") Long pId, TarjetaPuntosDTO pTarjetaPuntos) throws LogicaRestauranteException
     {
-        mockClientes.asignarTarjetaPuntosCliente(pId, pTarjetaPuntos);
+        return asignarTarjetaPuntosCliente(pId, pTarjetaPuntos);
     }
     
     @DELETE
     @Path("{idCliente}/tarjetaPuntos")
-    public void eliminarTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
+    public ClienteDTO eliminarTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
     {
-        mockClientes.eliminarTarjetaPuntosCliente(pId);
+        return mockClientes.eliminarTarjetaPuntosCliente(pId);
     }
     
+    @PUT
+    @Path("{idCliente}/tarjetaPuntos/sumaPuntos")
+    public ClienteDTO sumarPuntosTarjetaCliente(@PathParam("idCliente") Long pId, @QueryParam("compra") int pCompra) throws LogicaRestauranteException
+    {
+        return mockClientes.sumarPuntosTarjetaPuntosCliente(pId, pCompra);
+    }
 }
