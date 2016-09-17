@@ -36,11 +36,11 @@
 
             <div class="form-group col-md-12" >
                 <label for="calificacion" class="col-md-2 control-label">Calificacion:</label>
-                <label class="radio-inline"><input type="radio" name="optradio">1</label>
-                <label class="radio-inline"><input type="radio" name="optradio">2</label>
-                <label class="radio-inline"><input type="radio" name="optradio">3</label>
-                <label class="radio-inline"><input type="radio" name="optradio">4</label>
-                <label class="radio-inline"><input type="radio" name="optradio">5</label>
+                <input id="calificacion" name="calificacion" class="button" type="radio" value="1" ng-model="currentRecord.calificacion" ng-init="currentRecord.calificacion" required /> 1 
+                <input id="calificacion" name="calificacion" class="button" type="radio" value="2" ng-model="currentRecord.calificacion" ng-init="currentRecord.calificacion" required /> 2 
+                <input id="calificacion" name="calificacion" class="button" type="radio" value="3" ng-model="currentRecord.calificacion" ng-init="currentRecord.calificacion" required /> 3 
+                <input id="calificacion" name="calificacion" class="button" type="radio" value="4" ng-model="currentRecord.calificacion" ng-init="currentRecord.calificacion" required /> 4 
+                <input id="calificacion" name="calificacion" class="button" type="radio" value="5" ng-model="currentRecord.calificacion" ng-init="currentRecord.calificacion" required /> 5 
             </div>
             <button type="button" ui-sref='sucursalList'>Cancelar</button>
             <button type="submit" >Guardar</button>

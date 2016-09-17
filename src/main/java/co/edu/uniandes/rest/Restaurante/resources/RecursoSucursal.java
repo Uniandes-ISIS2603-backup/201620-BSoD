@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  *
  * @author af.pinzon10
  */
-@Path("sucursales")
+@Path("sucursal")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoSucursal 
@@ -76,7 +76,8 @@ public class RecursoSucursal
      * @throws LogicaRestauranteException Si no existe una sucursal con el id dado.
      */
     @PUT
-    public SucursalDTO actualizarSucursal(SucursalDTO sucursalActualizada) throws LogicaRestauranteException 
+    @Path("{id: \\d+}")
+    public SucursalDTO actualizarSucursal(@PathParam("id") Long pId, SucursalDTO sucursalActualizada) throws LogicaRestauranteException 
     {
         return mockSucursales.actualizarSucursal(sucursalActualizada);
     }

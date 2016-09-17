@@ -55,7 +55,7 @@
                
                 } else {
                     
-                  
+           
                     return $http.put(context + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                    

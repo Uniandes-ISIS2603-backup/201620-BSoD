@@ -1,6 +1,6 @@
 (function (ng) {
     var app = ng.module("sucursalModule", ["ngMessages","ui.router"]);
-    app.constant("sucursalContext", "api/sucursales");
+    app.constant("sucursalContext", "api/sucursal");
     app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/sucursal/';
      
@@ -9,7 +9,7 @@
                 views: {
                     'mainView': {
                         controller: 'sucursalCtrl',
-                        controllerAs: 'ctrl',
+                        controllerAs: 'sucursalCtrl',
                         templateUrl: basePath + 'sucursal.list.html'
                     }
                 }
