@@ -35,7 +35,7 @@
                 precio: undefined,
                 direccion: '',
                 telefono: undefined,
-                tarjetaPuntos: {}
+                tarjetaPuntos: null
             };
              
             $scope.alerts = [];

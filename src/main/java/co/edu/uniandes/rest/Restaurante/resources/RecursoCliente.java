@@ -65,7 +65,6 @@ public class RecursoCliente
     @POST
     public ClienteDTO crearCliente(ClienteDTO pNuevoCliente) throws LogicaRestauranteException
     {
-        pNuevoCliente.setTarjetaPuntos(null);
         return mockClientes.crearCliente(pNuevoCliente);
     }
     
