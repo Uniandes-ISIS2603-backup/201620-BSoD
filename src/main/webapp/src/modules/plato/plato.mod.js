@@ -5,23 +5,26 @@
  */
 (function(ng){
     var mod = ng.module("platoModule",["ngMessages", "ui.router"] );
-    mod.constant("platoContext", "api/platos");
+    mod.constant("platoContext", "/plato");
        mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/plato/';
-     
+            $urlRouterProvider.otherwise("/platoList");
+            
             $stateProvider.state('platoList', {
-                url: '/platos',
+                url: '/plato',
+                parent: 'sucursalEdit',
                 views: {
-                    'mainView': {
+                    'sucursalInstanceView': {
                         controller: 'platoCtrl',
-                        controllerAs: 'platoCtrl',
+                        controllerAs: 'ctrl',
                         templateUrl: basePath + 'plato.list.html'
                     }
                 }
             }).state('platoCreate', {
-                url: '/platos/create',
+                url: '/plato/create',
+                parent: 'sucursalEdit',
                 views: {
-                    'mainView': {
+                    'sucursalInstanceView': {
                         controller: 'platoCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'plato.create.html'
@@ -29,7 +32,7 @@
                 }
 
             }).state('platoEdit', {
-                url: '/platos/:platoId',
+                url: '/plato/:platoId',
                 param: {
                     platoId: null
                 },

@@ -2,12 +2,14 @@
     
     var mod = ng.module("platoModule");
 
-    mod.controller("platoCtrl", ['$scope', '$state', '$stateParams', '$http', 'platoContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("platoCtrl", ['$scope', '$state', '$stateParams', '$http', 'sucursalContext', function ($scope, $state, $stateParams, $http, sucursalContext) {
 
             // inicialmente el listado de plato está vacio
+            $scope.platoContext = '/plato';
+
             $scope.records = {};
             // carga las plato
-            $http.get(context).then(function(response){
+            $http.get(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -18,7 +20,7 @@
                 // toma el id del parámetro
                 id = $stateParams.platoId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                $http.get(sucursalContext + "/" + $stateParams.sucursalId +$scope.platoContext + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -40,14 +42,14 @@
             }
 
 
-            this.saveRecord = function (id, nombre, precio, descripcion) {
+            this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(context, currentRecord)
+                    return $http.post(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
@@ -58,7 +60,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -73,10 +75,10 @@
                 if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + id,currentRecord)
+                    return $http.delete(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext + "/" + currentRecord.id,currentRecord)
                         .then(function () {
                             $scope.records = {};
-                            $http.get(context).then(function(response){
+                            $http.get(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext).then(function(response){
                                 $scope.records = response.data;    
                             }, responseError);
                             $state.go('platoList');
