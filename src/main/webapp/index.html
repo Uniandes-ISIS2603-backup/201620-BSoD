@@ -55,6 +55,14 @@
         <script src="src/modules/reservas/reserva.mod.js" type="text/javascript"></script>
         <script src="src/modules/reservas/reserva.ctrl.js" type="text/javascript"></script>
         
+        
+        <!--Mesa-->
+        
+          
+        <script src="src/modules/mesa/mesa.mod.js" type="text/javascript"></script>
+        <script src="src/modules/mesa/mesa.ctrl.js" type="text/javascript"></script>
+        
+        
         <!--FAVICON-->
         
         <link rel='icon' type='image/x-icon' href='images/favicon.ico'/>
@@ -113,6 +121,15 @@
                 <li><a ui-sref="medioCreate">Agregar</a></li>
                 <li><a ui-sref="medioList">Listar</a></li>
             </ul></li>
+            
+             <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Mesa<span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a ui-sref="mesaCreate">Agregar</a></li>
+                                         <li><a ui-sref="mesaList">Listar</a></li>
+                                    </ul>
+           </li>
+                            
+       
     </ul>
   </div>
 </nav>

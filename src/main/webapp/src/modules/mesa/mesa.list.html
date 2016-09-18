@@ -1,16 +1,29 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+
+<div class="container">
+  <h2>Lista de Mesas</h2>
+
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Piso</th>
+        <th>Cant. Sillas </th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+        <tr ng-repeat="record in records">
+            <td id ="{{$index}}-name">{{record.id}}</td>
+            <td id ="{{$index}}-name">{{record.piso}}</td>
+            <td id ="{{$index}}-name">{{record.cantSillas}}</td>
+            
+             <td>
+                      <button  id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="mesaEdit({mesaId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>
+                      <button  id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="mesaCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span>Eliminar</button>
+             </td>
+        </tr>
+
+    </tbody>
+  </table>
+</div>
