@@ -19,7 +19,7 @@ public class MockMesas
     // Objeto para presentar logs de las operaciones
     private final static Logger logger = Logger.getLogger(MockMesas.class.getName());
 	
-    // Arreglo de clientes.
+    // Arreglo de mesas.
     private static ArrayList<MesaDTO> mesas;
     
     /**
@@ -30,10 +30,10 @@ public class MockMesas
     	if (mesas == null) 
         {
             mesas = new ArrayList<MesaDTO>();
-            mesas.add(new MesaDTO(1, 1, 4 , false));
-            mesas.add(new MesaDTO(2, 1, 4 , false));
-            mesas.add(new MesaDTO(3, 1, 4 , false));
-            mesas.add(new MesaDTO(4, 1, 4 , true));
+            mesas.add(new MesaDTO(1L, 1, 4 , 1L));
+            mesas.add(new MesaDTO(2L, 1, 4 , 2L));
+            mesas.add(new MesaDTO(3L, 1, 4 , 1L));
+            mesas.add(new MesaDTO(4L, 1, 4 , 2L));
         }
         
     	// Indica que se muestren todos los mensajes
@@ -49,7 +49,7 @@ public class MockMesas
     * @return Lista de mesas.
     * @throws LogicaRestauranteException cuando no existe la lista en memoria  
     */    
-    public List<MesaDTO> darMesas() throws LogicaRestauranteException 
+    public List<MesaDTO> darMesas(Long idSucursal) throws LogicaRestauranteException 
     {
         logger.info("Recibiendo solicitud de dar todas las mesas.");
         
@@ -58,8 +58,15 @@ public class MockMesas
     		logger.severe("Error interno: lista de mesas no existe.");
     		throw new LogicaRestauranteException("Error interno: lista de mesas no existe.");    		
     	}
+         ArrayList<MesaDTO> mesasSucursal = new ArrayList<MesaDTO>();
+        
+        for (MesaDTO mesa : mesas) {
+            if( idSucursal== mesa.getidSucursal() || mesa.getidSucursal() ==0){
+                mesasSucursal.add(mesa);
+            }
+        }
     	logger.info("Retornando todas las mesas.");
-    	return mesas;
+    	return mesasSucursal;
     }
     
         /**
@@ -89,29 +96,48 @@ public class MockMesas
     	logger.severe("Error de uso: Se pidio una mesa que no existe.");
     	throw new LogicaRestauranteException("Error de uso: Se pidio una mesa que no existe.");
     }
-
+    
+    
     /**
      * Agrega una mesa al sistema.
      * @param nuevaMesa Mesa a agregar.
      * @return Mesa agregada.
      * @throws LogicaRestauranteException Cuando se intenta crear una mesa con un id que ya existe. 
      */
-    public MesaDTO crearMesa(MesaDTO nuevaMesa) throws LogicaRestauranteException
+    public MesaDTO crearMesa(Long idSucursal, MesaDTO nuevaMesa) throws LogicaRestauranteException
     {
-        int idMesaAAgregar = nuevaMesa.getId();
-    	logger.info("Recibiendo solicitud de agregar la mesa con id "+idMesaAAgregar+".");
-        
+        logger.info("Recibiendo solicitud de agregar una mesa.");
+        Long idMesaAAgregar = nuevaMesa.getId();
     	// Se busca que no exista una mesa con ese id.
-	for (MesaDTO mesa : mesas) 
+	if ( nuevaMesa.getId() != null ) 
         {
-            if(mesa.getId()==(idMesaAAgregar))
-            {
-                logger.severe("Error de uso: Se intento crear una mesa con un id "+idMesaAAgregar+" que ya existia.");
-                throw new LogicaRestauranteException("Error de uso: Se intento crear una mesa con un id "+idMesaAAgregar+" que ya existia.");
-            }
-        }
-        // Se Agrega la mesa.
-    	logger.info("Agregada satisfactoriamente la mesa");
+	    	for (MesaDTO domi : mesas) 
+                {
+	            if (Objects.equals(domi.getId(), nuevaMesa.getId()))
+                    {
+	            	logger.severe("Ya existe una domicilio con ese id");
+	                throw new LogicaRestauranteException("Ya existe una domicilio con ese id");
+	            }
+	        }
+	        
+    	} else 
+        {
+    		logger.info("Generando id para un nuevo domicilio");
+    		long newId = 1;
+	        for (MesaDTO domi : mesas) 
+                {
+	            if (newId <= domi.getId()){
+	                newId =  domi.getId() + 1;
+	            }
+	        }
+	        nuevaMesa.setId(newId);
+                nuevaMesa.setidSucursal(idSucursal);
+    	}
+    	// Se busca que no exista un cliente con ese id.
+	
+	
+        // Se Agrega el cliente.
+    	logger.info("Agregando Mesa: " + nuevaMesa);
         mesas.add(nuevaMesa);
         return nuevaMesa;
     }
@@ -123,24 +149,21 @@ public class MockMesas
      * @return Mesa agregada.
      * @throws LogicaRestauranteException Cuando no existe una mesa con el id a actualizar. 
      */
-    public MesaDTO actualizarMesa(MesaDTO mesaActualizada) throws LogicaRestauranteException
+    public MesaDTO actualizarMesa(Long id, MesaDTO mesaActualizada) throws LogicaRestauranteException
     {   
-       int id = mesaActualizada.getId();
        logger.info("Recibiendo solicitud de actualizar la mesa con id "+id+"."); 
        
        
        // Se busca la mesa a actualizar
         for (MesaDTO mesa : mesas) 
         {
-            if(mesa.getId()==(id))
+            if(Objects.equals(mesa.getId(), id))
             {
                 int piso = mesaActualizada.getPiso();
-                int sillas =mesaActualizada.getSillas();
-                boolean estado = mesaActualizada.isEstado();
+                int cantSillas =mesaActualizada.getCantSillas();
                 
                 mesa.setPiso(piso);
-                mesa.setSillas(sillas);              
-                mesa.setEstado(estado);
+                mesa.setCantSillas(cantSillas);
                 
                 logger.info("Actualizada satisfactoriamente."); 
                 return mesa;
@@ -157,19 +180,19 @@ public class MockMesas
      * @param pId Identificacion del cliente que se quiere eliminar.
      * @throws LogicaRestauranteException Cuando no existe un cliente con el id que se quiere eliminar. 
      */
-      public void eliminarMesa(int pId) throws LogicaRestauranteException
+      public void eliminarMesa(Long pId) throws LogicaRestauranteException
    {
        logger.info("Recibiendo solicitud de eliminar la mesa con id: " + pId+".");
        boolean eliminado = false;
        
         // Se busca el cliente a eliminar
-        for (int i = 0; i< mesas.size() && !eliminado; i++) 
-        {
-            MesaDTO mesa = mesas.get(i);
-            if(mesa.getId()==(pId))
-            {
-                mesas.remove(i);
-                eliminado = true;
+         for (MesaDTO mesa : mesas) {
+            if (Objects.equals(mesa.getId(), pId)) {
+
+                // elimina la ciudad
+                logger.info("eliminando mesa " + mesa);
+                mesas.remove(mesa);
+                return;
             }
         }
        

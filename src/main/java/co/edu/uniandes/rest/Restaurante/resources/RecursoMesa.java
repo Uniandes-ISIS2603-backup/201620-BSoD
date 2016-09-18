@@ -25,7 +25,7 @@ import javax.ws.rs.Produces;
  *
  * @author jdguz
  */
-@Path("mesas")
+@Path("sucursal/{idSucursal: \\d+}/mesa")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoMesa 
@@ -38,9 +38,9 @@ public class RecursoMesa
      * @throws LogicaRestauranteException Si no existe una lista de mesas en el sistema.
      */
     @GET
-    public List<MesaDTO> darMesas() throws LogicaRestauranteException 
+    public List<MesaDTO> darMesas(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
     {
-        return mockMesas.darMesas();
+        return mockMesas.darMesas(idSucursal);
     }
     
      /**
@@ -63,9 +63,9 @@ public class RecursoMesa
      * @throws LogicaRestauranteException Si ya existe una mesa con ese id.
      */
     @POST
-    public MesaDTO crearMesa(MesaDTO pNuevaMesa) throws LogicaRestauranteException
+    public MesaDTO crearMesa(@PathParam("idSucursal") Long idSucursal, MesaDTO pNuevaMesa) throws LogicaRestauranteException
     {
-        return mockMesas.crearMesa(pNuevaMesa);
+        return mockMesas.crearMesa(idSucursal, pNuevaMesa);
     }
     
     /**
@@ -74,9 +74,9 @@ public class RecursoMesa
      * @throws LogicaRestauranteException Si no existe un cliente con el id dado.
      */
     @PUT
-    public MesaDTO actualizarMesa(MesaDTO pMesaAActualizar) throws LogicaRestauranteException 
+    public MesaDTO actualizarMesa(@PathParam("idSucursal") Long idSucursal, MesaDTO pMesaAActualizar) throws LogicaRestauranteException 
     {
-        return mockMesas.actualizarMesa(pMesaAActualizar);
+        return mockMesas.actualizarMesa(idSucursal, pMesaAActualizar);
     }
     
     /**
@@ -86,7 +86,7 @@ public class RecursoMesa
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void eliminarMesa(@PathParam("id") int pId) throws LogicaRestauranteException 
+    public void eliminarMesa(@PathParam("id") Long pId) throws LogicaRestauranteException 
     {
         mockMesas.eliminarMesa(pId);
     }

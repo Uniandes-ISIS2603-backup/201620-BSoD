@@ -1,16 +1,30 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+    <div class="container well">
+        <h1>Crear Mesa</h1>
+
+        <form novalidate name ="form" id="mesa-form" role="form" class="form-horizontal" ng-submit="form.$valid && mesaCtrl.saveRecord(currentRecord.id, currentRecord.piso, currentRecord.cantSillas)">
+         <fieldset>
+            <div class="form-group">
+           
+          <label for ="piso" class="control-label col-sm-2">Piso</label>
+          <div class="col-sm-5">
+              <input type="number" class="form-control" id="piso" placeholder="Piso mesa" ng-model="currentRecord.piso" ng-init="currentRecord.piso" required />
+          </div>
+        </div>
+        
+        <div class="form-group" ng-class="{'has-success': form.nombre.$valid && form.nombre.$dirty, 'has-error': form.nombre.$invalid && (form.nombre.$dirty || form.$submitted)}" >
+          <label class="control-label col-sm-2">Cantidad sillas:</label>
+          <div class="col-sm-5"> 
+              <input type="number" name="sillas" class="form-control" id="cantSillas" placeholder="cantidad de sillas"  ng-model="currentRecord.cantSillas" ng-init="currentRecord.cantSillas" required >
+          </div>
+        </div>
+          
+        <div class="form-group"> 
+          <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">Guardar</button>
+              <button type="button" class="btn btn-default" ui-sref="mesaList">Cancel</button>
+              
+          </div>
+        </div>
+         </fieldset>
+    </form>
+    </div>

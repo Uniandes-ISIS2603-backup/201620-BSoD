@@ -26,7 +26,7 @@
                 views: {
                     'sucursalInstanceView': {
                         controller: 'platoCtrl',
-                        controllerAs: 'ctrl',
+                        controllerAs: 'platoCtrl',
                         templateUrl: basePath + 'plato.create.html'
                     }
                 }

@@ -7,40 +7,43 @@ package co.edu.uniandes.rest.Restaurante.dtos;
 
 /**
  *
- * @author jdguz
+ * @author zl.castaneda
  */
 public class MesaDTO 
 {
-    private int id;
+    private Long id;
     
     private int piso;
     
-    private int sillas;
+    private int cantSillas;
     
     private boolean estado;
-
+    
+    private Long idSucursal;
+    
     public MesaDTO()
     {   }
     
-    public MesaDTO(int pId, int pPiso, int pSillas, boolean pEstado)
+    public MesaDTO(Long pId, int pPiso, int pCantSillas, Long idSucursal)
     {
         super();
         this.id = pId;
         this.piso = pPiso;
-        this.sillas = pSillas;
-        this.estado = pEstado;
+        this.cantSillas = pCantSillas;
+        this.estado = false;
+        this.idSucursal = idSucursal;
     }
-    
-    public int getId() 
+
+    public Long getId() 
     {
         return id;
     }
 
-    public void setId(int id) 
+    public void setId(Long id) 
     {
         this.id = id;
     }
-    
+
     public int getPiso() 
     {
         return piso;
@@ -51,14 +54,14 @@ public class MesaDTO
         this.piso = piso;
     }
 
-    public int getSillas() 
+    public int getCantSillas() 
     {
-        return sillas;
+        return cantSillas;
     }
 
-    public void setSillas(int sillas) 
+    public void setCantSillas(int cantSillas) 
     {
-        this.sillas = sillas;
+        this.cantSillas = cantSillas;
     }
 
     public boolean isEstado() 
@@ -70,15 +73,27 @@ public class MesaDTO
     {
         this.estado = estado;
     }
-    
+        
     /**
-     * Representacion JSON de una silla
-     * @return La representacion JSON de un DTO silla.
+     * Representacion JSON de un cliente
+     * @return La representacion JSON de un DTO cliente.
      */
     @Override
     public String toString() 
     {
-    	return "{  id : " + id +", piso : " + piso +", sillas : \""+ sillas + ", estado : \""+estado+"\" }" ;  
+    	return "{ id : " + id +", piso : \""+ piso +"\", cantSillas : \""+cantSillas+"\", estado : \""+estado+"\" }" ;  
     }
+    
+    public Long getidSucursal() 
+    {
+        return idSucursal;
+    }
+
+    public void setidSucursal(Long id) 
+    {
+         this.idSucursal = id;
+    }
+      
+    
     
 }
