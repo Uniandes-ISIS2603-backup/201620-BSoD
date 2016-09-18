@@ -1,12 +1,14 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.DomicilioDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -104,18 +106,28 @@ public class MockClientes
      */
     public ClienteDTO crearCliente(ClienteDTO nuevoCliente) throws LogicaRestauranteException
     {
-        Long idClienteAAgregar = nuevoCliente.getId();
     	logger.info("Recibiendo solicitud de agregar cliente con id "+idClienteAAgregar+".");
         
     	// Se busca que no exista un cliente con ese id.
-	for (ClienteDTO cliente : clientes) 
-        {
-            if(cliente.getId().equals(idClienteAAgregar))
-            {
-                logger.severe("Error de uso: Se intento crear un cliente con un id "+idClienteAAgregar+" que ya existia.");
-                throw new LogicaRestauranteException("Error de uso: Se intento crear un cliente con un id "+idClienteAAgregar+" que ya existia.");
+	if (nuevoCliente.getId() != null) {
+            for (ClienteDTO cliente : clientes) {
+                if (Objects.equals(cliente.getId(), nuevoCliente.getId())) {
+                    logger.severe("Ya existe una domicilio con ese id");
+                    throw new LogicaRestauranteException("Ya existe una domicilio con ese id");
+                }
             }
+
+        } else {
+            logger.info("Generando id para un nuevo domicilio");
+            long newId = 1;
+            for (ClienteDTO cliente : clientes) {
+                if (newId <= cliente.getId()) {
+                    newId = cliente.getId() + 1;
+                }
+            }
+            nuevoCliente.setId(newId);
         }
+
         // Se Agrega el cliente.
     	logger.info("Agregado satisfactoriamente el cliente");
         clientes.add(nuevoCliente);
