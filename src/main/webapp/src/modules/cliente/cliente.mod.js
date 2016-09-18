@@ -9,41 +9,49 @@
         {
             var basePath = 'src/modules/cliente/';
   
-            $stateProvider.state('clienteList', 
+            $stateProvider.state('cliente', 
             {
-                url: '/clientes',
-                views: 
+                url: '/cliente',
+                abstract :true,
+                views: {
+                        'mainView': 
                         {
-                            'mainView': 
-                            {
-                                controller: 'clienteCtrl',
-                                controllerAs: 'clienteCtrl',
-                                templateUrl: basePath + 'cliente.list.html'
-                            }
+                            controller: 'clienteCtrl',
+                            controllerAs: 'clienteCtrl',
+                            templateUrl: basePath + 'cliente.html'
                         }
+                    }
+            }).state('clienteList', {
+                url: '/list',
+                parent: 'cliente',
+                views: {
+                    'clienteView': {
+                        controller: 'clienteCtrl',
+                        controllerAs: 'clienteCtrl',
+                        templateUrl: basePath + 'cliente.list.html'
+                    }
+                }
             }).state('clienteCreate', 
             {
-                url: '/clientes/create',
+                url: '/create',
+                parent: 'cliente',
                 views: 
                 {
-                    'mainView': 
+                    'clienteView': 
                     {
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
                         templateUrl: basePath + 'cliente.create.html'
                     }
                 }
-
             }).state('clienteEdit', 
             {
-                url: 'clientes/{clienteId:int}/edit',
-                param: 
-                {
-                    clienteId: 'clienteId'
-                },
+                url: '/{clienteId:int}/edit',
+                parent: 'cliente',
+                param: {clienteId: 'clienteId'},
                 views: 
                 {
-                    'mainView': 
+                    'clienteView': 
                     {
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
