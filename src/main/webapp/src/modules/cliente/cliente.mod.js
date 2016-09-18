@@ -46,7 +46,7 @@
                 }
             }).state('clienteEdit', 
             {
-                url: '/{clienteId:int}/edit',
+                url: '/{clienteId}/edit',
                 parent: 'cliente',
                 param: {clienteId: 'clienteId'},
                 views: 

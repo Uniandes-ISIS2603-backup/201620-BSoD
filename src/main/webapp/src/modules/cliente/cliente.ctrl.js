@@ -15,7 +15,7 @@
             $scope.records = response.data;    
         }, responseError);
         
-        if ($stateParams.idCliente !== null && $stateParams.idCliente !== undefined) 
+        if ($stateParams.clienteId !== null && $stateParams.clienteId !== undefined) 
         {
                 id = $stateParams.clienteId;              // Toma el parametro id.
                 
