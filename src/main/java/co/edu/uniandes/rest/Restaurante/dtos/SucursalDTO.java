@@ -21,6 +21,8 @@ public class SucursalDTO
     
     private int calificacion;
     
+    
+    
     public SucursalDTO()
     {   }
     

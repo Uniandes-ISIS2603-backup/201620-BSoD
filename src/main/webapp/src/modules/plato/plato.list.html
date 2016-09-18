@@ -20,9 +20,11 @@
             <td id ="{{$index}}-name">{{record.precio}}</td>
             <td id ="{{$index}}-name">{{record.descripcion}}</td>
             
-             <td><button  id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="platoEdit({platoId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>
-                 <button  id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="platoCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span>Eliminar</button>
-             </td>
+             <td>
+                  <button  id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="platoCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span>Eliminar</button>
+
+                  <button  id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="platoEdit({platoId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>
+              </td>
         </tr>
 
     </tbody>

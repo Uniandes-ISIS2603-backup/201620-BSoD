@@ -2,12 +2,12 @@
     
     var mod = ng.module("sucursalModule");
 
-    mod.controller("sucursalCtrl", ['$scope', '$state', '$stateParams', '$http', 'sucursalContext', function ($scope, $state, $stateParams, $http, context) {
+    mod.controller("sucursalCtrl", ['$scope', '$state', '$stateParams', '$http', 'sucursalContext', function ($scope, $state, $stateParams, $http, sucursalContext) {
 
            
             $scope.records = {};
             
-            $http.get(context).then(function(response){
+            $http.get(sucursalContext).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -17,7 +17,7 @@
               
                 id = $stateParams.sucursalId;
                
-                $http.get(context + "/" + id)
+                $http.get(sucursalContext + "/" + id)
                     .then(function (response) {
              
                         $scope.currentRecord = response.data;
@@ -26,13 +26,14 @@
          
             } else
             {
-            
                 $scope.currentRecord = {
                     id: undefined,
                     ciudad: '',
                     direccion: '',
                     mesas: undefined,
-                    calificacion: undefined
+                    calificacion: undefined,
+                    /*error potencial*/
+                    plato:{} /*Objeto que representa instancia de plato*/
                 };
               
                 $scope.alerts = [];
@@ -46,7 +47,7 @@
                 if (id == null) {
 
                   
-                    return $http.post(context, currentRecord)
+                    return $http.post(sucursalContext, currentRecord)
                         .then(function () {
                        
                             $state.go('sucursalList');
@@ -56,7 +57,7 @@
                 } else {
                     
            
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put(sucursalContext + "/" + currentRecord.id, currentRecord)
                         .then(function () {
                    
                             $state.go('sucursalList');
@@ -69,10 +70,10 @@ this.deleteRecord = function (id) {
                 if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + id,currentRecord)
+                    return $http.delete(sucursalContext + "/" + id,currentRecord)
                         .then(function () {
                             $scope.records = {};
-                            $http.get(context).then(function(response){
+                            $http.get(sucursalContext).then(function(response){
                                 $scope.records = response.data;    
                             }, responseError);
                             $state.go('sucursalList');

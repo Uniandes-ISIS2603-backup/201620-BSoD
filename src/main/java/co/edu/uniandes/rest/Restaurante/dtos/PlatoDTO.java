@@ -19,18 +19,21 @@ public class PlatoDTO
     
     private String descripcion;
     
+    private Long idSucursal;
+    
     
     
     public PlatoDTO()
     {   }
     
-    public PlatoDTO(Long pId, String pNombre, int pPrecio, String pDescripcion)
+    public PlatoDTO(Long pId, String pNombre, int pPrecio, String pDescripcion, Long idSucursal)
     {
         super();
         this.id = pId;
         this.nombre = pNombre;
         this.precio = pPrecio;
         this.descripcion = pDescripcion;
+        this.idSucursal = idSucursal;
     }
 
     public Long getId() 
@@ -82,5 +85,17 @@ public class PlatoDTO
     {
     	return "{ id : " + id +", nombre : \""+ nombre +"\", precio : \""+precio+"\", descripcion : \""+descripcion+"\" }" ;  
     }
+    
+    public Long getidSucursal() 
+    {
+        return idSucursal;
+    }
+
+    public void setidSucursal(Long id) 
+    {
+         this.idSucursal = id;
+    }
+      
+    
     
 }
