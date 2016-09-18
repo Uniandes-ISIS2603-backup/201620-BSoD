@@ -35,12 +35,12 @@
                 url: '/mesa/:mesaId',
                 parent: 'sucursalEdit',
                 param: {
-                    platoId: null
+                    mesaId: null
                 },
                 views: {
                     'sucursalInstanceView': {
                         controller: 'mesaCtrl',
-                        controllerAs: 'ctrl',
+                        controllerAs: 'mesaCtrl',
                         templateUrl: basePath + 'mesa.create.html'
                     }
                 }

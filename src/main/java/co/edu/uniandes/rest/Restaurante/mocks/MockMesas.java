@@ -161,11 +161,9 @@ public class MockMesas
             {
                 int piso = mesaActualizada.getPiso();
                 int cantSillas =mesaActualizada.getCantSillas();
-                boolean estado = mesaActualizada.isEstado();
                 
                 mesa.setPiso(piso);
-                mesa.setCantSillas(cantSillas);              
-                mesa.setEstado(estado);
+                mesa.setCantSillas(cantSillas);
                 
                 logger.info("Actualizada satisfactoriamente."); 
                 return mesa;
