@@ -78,7 +78,7 @@ public class MockClientes
     */    
     public ClienteDTO darCliente(Long pId) throws LogicaRestauranteException 
     {
-        logger.info("Recibiendo solicitud de dar el cliente con id "+pId+".");
+        logger.info("Recibiendo solicitud de dar el cliente.");
         
     	if (clientes == null) 
         {
@@ -106,7 +106,7 @@ public class MockClientes
      */
     public ClienteDTO crearCliente(ClienteDTO nuevoCliente) throws LogicaRestauranteException
     {
-    	logger.info("Recibiendo solicitud de agregar cliente con id "+idClienteAAgregar+".");
+    	logger.info("Recibiendo solicitud de agregar cliente.");
         
     	// Se busca que no exista un cliente con ese id.
 	if (nuevoCliente.getId() != null) {
@@ -143,7 +143,7 @@ public class MockClientes
     public ClienteDTO actualizarCliente(ClienteDTO clienteActualizado) throws LogicaRestauranteException
     {   
        Long id = clienteActualizado.getId();
-       logger.info("Recibiendo solicitud de actualizar el cliente con id "+id+"."); 
+       logger.info("Recibiendo solicitud de actualizar el cliente."); 
        
        
        // Se busca el cliente a actualizar
@@ -184,7 +184,7 @@ public class MockClientes
      */
       public void eliminarCliente(Long pId) throws LogicaRestauranteException
    {
-       logger.info("Recibiendo solicitud de eliminar el cliente con id: " + pId+".");
+       logger.info("Recibiendo solicitud de eliminar el cliente+.");
        boolean eliminado = false;
        
         // Se busca el cliente a eliminar
@@ -201,15 +201,15 @@ public class MockClientes
         if(!eliminado)
         {
         // Si se llega hasta aca es porque no se encontro cliente con el id buscado.
-        logger.severe("Error de uso: Se pidio eliminar un cliente con id "+pId+" que no existe.");
-        throw new LogicaRestauranteException("Error de uso: Se pidio eliminar un cliente con id "+pId+" que no existe.");
+        logger.severe("Error de uso: Se pidio eliminar un cliente con id que no existe.");
+        throw new LogicaRestauranteException("Error de uso: Se pidio eliminar un cliente con id que no existe.");
         }
         logger.info("Eliminado satisfactoriamente.");
    }
       
       public TarjetaPuntosDTO darTarjetaPuntosCliente(Long pId ) throws LogicaRestauranteException
       {
-        logger.info("Recibiendo solicitud de dar la tarjeta de puntos del cliente : " + pId+".");
+        logger.info("Recibiendo solicitud de dar la tarjeta de puntos del cliente.");
         for(ClienteDTO cliente:clientes)
         {
             if(cliente.getId().equals(pId))
@@ -224,7 +224,7 @@ public class MockClientes
       
       public ClienteDTO agregarTarjetaPuntosCliente(Long pId)throws LogicaRestauranteException
       {
-        logger.info("Recibiendo solicitud de asignar tarjeta de puntos al cliente : " + pId+".");
+        logger.info("Recibiendo solicitud de asignar tarjeta de puntos al cliente.");
         
         for(ClienteDTO cliente:clientes)
         {
@@ -248,7 +248,7 @@ public class MockClientes
       
       public ClienteDTO eliminarTarjetaPuntosCliente(Long pId) throws LogicaRestauranteException
       {
-        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos al cliente : " + pId+".");
+        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos al cliente.");
             
         for(ClienteDTO cliente:clientes)
         {
@@ -269,7 +269,7 @@ public class MockClientes
       
      public ClienteDTO sumarPuntosTarjetaPuntosCliente(Long pId, int pCompra) throws LogicaRestauranteException
      {
-        logger.info("Recibiendo solicitud de sumar puntos al cliente : " + pId+".");
+        logger.info("Recibiendo solicitud de sumar puntos al cliente.");
         
         for(ClienteDTO cliente:clientes)
         {
