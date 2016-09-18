@@ -16,7 +16,7 @@
                 views: {
                     'sucursalInstanceView': {
                         controller: 'platoCtrl',
-                        controllerAs: 'ctrl',
+                        controllerAs: 'platoCtrl',
                         templateUrl: basePath + 'plato.list.html'
                     }
                 }
@@ -33,11 +33,12 @@
 
             }).state('platoEdit', {
                 url: '/plato/:platoId',
+                parent: 'sucursalEdit',
                 param: {
                     platoId: null
                 },
                 views: {
-                    'mainView': {
+                    'sucursalInstanceView': {
                         controller: 'platoCtrl',
                         controllerAs: 'ctrl',
                         templateUrl: basePath + 'plato.create.html'

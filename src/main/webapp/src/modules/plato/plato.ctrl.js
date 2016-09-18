@@ -35,7 +35,9 @@
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
                     nombre: '' /*Tipo String*/,
                     precio: undefined,
-                    descripcion: ''
+                    descripcion: '',
+                    
+                    
                 };
               
                 $scope.alerts = [];
@@ -70,12 +72,13 @@
             };
             
             
-             this.deleteRecord = function (id) {
+             this.deleteRecord = function (id) { 
                    currentRecord = $scope.currentRecord;
-                if(id!=null)
+                if(id!==null)
                 {            
-                    // ejecuta delete en el recurso REST
-                    return $http.delete(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext + "/" + currentRecord.id,currentRecord)
+                   
+                     // ejecuta delete en el recurso REST
+                    return $http.delete(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext + "/" + id,currentRecord)
                         .then(function () {
                             $scope.records = {};
                             $http.get(sucursalContext + "/" + $stateParams.sucursalId + $scope.platoContext).then(function(response){
@@ -83,7 +86,7 @@
                             }, responseError);
                             $state.go('platoList');
                         }, responseError); 
-                }
+                 }
                         
               };
 

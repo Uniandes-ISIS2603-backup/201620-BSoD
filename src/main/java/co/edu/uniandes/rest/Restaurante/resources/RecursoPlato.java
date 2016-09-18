@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
  *
  * @author ccnovoa10
  */
-@Path("platos")
+@Path("sucursal/{idSucursal: \\d+}/plato")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoPlato 
@@ -36,9 +36,9 @@ public class RecursoPlato
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<PlatoDTO> darPlatos() throws LogicaRestauranteException 
+    public List<PlatoDTO> darPlatos(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
     {
-        return mockPlato.darPlatos();
+        return mockPlato.darPlatos(idSucursal);
     }
     
      /**
@@ -65,9 +65,9 @@ public class RecursoPlato
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
     @POST
-    public PlatoDTO crearPlato(PlatoDTO nuevoPlato) throws LogicaRestauranteException
+    public PlatoDTO crearPlato(@PathParam("idSucursal") Long idSucursal, PlatoDTO nuevoPlato) throws LogicaRestauranteException
     {
-        return mockPlato.crearPlato(nuevoPlato);
+        return mockPlato.crearPlato(idSucursal, nuevoPlato);
     }
     
     /**

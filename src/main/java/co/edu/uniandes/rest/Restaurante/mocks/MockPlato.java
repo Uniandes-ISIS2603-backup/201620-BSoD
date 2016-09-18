@@ -31,10 +31,10 @@ public class MockPlato
     	if (platos == null) 
         {
             platos = new ArrayList<PlatoDTO>();
-            platos.add(new PlatoDTO(1L, "Plato1", 10000, "Sopa"));
-            platos.add(new PlatoDTO(2L, "Plato2", 15000, "Bandeja paisa"));
-            platos.add(new PlatoDTO(3L, "Plato3", 8000, "Corrientazo"));
-            platos.add(new PlatoDTO(4L, "Plato4", 20000, "Pescado"));
+            platos.add(new PlatoDTO(1L, "Plato1", 10000, "Sopa",0L));
+            platos.add(new PlatoDTO(2L, "Plato2", 15000, "Bandeja paisa",0L));
+            platos.add(new PlatoDTO(3L, "Plato3", 8000, "Corrientazo",1L));
+            platos.add(new PlatoDTO(4L, "Plato4", 20000, "Pescado",2L));
         }
         
     	// Indica que se muestren todos los mensajes
@@ -50,7 +50,7 @@ public class MockPlato
     * @return Lista de platos
     * @throws LogicaRestauranteException cuando no existe la lista en memoria  
     */    
-    public List<PlatoDTO> darPlatos() throws LogicaRestauranteException 
+    public List<PlatoDTO> darPlatos(Long idSucursal) throws LogicaRestauranteException 
     {
         logger.info("Recibiendo solicitud de dar todos los platos.");
         
@@ -60,8 +60,16 @@ public class MockPlato
     		throw new LogicaRestauranteException("Error interno: lista de platos no existe.");    		
     	}
         
+        ArrayList<PlatoDTO> platosSucursal = new ArrayList<PlatoDTO>();
+        
+        for (PlatoDTO plato : platos) {
+            if( idSucursal== plato.getidSucursal() || plato.getidSucursal() ==0){
+                platosSucursal.add(plato);
+            }
+        }
+        
     	logger.info("Retornando todos los platos.");
-    	return platos;
+    	return platosSucursal;
     }
     
     /**
@@ -96,7 +104,7 @@ public class MockPlato
      * @param nuevoPlato Plato a agregar.
      * @return plato agregado.
      */
-    public PlatoDTO crearPlato(PlatoDTO nuevoPlato) throws LogicaRestauranteException
+    public PlatoDTO crearPlato(Long idSucursal, PlatoDTO nuevoPlato) throws LogicaRestauranteException
     {
     	logger.info("Recibiendo solicitud de agregar un plato.");
         Long idPlatoAgregar = nuevoPlato.getId();
@@ -122,6 +130,7 @@ public class MockPlato
 	            }
 	        }
 	        nuevoPlato.setId(newId);
+                nuevoPlato.setidSucursal(idSucursal);
     	}
     	// Se busca que no exista un cliente con ese id.
 	
