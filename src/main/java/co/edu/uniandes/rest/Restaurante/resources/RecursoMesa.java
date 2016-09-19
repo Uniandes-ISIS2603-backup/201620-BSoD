@@ -74,9 +74,10 @@ public class RecursoMesa
      * @throws LogicaRestauranteException Si no existe un cliente con el id dado.
      */
     @PUT
-    public MesaDTO actualizarMesa(@PathParam("idSucursal") Long idSucursal, MesaDTO pMesaAActualizar) throws LogicaRestauranteException 
+    @Path("{id: \\d+}")
+    public MesaDTO actualizarMesa(@PathParam("id") Long id, MesaDTO pMesaAActualizar) throws LogicaRestauranteException 
     {
-        return mockMesas.actualizarMesa(idSucursal, pMesaAActualizar);
+        return mockMesas.actualizarMesa(id, pMesaAActualizar);
     }
     
     /**

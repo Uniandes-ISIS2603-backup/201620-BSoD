@@ -33,10 +33,8 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    nombre: '' /*Tipo String*/,
-                    precio: undefined,
-                    descripcion: '',
-                    
+                    piso: undefined /*Tipo Integer*/,
+                    cantSillas: undefined,
                     
                 };
               
@@ -63,7 +61,9 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(sucursalContext + "/" + $stateParams.sucursalId + $scope.mesaContext + "/" + currentRecord.id, currentRecord)
+                    console.log(id);
+                    console.log(currentRecord);
+                    return $http.put(sucursalContext + "/" + $stateParams.sucursalId + $scope.mesaContext + "/" + id, currentRecord)
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado

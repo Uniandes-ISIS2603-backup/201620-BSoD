@@ -7,7 +7,7 @@
 (function (ng) {
     var mod = ng.module("reservaModule");
 
-        mod.controller("reservaCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', function ($scope, $state, $stateParams, $http, clienteContext) {
+        mod.controller("reservaCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', 'sucursalContext', function ($scope, $state, $stateParams, $http, clienteContext, sucursalContext) {
             $scope.reservaContext = '/reservas';
             // inicialmente el listado de ciudades estÃ¡ vacio
             $scope.records = {};
@@ -36,11 +36,16 @@
                 // el registro actual debe estar vacio
                 $scope.currentRecord = {
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
-                    name: '' /*Tipo String*/
+                    name: '' /*Tipo String*/,
+                    sucursal: {}
                 };
               
                 $scope.alerts = [];
             }
+            
+            $http.get(sucursalContext).then(function(response) {
+                $scope.sucursal =  response.data;
+            });
 
 
             this.saveRecord = function (id) {

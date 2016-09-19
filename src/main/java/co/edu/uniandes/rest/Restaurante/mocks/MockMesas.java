@@ -107,7 +107,6 @@ public class MockMesas
     public MesaDTO crearMesa(Long idSucursal, MesaDTO nuevaMesa) throws LogicaRestauranteException
     {
         logger.info("Recibiendo solicitud de agregar una mesa.");
-        Long idMesaAAgregar = nuevaMesa.getId();
     	// Se busca que no exista una mesa con ese id.
 	if ( nuevaMesa.getId() != null ) 
         {
@@ -115,8 +114,8 @@ public class MockMesas
                 {
 	            if (Objects.equals(domi.getId(), nuevaMesa.getId()))
                     {
-	            	logger.severe("Ya existe una domicilio con ese id");
-	                throw new LogicaRestauranteException("Ya existe una domicilio con ese id");
+	            	logger.severe("Ya existe una mesa con ese id");
+	                throw new LogicaRestauranteException("Ya existe una mesa con ese id");
 	            }
 	        }
 	        

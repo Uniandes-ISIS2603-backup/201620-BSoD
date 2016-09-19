@@ -1,7 +1,7 @@
 (function (ng) {
     var mod = ng.module("domiciliosModule");
 
-    mod.controller("domiciliosCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', function ($scope, $state, $stateParams, $http, clienteContext) {
+    mod.controller("domiciliosCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', 'sucursalContext', function ($scope, $state, $stateParams, $http, clienteContext, sucursalContext) {
 
             // inicialmente el listado de domicilios estÃ¡ vacio
             $scope.domicilioContext = '/domicilios';
@@ -34,13 +34,16 @@
                     direccion: '' /*Tipo String*/,
                     plato: '',
                     precio: undefined,
-                    idCliente: undefined
-                    
+                    idCliente: undefined,
+                    sucursal: {}
                 };
 
                 $scope.alerts = [];
             }
 
+            $http.get(sucursalContext).then(function(response) {
+                $scope.sucursal =  response.data;
+            });
 
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
