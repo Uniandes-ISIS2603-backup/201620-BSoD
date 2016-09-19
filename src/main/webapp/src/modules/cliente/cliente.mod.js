@@ -22,11 +22,13 @@
                             templateUrl: basePath + 'cliente.html'
                         }
                     }
-            }).state('clienteList', {
+            }).state('clienteList', 
+            {
                 url: '/list',
                 parent: 'cliente',
                 views: {
-                    'clienteView': {
+                    'clienteView': 
+                    {
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
                         templateUrl: basePath + 'cliente.list.html'
@@ -45,10 +47,11 @@
                         templateUrl: basePath + 'cliente.create.html'
                     }
                 }
-            }).state('clienteEdit', {
-                url: '/{:clienteId}/edit',
-                param: {clienteId: null},
+            }).state('clienteEdit', 
+            {
+                url: '/{clienteId}/edit',
                 parent: 'cliente',
+                param: {clienteId: 'clienteId'},
                 views: 
                 {
                     'clienteView': 
@@ -56,9 +59,6 @@
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
                         templateUrl: basePath + 'cliente.edit.html'
-                    },
-                    'childClienteView':{
-                         templateUrl: basePath + 'cliente.instance.html'
                     }
                 }
             });

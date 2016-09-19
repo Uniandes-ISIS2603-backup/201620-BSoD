@@ -45,12 +45,10 @@
         {
             currentRecord = $scope.currentRecord;        
             
-            // Por ahora solo agrega, no modifica
-                // ejecuta POST en el recurso REST
-                return $http.post(clienteContext, currentRecord).then(function() 
-                        {
-                            $state.go('clienteList');
-                        }, responseError);
+            return $http.post(clienteContext, currentRecord).then(function() 
+                    {
+                        $state.go('clienteList');
+                    }, responseError);
              
         };
         
