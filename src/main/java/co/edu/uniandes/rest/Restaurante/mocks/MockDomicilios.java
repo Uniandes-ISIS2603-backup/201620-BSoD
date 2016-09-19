@@ -32,9 +32,9 @@ public class MockDomicilios {
 
         if (domicilios == null) {
             domicilios = new ArrayList<>();
-            domicilios.add(new DomicilioDTO(1L, "Direccion1", "Plato 1", 12000));
-            domicilios.add(new DomicilioDTO(2L, "Direccion2", "Plato 2", 18000));
-            domicilios.add(new DomicilioDTO(3L, "Direccion3", "Plato 3", 15000));
+            domicilios.add(new DomicilioDTO(1L, "Direccion1", "Plato 1", 12000, 1L));
+            domicilios.add(new DomicilioDTO(2L, "Direccion2", "Plato 2", 18000, 2L));
+            domicilios.add(new DomicilioDTO(3L, "Direccion3", "Plato 3", 15000, 2L));
 
         }
 
@@ -52,12 +52,20 @@ public class MockDomicilios {
      * @return lista de domicilios.
      * @throws LogicaRestauranteException
      */
-    public List<DomicilioDTO> getDomicilios() throws LogicaRestauranteException {
+    public List<DomicilioDTO> getDomicilios(Long idCliente) throws LogicaRestauranteException {
         if (domicilios == null) {
             logger.severe("Error interno: lista de domicilios no se encuentra.");
             throw new LogicaRestauranteException("Error interno: lista de domicilios no se encuentra.");
         }
 
+        ArrayList<DomicilioDTO> domiciliosCliente = new ArrayList<DomicilioDTO>();
+        
+        for (DomicilioDTO domicilio : domicilios) {
+            if( idCliente== domicilio.getidCliente() || domicilio.getidCliente() ==0){
+                domiciliosCliente.add(domicilio);
+            }
+        }
+        
         logger.info("retornando todos los domicilios");
         return domicilios;
     }
@@ -71,10 +79,18 @@ public class MockDomicilios {
      */
     public DomicilioDTO getDomicilio(Long id) throws LogicaRestauranteException {
 
-        for (DomicilioDTO domi : domicilios) {
-
-            if (Objects.equals(domi.getId(), id)) {
-                return domi;
+        if (domicilios == null) 
+        {
+    		logger.severe("Error interno: lista de platos no existe.");
+    		throw new LogicaRestauranteException("Error interno: lista de platos no existe.");    		
+    	}
+        
+        for(DomicilioDTO domicilio :domicilios)
+        {
+            if(domicilio.getId().equals(id))
+            {
+                logger.info("Retornando el plato con id "+id);
+                return domicilio;
             }
         }
         logger.severe("Error interno: domicilio no existe.");
@@ -88,7 +104,7 @@ public class MockDomicilios {
      * @return domicilio creado.
      * @throws LogicaRestauranteException
      */
-    public DomicilioDTO createDomicilio(DomicilioDTO nDomicilio) throws LogicaRestauranteException {
+    public DomicilioDTO createDomicilio(Long idCliente, DomicilioDTO nDomicilio) throws LogicaRestauranteException {
         logger.info("recibiendo solicitud de agregar un domicilio " + nDomicilio);
 
         if (nDomicilio.getId() != null) {
@@ -122,10 +138,11 @@ public class MockDomicilios {
      * @return domicilio actualizado con la información dada.
      * @throws LogicaRestauranteException
      */
-    public DomicilioDTO updateDomicilio(DomicilioDTO domicilio) throws LogicaRestauranteException {
+    public DomicilioDTO updateDomicilio(Long id, DomicilioDTO domicilio) throws LogicaRestauranteException {
         for (DomicilioDTO domi : domicilios) {
 
             if (Objects.equals(domi.getId(), domicilio.getId())) {
+                domi.setId(id);
                 domi.setDir(domicilio.getDir());
                 domi.setPlato(domicilio.getPlato());
                 domi.setPrecio(domicilio.getPrecio());

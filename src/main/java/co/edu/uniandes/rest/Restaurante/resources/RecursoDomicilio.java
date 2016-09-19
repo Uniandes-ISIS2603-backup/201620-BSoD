@@ -37,8 +37,8 @@ public class RecursoDomicilio {
      * en el sistema.
      */
     @GET
-    public List<DomicilioDTO> getDomicilios() throws LogicaRestauranteException {
-        return mockDomicilio.getDomicilios();
+    public List<DomicilioDTO> getDomicilios(@PathParam("idCliente") Long id) throws LogicaRestauranteException {
+        return mockDomicilio.getDomicilios(id);
     }
 
     /**
@@ -63,8 +63,8 @@ public class RecursoDomicilio {
      * @throws LogicaRestauranteException Si ya existe un domicilio con ese id.
      */
     @POST
-    public DomicilioDTO createDomicilio(DomicilioDTO domi) throws LogicaRestauranteException {
-        return mockDomicilio.createDomicilio(domi);
+    public DomicilioDTO createDomicilio(@PathParam("idSucursal") Long id, DomicilioDTO domi) throws LogicaRestauranteException {
+        return mockDomicilio.createDomicilio(id, domi);
     }
 
     /**
@@ -75,8 +75,8 @@ public class RecursoDomicilio {
      */
     @PUT
     @Path("{id: \\d+}")
-    public DomicilioDTO uptadeDomicilio(DomicilioDTO domi) throws LogicaRestauranteException {
-        return mockDomicilio.updateDomicilio(domi);
+    public DomicilioDTO uptadeDomicilio(@PathParam("id") Long id, DomicilioDTO domi) throws LogicaRestauranteException {
+        return mockDomicilio.updateDomicilio(id, domi);
     }
 
     /**

@@ -21,6 +21,8 @@ public class DomicilioDTO {
     private String plato;
 
     private int precio;
+    
+    private Long idCliente;
 
     /**
      * Constructor por defecto
@@ -35,13 +37,15 @@ public class DomicilioDTO {
      * @param pDir
      * @param pPlato
      * @param pPrecio
+     * @param pIdCliente
      */
-    public DomicilioDTO(Long pId, String pDir, String pPlato, int pPrecio) {
+    public DomicilioDTO(Long pId, String pDir, String pPlato, int pPrecio, Long pIdCliente) {
         super();
         this.id = pId;
         this.direccion = pDir;
         this.plato = pPlato;
         this.precio = pPrecio;
+        this.idCliente = pIdCliente;
     }
 
     /**
@@ -132,4 +136,13 @@ public class DomicilioDTO {
                 + "precio : \"" + precio + "\" }";
     }
 
+    public Long getidCliente() 
+    {
+        return idCliente;
+    }
+
+    public void setidCliente(Long id) 
+    {
+         this.idCliente = id;
+    }
 }
