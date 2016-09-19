@@ -7,12 +7,12 @@
 (function (ng) {
     var mod = ng.module("reservaModule");
 
-        mod.controller("reservaCtrl", ['$scope', '$state', '$stateParams', '$http', 'reservaContext', function ($scope, $state, $stateParams, $http, context) {
-
+        mod.controller("reservaCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', function ($scope, $state, $stateParams, $http, clienteContext) {
+            $scope.sucursalContext = '/sucursal';
             // inicialmente el listado de ciudades estÃ¡ vacio
             $scope.records = {};
             // carga las ciudades
-            $http.get(context).then(function(response){
+            $http.get(clienteContext + "/" + $stateParams.clienteId + $scope.sucursalContext).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -23,7 +23,7 @@
                 // toma el id del parÃ¡metro
                 id = $stateParams.reservaId;
                 // obtiene el dato del recurso REST
-                $http.get(context + "/" + id)
+                $http.get(clienteContext + "/" + $stateParams.clienteId +$scope.reservaContext + "/" + id)
                     .then(function (response) {
                         // $http.get es una promesa
                         // cuando llegue el dato, actualice currentRecord
@@ -50,7 +50,7 @@
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
-                    return $http.post(context, currentRecord)
+                    return $http.post(clienteContext, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
@@ -61,7 +61,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put(context + "/" + currentRecord.id, currentRecord)
+                    return $http.put($http.post(clienteContext + "/" + $stateParams.clienteId + $scope.sucursalContext, currentRecord))
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -75,13 +75,13 @@
                 if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(context + "/" + id,currentRecord)
+                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.sucursalContext)
                         .then(function () {
                             $scope.records = {};
-                            $http.get(context).then(function(response){
+                            $http.get(clienteContext).then(function(response){
                                 $scope.records = response.data;    
                             }, responseError);
-                            $state.go('sancionesList');
+                            $state.go('reservaList');
                         }, responseError); 
                 }
                 };
