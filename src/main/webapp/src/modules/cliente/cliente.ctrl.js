@@ -41,28 +41,16 @@
             $scope.alerts = [];
         }
         
-        this.agregarCliente = function (id) 
+         this.agregarCliente = function () 
         {
             currentRecord = $scope.currentRecord;        
             
-            if (id == null) {
-
-                    return $http.post(clienteContext, currentRecord)
-                        .then(function () {
-                       
+            // Por ahora solo agrega, no modifica
+                // ejecuta POST en el recurso REST
+                return $http.post(clienteContext, currentRecord).then(function() 
+                        {
                             $state.go('clienteList');
                         }, responseError);
-                        
-               
-                } else {
-                    
-           
-                    return $http.put(clienteContext + "/" + currentRecord.id, currentRecord)
-                        .then(function () {
-                   
-                            $state.go('clienteList');
-                        }, responseError);
-                };
              
         };
         

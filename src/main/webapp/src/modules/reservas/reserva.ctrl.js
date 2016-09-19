@@ -8,11 +8,11 @@
     var mod = ng.module("reservaModule");
 
         mod.controller("reservaCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', function ($scope, $state, $stateParams, $http, clienteContext) {
-            $scope.sucursalContext = '/sucursal';
+            $scope.reservaContext = '/reserva';
             // inicialmente el listado de ciudades estÃ¡ vacio
             $scope.records = {};
             // carga las ciudades
-            $http.get(clienteContext + "/" + $stateParams.clienteId + $scope.sucursalContext).then(function(response){
+            $http.get(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext).then(function(response){
                 $scope.records = response.data;    
             }, responseError);
 
@@ -61,7 +61,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put($http.post(clienteContext + "/" + $stateParams.clienteId + $scope.sucursalContext, currentRecord))
+                    return $http.put($http.post(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext, currentRecord))
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -75,7 +75,7 @@
                 if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.sucursalContext)
+                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext)
                         .then(function () {
                             $scope.records = {};
                             $http.get(clienteContext).then(function(response){

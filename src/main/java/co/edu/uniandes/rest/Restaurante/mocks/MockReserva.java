@@ -118,23 +118,22 @@ public class MockReserva {
    }
     
     public void deleteReserva(Long id) throws LogicaRestauranteException{
-       boolean borro = false;
-       int i=0;
-       for (ReservaDTO res : reservas) {
+    logger.info("recibiendo solictud de eliminar plato con id " + id);
+       
+         for (ReservaDTO reserva : reservas) {
+            if (Objects.equals(reserva.getId(), id)) {
 
-	    if (Objects.equals(res.getId(), id)){
-                if (res != null){
-                    reservas.remove(i);
-                    borro= true;
-                    break;
-               }
+                // elimina la ciudad
+                logger.info("eliminando plato " + reserva);
+                reservas.remove(reserva);
+                return;
             }
-            i++;
         }
-       if(!borro){
-       logger.severe("Error interno: la reserva no existe.");
-    		throw new LogicaRestauranteException("Error interno: la reserva no existe.");
-       }
+
+        // Si se llega hasta aca es porque no se encontro plato con el id buscado.
+        logger.severe("Error de uso: Se pidio eliminar un plato con id "+id+" que no existe.");
+        throw new LogicaRestauranteException("Error de uso: Se pidio eliminar un plato con id "+id+" que no existe.");
+        
    }
    
 }
