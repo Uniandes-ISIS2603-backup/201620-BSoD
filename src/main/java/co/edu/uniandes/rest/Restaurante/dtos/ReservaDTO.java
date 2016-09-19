@@ -19,6 +19,9 @@ public class ReservaDTO {
     private Date fecha;
     private int numPersonas;
     private int piso;
+    private Long idMesa;
+    private Long idCliente;
+    private Long idSucursal;
    
     /**
      * Constructor por defecto
@@ -32,12 +35,18 @@ public class ReservaDTO {
      * @param fecha
      * @param numPersonas
      * @param piso
+     * @param idMesa
+     * @param idCliente
+     * @param idSucursal
      */
-    public ReservaDTO(Long id, Date fecha, int numPersonas, int piso){
+    public ReservaDTO(Long id, Date fecha, int numPersonas, int piso, Long idMesa, Long idCliente, Long idSucursal){
         this.id = id;
         this.fecha = fecha;
         this.numPersonas = numPersonas;
         this.piso = piso;
+        this.idMesa = idMesa;
+        this.idCliente = idCliente;
+        this.idSucursal = idSucursal;
     }
     
     //METODOS
@@ -68,5 +77,29 @@ public class ReservaDTO {
     }
     public void setPiso(int piso){
         this.piso =piso;
+    }
+    
+    public Long getIdMesa(){
+        return idMesa;
+    }
+    
+    public void setIdMesa(Long idMesa){
+        this.idMesa = idMesa;
+    }
+    
+    public Long getIdCliente(){
+        return idCliente;
+    }
+    
+    public void setIdCliente(Long idCliente){
+        this.idCliente = idCliente;
+    }
+    
+    public Long getIdSucursal(){
+        return idSucursal;
+    }
+    
+    public void setIdSucursal(Long idSucursal){
+        this.idSucursal = idSucursal;
     }
 }
