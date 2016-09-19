@@ -91,7 +91,7 @@
         {
             return $http.put(clienteContext+"/"+ id+"/tarjetaPuntos/sumaPuntos?compra="+pCompra).then(function() 
             {
-                $state.reload();
+                $state.go('clienteList');
             }, responseError);
         }
         
