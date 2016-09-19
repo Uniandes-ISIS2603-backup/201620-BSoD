@@ -72,7 +72,11 @@
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
                         templateUrl: basePath + 'cliente.edit.html'
-                    }
+                    },
+                    'childClienteView':
+                    {
+                        templateUrl: basePath + 'cliente.instance.html'
+                    }   
                 }
             });
         }]);
