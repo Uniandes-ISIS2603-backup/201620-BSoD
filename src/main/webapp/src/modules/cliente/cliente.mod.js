@@ -4,6 +4,7 @@
 (function(ng)
 {
     var mod = ng.module("clienteModule",["ngMessages", "ui.router"] );
+    ////Aqui se dañoo 
     mod.constant("clienteContext", "api/clientes");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) 
         {
@@ -44,18 +45,20 @@
                         templateUrl: basePath + 'cliente.create.html'
                     }
                 }
-            }).state('clienteEdit', 
-            {
-                url: '/{clienteId}/edit',
+            }).state('clienteEdit', {
+                url: '/{:clienteId}/edit',
+                param: {clienteId: null},
                 parent: 'cliente',
-                param: {clienteId: 'clienteId'},
                 views: 
                 {
                     'clienteView': 
                     {
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
-                        templateUrl: basePath + 'cliente.edit.html'
+                        templateUrl: basePath + 'cliente.create.html'
+                    },
+                    'childClienteView':{
+                         templateUrl: basePath + 'cliente.instance.html'
                     }
                 }
             });

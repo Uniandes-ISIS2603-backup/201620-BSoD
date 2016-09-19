@@ -9,7 +9,7 @@
        mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/plato/';
             $urlRouterProvider.otherwise("/platoList");
-            
+             
             $stateProvider.state('platoList', {
                 url: '/plato',
                 parent: 'sucursalEdit',

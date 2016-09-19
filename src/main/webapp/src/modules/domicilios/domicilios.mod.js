@@ -3,11 +3,13 @@
     mod.constant("domicilioContext", "api/domicilios");
     mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
             var basePath = 'src/modules/domicilios/';
+             $urlRouterProvider.otherwise("/domiciliosList");
 
             $stateProvider.state('domiciliosList', {
                 url: '/domicilios',
+                parent: 'clienteEdit',
                 views: {
-                    'mainView': {
+                    'clienteInstanceView': {
                         controller: 'domiciliosCtrl',
                         controllerAs: 'domiciliosCtrl',
                         templateUrl: basePath + 'domicilios.list.html'
@@ -15,8 +17,9 @@
                 }
             }).state('domiciliosCreate', {
                 url: '/domicilios/create',
+                parent: 'clienteEdit',
                 views: {
-                    'mainView': {
+                    'clienteInstanceView': {
                         controller: 'domiciliosCtrl',
                         controllerAs: 'domiciliosCtrl',
                         templateUrl: basePath + 'domicilios.create.html'
@@ -29,7 +32,7 @@
                     domicilioId: null
                 },
                 views: {
-                    'mainView': {
+                    'clienteInstanceView': {
                         controller: 'domiciliosCtrl',
                         controllerAs: 'domiciliosCtrl',
                         templateUrl: basePath + 'domicilios.create.html'
