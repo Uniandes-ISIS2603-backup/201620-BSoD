@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<div class="container-fluid">                                     <!--Contenedor del estado-->
+    <h1>Tu informacioon</h1>
+    
+    
+    <h2>Tarjeta de puntos</h1>
+        <table ng-show="record.tarjetaPuntos!=null" class="table table-bordered table-hover">            <!--Tabla-->
+        <thead>                                                     <!--Headers de la tabla-->
+            <tr>
+                <th>Numero tarjeta</th>
+                <th>Fecha de vencimiento</th>
+                <th>Puntos actuales</th>
+                <th>Puntos totales?</th>
+            </tr>
+        </thead>
+        
+        <tbody>                                                     <!--Cuerpo de la tabla-->
+            <tr>
+                <td>{{record.tarjetaPuntos.id}}</td>
+                <td>{{record.tarjetaPuntos.fechaVencimiento}}</td>
+                <td>WATARDOSEE</td>
+                <td>{{record.tarjetaPuntos.acumulado}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarCliente(record.id)"><span class="glyphicon glyphicon-remove"></span>Cancelar tarjeta de puntos</button>
+    
+</div>

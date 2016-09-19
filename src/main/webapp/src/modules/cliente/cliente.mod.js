@@ -47,6 +47,19 @@
                         templateUrl: basePath + 'cliente.create.html'
                     }
                 }
+            }).state('clienteVistaCliente', 
+            {
+                url: '/{clienteId}/verCliente',
+                parent: 'cliente',
+                param: {clienteId: 'clienteId'},
+                views: {
+                    'clienteView': 
+                    {
+                        controller: 'clienteCtrl',
+                        controllerAs: 'clienteCtrl',
+                        templateUrl: basePath + 'cliente.verCliente.html'
+                    }
+                }
             }).state('clienteEdit', 
             {
                 url: '/{clienteId}/edit',
