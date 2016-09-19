@@ -36,6 +36,7 @@
 
             }).state('reservaEdit', {
                 url: '/reservas/:reservaId',
+                parent: 'clienteEdit',
                 param: {
                     reservaId: null
                 },
