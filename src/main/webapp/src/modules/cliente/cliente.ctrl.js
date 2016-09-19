@@ -17,7 +17,7 @@
         
         if ($stateParams.clienteId !== null && $stateParams.clienteId !== undefined) 
         {
-                id = $stateParams.clienteId;              // Toma el parametro id.
+                id = $stateParams.clienteId;                    // Toma el parametro id.
                 
                 $http.get(clienteContext + "/" + id)             // Obtiene el dato del recurso REST
                     .then(function (response) 

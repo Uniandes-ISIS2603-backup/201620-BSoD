@@ -58,7 +58,13 @@
                         controller: 'clienteCtrl',
                         controllerAs: 'clienteCtrl',
                         templateUrl: basePath + 'cliente.verCliente.html'
-                    }
+                    },
+                    'childClienteView':
+                    {
+                        controller: 'clienteCtrl',
+                        controllerAs: 'clienteCtrl',
+                        templateUrl: basePath + 'cliente.verTarjetaPuntos.html'
+                    }   
                 }
             }).state('clienteEdit', 
             {
