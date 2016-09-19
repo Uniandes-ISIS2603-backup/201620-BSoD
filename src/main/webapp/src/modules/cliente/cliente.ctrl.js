@@ -6,11 +6,11 @@
     var mod = ng.module("clienteModule");
     
     mod.controller("clienteCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext',
-        function ($scope, $state, $stateParams, $http, context) 
+        function ($scope, $state, $stateParams, $http, clienteContext) 
     {
         $scope.records = {};                            // La lista de clientes no contiene ninguno.
         
-        $http.get(context).then(function(response)      // Obtiene los clientes del sistema GET.
+        $http.get(clienteContext).then(function(response)      // Obtiene los clientes del sistema GET.
         {
             $scope.records = response.data;    
         }, responseError);
@@ -19,7 +19,7 @@
         {
                 id = $stateParams.clienteId;              // Toma el parametro id.
                 
-                $http.get(context + "/" + id)             // Obtiene el dato del recurso REST
+                $http.get(clienteContext + "/" + id)             // Obtiene el dato del recurso REST
                     .then(function (response) 
                     {  
                         $scope.currentRecord = response.data;    // Comando para actualizar el reccord que llega.
@@ -41,22 +41,34 @@
             $scope.alerts = [];
         }
         
-        this.agregarCliente = function () 
+        this.agregarCliente = function (id) 
         {
             currentRecord = $scope.currentRecord;        
             
-            // Por ahora solo agrega, no modifica
-                // ejecuta POST en el recurso REST
-                return $http.post(context, currentRecord).then(function() 
-                        {
+            if (id == null) {
+
+                    return $http.post(clienteContext, currentRecord)
+                        .then(function () {
+                       
                             $state.go('clienteList');
                         }, responseError);
+                        
+               
+                } else {
+                    
+           
+                    return $http.put(clienteContext + "/" + currentRecord.id, currentRecord)
+                        .then(function () {
+                   
+                            $state.go('clienteList');
+                        }, responseError);
+                };
              
         };
         
         this.eliminarCliente = function(id)
         {
-            return $http.delete(context+"/"+ id).then(function() 
+            return $http.delete(clienteContext+"/"+ id).then(function() 
             {
                 $state.reload();
             }, responseError);
@@ -67,7 +79,7 @@
             currentRecord = $scope.currentRecord;
             id = $stateParams.clienteId;
             currentRecord.id = id;
-            return $http.put(context, currentRecord).then(function() 
+            return $http.put(clienteContext, currentRecord).then(function() 
                     {
                         $state.go('clienteList');
                     }, responseError);
@@ -75,7 +87,7 @@
         
         this.agregarTarjetaPuntosCliente = function(id)
         {
-            return $http.post(context+"/"+ id+"/tarjetaPuntos").then(function() 
+            return $http.post(clienteContext+"/"+ id+"/tarjetaPuntos").then(function() 
             {
                 $state.reload();
             }, responseError);
@@ -83,7 +95,7 @@
 
         this.eliminarTarjetaPuntosCliente = function(id)
         {
-            return $http.delete(context+"/"+ id+"/tarjetaPuntos").then(function() 
+            return $http.delete(clienteContext+"/"+ id+"/tarjetaPuntos").then(function() 
             {
                 $state.reload();
             }, responseError);
