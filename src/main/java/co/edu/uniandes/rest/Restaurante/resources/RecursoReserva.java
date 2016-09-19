@@ -41,8 +41,8 @@ public class RecursoReserva {
      * @throws LogicaRestauranteException excepción retornada por la lógica
      */
     @GET
-    public List<ReservaDTO> getReservas() throws LogicaRestauranteException {
-        return mockReserva.getReservas();
+    public List<ReservaDTO> getReservas(@PathParam("idCliente") Long id) throws LogicaRestauranteException {
+        return mockReserva.getReservas(id);
     }
     /**
      * Crea una reserva.
@@ -51,8 +51,8 @@ public class RecursoReserva {
      * @throws LogicaRestauranteException si la reserva ya existe.
      */
     @POST
-    public ReservaDTO createReserva(ReservaDTO reserva) throws LogicaRestauranteException {
-        return mockReserva.createReserva(reserva);
+    public ReservaDTO createReserva(@PathParam("idCliente") Long id, ReservaDTO reserva) throws LogicaRestauranteException {
+        return mockReserva.createReserva(id, reserva);
     }
     /**
      * Obtiene una reserva.
@@ -74,7 +74,7 @@ public class RecursoReserva {
     
     @PUT
     @Path ("{id: \\d+}")
-    public ReservaDTO uptadeReserva (ReservaDTO reserva) throws LogicaRestauranteException {
+    public ReservaDTO uptadeReserva (@PathParam("idCliente") Long id, ReservaDTO reserva) throws LogicaRestauranteException {
      return mockReserva.updateReserva(reserva);
     }
     /**

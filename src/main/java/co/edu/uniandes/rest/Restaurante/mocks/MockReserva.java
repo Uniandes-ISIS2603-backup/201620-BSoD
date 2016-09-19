@@ -48,12 +48,18 @@ public class MockReserva {
      * @return
      * @throws LogicaRestauranteException
      */
-    public List<ReservaDTO> getReservas() throws LogicaRestauranteException {
+    public List<ReservaDTO> getReservas(Long idCliente) throws LogicaRestauranteException {
     	if (reservas == null) {
     		logger.severe("Error interno: lista de reservas no existe.");
     		throw new LogicaRestauranteException("Error interno: lista de reservas no existe.");    		
     	}
-    	
+    	ArrayList<ReservaDTO> reservasCliente = new ArrayList<ReservaDTO>();
+        
+        for (ReservaDTO reserva : reservas) {
+            if( idCliente== reserva.getIdCliente() ){
+                reservasCliente.add(reserva);
+            }
+        }
     	logger.info("retornando todas las reservas");
     	return reservas;
     }
@@ -70,7 +76,7 @@ public class MockReserva {
     		throw new LogicaRestauranteException("Error interno: la reserva no existe.");
     }
     
-    public ReservaDTO createReserva(ReservaDTO nuevaReserva) throws LogicaRestauranteException {
+    public ReservaDTO createReserva(Long idCliente, ReservaDTO nuevaReserva) throws LogicaRestauranteException {
     	logger.info("recibiendo solicitud de agregar reserva " + nuevaReserva);
     	
        	if ( nuevaReserva.getId() != null ) {
