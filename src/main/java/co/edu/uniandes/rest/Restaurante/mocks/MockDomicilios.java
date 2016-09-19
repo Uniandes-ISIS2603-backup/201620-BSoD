@@ -143,7 +143,7 @@ public class MockDomicilios {
 
             if (Objects.equals(domi.getId(), domicilio.getId())) {
                 domi.setId(id);
-                domi.setDir(domicilio.getDir());
+                domi.setDireccion(domicilio.getDireccion());
                 domi.setPlato(domicilio.getPlato());
                 domi.setPrecio(domicilio.getPrecio());
                 return domi;

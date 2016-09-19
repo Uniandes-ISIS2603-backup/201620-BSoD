@@ -30,15 +30,8 @@ public class DomicilioDTO {
     public DomicilioDTO() {
     }
 
-    /**
-     * Constructor por con parámetros dados
-     *
-     * @param pId
-     * @param pDir
-     * @param pPlato
-     * @param pPrecio
-     * @param pIdCliente
-     */
+
+
     public DomicilioDTO(Long pId, String pDir, String pPlato, int pPrecio, Long pIdCliente) {
         super();
         this.id = pId;
@@ -75,7 +68,7 @@ public class DomicilioDTO {
      * @return direccion
      */
 
-    public String getDir() {
+    public String getDireccion() {
         return direccion;
     }
 
@@ -84,7 +77,7 @@ public class DomicilioDTO {
      *
      * @param direccion
      */
-    public void setDir(String direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 

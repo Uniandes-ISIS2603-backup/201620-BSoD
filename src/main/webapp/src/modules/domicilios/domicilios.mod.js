@@ -28,6 +28,7 @@
 
             }).state('domicilioEdit', {
                 url: '/domicilios/:domicilioId',
+                parent: 'clienteEdit',
                 param: {
                     domicilioId: null
                 },

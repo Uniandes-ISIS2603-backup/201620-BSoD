@@ -33,7 +33,8 @@
                     id: undefined /*Tipo Long. El valor se asigna en el backend*/,
                     direccion: '' /*Tipo String*/,
                     plato: '',
-                    precio: undefined
+                    precio: undefined,
+                    
                 };
 
                 $scope.alerts = [];
@@ -47,6 +48,7 @@
                 if (id == null) {
 
                     // ejecuta POST en el recurso REST
+                    console.log($http.post(clienteContext + "/" + $stateParams.clienteId + $scope.domicilioContext, currentRecord));
                     return $http.post(clienteContext + "/" + $stateParams.clienteId + $scope.domicilioContext, currentRecord)
                             .then(function () {
                                 // $http.post es una promesa
@@ -76,7 +78,7 @@
                     return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.domicilioContext)
                             .then(function () {
                                 $scope.records = {};
-                                $http.get(context).then(function (response) {
+                                $http.get(clienteContext).then(function (response) {
                                     $scope.records = response.data;
                                 }, responseError);
                                 $state.go('domiciliosList');

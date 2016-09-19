@@ -5,7 +5,7 @@
 <div>
 
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="domiciliosCtrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
-    <form novalidate name="form" id="domicilio-form" role="form" ng-submit="form.$valid && domiciliosCtrl.saveRecord(currentRecord.id)">
+    <form novalidate name="form" id="domicilio-form" role="form" ng-submit="form.$valid && domiciliosCtrl.saveRecord(currentRecord.id, currentRecord.direccion, currentRecord.plato, currentRecord.precio)">
 
         <div ng-messages="form.$error">
             <div ng-message="required">Fill the required fields!</div>
