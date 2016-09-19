@@ -78,7 +78,7 @@ public class MockClientes
     */    
     public ClienteDTO darCliente(Long pId) throws LogicaRestauranteException 
     {
-        logger.info("Recibiendo solicitud de dar el cliente.");
+        logger.info("Recibiendo solicitud de dar el cliente con id "+pId+".");
         
     	if (clientes == null) 
         {
