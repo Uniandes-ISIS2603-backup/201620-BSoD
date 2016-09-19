@@ -61,13 +61,13 @@ public class MockDomicilios {
         ArrayList<DomicilioDTO> domiciliosCliente = new ArrayList<DomicilioDTO>();
         
         for (DomicilioDTO domicilio : domicilios) {
-            if( idCliente== domicilio.getidCliente() || domicilio.getidCliente() ==0){
+            if( idCliente== domicilio.getidCliente() ){
                 domiciliosCliente.add(domicilio);
             }
         }
         
         logger.info("retornando todos los domicilios");
-        return domicilios;
+        return domiciliosCliente;
     }
 
     /**
