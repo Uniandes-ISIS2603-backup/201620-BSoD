@@ -10,6 +10,7 @@ import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import co.edu.uniandes.rest.Restaurante.mocks.MockReserva;
 
 import java.util.List;
+import javax.ws.rs.Consumes;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,6 +30,7 @@ import javax.ws.rs.Produces;
 
 @Path("reservas")
 @Produces("application/json")
+@Consumes("application/json")
 public class RecursoReserva {
     
     MockReserva mockReserva = new MockReserva();
