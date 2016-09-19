@@ -28,7 +28,7 @@ import javax.ws.rs.Produces;
  * @author aj.paredes10
  */
 
-@Path("clientes/{idCliente: \\d+}/reserva")
+@Path("clientes/{idCliente: \\d+}/reservas")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoReserva {

@@ -8,7 +8,7 @@
     var mod = ng.module("reservaModule");
 
         mod.controller("reservaCtrl", ['$scope', '$state', '$stateParams', '$http', 'clienteContext', function ($scope, $state, $stateParams, $http, clienteContext) {
-            $scope.reservaContext = '/reserva';
+            $scope.reservaContext = '/reservas';
             // inicialmente el listado de ciudades estÃ¡ vacio
             $scope.records = {};
             // carga las ciudades
