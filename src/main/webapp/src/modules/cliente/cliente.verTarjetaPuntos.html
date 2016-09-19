@@ -24,5 +24,6 @@
     </table>
     
     <button ng-show="currentRecord.tarjetaPuntos!=null" id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarTarjetaPuntosCliente(currentRecord.id)"><span class="glyphicon glyphicon-remove"></span>Cancelar tarjeta de puntos</button>
-    <button ng-show="currentRecord.tarjetaPuntos==null" id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.agregarTarjetaPuntosCliente(currentRecord.id)"><span></span>Obtener tarjeta de puntos</button>
+    <button ng-show="currentRecord.tarjetaPuntos==null" id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.agregarTarjetaPuntosCliente(currentRecord.id)"><span class="glyphicon glyphicon-heart"></span>Obtener tarjeta de puntos</button>
+    
 </div>

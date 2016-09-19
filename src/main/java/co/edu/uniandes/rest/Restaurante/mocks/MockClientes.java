@@ -269,7 +269,7 @@ public class MockClientes
       
      public ClienteDTO sumarPuntosTarjetaPuntosCliente(Long pId, int pCompra) throws LogicaRestauranteException
      {
-        logger.info("Recibiendo solicitud de sumar puntos al cliente.");
+        logger.info("Recibiendo solicitud de sumar puntos al cliente con id "+pId+".");
         
         for(ClienteDTO cliente:clientes)
         {

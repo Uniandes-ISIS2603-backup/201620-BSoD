@@ -20,10 +20,9 @@
                 <td id="{{$index}}-apellidos">{{record.apellidos}}</td>
                 <td id="{{$index}}-direccion">{{record.direccion}}</td>
                 <td id="{{$index}}-telefono">{{record.telefono}}</td>
-                <td id="{{$index}}-tarjetaPuntos">{{(record.tarjetaPuntos!=null)?record.tarjetaPuntos.id:'No tiene'}}
-                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteVerTarjetaPuntos({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Ver</button>
-                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteSumarPuntos({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Sumar puntos</button>
-                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
+                <td id="{{$index}}-tarjetaPuntos">{{(record.tarjetaPuntos!=null)?'Id: '+record.tarjetaPuntos.id +', vence en '+record.tarjetaPuntos.fechaCaducidad:'No tiene'}}
+                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteRegistrarCompra({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Registrar compra</button>
+                    <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-remove"></span>Cancelar</button>
                     <button ng-show="record.tarjetaPuntos==null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.agregarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-credit-card"></span>Crear</button>
                 </td>
                 <td>

@@ -66,6 +66,19 @@
                         templateUrl: basePath + 'cliente.verTarjetaPuntos.html'
                     }   
                 }
+            }).state('clienteRegistrarCompra', 
+            {
+                url: '/{clienteId}/registrarComra',
+                parent: 'cliente',
+                param: {clienteId: 'clienteId'},
+                views: {
+                    'clienteView': 
+                    {
+                        controller: 'clienteCtrl',
+                        controllerAs: 'clienteCtrl',
+                        templateUrl: basePath + 'cliente.registrarCompra.html'
+                    }
+                }
             }).state('clienteEdit', 
             {
                 url: '/{clienteId}/edit',

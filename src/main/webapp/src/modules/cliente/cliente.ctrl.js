@@ -87,6 +87,15 @@
             }, responseError);
         };
         
+        this.sumarPuntosTarjetaPuntosCliente = function(id, pCompra)
+        {
+            return $http.put(clienteContext+"/"+ id+"/tarjetaPuntos/sumaPuntos?compra="+pCompra).then(function() 
+            {
+                $state.reload();
+            }, responseError);
+        }
+        
+         
      // -----------------------------------------------------------------
      // Funciones para manejra los mensajes en la aplicación
 
