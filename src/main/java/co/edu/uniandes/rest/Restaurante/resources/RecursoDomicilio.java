@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  *
  * @author cc.novoa11
  */
-@Path("domicilios")
+@Path("clientes/{idCliente: \\d+}/domicilios")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoDomicilio {
