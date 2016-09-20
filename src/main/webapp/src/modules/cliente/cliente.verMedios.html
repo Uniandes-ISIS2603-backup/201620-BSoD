@@ -17,12 +17,12 @@
         
         <tbody>                                                     <!--Cuerpo de la tabla-->
             <tr>
-                <td>{{currentRecordid}}</td>
-                <td>{{currentRecord.tarjeta}}</td>
-                <td>{{currentRecord.numerosTarjeta}}</td>
-                <td>{{currentRecord.fechaVencimiento}}</td>
-                <td>{{currentRecord.codigoSeguridad}}</td>
-                <td>{{currentRecord.franquicia}}</td>
+                <td>{{currentRecord.id}}</td>
+                <td>{{currentRecord.medios[0].tarjeta}}</td>
+                <td>{{currentRecord.medios[0].numerosTarjeta}}</td>
+                <td>{{currentRecord.medios[0].fechaVencimiento}}</td>
+                <td>{{currentRecord.medios[0].codigoSeguridad}}</td>
+                <td>{{currentRecord.medios[0].franquicia}}</td>
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" data-ui-sref="medioEdit({medioId: record.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
                     <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="medioCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>

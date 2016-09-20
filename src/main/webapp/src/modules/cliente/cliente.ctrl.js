@@ -107,10 +107,9 @@
             }, responseError);
         }
         
-         this.agregarMedio = function ()
-            {
-                currentMedio = $scope.currentMedio;
-                return $http.post(clienteContext,currentRecord).then(function ()
+        this.agregarMedio = function (id, medio)
+       {
+                return $http.post(clienteContext+"/"+ id+"/medios", medio).then(function ()
                 {
                     $state.reload();
                 }, responseError);

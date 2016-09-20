@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author jdguz
@@ -24,6 +27,8 @@ public class ClienteDTO
     // Asociacion a tarjeta de puntos
     private TarjetaPuntosDTO tarjetaPuntos;
     
+    private ArrayList<MedioDTO> medios;
+    
     public ClienteDTO()
     {   }
     
@@ -36,6 +41,7 @@ public class ClienteDTO
         this.direccion = pDireccion;
         this.telefono = pTelefono;
         this.tarjetaPuntos = null;
+        this.medios = new ArrayList();
     }
 
     public Long getId() 
@@ -97,6 +103,21 @@ public class ClienteDTO
     {
         this.tarjetaPuntos = tarjetaPuntos;
     }
+
+    public ArrayList<MedioDTO> getMedios() 
+    {
+        return medios;
+    }
+
+    public void setMedios(ArrayList<MedioDTO> medios) 
+    {
+        this.medios = medios;
+    }
+    
+    public void agregarMedio(MedioDTO pMedio)
+    {
+        this.medios.add(pMedio);
+    }
         
     /**
      * Representacion JSON de un cliente
@@ -108,8 +129,9 @@ public class ClienteDTO
     	return "{ id : " + id +
                 ", nombre : \""+ nombre +
                 "\", apellidos : \""+apellidos
-                +"\", direccion : \""+ direccion +
-                "\", tarjetaPuntos : "+ tarjetaPuntos +
+                +"\", direccion : \""+ direccion
+                +"\", tarjetaPuntos : "+ tarjetaPuntos
+                +"\", medios : "+ medios +
                 ", telefono : "+telefono+" }" ;  
     }
     

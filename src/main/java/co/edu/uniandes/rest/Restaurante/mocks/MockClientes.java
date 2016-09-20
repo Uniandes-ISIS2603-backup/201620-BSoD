@@ -2,8 +2,11 @@ package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.DomicilioDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.MedioDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,10 +34,23 @@ public class MockClientes
     {
     	if (clientes == null) 
         { 
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             TarjetaPuntosDTO tc1 = new TarjetaPuntosDTO(1, new Date(), 5);
-            ClienteDTO c1 = new ClienteDTO(1L, "Ignacio1", "Arboleda1", "DireccionPereira1", 1);
+            ClienteDTO c1 = new ClienteDTO(1L, "Ignacioss1", "Arboleda1", "DireccionPereira1", 1);
             c1.setTarjetaPuntos(tc1);
+            try
+            {
+            ArrayList<MedioDTO> prueba =  new ArrayList<MedioDTO>();
+            MedioDTO m1 = new MedioDTO(1L,1l, 0 ,"descripcion1", 123456789L ,df.parse("02/07/2018"),123,"visa");
+            prueba.add(m1); 
+            c1.setMedios(prueba);
+            } 
+            catch (Exception e)
+            {
+             logger.severe("BIRRIBIR.");   
+            }
             
+                     
             clientes = new ArrayList<ClienteDTO>();
             clientes.add(c1);
             clientes.add(new ClienteDTO(2L, "Ignacio2", "Arboleda2", "DireccionPereira2", 1));
@@ -244,6 +260,22 @@ public class MockClientes
             logger.severe("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que no existe.");
             throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que no existe.");
     }
+      
+    public ClienteDTO agregarMedioCliente(Long pId, MedioDTO pMedio)throws LogicaRestauranteException
+      {
+        logger.info("Recibiendo solicitud de asignar medio de pago al cliente "+pId+".");
+        
+        for(ClienteDTO cliente:clientes)
+        {
+            if(cliente.getId().equals(pId))
+            {
+                cliente.agregarMedio(pMedio);
+                return cliente;
+            }
+        }
+            logger.severe("Error de uso: Se pidio asignar agregar un medio de pago a un cliente que no existe.");
+            throw new LogicaRestauranteException("Error de uso: Se pidio asignar agregar un medio de pago a un cliente que no existe..");
+    }  
       
       
       public ClienteDTO eliminarTarjetaPuntosCliente(Long pId) throws LogicaRestauranteException
