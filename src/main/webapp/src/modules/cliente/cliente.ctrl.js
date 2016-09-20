@@ -37,7 +37,19 @@
                 telefono: undefined,
                 tarjetaPuntos: null
             };
-             
+            $scope.currentMedio=
+            {
+                
+                            id: undefined,               /*Tipo Long. El valor se asigna en el backend*/
+                            efectivo: undefined,        /*Tipo Integer*/
+                            tarjeta: '',                 /*Tipo String*/
+                            numerosTarjeta: undefined,   /*Tipo Long*/
+                            fechaVencimiento: undefined, /*Tipo Date*/
+                            codigoSeguridad: undefined,  /*Tipo Integer*/
+                            franquicia: ''       /*Tipo String*/
+            };
+            
+            
             $scope.alerts = [];
         }
         
@@ -95,6 +107,14 @@
             }, responseError);
         }
         
+         this.agregarMedio = function ()
+            {
+                currentMedio = $scope.currentMedio;
+                return $http.post(clienteContext,currentRecord).then(function ()
+                {
+                    $state.reload();
+                }, responseError);
+            };
          
      // -----------------------------------------------------------------
      // Funciones para manejra los mensajes en la aplicación

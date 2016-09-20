@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<div class="container-fluid">                                     <!--Contenedor del estado-->
+    
+    <h2>Medios de pago</h1>
+    
+    <table  class="table table-bordered table-hover">            <!--Tabla-->
+        <thead>                                                     <!--Headers de la tabla-->
+            <tr>
+                <th>Efectivo</th>
+                <th>Tarjeta</th>
+                <th>NumerosTarjeta</th>
+                <th>FechaVencimiento</th>
+                <th>CodigoSeguridad</th>
+                <th>Franquicia</th>
+            </tr>
+        </thead>
+        
+        <tbody>                                                     <!--Cuerpo de la tabla-->
+            <tr>
+                <td>{{currentRecordid}}</td>
+                <td>{{currentRecord.tarjeta}}</td>
+                <td>{{currentRecord.numerosTarjeta}}</td>
+                <td>{{currentRecord.fechaVencimiento}}</td>
+                <td>{{currentRecord.codigoSeguridad}}</td>
+                <td>{{currentRecord.franquicia}}</td>
+                <td>
+                    <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" data-ui-sref="medioEdit({medioId: record.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="medioCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <button ui-sref="medioCreate">Agregar Medio de Pago</button>
+</div>

@@ -62,7 +62,16 @@
                                         controller: 'clienteCtrl',
                                         controllerAs: 'clienteCtrl',
                                         templateUrl: basePath + 'cliente.verTarjetaPuntos.html'
-                                    }
+                                    },
+                             'mediosClienteView':
+                                    {
+                                        controller: 'clienteCtrl',
+                                        controllerAs: 'clienteCtrl',
+                                        templateUrl: basePath + 'cliente.verMedios.html'
+                                    }       
+                                    
+                                    
+                                    
                         }
                     }).state('clienteRegistrarCompra',
                     {
