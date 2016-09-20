@@ -6,6 +6,7 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;        
+import co.edu.uniandes.rest.Restaurante.dtos.SucursalDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
@@ -29,11 +30,11 @@ public class MockReserva {
         
         if (reservas == null) {
             reservas = new ArrayList<>();
-            reservas.add(new ReservaDTO(1L, new Date(), 1, 1, 1L, 1L, 1L));
-            reservas.add(new ReservaDTO(2L, new Date(), 2, 1, 2L, 1L, 2L));
-            reservas.add(new ReservaDTO(3L, new Date(), 3, 2, 1L, 2L, 3L));
-            reservas.add(new ReservaDTO(4L, new Date(), 5, 2, 2L, 1L, 4L));
-            reservas.add(new ReservaDTO(5L, new Date(), 4, 1, 1L, 2L, 1L));
+            reservas.add(new ReservaDTO(1L, new Date(), 1, 1, 1L, new SucursalDTO(1L, "Ciudad1", "Direccion1", 1, 1)));
+            reservas.add(new ReservaDTO(2L, new Date(), 2, 1, 1L, new SucursalDTO(1L, "Ciudad1", "Direccion1", 1, 1)));
+            reservas.add(new ReservaDTO(3L, new Date(), 3, 2, 2L, new SucursalDTO(1L, "Ciudad1", "Direccion1", 1, 1)));
+            reservas.add(new ReservaDTO(4L, new Date(), 5, 2, 1L, new SucursalDTO(1L, "Ciudad1", "Direccion1", 1, 1)));
+            reservas.add(new ReservaDTO(5L, new Date(), 4, 1, 2L, new SucursalDTO(1L, "Ciudad1", "Direccion1", 1, 1)));
         }
         
         // indica que se muestren todos los mensajes

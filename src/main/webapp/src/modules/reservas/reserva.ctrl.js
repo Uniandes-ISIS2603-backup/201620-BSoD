@@ -49,6 +49,7 @@
 
 
             this.saveRecord = function (id) {
+                console.log("holi;");
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea

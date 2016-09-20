@@ -12,7 +12,7 @@ and open the template in the editor.
     <div>
         
         <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="reservaCtrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
-    <form novalidate name="form" id="reserva-form" role="form" ng-submit="form.$valid && reservaCtrl.saveRecord(currentRecord.id)">
+    <form novalidate name="form" id="reserva-form" role="form" ng-submit="reservaCtrl.saveRecord(currentRecord.id)">
         
         <div ng-messages="form.$error">
             <div ng-message="required">Fill the required fields!</div>
@@ -25,7 +25,7 @@ and open the template in the editor.
             <div class="form-group col-md-12" >
                 <label for="fecha" class="col-md-2 control-label">Fecha</label>
                 <div class="col-md-10">
-                    <input id="fecha" name="fecha" class="form-control" type="text" ng-model="currentRecord.fecha" ng-init="currentRecord.fecha" required />
+                    <input id="fecha" name="fecha" class="form-control" type="date" ng-model="currentRecord.fecha" ng-init="currentRecord.fecha" required />
                 </div>
             </div>
             
