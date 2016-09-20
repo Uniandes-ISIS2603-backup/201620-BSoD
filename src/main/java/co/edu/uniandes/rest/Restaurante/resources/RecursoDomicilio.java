@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.rest.Restaurante.resources;
 
 import co.edu.uniandes.rest.Restaurante.dtos.DomicilioDTO;
@@ -37,8 +32,8 @@ public class RecursoDomicilio {
      * en el sistema.
      */
     @GET
-    public List<DomicilioDTO> getDomicilios(@PathParam("idCliente") Long id) throws LogicaRestauranteException {
-        return mockDomicilio.getDomicilios(id);
+    public List<DomicilioDTO> getDomicilios(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException {
+        return mockDomicilio.getDomicilios(idCliente);
     }
 
     /**
@@ -51,8 +46,8 @@ public class RecursoDomicilio {
      */
     @GET
     @Path("{id: \\d+}")
-    public DomicilioDTO getDomicilio(@PathParam("id") Long id) throws LogicaRestauranteException {
-        return mockDomicilio.getDomicilio(id);
+    public DomicilioDTO getDomicilio(@PathParam("idCliente") Long idCliente,@PathParam("id") Long id ) throws LogicaRestauranteException {
+        return mockDomicilio.getDomicilio(idCliente, id);
     }
 
     /**
@@ -63,8 +58,8 @@ public class RecursoDomicilio {
      * @throws LogicaRestauranteException Si ya existe un domicilio con ese id.
      */
     @POST
-    public DomicilioDTO createDomicilio(@PathParam("idSucursal") Long id, DomicilioDTO domi) throws LogicaRestauranteException {
-        return mockDomicilio.createDomicilio(id, domi);
+    public DomicilioDTO createDomicilio(@PathParam("idCliente") Long idCliente, DomicilioDTO domi) throws LogicaRestauranteException {
+        return mockDomicilio.createDomicilio(idCliente, domi);
     }
 
     /**
@@ -75,8 +70,8 @@ public class RecursoDomicilio {
      */
     @PUT
     @Path("{id: \\d+}")
-    public DomicilioDTO uptadeDomicilio(@PathParam("id") Long id, DomicilioDTO domi) throws LogicaRestauranteException {
-        return mockDomicilio.updateDomicilio(id, domi);
+    public DomicilioDTO uptadeDomicilio(@PathParam("idCliente") Long idCliente,@PathParam("id") Long id, DomicilioDTO domi) throws LogicaRestauranteException {
+        return mockDomicilio.updateDomicilio(idCliente, id, domi);
     }
 
     /**
@@ -87,7 +82,7 @@ public class RecursoDomicilio {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteDomicilio(@PathParam("id") Long id) throws LogicaRestauranteException {
-        mockDomicilio.deleteDomicilio(id);
+    public void deleteDomicilio(@PathParam("idCliente") Long idCliente, @PathParam("id") Long id) throws LogicaRestauranteException {
+        mockDomicilio.deleteDomicilio(idCliente, id);
     }
 }

@@ -77,7 +77,7 @@ public class MockDomicilios {
      * @return domicilio con el id dado.
      * @throws LogicaRestauranteException
      */
-    public DomicilioDTO getDomicilio(Long id) throws LogicaRestauranteException {
+    public DomicilioDTO getDomicilio(Long idCliente, Long id) throws LogicaRestauranteException {
 
         if (domicilios == null) 
         {
@@ -124,7 +124,9 @@ public class MockDomicilios {
                 }
             }
             nDomicilio.setId(newId);
+            nDomicilio.setidCliente(idCliente);
         }
+        
 
         logger.info("agregando domicilio " + nDomicilio);
         domicilios.add(nDomicilio);
@@ -138,7 +140,7 @@ public class MockDomicilios {
      * @return domicilio actualizado con la información dada.
      * @throws LogicaRestauranteException
      */
-    public DomicilioDTO updateDomicilio(Long id, DomicilioDTO domicilio) throws LogicaRestauranteException {
+    public DomicilioDTO updateDomicilio(Long idCliente,Long id, DomicilioDTO domicilio) throws LogicaRestauranteException {
         for (DomicilioDTO domi : domicilios) {
 
             if (Objects.equals(domi.getId(), domicilio.getId())) {
@@ -159,7 +161,7 @@ public class MockDomicilios {
      * @param id
      * @throws LogicaRestauranteException
      */
-    public void deleteDomicilio(Long id) throws LogicaRestauranteException {
+    public void deleteDomicilio(Long idCliente, Long id) throws LogicaRestauranteException {
         boolean eliminado = false;
 
         for (int i = 0; i < domicilios.size() && !eliminado; i++) {

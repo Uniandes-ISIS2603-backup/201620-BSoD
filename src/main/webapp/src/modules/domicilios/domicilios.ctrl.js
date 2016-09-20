@@ -84,7 +84,7 @@
                 if (id != null)
                 {
                     // ejecuta delete en el recurso REST
-                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.domicilioContext)
+                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.domicilioContext + "/" + id)
                             .then(function () {
                                 $scope.records = {};
                                 $http.get(clienteContext).then(function (response) {

@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import java.util.Date;
+
 /**
  *
  * @author cc.novoa11
@@ -15,7 +17,7 @@ public class FacturaDTO
      * Atributos
      */
     private Long id;
-    
+    private Date fechaFactura;
     private int total;
     
     /**
@@ -28,10 +30,11 @@ public class FacturaDTO
      * @param pId
      * @param pTotal
      */
-    public FacturaDTO(Long pId, int pTotal)
+    public FacturaDTO(Long pId,Date fecha, int pTotal)
     {
         super();
         this.id = pId;
+        this.fechaFactura = fecha;
         this.total = pTotal;
     }
     
@@ -40,7 +43,7 @@ public class FacturaDTO
      */
     
     /**
-     * Obtener el id del domicilio.
+     * Obtener el id de factura.
      * @return id
      */
 
@@ -59,7 +62,7 @@ public class FacturaDTO
         this.id = id;
     }
     /**
-     * Obtener el precio del domicilio.
+     * Obtener el precio de factura.
      * @return total
      */
     
@@ -70,23 +73,42 @@ public class FacturaDTO
     
     /**
      * Asignar un nuevo precio.
-     * @param nPrecio 
+     * @param nTotal
      */
 
     public void setTotal(int nTotal) 
     {
         this.total = nTotal;
     }
+     /**
+     * Obtener fecha de factura.
+     * @return fechaFactura
+     */
+    
+    public Date getFecha() 
+    {
+        return fechaFactura;
+    }
+    
+    /**
+     * Asignar un nuevo precio.
+     * @param nFecha
+     */
+
+    public void setFecha(Date nFecha) 
+    {
+        this.fechaFactura = nFecha;
+    }
         
     /**
-     * Representacion JSON de un domicilio
-     * @return La representacion JSON de un DTO domicilio.
+     * Representacion JSON de factura
+     * @return La representacion JSON de un DTO factura.
      */
     @Override
     public String toString() 
     {
     	return "{ id : " + id +"\", "
-                + "total : \""+total+"\" }" ;  
+                +"fecha : \""+fechaFactura+ "total : \""+total+"\" }" ;  
     }
     
 }

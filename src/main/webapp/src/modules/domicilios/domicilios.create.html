@@ -1,7 +1,3 @@
-<head>
-    <title>Domicilios</title>
-
-</head>
 <div>
 
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="domiciliosCtrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
@@ -21,6 +17,13 @@
             </div>
 
             <div class="form-group col-md-12" >
+                <label for="plato" class="col-md-2 control-label">Plato</label>
+                <div class="col-md-10">
+                    <input id="plato" name="plato" class="form-control" type="text" ng-model="currentRecord.plato" ng-init="currentRecord.plato" required />
+                </div>
+            </div>
+
+            <div class="form-group col-md-12" >
                 <label for="precio" class="col-md-2 control-label">Precio</label>
                 <div class="col-md-10">
                     <input id="precio" name="precio" class="form-control" type="number" ng-model="currentRecord.precio" ng-init="currentRecord.precio" required />
@@ -30,14 +33,7 @@
             <div class="form-group col-md-12" ng-class="{'has-success': form.sucursal.$valid && form.sucursal.$dirty, 'has-error': form.sucursal.$invalid && (form.sucursal.$dirty || form.$submitted)}">
                 <label for="sucursal" class="col-md-2 control-label">Sucursal</label>
                 <div class="col-md-10">
-                    <select id="sucursal" name="sucursal" class="form-control" type="text" ng-change="reloadPlatos()" ng-options="rc.direccion+' '+rc.ciudad for rc in sucursal track by rc.id" ng-model="currentRecord.sucursal"></select>
-                </div>
-            </div>
-            
-            <div class="form-group col-md-12" ng-class="{'has-success': form.plato.$valid && form.plato.$dirty, 'has-error': form.plato.$invalid && (form.plato.$dirty || form.$submitted)}">
-                <label for="plato" class="col-md-2 control-label">Plato</label>
-                <div class="col-md-10">
-                    <select id="plato" name="plato" class="form-control" type="text" ng-options="rc.nombre for rc in plato track by rc.id" ng-model="currentRecord.plato"></select>
+                    <select id="sucursal" name="sucursal" class="form-control" type="text" ng-options="rc.direccion+' '+rc.ciudad for rc in sucursal track by rc.id" ng-model="currentRecord.sucursal"></select>
                 </div>
             </div>
             
@@ -48,4 +44,3 @@
 
 
 </div>
-

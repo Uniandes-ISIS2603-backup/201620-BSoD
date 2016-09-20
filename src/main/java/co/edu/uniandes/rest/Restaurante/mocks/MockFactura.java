@@ -4,6 +4,7 @@ import co.edu.uniandes.rest.Restaurante.dtos.FacturaDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -31,9 +32,9 @@ public class MockFactura {
         
         if (facturas == null) {
             facturas = new ArrayList<>();
-            facturas.add(new FacturaDTO(1L, 12000));
-            facturas.add(new FacturaDTO(2L, 18000));
-            facturas.add(new FacturaDTO(3L, 15000));
+            facturas.add(new FacturaDTO(1L,new Date() ,12000));
+            facturas.add(new FacturaDTO(2L,new Date() ,18000));
+            facturas.add(new FacturaDTO(3L,new Date() ,15000));
 
         }
         
