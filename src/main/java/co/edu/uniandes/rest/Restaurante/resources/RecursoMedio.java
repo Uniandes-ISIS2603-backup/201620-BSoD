@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  *
  * @author igomez10
  */
-@Path("medios")
+@Path("/clientes/{idCliente: \\d+}/medios")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoMedio
@@ -36,17 +36,11 @@ public class RecursoMedio
      * @throws LogicaRestauranteException Si no existe una lista de medios de pago en el sistema.
      */
     @GET
-    public List<MedioDTO> darMedios() throws LogicaRestauranteException
+    public List<MedioDTO> darMedios(@PathParam("idCliente") Long id) throws LogicaRestauranteException
     {
-        return mockMedio.darMedios();
+        return mockMedio.darMedios(id);
     }
 
-     /**
-     * Obtiene el medio de pago con el identificador buscado.
-     * @param pId Identificador del medio de pago buscado
-     * @return MedioDTO medio de pago buscado.
-     * @throws LogicaRestauranteException Si no existe un medio de pago con el identificador dado.
-     */
     @GET
     @Path("{id: \\d+}")
       public MedioDTO darMedio(@PathParam("id") Long pId) throws LogicaRestauranteException
@@ -54,34 +48,18 @@ public class RecursoMedio
         return mockMedio.darMedio(pId);
     }
 
-
-     /**
-     * Crea una nueva instancia de Medio.
-     * @return medioDTO medio de pago creado.
-     * @throws LogicaRestauranteException Si ya existe un medio de pago con ese id.
-     */
     @POST
     public MedioDTO crearMedio(MedioDTO nuevoMedio) throws LogicaRestauranteException
     {
         return mockMedio.crearMedio(nuevoMedio);
     }
 
-    /**
-     *
-     * @param MedioDTO medio de pago a actualizar.
-     * @throws LogicaRestauranteException Si no existe un medio de pago con el id dado.
-     */
     @PUT
     public MedioDTO actualizarMedio(MedioDTO medioActualizado) throws LogicaRestauranteException
     {
         return mockMedio.actualizarMedio(medioActualizado);
     }
 
-    /**
-     * Elimina el medio de pago con el identificador indicado
-     * @param pId Identificador del medio de pago que se quiere eliminar.
-     * @throws LogicaRestauranteException Si no existe ningun medio de pago con el id dado.
-     */
     @DELETE
     @Path("{id: \\d+}")
     public void eliminarMedio(@PathParam("id") Long pId) throws LogicaRestauranteException

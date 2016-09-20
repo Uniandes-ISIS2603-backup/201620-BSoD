@@ -21,27 +21,30 @@ public class MedioDTO
 
     private Long id;
 
+    private Long idCliente;
+    
     private Integer efectivo;
 
     private String tarjeta;
 
-    private Integer numerosTarjeta;
+    private Long numerosTarjeta;
 
     private Date fechaVencimiento;
 
     private Integer codigoSeguridad;
 
     private String franquicia;
-
+    
     public MedioDTO()
     {   }
 
     //CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR-----------
 
-    public MedioDTO(Long pId, Integer pEfectivo, String pTarjeta, Integer pNumerosTarjeta, Date pFechaVencimiento, Integer pCodigoSeguridad, String pFranquicia )
+    public MedioDTO(Long pId ,Long pIdCliente, Integer pEfectivo, String pTarjeta, Long pNumerosTarjeta, Date pFechaVencimiento, Integer pCodigoSeguridad, String pFranquicia )
     {
         super();
         this.id = pId;
+        this.idCliente=pIdCliente;
         this.efectivo = pEfectivo;
         this.tarjeta = pTarjeta;
         this.numerosTarjeta = pNumerosTarjeta;
@@ -56,6 +59,10 @@ public class MedioDTO
     {
         id = pId;
     }
+        public void setIdCliente(Long pIdCliente)
+    {
+        idCliente=pIdCliente;
+    }
     public void setEfectivo(Integer pEfectivo)
     {
       efectivo=pEfectivo;
@@ -64,7 +71,7 @@ public class MedioDTO
     {
       tarjeta=pTarjeta;
     }
-    public void setNumerosTarjeta(Integer pNumerosTarjeta)
+    public void setNumerosTarjeta(Long pNumerosTarjeta)
     {
       numerosTarjeta=pNumerosTarjeta;
     }
@@ -81,11 +88,13 @@ public class MedioDTO
       franquicia=pFranquicia;
     }
 
-
     //DAR DAR DAR DAR DAR----------------------------------
 
     public Long getId() {
         return id;
+    }
+    public Long getIdCliente(){
+        return idCliente;
     }
     public Integer getEfectivo(){
       return efectivo;
@@ -93,7 +102,7 @@ public class MedioDTO
     public String getTarjeta(){
       return tarjeta;
     }
-    public Integer getNumerosTarjeta(){
+    public Long getNumerosTarjeta(){
       return numerosTarjeta;
     }
     public Date getFechaVencimiento(){
@@ -111,7 +120,7 @@ public class MedioDTO
     @Override
     public String toString()
     {
-    	return "{ id : " + getId() +", efectivo : \""+ getEfectivo() +"\", tarjeta : \""+getTarjeta()+"\", "
+    	return "{ id : " + getId() +", idCliente : \""+ getIdCliente()+", efectivo : \""+ getEfectivo() +"\", tarjeta : \""+getTarjeta()+"\", "
                 + ", numeros de Tarjeta : \""+getNumerosTarjeta()+"\""+", fecha de vencimiento : \""+ getFechaVencimiento()+", codigoSeguridad : \""+getCodigoSeguridad()+", franquicia : \""+getFranquicia()
                 + " }" ;
     }
