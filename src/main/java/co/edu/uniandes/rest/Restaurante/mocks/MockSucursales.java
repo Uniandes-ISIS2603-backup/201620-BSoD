@@ -203,7 +203,7 @@ public class MockSucursales
         throw new LogicaRestauranteException("Error de uso: Se pidio eliminar una sucursal con id "+pId+" que no existe.");
         }
    }
-      
+    /*  
    public int mesasFecha(Long id, Date fecha) throws LogicaRestauranteException
    {
        ArrayList res = darSucursal(id).getReservas();
@@ -221,4 +221,5 @@ public class MockSucursales
        }
       
    }
+   */
 }
