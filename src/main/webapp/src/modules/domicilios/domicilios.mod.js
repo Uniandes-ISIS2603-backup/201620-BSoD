@@ -39,6 +39,32 @@
                         templateUrl: basePath + 'domicilios.create.html'
                     }
                 }
+            }).state('domicilioPago', {
+                url: '/domicilios/:domicilioId/PagoDomicilio',
+                parent: 'clienteEdit',
+                param: {
+                    domicilioId: null
+                },
+                views: {
+                    'clienteInstanceView': {
+                        controller: 'domiciliosCtrl',
+                        controllerAs: 'domiciliosCtrl',
+                        templateUrl: basePath + 'domicilios.pago.html'
+                    }
+                }
+            }).state('domicilioTarjeta', {
+                url: '/domicilios/:domicilioId/PagoDomicilio/Tarjeta',
+                parent: 'clienteEdit',
+                param: {
+                    domicilioId: null
+                },
+                views: {
+                    'clienteInstanceView': {
+                        controller: 'domiciliosCtrl',
+                        controllerAs: 'domiciliosCtrl',
+                        templateUrl: basePath + 'domicilios.tarjeta.html'
+                    }
+                }
             });
         }]);
 })(window.angular);
