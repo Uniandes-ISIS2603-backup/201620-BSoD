@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author af.pinzon10
@@ -21,6 +23,8 @@ public class SucursalDTO
     
     private int calificacion;
     
+    private ArrayList<ReservaDTO> reservas;
+    
     
     
     public SucursalDTO()
@@ -34,6 +38,7 @@ public class SucursalDTO
         this.direccion = pDireccion;
         this.mesas = pMesas;
         this.calificacion = pCalificacion;
+        this.reservas = new ArrayList();
     }
 
     public Long getId() 
@@ -84,6 +89,16 @@ public class SucursalDTO
     public void setCalificacion(int calificacion)
     {
         this.calificacion = calificacion;
+    }
+    
+    public ArrayList getReservas()
+    {
+        return reservas;
+    }
+    
+    public void setReservas(ArrayList reservas)
+    {
+        this.reservas = reservas;
     }
         
     /**

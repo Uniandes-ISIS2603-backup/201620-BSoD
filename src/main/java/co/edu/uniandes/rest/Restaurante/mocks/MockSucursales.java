@@ -1,9 +1,11 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
+import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.SucursalDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -200,5 +202,23 @@ public class MockSucursales
         logger.severe("Error de uso: Se pidio eliminar una sucursal con id "+pId+" que no existe.");
         throw new LogicaRestauranteException("Error de uso: Se pidio eliminar una sucursal con id "+pId+" que no existe.");
         }
+   }
+      
+   public int mesasFecha(Long id, Date fecha) throws LogicaRestauranteException
+   {
+       ArrayList res = darSucursal(id).getReservas();
+       
+       for (int i=0; i<res.size(); i++){
+           ReservaDTO reserva = (ReservaDTO)res.get(i);
+           
+           if (reserva.getFecha().getYear() == fecha.getYear()){
+               if(reserva.getFecha().getMonth() == fecha.getMonth()){
+                   if(reserva.getFecha().getDate() == fecha.getDate()){
+                      int mesas = reserva.getNumPersonas() /4;
+                     }
+               }
+           }
+       }
+      
    }
 }
