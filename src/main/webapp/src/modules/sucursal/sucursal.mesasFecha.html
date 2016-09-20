@@ -1,7 +1,7 @@
 <div class="container">
         <h3>Consultar mesas disponibles</h3>
         
-        <form novalidate name="form" id="sucursal-form" role="form" ng-submit="form.$valid && sucursalCtrl.saveRecord(currentRecord.id)">
+        <form novalidate name="form" id="sucursal-form" role="form" ng-submit="form.$valid && sucursalCtrl.mesasFecha(currentRecord.id, fecha)">
 
          <div ng-messages="form.$error">
                 <div ng-message="required">Fill the required fields!</div>
@@ -15,7 +15,8 @@
                     <input id="fecha" name="fecha" class="form-control" type="date" ng-model="fecha" required />
                 </div>
             </div>
-            <button class="btn btn-default btn-sm" ng-click="sucursalCtrl.mesasFecha(currentRecord.id, fecha)">Consultar</button>
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Consultar</button>
+            <button class="btn btn-default" type="button" ui-sref='sucursalList'>Cancelar</button>
          </fieldset>
         </form>
 </div>

@@ -8,6 +8,7 @@ package co.edu.uniandes.rest.Restaurante.resources;
 import co.edu.uniandes.rest.Restaurante.dtos.SucursalDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import co.edu.uniandes.rest.Restaurante.mocks.MockSucursales;
+import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -17,6 +18,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -94,5 +96,10 @@ public class RecursoSucursal
         mockSucursales.eliminarSucursal(pId);
     }
     
-    
+    @GET
+    @Path("{id: \\d+}/mesasDisponibles/{pFecha}")
+    public String darMesasFecha(@PathParam("id") Long pId, @PathParam("pFecha") Date pFecha )throws LogicaRestauranteException
+    {
+        return mockSucursales.mesasFecha(pId, pFecha);
+    }
 }

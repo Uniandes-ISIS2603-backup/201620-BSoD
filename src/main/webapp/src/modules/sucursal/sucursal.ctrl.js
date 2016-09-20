@@ -64,6 +64,13 @@
                         }, responseError);
                 };
             };
+            
+            this.mesasFecha = function (id, fecha){
+                return $http.get(sucursalContext +"/"+id +"/mesasDisponibles/"+ fecha)
+                        .then (function (){
+                            $state.go('');
+                }, responseError);
+            };
 
 this.deleteRecord = function (id) {
                 currentRecord = $scope.currentRecord;

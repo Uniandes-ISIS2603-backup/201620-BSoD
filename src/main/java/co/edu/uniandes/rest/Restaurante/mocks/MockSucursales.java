@@ -203,23 +203,30 @@ public class MockSucursales
         throw new LogicaRestauranteException("Error de uso: Se pidio eliminar una sucursal con id "+pId+" que no existe.");
         }
    }
-    /*  
-   public int mesasFecha(Long id, Date fecha) throws LogicaRestauranteException
+      
+   public String mesasFecha(Long id, Date fecha) throws LogicaRestauranteException
    {
-       ArrayList res = darSucursal(id).getReservas();
+       SucursalDTO suc = darSucursal(id);
+       ArrayList res = suc.getReservas();
        
+       int mesas = 0;
        for (int i=0; i<res.size(); i++){
            ReservaDTO reserva = (ReservaDTO)res.get(i);
            
            if (reserva.getFecha().getYear() == fecha.getYear()){
                if(reserva.getFecha().getMonth() == fecha.getMonth()){
                    if(reserva.getFecha().getDate() == fecha.getDate()){
-                      int mesas = reserva.getNumPersonas() /4;
+                      mesas += reserva.getNumPersonas() /4;
+                      if((reserva.getNumPersonas() %4) !=0)
+                      {
+                          mesas++;
+                      }
                      }
                }
            }
        }
+       return "En la sucursal hay "+(suc.getMesas()-mesas)+" mesas disponibles";
       
    }
-   */
+   
 }
