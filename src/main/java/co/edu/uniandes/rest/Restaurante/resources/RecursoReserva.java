@@ -41,8 +41,8 @@ public class RecursoReserva {
      * @throws LogicaRestauranteException excepción retornada por la lógica
      */
     @GET
-    public List<ReservaDTO> getReservas(@PathParam("idCliente") Long id) throws LogicaRestauranteException {
-        return mockReserva.getReservas(id);
+    public List<ReservaDTO> getReservas(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException {
+        return mockReserva.getReservas(idCliente);
     }
     /**
      * Crea una reserva.
@@ -51,8 +51,8 @@ public class RecursoReserva {
      * @throws LogicaRestauranteException si la reserva ya existe.
      */
     @POST
-    public ReservaDTO createReserva(@PathParam("idCliente") Long id, ReservaDTO reserva) throws LogicaRestauranteException {
-        return mockReserva.createReserva(id, reserva);
+    public ReservaDTO createReserva(@PathParam("idCliente") Long idCliente, ReservaDTO reserva) throws LogicaRestauranteException {
+        return mockReserva.createReserva(idCliente, reserva);
     }
     /**
      * Obtiene una reserva.
@@ -62,8 +62,8 @@ public class RecursoReserva {
      */
     @GET
     @Path ("{id: \\d+}")
-    public ReservaDTO getReserva (@PathParam ("id")Long id) throws LogicaRestauranteException {
-     return mockReserva.getReserva(id);
+    public ReservaDTO getReserva (@PathParam("idCliente") Long idCliente, @PathParam ("id")Long id) throws LogicaRestauranteException {
+     return mockReserva.getReserva(idCliente,id);
     }   
     /**
      * Acrualiza los datos de una reserva.
@@ -74,8 +74,8 @@ public class RecursoReserva {
     
     @PUT
     @Path ("{id: \\d+}")
-    public ReservaDTO uptadeReserva (@PathParam("idCliente") Long id, ReservaDTO reserva) throws LogicaRestauranteException {
-     return mockReserva.updateReserva(reserva);
+    public ReservaDTO uptadeReserva (@PathParam("idCliente") Long idCliente, ReservaDTO reserva) throws LogicaRestauranteException {
+     return mockReserva.updateReserva(idCliente, reserva);
     }
     /**
      * Elimina una reserva
@@ -84,8 +84,8 @@ public class RecursoReserva {
      */
     @DELETE
     @Path ("{id: \\d+}")
-    public void deleteReserva (@PathParam ("id")Long id) throws LogicaRestauranteException {
-       mockReserva.deleteReserva(id);
+    public void deleteReserva (@PathParam("idCliente") Long idCliente, @PathParam ("id")Long id) throws LogicaRestauranteException {
+       mockReserva.deleteReserva(idCliente, id);
     } 
     
 }

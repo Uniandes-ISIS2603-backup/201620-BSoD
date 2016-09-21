@@ -62,10 +62,10 @@ public class MockReserva {
             }
         }
     	logger.info("retornando todas las reservas");
-    	return reservas;
+    	return reservasCliente;
     }
     
-    public ReservaDTO getReserva(Long id) throws LogicaRestauranteException{
+    public ReservaDTO getReserva(Long idCliente, Long id) throws LogicaRestauranteException{
      
           for (ReservaDTO res : reservas) {
 
@@ -97,6 +97,7 @@ public class MockReserva {
 	            }
 	        }
 	        nuevaReserva.setId(newId);
+                nuevaReserva.setIdCliente(idCliente);
     	}
     	
     	logger.info("agregando reserva " + nuevaReserva);
@@ -104,7 +105,7 @@ public class MockReserva {
         return nuevaReserva;
     }
     
-    public ReservaDTO updateReserva(ReservaDTO reserva) throws LogicaRestauranteException{
+    public ReservaDTO updateReserva(Long idCliente, ReservaDTO reserva) throws LogicaRestauranteException{
        for (ReservaDTO res : reservas) {
 
 	    if (Objects.equals(res.getId(), reserva.getId())){
@@ -118,7 +119,7 @@ public class MockReserva {
     		throw new LogicaRestauranteException("Error interno: la reserva no existe.");
    }
     
-    public void deleteReserva(Long id) throws LogicaRestauranteException{
+    public void deleteReserva(Long idCliente, Long id) throws LogicaRestauranteException{
     logger.info("recibiendo solictud de eliminar plato con id " + id);
        
          for (ReservaDTO reserva : reservas) {

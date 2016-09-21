@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 (function (ng) {
     var mod = ng.module("reservaModule");
 
@@ -49,7 +43,6 @@
 
 
             this.saveRecord = function (id) {
-                console.log("holi;");
                 currentRecord = $scope.currentRecord;
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
@@ -67,7 +60,7 @@
                 } else {
                     
                     // ejecuta PUT en el recurso REST
-                    return $http.put($http.post(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext, currentRecord))
+                    return $http.put($http.post(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext + "/" + currentRecord.id, currentRecord))
                         .then(function () {
                             // $http.put es una promesa
                             // cuando termine bien, cambie de estado
@@ -81,7 +74,7 @@
                 if(id!=null)
                 {            
                     // ejecuta delete en el recurso REST
-                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext)
+                    return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.reservaContext +"/"+id)
                         .then(function () {
                             $scope.records = {};
                             $http.get(clienteContext).then(function(response){

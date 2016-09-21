@@ -81,15 +81,15 @@ public class MockDomicilios {
 
         if (domicilios == null) 
         {
-    		logger.severe("Error interno: lista de platos no existe.");
-    		throw new LogicaRestauranteException("Error interno: lista de platos no existe.");    		
+    		logger.severe("Error interno: lista de domicilios no existe.");
+    		throw new LogicaRestauranteException("Error interno: lista dedomicilios no existe.");    		
     	}
         
         for(DomicilioDTO domicilio :domicilios)
         {
             if(domicilio.getId().equals(id))
             {
-                logger.info("Retornando el plato con id "+id);
+                logger.info("Retornando domicilio con id "+id);
                 return domicilio;
             }
         }
