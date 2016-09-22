@@ -87,10 +87,7 @@
                     return $http.delete(clienteContext + "/" + $stateParams.clienteId + $scope.domicilioContext + "/" + id)
                             .then(function () {
                                 $scope.records = {};
-                                $http.get(clienteContext).then(function (response) {
-                                    $scope.records = response.data;
-                                }, responseError);
-                                $state.go('domiciliosList');
+                                $state.reload();
                             }, responseError);
                 }
             };
