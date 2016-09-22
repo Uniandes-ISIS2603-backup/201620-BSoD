@@ -18,5 +18,12 @@
             <button ng-click="sucursalCtrl.mesasFecha(currentRecord.id, fecha)" class="btn btn-default"> Consultar</button>
             <button class="btn btn-default" type="button" ui-sref='sucursalList'>Cancelar</button>
          </fieldset>
+         
+            <hr>
+            
+            <div class="well" ng-if="dato">
+            {{ dato }} 
+            </div>
+            
         </form>
 </div>

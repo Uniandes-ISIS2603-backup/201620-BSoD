@@ -5,9 +5,12 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.SucursalDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import co.edu.uniandes.rest.Restaurante.mocks.MockSucursales;
+
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.ws.rs.Consumes;
@@ -97,9 +100,14 @@ public class RecursoSucursal
     }
     
     @GET
-    @Path("{id: \\d+}/mesasDisponibles/{pFecha}")
-    public String darMesasFecha(@PathParam("id") Long pId, @PathParam("pFecha") Date pFecha )throws LogicaRestauranteException
+    @Path("{id: \\d+}/mesasDisponibles/{ano}/{mes}/{dia}")
+    @Produces("text/plain")
+    public String darMesasFecha(@PathParam("id") Long pId, @PathParam("ano") int ano, @PathParam("mes") int mes, @PathParam("dia") int dia )throws LogicaRestauranteException
     {
+        Calendar calendario = Calendar.getInstance();
+        calendario.set(ano, mes, dia);
+        Date pFecha = calendario.getTime();
+        
         return mockSucursales.mesasFecha(pId, pFecha);
     }
 }

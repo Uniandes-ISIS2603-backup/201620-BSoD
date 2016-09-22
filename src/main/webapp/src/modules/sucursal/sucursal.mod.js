@@ -57,7 +57,7 @@
                 url: '/{:sucursalId}/mesasDisponibles',
                 param: {sucursalId: null},
                 views: {
-                    'sucursalConsultView': {
+                    'mainView': {
                         controller: 'sucursalCtrl',
                         controllerAs: 'sucursalCtrl',
                         templateUrl: basePath + 'sucursal.mesasFecha.html'
