@@ -113,7 +113,14 @@
                 {
                     $state.reload();
                 }, responseError);
-            };
+        };
+        this.eliminarMedio=function(id,medio)
+        {
+            return $http.delete(clienteContext + "/" + id + "/medios", medio).then(function()
+            {
+                $state.reload();
+            }, responseError);
+        };
          
      // -----------------------------------------------------------------
      // Funciones para manejra los mensajes en la aplicación

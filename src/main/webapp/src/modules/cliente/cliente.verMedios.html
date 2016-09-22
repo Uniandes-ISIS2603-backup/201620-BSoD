@@ -25,11 +25,11 @@
                 <td>{{currentRecord.medios[0].franquicia}}</td>
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" data-ui-sref="medioEdit({medioId: record.id})"><span class="glyphicon glyphicon-edit"></span> Editar</button>
-                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="medioCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
+                    <button id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarMedio(record.id, currentMedio)"><span class="glyphicon glyphicon-remove"></span>Eliminar</button>
                 </td>
 
             </tr>
         </tbody>
     </table>
-    <button ui-sref="medioCreate">Agregar Medio de Pago</button>
+    <button data-ui-sref="medioCreate">Agregar Medio de Pago</button>
 </div>
