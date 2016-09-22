@@ -11,27 +11,26 @@ import java.util.ArrayList;
  *
  * @author af.pinzon10
  */
-public class SucursalDTO 
-{
+public class SucursalDTO {
+
     private Long id;
-    
+
     private String ciudad;
-    
+
     private String direccion;
-    
+
     private int mesas;
-    
+
     private int calificacion;
-    
+
     private ArrayList<ReservaDTO> reservas;
-    
-    
-    
-    public SucursalDTO()
-    {   }
-    
-    public SucursalDTO(Long pId, String pCiudad, String pDireccion, int pMesas, int pCalificacion)
-    {
+
+    private ArrayList<FacturaDTO> facturas;
+
+    public SucursalDTO() {
+    }
+
+    public SucursalDTO(Long pId, String pCiudad, String pDireccion, int pMesas, int pCalificacion) {
         super();
         this.id = pId;
         this.ciudad = pCiudad;
@@ -39,76 +38,73 @@ public class SucursalDTO
         this.mesas = pMesas;
         this.calificacion = pCalificacion;
         this.reservas = new ArrayList();
+        this.facturas = new ArrayList<>();
     }
 
-    public Long getId() 
-    {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Long id) 
-    {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getCiudad()
-    {
+    public String getCiudad() {
         return ciudad;
     }
-    
-    public void setCiudad(String ciudad)
-    {
+
+    public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
 
-    public String getDireccion() 
-    {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) 
-    {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
-    
-    public int getMesas()
-    {
+
+    public int getMesas() {
         return mesas;
     }
-    
-    public void setMesas(int mesas)
-    {
+
+    public void setMesas(int mesas) {
         this.mesas = mesas;
     }
-    
-    public int getCalificacion()
-    {
+
+    public int getCalificacion() {
         return calificacion;
     }
-    
-    public void setCalificacion(int calificacion)
-    {
+
+    public void setCalificacion(int calificacion) {
         this.calificacion = calificacion;
     }
-    
-    public ArrayList getReservas()
-    {
+
+    public ArrayList getReservas() {
         return reservas;
     }
-    
-    public void setReservas(ArrayList reservas)
-    {
+
+    public void setReservas(ArrayList reservas) {
         this.reservas = reservas;
     }
-        
+
+    public ArrayList getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(ArrayList facturas) {
+        this.facturas = facturas;
+    }
+
     /**
      * Representacion JSON de un cliente
+     *
      * @return La representacion JSON de un DTO Sucursal.
      */
     @Override
-    public String toString() 
-    {
-    	return "{ id : " + id + ", ciudad : \""+ ciudad +"\", direccion : \""+direccion+"\", mesas : \""+mesas+"\", calificacion : \""+calificacion+"\" }" ;  
+    public String toString() {
+        return "{ id : " + id + ", ciudad : \"" + ciudad + "\", direccion : \"" + direccion + "\", mesas : \"" + mesas + "\", calificacion : \"" + calificacion + "\" }";
     }
-    
+
 }

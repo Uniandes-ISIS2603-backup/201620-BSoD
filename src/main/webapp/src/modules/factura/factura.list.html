@@ -1,0 +1,25 @@
+<div class="col-md-12">
+    <div class="container-fluid">
+
+            <h2>Lista de factura</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr ng-repeat="record in records">
+                        <td id ="{{$index}}-id">{{record.id}}</td>
+                        <td id ="{{$index}}-fecha">{{record.fecha}}</td>
+                        <td id ="{{$index}}-total">{{record.total}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+

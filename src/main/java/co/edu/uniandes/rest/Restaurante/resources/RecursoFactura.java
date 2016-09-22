@@ -22,7 +22,7 @@ import javax.ws.rs.Produces;
  *
  * @author cc.novoa11
  */
-@Path("factura")
+@Path("sucursal/{idSucursal: \\d+}/facturas ")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoFactura 
@@ -36,9 +36,9 @@ public class RecursoFactura
      */
    
     @GET
-    public List<FacturaDTO> getDomicilios() throws LogicaRestauranteException 
+    public List<FacturaDTO> getFacturas(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
     {
-        return mockFactura.getFacturas();
+        return mockFactura.getFacturas(idSucursal);
     }
    
     /**
@@ -49,9 +49,9 @@ public class RecursoFactura
      */
     @GET
     @Path ("{id: \\d+}")
-    public FacturaDTO getFactura (@PathParam ("id")Long id) throws LogicaRestauranteException 
+    public FacturaDTO getFactura (@PathParam("idSucursal") Long idSucursal, @PathParam ("id")Long id) throws LogicaRestauranteException 
     {
-     return mockFactura.getFactura(id);
+     return mockFactura.getFactura(idSucursal, id);
     }   
     
     /**
@@ -61,9 +61,9 @@ public class RecursoFactura
      * @throws LogicaRestauranteException Si ya existe factura con ese id.
      */
    @POST
-    public FacturaDTO createDomicilio(FacturaDTO fac) throws LogicaRestauranteException
+    public FacturaDTO createFactura(@PathParam("idSucursal") Long idSucursal, FacturaDTO fac) throws LogicaRestauranteException
     {
-        return mockFactura.createFactura(fac);
+        return mockFactura.createFactura(idSucursal, fac);
     }
  
     /**
@@ -74,9 +74,9 @@ public class RecursoFactura
    
     @PUT
     @Path ("{id: \\d+}")
-    public FacturaDTO uptadeFactura (FacturaDTO fact) throws LogicaRestauranteException 
+    public FacturaDTO uptadeFactura (@PathParam("idSucursal") Long idSucursal, FacturaDTO fact) throws LogicaRestauranteException 
     {
-     return mockFactura.updateFactura(fact);
+     return mockFactura.updateFactura(idSucursal,fact);
     }
     
      /**
@@ -87,8 +87,8 @@ public class RecursoFactura
     
     @DELETE
     @Path ("{id: \\d+}")
-    public void deleteFactura (@PathParam ("id")Long id) throws LogicaRestauranteException {
-       mockFactura.deleteFactura(id);  
+    public void deleteFactura (@PathParam("idSucursal") Long idSucursal, @PathParam ("id")Long id) throws LogicaRestauranteException {
+       mockFactura.deleteFactura(idSucursal,id);  
     } 
 }
 

@@ -1,5 +1,6 @@
 package co.edu.uniandes.rest.Restaurante.mocks;
 
+import co.edu.uniandes.rest.Restaurante.dtos.FacturaDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.SucursalDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
@@ -225,8 +226,29 @@ public class MockSucursales
                }
            }
        }
-       return "En la sucursal hay "+(suc.getMesas()-mesas)+" mesas disponibles";
-      
+       return "En la sucursal hay "+(suc.getMesas()-mesas)+" mesas disponibles";      
    }
+   
+      public ArrayList facturasFecha(Long id, Date fecha) throws LogicaRestauranteException
+   {
+       SucursalDTO suc = darSucursal(id);
+       ArrayList res = suc.getFacturas();
+       ArrayList factFe = new ArrayList();
+       
+       int mesas = 0;
+       for (int i=0; i<res.size(); i++){
+           FacturaDTO factura = (FacturaDTO)res.get(i);
+           
+           if (factura.getFecha().getYear() == fecha.getYear()){
+               if(factura.getFecha().getMonth() == fecha.getMonth()){
+                   if(factura.getFecha().getDate() == fecha.getDate()){
+                      factFe.add(factura);
+                     }
+               }
+           }
+       }
+       return factFe;      
+   }
+   
    
 }

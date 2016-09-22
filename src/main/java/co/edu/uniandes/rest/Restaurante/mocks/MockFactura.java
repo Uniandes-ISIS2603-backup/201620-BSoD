@@ -32,9 +32,7 @@ public class MockFactura {
         
         if (facturas == null) {
             facturas = new ArrayList<>();
-            facturas.add(new FacturaDTO(1L,new Date() ,12000));
-            facturas.add(new FacturaDTO(2L,new Date() ,18000));
-            facturas.add(new FacturaDTO(3L,new Date() ,15000));
+            facturas.add(new FacturaDTO(1L, 1L, 1L, new Date(), 4000));
 
         }
         
@@ -50,15 +48,24 @@ public class MockFactura {
     * @return lista de facturas.
     * @throws LogicaRestauranteException 
     */
-    public List<FacturaDTO> getFacturas() throws LogicaRestauranteException 
+    public List<FacturaDTO> getFacturas(Long idSucursal) throws LogicaRestauranteException 
     {
     	if (facturas == null) {
     		logger.severe("Error interno: lista de facturas no se encuentra.");
     		throw new LogicaRestauranteException("Error interno: lista de facturas no se encuentra.");    		
     	}
+        
+        ArrayList<FacturaDTO> facturasSucursal = new ArrayList<FacturaDTO>();
+        
+        for (FacturaDTO fact : facturas) {
+            if( idSucursal== fact.getIdSucursal() ){
+                facturasSucursal.add(fact);
+            }
+        }
+        
+        logger.info("retornando todos los domicilios");
+        return facturasSucursal;
     	
-    	logger.info("retornando todos los facturas");
-    	return facturas;
     }
     
     /**
@@ -68,7 +75,7 @@ public class MockFactura {
      * @throws LogicaRestauranteException 
      */
     
-    public FacturaDTO getFactura(Long id) throws LogicaRestauranteException{
+    public FacturaDTO getFactura(Long idSucursal, Long id) throws LogicaRestauranteException{
      
           for (FacturaDTO fa : facturas) {
 
@@ -87,15 +94,15 @@ public class MockFactura {
      * @throws LogicaRestauranteException 
      */
     
-    public FacturaDTO createFactura(FacturaDTO nFactura) throws LogicaRestauranteException 
+    public FacturaDTO createFactura(Long idSucursal, FacturaDTO nFactura) throws LogicaRestauranteException 
     {
     	logger.info("recibiendo solicitud de agregar un domicilio " + nFactura);
     	
        	if ( nFactura.getId() != null ) 
         {
-	    	for (FacturaDTO domi : facturas) 
+	    	for (FacturaDTO fact : facturas) 
                 {
-	            if (Objects.equals(domi.getId(), nFactura.getId()))
+	            if (Objects.equals(fact.getId(), nFactura.getId()))
                     {
 	            	logger.severe("Ya existe una factura con ese id");
 	                throw new LogicaRestauranteException("Ya existe una factura con ese id");
@@ -106,16 +113,16 @@ public class MockFactura {
         {
     		logger.info("Generando id para un nuevo factura");
     		long newId = 1;
-	        for (FacturaDTO domi : facturas) 
+	        for (FacturaDTO fact : facturas) 
                 {
-	            if (newId <= domi.getId()){
-	                newId =  domi.getId() + 1;
+	            if (newId <= fact.getId()){
+	                newId =  fact.getId() + 1;
 	            }
 	        }
 	        nFactura.setId(newId);
     	}
     	
-    	logger.info("agregando domicilio " + nFactura);
+    	logger.info("agregando factura " + nFactura);
         facturas.add(nFactura);
         return nFactura;
     }
@@ -127,7 +134,7 @@ public class MockFactura {
      * @throws LogicaRestauranteException 
      */
     
-    public FacturaDTO updateFactura(FacturaDTO factura) throws LogicaRestauranteException{
+    public FacturaDTO updateFactura(Long idSucursal, FacturaDTO factura) throws LogicaRestauranteException{
        for (FacturaDTO fa : facturas) {
 
 	    if (Objects.equals(fa.getId(), factura.getId()))
@@ -146,14 +153,14 @@ public class MockFactura {
      * @throws LogicaRestauranteException 
      */
     
-    public void deleteFactura(Long id) throws LogicaRestauranteException
+    public void deleteFactura(Long idSucursal, Long id) throws LogicaRestauranteException
     {
         boolean eliminado = false;
         
          for (int i = 0; i< facturas.size() && !eliminado; i++) 
          {
-             FacturaDTO domi = facturas.get(i);
-             if(domi.getId().equals(id))
+             FacturaDTO fact = facturas.get(i);
+             if(fact.getId().equals(id))
              {
                  facturas.remove(i);
                  eliminado = true;

@@ -1,5 +1,4 @@
 <div>
-
     <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="domiciliosCtrl.closeAlert($index)" dismiss-on-timeout="5000">{{alert.msg}} </alert>
     <form novalidate name="form" id="domicilio-form" role="form" ng-submit="form.$valid && domiciliosCtrl.saveRecord(currentRecord.id)">
 
@@ -41,6 +40,4 @@
             <button type="button" ui-sref='domiciliosList'>Cancelar</button>
         </fieldset>
     </form>
-
-
 </div>

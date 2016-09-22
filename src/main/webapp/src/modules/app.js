@@ -8,7 +8,8 @@
         'platoModule',
         'reservaModule',
         'sucursalModule',
-        'mesaModule'
+        'mesaModule',
+        'facturaModule'
     ]);
     app.config(['$logProvider', function ($logProvider) {
             $logProvider.debugEnabled(true);

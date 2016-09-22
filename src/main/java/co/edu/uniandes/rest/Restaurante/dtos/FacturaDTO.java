@@ -17,7 +17,9 @@ public class FacturaDTO
      * Atributos
      */
     private Long id;
-    private Date fechaFactura;
+    private Long idCliente;
+    private Long idsucursal;
+    private Date fecha;
     private int total;
     
     /**
@@ -30,11 +32,13 @@ public class FacturaDTO
      * @param pId
      * @param pTotal
      */
-    public FacturaDTO(Long pId,Date fecha, int pTotal)
+    public FacturaDTO(Long pId,Long pIdCliente,Long pIdSucursal,Date fecha, int pTotal)
     {
         super();
         this.id = pId;
-        this.fechaFactura = fecha;
+        this.idCliente = pIdCliente;
+        this.idsucursal = pIdSucursal;
+        this.fecha = fecha;
         this.total = pTotal;
     }
     
@@ -87,7 +91,7 @@ public class FacturaDTO
     
     public Date getFecha() 
     {
-        return fechaFactura;
+        return fecha;
     }
     
     /**
@@ -97,7 +101,36 @@ public class FacturaDTO
 
     public void setFecha(Date nFecha) 
     {
-        this.fechaFactura = nFecha;
+        this.fecha = nFecha;
+    }
+    
+       public Long getIdCliente() 
+    {
+        return idCliente;
+    }
+    
+    /**
+     * Asignar un nuevo id.
+     * @param idCliente 
+     */
+
+    public void setIdCliente(Long idCliente) 
+    {
+        this.idCliente = idCliente;
+    }
+       public Long getIdSucursal() 
+    {
+        return idsucursal;
+    }
+    
+    /**
+     * Asignar un nuevo id.
+     * @param idSucursal 
+     */
+
+    public void setIdSucursal(Long idSucursal) 
+    {
+        this.idsucursal = idSucursal;
     }
         
     /**
@@ -107,8 +140,8 @@ public class FacturaDTO
     @Override
     public String toString() 
     {
-    	return "{ id : " + id +"\", "
-                +"fecha : \""+fechaFactura+ "total : \""+total+"\" }" ;  
+    	return "{ id : " + id +"\", "+"idCliente : \""+idCliente +"idSucursal : \""+idsucursal
+                +"fecha : \""+fecha+ "total : \""+total+"\" }" ;  
     }
     
 }
