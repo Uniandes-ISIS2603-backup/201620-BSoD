@@ -55,8 +55,9 @@
                 }
             }).state('sucursalConsult', {
                 url: '/{:sucursalId}/mesasDisponibles',
+                param: {sucursalId: null},
                 views: {
-                    'sucursalView': {
+                    'sucursalConsultView': {
                         controller: 'sucursalCtrl',
                         controllerAs: 'sucursalCtrl',
                         templateUrl: basePath + 'sucursal.mesasFecha.html'
