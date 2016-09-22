@@ -53,6 +53,16 @@
                     }
                     
                 }
+            }).state('sucursalConsult', {
+                url: '/{:sucursalId}/mesasDisponibles',
+                views: {
+                    'sucursalView': {
+                        controller: 'sucursalCtrl',
+                        controllerAs: 'sucursalCtrl',
+                        templateUrl: basePath + 'sucursal.mesasFecha.html'
+                    }
+                }
+
             });
         }]);
 })(window.angular);

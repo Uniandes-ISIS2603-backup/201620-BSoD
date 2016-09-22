@@ -29,6 +29,7 @@
 
                     <td><button  id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="sucursalEdit({sucursalId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>
                         <button  id="{{$index}}-delete-btn" class="btn btn-default btn-sm" ng-click="sucursalCtrl.deleteRecord(record.id)"><span class="glyphicon glyphicon-minus"></span>Eliminar</button>
+                        <button  id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="sucursalConsult({sucursalId: record.id})"><span class="glyphicon glyphicon-edit"></span>Mesas Disponibles</button>
                     </td>
                 </tr>
             </tbody>
