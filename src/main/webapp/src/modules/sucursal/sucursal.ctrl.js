@@ -40,6 +40,7 @@
             }
 
 
+
             this.saveRecord = function (id) {
                 currentRecord = $scope.currentRecord;
                 
