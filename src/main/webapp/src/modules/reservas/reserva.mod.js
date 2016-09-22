@@ -1,4 +1,4 @@
-(function(ng){
+    (function(ng){
     var mod = ng.module("reservaModule",["ngMessages","ui.router"] );
     mod.constant("reservaContext", "api/reservas");
        mod.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
