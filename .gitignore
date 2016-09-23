@@ -8,8 +8,8 @@ tmp/
 *.class
 
 # Binaries produced by Maven
-/target/
-/RestauranteElSabor/target/
+target/
+/RestauranteElSabor.web/target/
 
 # Package Files
 *.jar
@@ -24,7 +24,7 @@ hs_err_pid*
 
 # Bower
 bower_components/
-/src/main/webapp/bower_components/
+/RestauranteElSabor.web/src/main/webapp/bower_components/
 
 # Grunt 
 .grunt
