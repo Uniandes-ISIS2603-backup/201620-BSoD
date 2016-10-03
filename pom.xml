@@ -8,8 +8,8 @@
     <packaging>pom</packaging>
     
 	<modules>
-        <module>RestaurantesElSabor.web</module>
-        <module>RestaurantesElSabor.back</module>
+        <module>RestaurantesElSabor-web</module>
+        <module>RestaurantesElSabor-back</module>
     </modules>
 	
     <properties>
