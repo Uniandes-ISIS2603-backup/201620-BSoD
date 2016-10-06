@@ -6,11 +6,12 @@
 package Persistance;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.BaseEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author zl.castaneda10
  */
-public class PlatoEntity extends BaseEntity{
+public class PlatoEntity extends BaseEntity implements Serializable{
     
 }
