@@ -6,19 +6,13 @@
 package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import javax.persistence.*;
-
 /**
  *
  * @author aj.paredes10
  */
 @Entity
-public class ReservaEntity extends BaseEntity{
+public class MedioDePagoEntity extends BaseEntity{
     
     @ManyToOne
-    SucursalEntity sucursal;
-    
-    @ManyToOne
-    ClieneteEntity cliente;
-    
-    // en sucursal iria @OneToMany(mappedBy="reservas")
+    ClienteEntity cliente;
 }
