@@ -6,7 +6,6 @@
 package co.edu.uniandes.rest.Restaurante.dtos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -16,32 +15,35 @@ public class ClienteDTO
 {
     private Long id;
     
-    private String nombre;
+    private int documentoIdentidad;
+    
+    private String tipoDocumentoIdentidad;
+    
+    private String name;
     
     private String apellidos;
     
     private String direccion;
     
     private int telefono;
-    
-    // Asociacion a tarjeta de puntos
+
     private TarjetaPuntosDTO tarjetaPuntos;
     
-    private ArrayList<MedioDTO> medios;
+    private ArrayList<MedioPagoDTO> mediosPago;
     
     public ClienteDTO()
     {   }
-    
-    public ClienteDTO(Long pId, String pNombre, String pApellidos, String pDireccion, int pTelefono)
-    {
-        super();
-        this.id = pId;
-        this.nombre = pNombre;
-        this.apellidos = pApellidos;
-        this.direccion = pDireccion;
-        this.telefono = pTelefono;
-        this.tarjetaPuntos = null;
-        this.medios = new ArrayList();
+
+    public ClienteDTO(Long id, int documentoIdentidad, String tipoDocumentoIdentidad, String name, String apellidos, String direccion, int telefono, TarjetaPuntosDTO tarjetaPuntos, ArrayList<MedioPagoDTO> mediosPago) {
+        this.id = id;
+        this.documentoIdentidad = documentoIdentidad;
+        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
+        this.name = name;
+        this.apellidos = apellidos;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.tarjetaPuntos = tarjetaPuntos;
+        this.mediosPago = mediosPago;
     }
 
     public Long getId() 
@@ -54,14 +56,34 @@ public class ClienteDTO
         this.id = id;
     }
 
-    public String getNombre() 
+    public int getDocumentoIdentidad() 
     {
-        return nombre;
+        return documentoIdentidad;
     }
 
-    public void setNombre(String nombre) 
+    public void setDocumentoIdentidad(int documentoIdentidad) 
     {
-        this.nombre = nombre;
+        this.documentoIdentidad = documentoIdentidad;
+    }
+
+    public String getTipoDocumentoIdentidad() 
+    {
+        return tipoDocumentoIdentidad;
+    }
+
+    public void setTipoDocumentoIdentidad(String tipoDocumentoIdentidad) 
+    {
+        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
+    }
+    
+    public String getName() 
+    {
+        return name;
+    }
+
+    public void setName(String name) 
+    {
+        this.name = name;
     }
 
     public String getApellidos() 
@@ -83,13 +105,13 @@ public class ClienteDTO
     {
         this.direccion = direccion;
     }
-    
-    public int getTelefono()
+
+    public int getTelefono() 
     {
         return telefono;
     }
-    
-    public void setTelefono(int telefono)
+
+    public void setTelefono(int telefono) 
     {
         this.telefono = telefono;
     }
@@ -104,35 +126,28 @@ public class ClienteDTO
         this.tarjetaPuntos = tarjetaPuntos;
     }
 
-    public ArrayList<MedioDTO> getMedios() 
+    public ArrayList<MedioPagoDTO> getMediosPago() 
     {
-        return medios;
+        return mediosPago;
     }
 
-    public void setMedios(ArrayList<MedioDTO> medios) 
+    public void setMediosPago(ArrayList<MedioPagoDTO> mediosPago) 
     {
-        this.medios = medios;
+        this.mediosPago = mediosPago;
     }
     
-    public void agregarMedio(MedioDTO pMedio)
-    {
-        this.medios.add(pMedio);
-    }
-        
-    /**
-     * Representacion JSON de un cliente
-     * @return La representacion JSON de un DTO cliente.
-     */
     @Override
     public String toString() 
     {
-    	return "{ id : " + id +
-                ", nombre : \""+ nombre +
-                "\", apellidos : \""+apellidos
-                +"\", direccion : \""+ direccion
-                +"\", tarjetaPuntos : "+ tarjetaPuntos
-                +"\", medios : "+ medios +
-                ", telefono : "+telefono+" }" ;  
+    	return "{ id : " + id + ","+
+                "documentoIdentidad : "+ documentoIdentidad +", "+
+                "tipoDocumentoIdentidad : \""+tipoDocumentoIdentidad+"\", "+
+                "name : \""+name+"\", "+
+                "apellidos : \""+apellidos+"\", "+
+                "direccion : \""+direccion+"\", "+
+                "telefono : "+ telefono + ", "+
+                "tarjetaPuntos : "+ tarjetaPuntos + ", "+
+                "mediosPago : "+ mediosPago +" }";
     }
     
 }

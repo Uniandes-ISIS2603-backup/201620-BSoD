@@ -7,7 +7,7 @@ package co.edu.uniandes.rest.Restaurante.resources;
 
 import co.edu.uniandes.rest.Restaurante.mocks.MockClientes;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
-import co.edu.uniandes.rest.Restaurante.dtos.MedioDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
@@ -32,6 +32,7 @@ import javax.ws.rs.QueryParam;
 public class RecursoCliente 
 {
     MockClientes mockClientes = new MockClientes();
+    MockMediosPago mockMediosPago = new MockMediosPago();
     
     /**
      * Retorna la lista de clientes.
@@ -108,7 +109,7 @@ public class RecursoCliente
     
     @POST
     @Path("{idCliente}/medios")
-    public ClienteDTO agregarMedioCliente(@PathParam("idCliente") Long pId, MedioDTO pMedio) throws LogicaRestauranteException
+    public ClienteDTO agregarMedioCliente(@PathParam("idCliente") Long pId, MedioPagoDTO pMedio) throws LogicaRestauranteException
     {
         return mockClientes.agregarMedioCliente(pId, pMedio);
     }

@@ -2,7 +2,7 @@ package co.edu.uniandes.rest.Restaurante.mocks;
 
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.DomicilioDTO;
-import co.edu.uniandes.rest.Restaurante.dtos.MedioDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import java.text.DateFormat;
@@ -36,28 +36,24 @@ public class MockClientes
         { 
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             TarjetaPuntosDTO tc1 = new TarjetaPuntosDTO(1, new Date(), 5);
-            ClienteDTO c1 = new ClienteDTO(1L, "Ignacioss1", "Arboleda1", "DireccionPereira1", 1);
+            ClienteDTO c1 = new ClienteDTO(1L, 940101, "CC", "Nombre1", "Apellidos1", "Direccion1", 3131, null, null);
             c1.setTarjetaPuntos(tc1);
             try
             {
-            ArrayList<MedioDTO> prueba =  new ArrayList<MedioDTO>();
-            MedioDTO m1 = new MedioDTO(1L,1l, 0 ,"descripcion1", 123456789L ,df.parse("02/07/2018"),123,"visa");
-            prueba.add(m1); 
-            c1.setMedios(prueba);
+                ArrayList<MedioPagoDTO> prueba =  new ArrayList<MedioPagoDTO>();
+                MedioPagoDTO m1 = new MedioPagoDTO(1L,1l, 0 ,"descripcion1", 123456789L ,df.parse("02/07/2018"),123,"visa");
+                prueba.add(m1); 
+                c1.setMediosPago(prueba);
             } 
             catch (Exception e)
             {
              logger.severe("BIRRIBIR.");   
             }
-            
                      
-            clientes = new ArrayList<ClienteDTO>();
+            clientes = new ArrayList<>();
             clientes.add(c1);
-            clientes.add(new ClienteDTO(2L, "Ignacio2", "Arboleda2", "DireccionPereira2", 1));
-            clientes.add(new ClienteDTO(3L, "Ignacio3", "Arboleda3", "DireccionPereira3", 1));
-            clientes.add(new ClienteDTO(4L, "Ignacio4", "Arboleda4", "DireccionPereira4", 1));
-            
-           
+            clientes.add(new ClienteDTO(2L, 940101, "CC", "Nombre2", "Apellidos2", "Direccion2", 3132, null, null));
+            clientes.add(new ClienteDTO(3L, 940101, "CC", "Nombre3", "Apellidos3", "Direccion3", 3133, null, null));
         }
         
     	// Indica que se muestren todos los mensajes
@@ -167,13 +163,22 @@ public class MockClientes
         {
             if(cliente.getId().equals(id))
             {
-                String nombre = clienteActualizado.getNombre();
+                int documentoIdentidad = clienteActualizado.getDocumentoIdentidad();
+                String tipoDocumentoIdentidad = clienteActualizado.getTipoDocumentoIdentidad();
+                String nombre = clienteActualizado.getName();
                 String apellidos =clienteActualizado.getApellidos();
                 String direccion = clienteActualizado.getDireccion();
+                int telefono = clienteActualizado.getTelefono();
                 
+                
+                cliente.setDocumentoIdentidad(documentoIdentidad);
+                if(tipoDocumentoIdentidad != null && !tipoDocumentoIdentidad.equalsIgnoreCase(""))
+                {
+                    cliente.setName(nombre);
+                }
                 if(nombre != null && !nombre.equalsIgnoreCase(""))
                 {
-                    cliente.setNombre(nombre);
+                    cliente.setName(nombre);
                 }
                 if(apellidos !=null && !apellidos.equalsIgnoreCase(""))
                 {
@@ -183,6 +188,9 @@ public class MockClientes
                 {
                     cliente.setDireccion(direccion);
                 }
+                cliente.setTelefono(telefono);
+                
+                
                 logger.info("Actualizado satisfactoriamente."); 
                 return cliente;
             }
@@ -261,7 +269,7 @@ public class MockClientes
             throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que no existe.");
     }
       
-    public ClienteDTO agregarMedioCliente(Long pId, MedioDTO pMedio)throws LogicaRestauranteException
+    public ClienteDTO agregarMedioCliente(Long pId, MedioPagoDTO pMedio)throws LogicaRestauranteException
       {
         logger.info("Recibiendo solicitud de asignar medio de pago al cliente "+pId+".");
         
@@ -269,7 +277,9 @@ public class MockClientes
         {
             if(cliente.getId().equals(pId))
             {
-                cliente.agregarMedio(pMedio);
+                ArrayList<MedioPagoDTO> mediosPago = cliente.getMediosPago();
+                mediosPago.add(pMedio);
+                cliente.setMediosPago(mediosPago);
                 return cliente;
             }
         }

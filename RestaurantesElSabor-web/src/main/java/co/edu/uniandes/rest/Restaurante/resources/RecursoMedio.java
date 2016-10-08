@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
-import co.edu.uniandes.rest.Restaurante.dtos.MedioDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import co.edu.uniandes.rest.Restaurante.mocks.MockMedio;
 import java.util.List;
@@ -36,26 +36,26 @@ public class RecursoMedio
      * @throws LogicaRestauranteException Si no existe una lista de medios de pago en el sistema.
      */
     @GET
-    public List<MedioDTO> darMedios(@PathParam("idCliente") Long id) throws LogicaRestauranteException
+    public List<MedioPagoDTO> darMedios(@PathParam("idCliente") Long id) throws LogicaRestauranteException
     {
         return mockMedio.darMedios(id);
     }
 
     @GET
     @Path("{id: \\d+}")
-      public MedioDTO darMedio(@PathParam("id") Long pId) throws LogicaRestauranteException
+      public MedioPagoDTO darMedio(@PathParam("id") Long pId) throws LogicaRestauranteException
     {
         return mockMedio.darMedio(pId);
     }
 
     @POST
-    public MedioDTO crearMedio(MedioDTO nuevoMedio) throws LogicaRestauranteException
+    public MedioPagoDTO crearMedio(MedioPagoDTO nuevoMedio) throws LogicaRestauranteException
     {
         return mockMedio.crearMedio(nuevoMedio);
     }
 
     @PUT
-    public MedioDTO actualizarMedio(MedioDTO medioActualizado) throws LogicaRestauranteException
+    public MedioPagoDTO actualizarMedio(MedioPagoDTO medioActualizado) throws LogicaRestauranteException
     {
         return mockMedio.actualizarMedio(medioActualizado);
     }

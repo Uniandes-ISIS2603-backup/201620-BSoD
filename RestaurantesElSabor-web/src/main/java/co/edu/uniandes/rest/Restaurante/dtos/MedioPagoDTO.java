@@ -13,10 +13,8 @@ import java.util.Date;
  */
 
 
-
-public class MedioDTO
+public class MedioPagoDTO
 {
-
     //ATRIBUTOS ATRIBUTOS ATRIBUTOS ATRIBUTOS ----------
 
     private Long id;
@@ -35,12 +33,12 @@ public class MedioDTO
 
     private String franquicia;
     
-    public MedioDTO()
+    public MedioPagoDTO()
     {   }
 
     //CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR-----------
 
-    public MedioDTO(Long pId ,Long pIdCliente, Integer pEfectivo, String pTarjeta, Long pNumerosTarjeta, Date pFechaVencimiento, Integer pCodigoSeguridad, String pFranquicia )
+    public MedioPagoDTO(Long pId ,Long pIdCliente, Integer pEfectivo, String pTarjeta, Long pNumerosTarjeta, Date pFechaVencimiento, Integer pCodigoSeguridad, String pFranquicia )
     {
         super();
         this.id = pId;

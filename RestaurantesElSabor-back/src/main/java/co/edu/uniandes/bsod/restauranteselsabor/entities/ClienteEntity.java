@@ -22,8 +22,6 @@ public class ClienteEntity extends BaseEntity implements Serializable
     
     private String tipoDocumentoIdentidad;
     
-    private String nombre;
-    
     private String apellidos;
     
     private String direccion;
@@ -31,7 +29,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private int telefono;
     
 //    @PodamExclude
-//   @OneToOne
+//    @OneToOne
 //    private TarjetaPuntosEntity tarjetaPuntos;
 //    
 //    @PodamExclude
@@ -56,16 +54,6 @@ public class ClienteEntity extends BaseEntity implements Serializable
     public void setTipoDocumentoIdentidad(String tipoDocumentoIdentidad) 
     {
         this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-    }
-
-    public String getNombre() 
-    {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) 
-    {
-        this.nombre = nombre;
     }
 
     public String getApellidos() 
