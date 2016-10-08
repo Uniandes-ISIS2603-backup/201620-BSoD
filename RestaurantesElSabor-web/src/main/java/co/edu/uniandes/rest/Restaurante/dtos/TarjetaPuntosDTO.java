@@ -12,32 +12,44 @@ import java.util.Date;
  * @author jdguz
  */
 public class TarjetaPuntosDTO 
-{
-    private int id;
+{   
+    private Long id;
+    
+    private ClienteDTO cliente;
     
     private Date fechaCaducidad;
     
-    int acumulado;
+    private int acumulado;
     
     public TarjetaPuntosDTO()
     {   }
-    
-    public TarjetaPuntosDTO(int pId, Date pFechaCaducidad,int pAcumulado)
+
+    public TarjetaPuntosDTO(Long id, ClienteDTO cliente, Date fechaCaducidad, int acumulado) 
     {
-        super();
-        this.id = pId;
-        this.fechaCaducidad = pFechaCaducidad;
-        this.acumulado = pAcumulado;
+        this.id = id;
+        this.cliente = cliente;
+        this.fechaCaducidad = fechaCaducidad;
+        this.acumulado = acumulado;
     }
 
-    public int getId() 
+    public Long getId() 
     {
         return id;
     }
 
-    public void setId(int id) 
+    public void setId(Long id) 
     {
         this.id = id;
+    }
+    
+     public ClienteDTO getCliente() 
+    {
+        return cliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) 
+    {
+        this.cliente = cliente;
     }
 
     public Date getFechaCaducidad() 
@@ -65,16 +77,14 @@ public class TarjetaPuntosDTO
         int suma = pCompra/10000;
         this.acumulado += suma;
     }
-        
-    /**
-     * Representacion JSON de una tarjeta de puntos.
-     * @return La representacion JSON de un DTO tarjeta de puntos.
-     */
+    
     @Override
     public String toString() 
     {
-    	return "{ id : " + id +", fechaCaducidad : \""+ fechaCaducidad
-                +", acumulado: "+acumulado+" }" ;  
+    	return "{ id : " + id + ","+
+                "cliente : "+cliente+", "+
+                "fechaCaducidad : "+fechaCaducidad+", "+
+                "acumulado: "+acumulado+" }";
     }
     
 }

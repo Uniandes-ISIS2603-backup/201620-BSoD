@@ -27,31 +27,12 @@ public class MockClientes
     // Arreglo de clientes.
     private static ArrayList<ClienteDTO> clientes;
     
-    /**
-     * Constructor.
-     */
     public MockClientes() 
     {
     	if (clientes == null) 
-        { 
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            TarjetaPuntosDTO tc1 = new TarjetaPuntosDTO(1, new Date(), 5);
-            ClienteDTO c1 = new ClienteDTO(1L, 940101, "CC", "Nombre1", "Apellidos1", "Direccion1", 3131, null, null);
-            c1.setTarjetaPuntos(tc1);
-            try
-            {
-                ArrayList<MedioPagoDTO> prueba =  new ArrayList<MedioPagoDTO>();
-                MedioPagoDTO m1 = new MedioPagoDTO(1L,1l, 0 ,"descripcion1", 123456789L ,df.parse("02/07/2018"),123,"visa");
-                prueba.add(m1); 
-                c1.setMediosPago(prueba);
-            } 
-            catch (Exception e)
-            {
-             logger.severe("BIRRIBIR.");   
-            }
-                     
+        {                     
             clientes = new ArrayList<>();
-            clientes.add(c1);
+            clientes.add(new ClienteDTO(1L, 940101, "CC", "Nombre1", "Apellidos1", "Direccion1", 3131, null, null));
             clientes.add(new ClienteDTO(2L, 940101, "CC", "Nombre2", "Apellidos2", "Direccion2", 3132, null, null));
             clientes.add(new ClienteDTO(3L, 940101, "CC", "Nombre3", "Apellidos3", "Direccion3", 3133, null, null));
         }
@@ -64,11 +45,6 @@ public class MockClientes
     	logger.info("Clientes:\n" + clientes );
     }    
     
-    /**
-    * Obtiene el listado de clientes. 
-    * @return Lista de clientes.
-    * @throws LogicaRestauranteException cuando no existe la lista en memoria  
-    */    
     public List<ClienteDTO> darClientes() throws LogicaRestauranteException 
     {
         logger.info("Recibiendo solicitud de dar todos los clientes.");
@@ -81,13 +57,7 @@ public class MockClientes
     	logger.info("Retornando todos los clientes.");
     	return clientes;
     }
-    
-    /**
-    * Obtiene el cliente con el id que entra por parametro. 
-    * @param pId Id del cliente que se busca.
-    * @return ClienteDTO Cliente buscado.
-    * @throws LogicaRestauranteException Cuando no existe un cliente con el id buscado.  
-    */    
+  
     public ClienteDTO darCliente(Long pId) throws LogicaRestauranteException 
     {
         logger.info("Recibiendo solicitud de dar el cliente con id "+pId+".");
@@ -110,30 +80,30 @@ public class MockClientes
     	throw new LogicaRestauranteException("Error de uso: Se pidio un cliente que no existe.");
     }
 
-    /**
-     * Agrega un cliente al sistema.
-     * @param nuevoCliente Cliente a agregar.
-     * @return Cliente agregado.
-     * @throws LogicaRestauranteException Cuando se intenta crear un cliente con un id que ya existe. 
-     */
     public ClienteDTO crearCliente(ClienteDTO nuevoCliente) throws LogicaRestauranteException
     {
     	logger.info("Recibiendo solicitud de agregar cliente.");
         
     	// Se busca que no exista un cliente con ese id.
-	if (nuevoCliente.getId() != null) {
-            for (ClienteDTO cliente : clientes) {
-                if (Objects.equals(cliente.getId(), nuevoCliente.getId())) {
-                    logger.severe("Ya existe una domicilio con ese id");
-                    throw new LogicaRestauranteException("Ya existe una domicilio con ese id");
+	if (nuevoCliente.getId() != null) 
+        {
+            for (ClienteDTO cliente : clientes) 
+            {
+                if (Objects.equals(cliente.getId(), nuevoCliente.getId())) 
+                {
+                    logger.severe("Ya existe un cliente con ese id");
+                    throw new LogicaRestauranteException("Ya existe un cliente con ese id");
                 }
             }
-
-        } else {
-            logger.info("Generando id para un nuevo domicilio");
+        } 
+        else 
+        {
+            logger.info("Generando id para un nuevo cliente");
             long newId = 1;
-            for (ClienteDTO cliente : clientes) {
-                if (newId <= cliente.getId()) {
+            for (ClienteDTO cliente : clientes) 
+            {
+                if (newId <= cliente.getId()) 
+                {
                     newId = cliente.getId() + 1;
                 }
             }
@@ -155,8 +125,7 @@ public class MockClientes
     public ClienteDTO actualizarCliente(ClienteDTO clienteActualizado) throws LogicaRestauranteException
     {   
        Long id = clienteActualizado.getId();
-       logger.info("Recibiendo solicitud de actualizar el cliente."); 
-       
+       logger.info("Recibiendo solicitud de actualizar el cliente: "+clienteActualizado); 
        
        // Se busca el cliente a actualizar
         for (ClienteDTO cliente : clientes) 
@@ -165,31 +134,22 @@ public class MockClientes
             {
                 int documentoIdentidad = clienteActualizado.getDocumentoIdentidad();
                 String tipoDocumentoIdentidad = clienteActualizado.getTipoDocumentoIdentidad();
-                String nombre = clienteActualizado.getName();
+                String name = clienteActualizado.getName();
                 String apellidos =clienteActualizado.getApellidos();
                 String direccion = clienteActualizado.getDireccion();
                 int telefono = clienteActualizado.getTelefono();
-                
+                TarjetaPuntosDTO tarjetaPuntos = clienteActualizado.getTarjetaPuntos();
+                ArrayList<MedioPagoDTO> mediosPago = clienteActualizado.getMediosPago();
                 
                 cliente.setDocumentoIdentidad(documentoIdentidad);
-                if(tipoDocumentoIdentidad != null && !tipoDocumentoIdentidad.equalsIgnoreCase(""))
-                {
-                    cliente.setName(nombre);
-                }
-                if(nombre != null && !nombre.equalsIgnoreCase(""))
-                {
-                    cliente.setName(nombre);
-                }
-                if(apellidos !=null && !apellidos.equalsIgnoreCase(""))
-                {
-                    cliente.setApellidos(apellidos);
-                }
-                if(direccion != null && !direccion.equalsIgnoreCase(""))
-                {
-                    cliente.setDireccion(direccion);
-                }
+                cliente.setTipoDocumentoIdentidad(tipoDocumentoIdentidad);
+                cliente.setName(name);
+                cliente.setName(name);
+                cliente.setApellidos(apellidos);
+                cliente.setDireccion(direccion);
                 cliente.setTelefono(telefono);
-                
+                cliente.setTarjetaPuntos(tarjetaPuntos);
+                cliente.setMediosPago(mediosPago);
                 
                 logger.info("Actualizado satisfactoriamente."); 
                 return cliente;
@@ -230,105 +190,4 @@ public class MockClientes
         }
         logger.info("Eliminado satisfactoriamente.");
    }
-      
-      public TarjetaPuntosDTO darTarjetaPuntosCliente(Long pId ) throws LogicaRestauranteException
-      {
-        logger.info("Recibiendo solicitud de dar la tarjeta de puntos del cliente.");
-        for(ClienteDTO cliente:clientes)
-        {
-            if(cliente.getId().equals(pId))
-            {
-                logger.info("Retornando la tarjeta de puntos.");
-                return cliente.getTarjetaPuntos();
-            }
-        }
-        logger.severe("Error de uso: Se pidio la tarjeta de puntos de un cliente que no existe.");
-        throw new LogicaRestauranteException("Error de uso: Se pidio la tarjeta de puntos de un cliente que no existe.");
-      }
-      
-      public ClienteDTO agregarTarjetaPuntosCliente(Long pId)throws LogicaRestauranteException
-      {
-        logger.info("Recibiendo solicitud de asignar tarjeta de puntos al cliente.");
-        
-        for(ClienteDTO cliente:clientes)
-        {
-            if(cliente.getId().equals(pId))
-            {
-                if(cliente.getTarjetaPuntos()!=null)
-                {
-                    logger.severe("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que ya tenia una asignada.");
-                    throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que ya tenia una asignada.");
-                }
-                double aleatorioDouble = 10000000*Math.random();
-                int aleatorioInt = (int)aleatorioDouble;
-                cliente.setTarjetaPuntos(new TarjetaPuntosDTO(aleatorioInt, new Date(), 0));
-                return cliente;
-            }
-        }
-            logger.severe("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que no existe.");
-            throw new LogicaRestauranteException("Error de uso: Se pidio asignar tarjeta de puntos de un cliente que no existe.");
-    }
-      
-    public ClienteDTO agregarMedioCliente(Long pId, MedioPagoDTO pMedio)throws LogicaRestauranteException
-      {
-        logger.info("Recibiendo solicitud de asignar medio de pago al cliente "+pId+".");
-        
-        for(ClienteDTO cliente:clientes)
-        {
-            if(cliente.getId().equals(pId))
-            {
-                ArrayList<MedioPagoDTO> mediosPago = cliente.getMediosPago();
-                mediosPago.add(pMedio);
-                cliente.setMediosPago(mediosPago);
-                return cliente;
-            }
-        }
-            logger.severe("Error de uso: Se pidio asignar agregar un medio de pago a un cliente que no existe.");
-            throw new LogicaRestauranteException("Error de uso: Se pidio asignar agregar un medio de pago a un cliente que no existe..");
-    }  
-      
-      
-      public ClienteDTO eliminarTarjetaPuntosCliente(Long pId) throws LogicaRestauranteException
-      {
-        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos al cliente.");
-            
-        for(ClienteDTO cliente:clientes)
-        {
-            if(cliente.getId().equals(pId))
-            {
-                if(cliente.getTarjetaPuntos()==null)
-                {
-                    logger.severe("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no tenia.");
-                    throw new LogicaRestauranteException("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no tenia.");
-                }
-                cliente.setTarjetaPuntos(null);
-                return cliente;
-            }
-        }
-            logger.severe("Error de uso: Se pidio eliminar tarjeta de puntos de un cliente que no existe.");
-            throw new LogicaRestauranteException("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no existe.");
-    }
-      
-     public ClienteDTO sumarPuntosTarjetaPuntosCliente(Long pId, int pCompra) throws LogicaRestauranteException
-     {
-        logger.info("Recibiendo solicitud de sumar puntos al cliente con id "+pId+".");
-        
-        for(ClienteDTO cliente:clientes)
-        {
-            if(cliente.getId().equals(pId))
-            {
-                if(cliente.getTarjetaPuntos()==null)
-                {
-                    logger.severe("Error de uso: Se pidio sumar puntos a un cliente que no tenia tarjeta de puntos.");
-                    throw new LogicaRestauranteException("Error de uso: Se pidio sumar puntos a un cliente que no tenia tarjeta de puntos.");
-                }
-                cliente.getTarjetaPuntos().sumarAcumulado(pCompra);
-                return cliente;
-            }
-        }
-        
-        logger.severe("Error de uso: Se pidio eliminar tarjeta de puntos de un cliente que no existe.");
-        throw new LogicaRestauranteException("Error de uso: Se pidio eliminar la tarjeta de puntos de un cliente que no existe.");
-        
-     }
 }

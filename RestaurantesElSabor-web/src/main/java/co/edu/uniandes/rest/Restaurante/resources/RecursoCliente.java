@@ -32,8 +32,6 @@ import javax.ws.rs.QueryParam;
 public class RecursoCliente 
 {
     MockClientes mockClientes = new MockClientes();
-    MockMediosPago mockMediosPago = new MockMediosPago();
-    
     /**
      * Retorna la lista de clientes.
      * @return lista de clientes.
