@@ -28,7 +28,7 @@ public class ClientePersistence
     
     //  CREATE
     
-    public ClienteEntity crearCliente(ClienteEntity clienteEntity)
+    public ClienteEntity create(ClienteEntity clienteEntity)
     {
         LOGGER.info("Creando un CLIENTE nuevo");
         em.persist(clienteEntity);
@@ -38,13 +38,13 @@ public class ClientePersistence
     
     //  READ
     
-    public ClienteEntity darCliente(Long id) 
+    public ClienteEntity find(Long id) 
     {
         LOGGER.log(Level.INFO, "Consultando CLIENTE con id={0}", id);
         return em.find(ClienteEntity.class, id);
     }
     
-    public List<ClienteEntity> darClientes() 
+    public List<ClienteEntity> findAll() 
     {
         LOGGER.info("Consultando todos los CLIENTE");
         Query q = em.createQuery("select clientes from ClienteEntity clientes");
@@ -53,7 +53,7 @@ public class ClientePersistence
     
     //  UPDATE
     
-    public ClienteEntity actualizarCliente(ClienteEntity clienteEntity) 
+    public ClienteEntity update(ClienteEntity clienteEntity) 
     {
         LOGGER.log(Level.INFO, "Actualizando CLIENTE con id={0}", clienteEntity.getId());
         return em.merge(clienteEntity);
@@ -61,7 +61,7 @@ public class ClientePersistence
     
     //  DELETE
 
-    public void eliminarCliente(Long id) 
+    public void delete(Long id) 
     {
         LOGGER.log(Level.INFO, "Borrando CLIENTE con id={0}", id);
         ClienteEntity entity = em.find(ClienteEntity.class, id);
