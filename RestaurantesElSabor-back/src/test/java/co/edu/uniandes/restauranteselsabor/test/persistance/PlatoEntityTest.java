@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.restauranteelsabor.test;
+package co.edu.uniandes.restauranteselsabor.test.persistance;
 
 import org.junit.After;
 import org.junit.AfterClass;

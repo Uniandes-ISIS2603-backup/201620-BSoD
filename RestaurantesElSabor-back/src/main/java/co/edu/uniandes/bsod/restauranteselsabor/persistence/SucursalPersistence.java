@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.bsod.restauranteelsabor.persistence;
+package co.edu.uniandes.bsod.restauranteselsabor.persistence;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import java.util.List;
