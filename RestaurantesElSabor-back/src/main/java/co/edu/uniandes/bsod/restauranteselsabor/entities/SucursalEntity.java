@@ -6,8 +6,9 @@
 package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  *
@@ -20,13 +21,16 @@ public class SucursalEntity extends BaseEntity implements Serializable{
     
     private String direccion;
     
-    private List<MesaEntity> mesas;
+    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MesaEntity> mesas = new ArrayList<MesaEntity>();
     
     private List<String> calificaciones;
     
-    private List<ReservaEntity> reservas;
+    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
     
-    private List<FacturaEntity> facturas;
+    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FacturaEntity> facturas = new ArrayList<FacturaEntity>();
 
     public String getCiudad() {
         return ciudad;
