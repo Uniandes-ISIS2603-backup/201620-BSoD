@@ -31,6 +31,7 @@
             $scope.currentRecord = 
             {
                 id: undefined,
+                
                 nombre: '',
                 precio: undefined,
                 direccion: '',

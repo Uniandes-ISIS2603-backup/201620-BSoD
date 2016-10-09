@@ -124,19 +124,29 @@ public class MockTarjetasPuntos
       public void eliminarTarjetaPuntos(Long idCliente) throws LogicaRestauranteException
    {
        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos del cliente " +idCliente+".");
-       boolean eliminado = false;
+       boolean eliminado1 = false;
+       boolean eliminado2 = false;
        
-        for (int i = 0; i< tarjetasPuntos.size() && !eliminado; i++) 
+        for (int i = 0; i< tarjetasPuntos.size() && !eliminado1; i++) 
         {
             TarjetaPuntosDTO tarjetaPuntos = tarjetasPuntos.get(i);
             if(tarjetaPuntos.getCliente().getId()==(idCliente))
             {
                 tarjetasPuntos.remove(i);
-                eliminado = true;
+                eliminado1 = true;
             }
         }
+        
+        for (ClienteDTO cliente : mockClientes.darClientes()) 
+        {
+            if(cliente.getId()==(idCliente))
+            {
+                cliente.setTarjetaPuntos(null);
+                eliminado2 = true;
+            }
+	}
        
-        if(!eliminado)
+        if(!eliminado1 || !eliminado2)
         {
         logger.severe("Error de uso: Se pidio eliminar una tarjeta de puntos de un cliente que no tiene tarjeta de puntos.");
         throw new LogicaRestauranteException("Error de uso: Se pidio eliminar una tarjeta de puntos de un cliente que no tiene tarjeta de puntos.");

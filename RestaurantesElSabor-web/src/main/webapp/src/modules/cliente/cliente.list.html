@@ -5,18 +5,22 @@
         <thead>                                                     <!--Headers de la tabla-->
             <tr>
                 <th>Identificacion</th>
+                <th>Documento de identidad</th>
+                <th>Tipo de documento de identidad</th>
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Direccion</th>
                 <th>Telefono</th>
                 <th>Tarjeta de puntos</th>
+                <th>Medios de pago</th>
             </tr>
         </thead>
         
         <tbody>                                                     <!--Cuerpo de la tabla-->
             <tr ng-repeat="record in records">
-                <td id="{{$index}}-id">{{record.id}}</td>
-                <td id="{{$index}}-nombre">{{record.nombre}}</td>
+                <td id="{{$index}}-documentoIdentidad">{{record.documentoIdentidad}}</td>
+                <td id="{{$index}}-tipoDocumentoIdentidad">{{record.tipoDocumentoIdentidad}}</td>
+                <td id="{{$index}}-nombre">{{record.name}}</td>
                 <td id="{{$index}}-apellidos">{{record.apellidos}}</td>
                 <td id="{{$index}}-direccion">{{record.direccion}}</td>
                 <td id="{{$index}}-telefono">{{record.telefono}}</td>
@@ -24,6 +28,8 @@
                     <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ui-sref="clienteRegistrarCompra({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Registrar compra</button>
                     <button ng-show="record.tarjetaPuntos!=null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.eliminarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-remove"></span>Cancelar</button>
                     <button ng-show="record.tarjetaPuntos==null" id="{{$index}}-agregarTarjeta-btn" class="btn btn-default btn-sm" ng-click="clienteCtrl.agregarTarjetaPuntosCliente(record.id)"><span class="glyphicon glyphicon-credit-card"></span>Crear</button>
+                </td>
+                <td id="{{$index}}-mediosPago">{{(record.mediosPago!=null)?'Tiene '+record.mediosPago.length+' registrados ':'No tiene'}}
                 </td>
                 <td>
                     <button id="{{$index}}-edit-btn" class="btn btn-default btn-sm" ui-sref="clienteEdit({clienteId: record.id})"><span class="glyphicon glyphicon-edit"></span>Editar</button>
