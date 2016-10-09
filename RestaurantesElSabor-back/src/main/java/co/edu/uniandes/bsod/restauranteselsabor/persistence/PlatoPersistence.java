@@ -38,23 +38,26 @@ public class PlatoPersistence {
         Query q = em.createQuery("select u from PlatoEntity u");
         return q.getResultList();
     }
-
-    public List<PlatoEntity> findAllInPlato(Long platoId) {
-        LOGGER.log(Level.INFO, "Consultando todos los departments de la company id={0}", platoId);
-        TypedQuery q = em.createQuery("select d from PlatoEntity d  where d.plato.id = :platoId", PlatoEntity.class);
-        q = q.setParameter("companyId", platoId);
+    
+    public List<PlatoEntity> findAllInEntity(Long sucursalId) {
+        LOGGER.log(Level.INFO, "Consultando todos los platos de la sucursal id={0}", sucursalId);
+        TypedQuery q = em.createQuery("select d from PlatoEntity d  where d.sucursal.id = :sucursalId", PlatoEntity.class);
+        q = q.setParameter("sucursalId", sucursalId);
         return q.getResultList();
     }
 
+
+
+
     public PlatoEntity create(PlatoEntity entity) {
-        LOGGER.info("Creando un department nuevo");
+        LOGGER.info("Creando un plato nuevo");
         em.persist(entity);
-        LOGGER.info("Department creado");
+        LOGGER.info("Plato creado");
         return entity;
     }
 
     public PlatoEntity update(PlatoEntity entity) {
-        LOGGER.log(Level.INFO, "Actualizando department con id={0}", entity.getId());
+        LOGGER.log(Level.INFO, "Actualizando plato con id={0}", entity.getId());
         return em.merge(entity);
     }
 
@@ -64,7 +67,7 @@ public class PlatoPersistence {
      * crrespondiente en la base de datos.
      */
     public void delete(Long id) {
-        LOGGER.log(Level.INFO, "Borrando department con id={0}", id);
+        LOGGER.log(Level.INFO, "Borrando plato con id={0}", id);
         PlatoEntity entity = em.find(PlatoEntity.class, id);
         assert entity != null;
         em.remove(entity);
