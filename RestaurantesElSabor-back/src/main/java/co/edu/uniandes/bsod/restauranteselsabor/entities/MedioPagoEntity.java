@@ -12,8 +12,8 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author aj.paredes10
  */
 @Entity
-public class MedioPagoEntity extends BaseEntity{
-    
+public class MedioPagoEntity extends BaseEntity
+{    
     @PodamExclude
     @ManyToOne
     ClienteEntity cliente;
