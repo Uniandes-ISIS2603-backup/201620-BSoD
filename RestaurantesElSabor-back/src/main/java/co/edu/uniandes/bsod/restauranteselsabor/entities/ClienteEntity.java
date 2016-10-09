@@ -6,8 +6,11 @@
 package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -28,13 +31,13 @@ public class ClienteEntity extends BaseEntity implements Serializable
     
     private int telefono;
     
-//    @PodamExclude
-//    @OneToOne
-//    private TarjetaPuntosEntity tarjetaPuntos;
-//    
-//    @PodamExclude
-//    @ManyToOne
-//    private List<MedioPagoEntity> mediosPago;
+    @PodamExclude
+    @OneToOne
+    private TarjetaPuntosEntity tarjetaPuntos;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MedioPagoEntity> mediosPago = new ArrayList<>();
 
     public int getDocumentoIdentidad() 
     {
@@ -86,4 +89,24 @@ public class ClienteEntity extends BaseEntity implements Serializable
         this.telefono = telefono;
     }
 
+    public TarjetaPuntosEntity getTarjetaPuntos() 
+    {
+        return tarjetaPuntos;
+    }
+
+    public void setTarjetaPuntos(TarjetaPuntosEntity tarjetaPuntos) 
+    {
+        this.tarjetaPuntos = tarjetaPuntos;
+    }
+
+    public List<MedioPagoEntity> getMediosPago() 
+    {
+        return mediosPago;
+    }
+
+    public void setMediosPago(List<MedioPagoEntity> mediosPago) 
+    {
+        this.mediosPago = mediosPago;
+    }    
+    
 }

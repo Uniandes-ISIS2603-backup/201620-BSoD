@@ -31,37 +31,36 @@
             $scope.currentRecord = 
             {
                 id: undefined,
-                
-                nombre: '',
-                precio: undefined,
-                direccion: '',
+                documentoIdentidad: undefined,
+                tipoDocumentoIdentidad: ' ',
+                name: undefined,
+                apellidos: undefined,
+                direccion: undefined,
                 telefono: undefined,
-                tarjetaPuntos: null
+                tarjetaPuntos: undefined,
+                mediosPago: undefined
             };
-            $scope.currentMedio=
-            {
-                
-                            id: undefined,               /*Tipo Long. El valor se asigna en el backend*/
-                            efectivo: undefined,        /*Tipo Integer*/
-                            tarjeta: '',                 /*Tipo String*/
-                            numerosTarjeta: undefined,   /*Tipo Long*/
-                            fechaVencimiento: undefined, /*Tipo Date*/
-                            codigoSeguridad: undefined,  /*Tipo Integer*/
-                            franquicia: ''       /*Tipo String*/
-            };
-            
-            
+
             $scope.alerts = [];
         }
         
          this.agregarCliente = function () 
         {
             currentRecord = $scope.currentRecord;        
-            
-            return $http.post(clienteContext, currentRecord).then(function() 
+            if(currentRecord.id==null)
+            {
+                return $http.post(clienteContext, currentRecord).then(function() 
                     {
                         $state.go('clienteList');
                     }, responseError);
+            }
+            else
+            {
+                return $http.put(clienteContext, currentRecord).then(function() 
+                    {
+                        $state.go('clienteList');
+                    }, responseError);
+            }
              
         };
         
@@ -72,17 +71,6 @@
                 $state.reload();
             }, responseError);
         };
-        
-        this.editarCliente = function()
-        {
-            currentRecord = $scope.currentRecord;
-            id = $stateParams.clienteId;
-            currentRecord.id = id;
-            return $http.put(clienteContext, currentRecord).then(function() 
-                    {
-                        $state.go('clienteList');
-                    }, responseError);
-        }
         
         this.agregarTarjetaPuntosCliente = function(id)
         {
@@ -108,20 +96,6 @@
             }, responseError);
         }
         
-        this.agregarMedio = function (id, medio)
-       {
-                return $http.post(clienteContext+"/"+ id+"/medios", medio).then(function ()
-                {
-                    $state.reload();
-                }, responseError);
-        };
-        this.eliminarMedio=function(id,medio)
-        {
-            return $http.delete(clienteContext + "/" + id + "/medios", medio).then(function()
-            {
-                $state.reload();
-            }, responseError);
-        };
          
      // -----------------------------------------------------------------
      // Funciones para manejra los mensajes en la aplicación

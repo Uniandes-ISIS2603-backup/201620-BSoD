@@ -81,7 +81,11 @@ public class TarjetaPuntosDTO
     @Override
     public String toString() 
     {
-    	return "{ id : " + id + ","+
+        System.out.println("{ id : "+ id +","+
+                "cliente : "+cliente+", "+
+                "fechaCaducidad : "+fechaCaducidad+", "+
+                "acumulado: "+acumulado+" }");
+    	return "{ id : "+ id +","+
                 "cliente : "+cliente+", "+
                 "fechaCaducidad : "+fechaCaducidad+", "+
                 "acumulado: "+acumulado+" }";

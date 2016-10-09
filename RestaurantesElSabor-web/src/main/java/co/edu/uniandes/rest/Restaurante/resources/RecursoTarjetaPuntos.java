@@ -36,9 +36,9 @@ public class RecursoTarjetaPuntos
     }
     
     @POST
-    public TarjetaPuntosDTO crearTarjetaPuntos(@PathParam("idCliente") Long idCliente, TarjetaPuntosDTO pNuevaTarjetaPuntos) throws LogicaRestauranteException
+    public TarjetaPuntosDTO crearTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException
     {
-        return mockTarjetasPuntos.crearTarjetaPuntos(idCliente, pNuevaTarjetaPuntos);
+        return mockTarjetasPuntos.crearTarjetaPuntos(idCliente);
     }
     
     @PUT

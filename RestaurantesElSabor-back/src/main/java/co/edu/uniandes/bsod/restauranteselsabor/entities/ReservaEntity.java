@@ -18,7 +18,7 @@ public class ReservaEntity extends BaseEntity{
     SucursalEntity sucursal;
     
     @ManyToOne
-    ClieneteEntity cliente;
+    ClienteEntity cliente;
     
     // en sucursal iria @OneToMany(mappedBy="reservas")
 }

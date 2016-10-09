@@ -91,38 +91,4 @@ public class RecursoCliente
         mockClientes.eliminarCliente(pId);
     }
     
-    @GET
-    @Path("{idCliente}/tarjetaPuntos")
-    public TarjetaPuntosDTO darTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
-    {
-        return mockClientes.darTarjetaPuntosCliente(pId);
-    }
-    
-    @POST
-    @Path("{idCliente}/tarjetaPuntos")
-    public ClienteDTO agregarTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
-    {
-        return mockClientes.agregarTarjetaPuntosCliente(pId);
-    }
-    
-    @POST
-    @Path("{idCliente}/medios")
-    public ClienteDTO agregarMedioCliente(@PathParam("idCliente") Long pId, MedioPagoDTO pMedio) throws LogicaRestauranteException
-    {
-        return mockClientes.agregarMedioCliente(pId, pMedio);
-    }
-    
-    @DELETE
-    @Path("{idCliente}/tarjetaPuntos")
-    public ClienteDTO eliminarTarjetaPuntosCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException
-    {
-        return mockClientes.eliminarTarjetaPuntosCliente(pId);
-    }
-    
-    @PUT
-    @Path("{idCliente}/tarjetaPuntos/sumaPuntos")
-    public ClienteDTO sumarPuntosTarjetaCliente(@PathParam("idCliente") Long pId, @QueryParam("compra") int pCompra) throws LogicaRestauranteException
-    {
-        return mockClientes.sumarPuntosTarjetaPuntosCliente(pId, pCompra);
-    }
 }

@@ -65,25 +65,9 @@ public class MockTarjetasPuntos
     	return null;
     }
 
-    public TarjetaPuntosDTO crearTarjetaPuntos(Long idCliente, TarjetaPuntosDTO nuevaTarjetaPuntos) throws LogicaRestauranteException
+    public TarjetaPuntosDTO crearTarjetaPuntos(Long idCliente) throws LogicaRestauranteException
     {
-        Long idTarjetaPuntosAAgregar = nuevaTarjetaPuntos.getId();
-        logger.info("Recibiendo solicitud de agregar tarjeta de puntos con id "+idTarjetaPuntosAAgregar+" al cliente "+idCliente+".");
-        
-    	// Se busca que no exista un cliente con esa tarjeta de puntos o una tarjeta de puntos con ese id.
-	for (TarjetaPuntosDTO tarjetaPuntos: tarjetasPuntos) 
-        {
-            if(tarjetaPuntos.getId()==(idTarjetaPuntosAAgregar))
-            {
-                logger.severe("Error de uso: Se intento crear una tarjeta de puntos que ya existia.");
-                throw new LogicaRestauranteException("Error de uso: Se intento crear una tarjeta de puntos que ya existia.");
-            }
-            if(tarjetaPuntos.getCliente().getId() == (idCliente))
-            {
-                logger.severe("Error de uso: Se intento crear una tarjeta de puntos a un cliente que ya tenia una.");
-                throw new LogicaRestauranteException("Error de uso: Se intento crear una tarjeta de puntos a un cliente que ya tenia una.");
-            }
-        }
+        logger.info("Recibiendo solicitud de agregar tarjeta de puntos al cliente "+idCliente+".");
         
         logger.info("Generando id para un nueva tarjeta de puntos.");
         long newId = 1;
@@ -94,8 +78,17 @@ public class MockTarjetasPuntos
                 newId = tarjetaPuntos.getId() + 1;
             }
         }
-        nuevaTarjetaPuntos.setId(newId);        
-        mockClientes.darCliente(idCliente).setTarjetaPuntos(nuevaTarjetaPuntos);
+        
+    	// Se busca que el cliente no tenga una tarjeta de puntos.
+        ClienteDTO clienteAAgregarTarjeta = mockClientes.darCliente(idCliente);
+        
+        if(clienteAAgregarTarjeta.getTarjetaPuntos()!=null)
+        {
+            logger.severe("Error de uso: Se pidio agregar una tarjeta de puntos a un cliente que ya tenia una.");
+            throw new LogicaRestauranteException("Error de uso: Se pidio agregar una tarjeta de puntos a un cliente que ya tenia una.");
+        }
+        TarjetaPuntosDTO nuevaTarjetaPuntos = new TarjetaPuntosDTO(newId, clienteAAgregarTarjeta, new Date(), 0);
+        clienteAAgregarTarjeta.setTarjetaPuntos(nuevaTarjetaPuntos);
         
         logger.info("Agregada satisfactoriamente la tarjeta de puntos.");
         tarjetasPuntos.add(nuevaTarjetaPuntos);
