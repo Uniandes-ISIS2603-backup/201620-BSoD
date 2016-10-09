@@ -31,6 +31,9 @@ public class SucursalEntity extends BaseEntity implements Serializable{
     
     @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FacturaEntity> facturas = new ArrayList<FacturaEntity>();
+    
+    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PlatoEntity> platos = new ArrayList<PlatoEntity>();
 
     public String getCiudad() {
         return ciudad;
@@ -78,6 +81,14 @@ public class SucursalEntity extends BaseEntity implements Serializable{
 
     public void setFacturas(List<FacturaEntity> facturas) {
         this.facturas = facturas;
+    }
+
+    public List<PlatoEntity> getPlatos() {
+        return platos;
+    }
+
+    public void setPlatos(List<PlatoEntity> platos) {
+        this.platos = platos;
     }
     
     
