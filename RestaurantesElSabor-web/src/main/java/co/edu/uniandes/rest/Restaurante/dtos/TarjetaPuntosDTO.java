@@ -15,8 +15,6 @@ public class TarjetaPuntosDTO
 {   
     private Long id;
     
-    private ClienteDTO cliente;
-    
     private Date fechaCaducidad;
     
     private int acumulado;
@@ -24,10 +22,9 @@ public class TarjetaPuntosDTO
     public TarjetaPuntosDTO()
     {   }
 
-    public TarjetaPuntosDTO(Long id, ClienteDTO cliente, Date fechaCaducidad, int acumulado) 
+    public TarjetaPuntosDTO(Long id, Date fechaCaducidad, int acumulado) 
     {
         this.id = id;
-        this.cliente = cliente;
         this.fechaCaducidad = fechaCaducidad;
         this.acumulado = acumulado;
     }
@@ -40,16 +37,6 @@ public class TarjetaPuntosDTO
     public void setId(Long id) 
     {
         this.id = id;
-    }
-    
-     public ClienteDTO getCliente() 
-    {
-        return cliente;
-    }
-
-    public void setCliente(ClienteDTO cliente) 
-    {
-        this.cliente = cliente;
     }
 
     public Date getFechaCaducidad() 
@@ -81,12 +68,7 @@ public class TarjetaPuntosDTO
     @Override
     public String toString() 
     {
-        System.out.println("{ id : "+ id +","+
-                "cliente : "+cliente+", "+
-                "fechaCaducidad : "+fechaCaducidad+", "+
-                "acumulado: "+acumulado+" }");
     	return "{ id : "+ id +","+
-                "cliente : "+cliente+", "+
                 "fechaCaducidad : "+fechaCaducidad+", "+
                 "acumulado: "+acumulado+" }";
     }

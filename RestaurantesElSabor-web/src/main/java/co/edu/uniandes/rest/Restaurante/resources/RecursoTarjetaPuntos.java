@@ -47,6 +47,13 @@ public class RecursoTarjetaPuntos
         return mockTarjetasPuntos.actualizarTarjetaPuntos(idCliente, pTarjetaPuntosAActualziar);
     }
     
+    @PUT
+    public TarjetaPuntosDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws LogicaRestauranteException 
+    {
+        return mockTarjetasPuntos.sumarPuntosTarjetaPuntos(idCliente, pCompra);
+    }
+    
+    
     @DELETE
     public void eliminarTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
     {

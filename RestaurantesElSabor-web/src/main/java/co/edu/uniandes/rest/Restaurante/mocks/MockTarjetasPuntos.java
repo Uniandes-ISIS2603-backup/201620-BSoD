@@ -6,8 +6,6 @@ import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,18 +46,11 @@ public class MockTarjetasPuntos
     {
         logger.info("Recibiendo solicitud de dar la tarjeta de puntos del cliente "+idCliente+".");
         
-    	if (tarjetasPuntos == null) 
+    	ClienteDTO cliente = mockClientes.darCliente(idCliente);
+        
+        if(cliente!=null)
         {
-    		logger.severe("Error interno: lista de tarjetas de puntos no existe.");
-    		throw new LogicaRestauranteException("Error interno: lista de tarjetas de puntos no existe.");    		
-    	}
-        for(TarjetaPuntosDTO tarjetaPuntos:tarjetasPuntos)
-        {
-            if(tarjetaPuntos.getCliente().getId()==(idCliente))
-            {
-                logger.info("Retornando la tarjeta de puntos.");
-                return tarjetaPuntos;
-            }
+            return cliente.getTarjetaPuntos();
         }
     	logger.info("no se encontro, retornando NULL.");
     	return null;
@@ -87,7 +78,7 @@ public class MockTarjetasPuntos
             logger.severe("Error de uso: Se pidio agregar una tarjeta de puntos a un cliente que ya tenia una.");
             throw new LogicaRestauranteException("Error de uso: Se pidio agregar una tarjeta de puntos a un cliente que ya tenia una.");
         }
-        TarjetaPuntosDTO nuevaTarjetaPuntos = new TarjetaPuntosDTO(newId, clienteAAgregarTarjeta, new Date(), 0);
+        TarjetaPuntosDTO nuevaTarjetaPuntos = new TarjetaPuntosDTO(newId, new Date(), 0);
         clienteAAgregarTarjeta.setTarjetaPuntos(nuevaTarjetaPuntos);
         
         logger.info("Agregada satisfactoriamente la tarjeta de puntos.");
@@ -114,36 +105,24 @@ public class MockTarjetasPuntos
         throw new LogicaRestauranteException("Error de uso: Se pidio actualizar una tarjeta de puntos que no existe.");
    }
    
-      public void eliminarTarjetaPuntos(Long idCliente) throws LogicaRestauranteException
-   {
+    public void eliminarTarjetaPuntos(Long idCliente) throws LogicaRestauranteException
+    {
        logger.info("Recibiendo solicitud de eliminar la tarjeta de puntos del cliente " +idCliente+".");
-       boolean eliminado1 = false;
-       boolean eliminado2 = false;
-       
-        for (int i = 0; i< tarjetasPuntos.size() && !eliminado1; i++) 
-        {
-            TarjetaPuntosDTO tarjetaPuntos = tarjetasPuntos.get(i);
-            if(tarjetaPuntos.getCliente().getId()==(idCliente))
-            {
-                tarjetasPuntos.remove(i);
-                eliminado1 = true;
-            }
-        }
-        
-        for (ClienteDTO cliente : mockClientes.darClientes()) 
-        {
-            if(cliente.getId()==(idCliente))
-            {
-                cliente.setTarjetaPuntos(null);
-                eliminado2 = true;
-            }
-	}
-       
-        if(!eliminado1 || !eliminado2)
-        {
-        logger.severe("Error de uso: Se pidio eliminar una tarjeta de puntos de un cliente que no tiene tarjeta de puntos.");
-        throw new LogicaRestauranteException("Error de uso: Se pidio eliminar una tarjeta de puntos de un cliente que no tiene tarjeta de puntos.");
-        }
+
+        ClienteDTO cliente = mockClientes.darCliente(idCliente);
+        cliente.setTarjetaPuntos(null);
         logger.info("Eliminada satisfactoriamente.");
-   }
+    }
+      
+    public TarjetaPuntosDTO sumarPuntosTarjetaPuntos(Long idCliente, int pCompra) throws LogicaRestauranteException
+    {
+        logger.info("Recibiendo solicitud de sumar puntos a la tarjeta de puntos del cliente " +idCliente+" correspondiente a una compra de "+pCompra+".");
+        ClienteDTO cliente = mockClientes.darCliente(idCliente);
+        TarjetaPuntosDTO tarjeta = cliente.getTarjetaPuntos();
+        int puntos = pCompra/10000;
+        int acumulado = tarjeta.getAcumulado();
+        int nuevoAcumulado = acumulado + puntos;
+        tarjeta.setAcumulado(nuevoAcumulado);
+        return tarjeta;
+    }
 }
