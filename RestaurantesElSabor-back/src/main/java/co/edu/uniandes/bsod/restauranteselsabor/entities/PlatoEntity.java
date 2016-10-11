@@ -8,10 +8,6 @@ package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 
 /**
@@ -23,6 +19,7 @@ public class PlatoEntity extends BaseEntity implements Serializable{
     
     private int precio;
     private String descripcion;
+    
     @OneToMany( mappedBy = "sucursal")
     private SucursalEntity sucursal;
     
@@ -49,8 +46,6 @@ public class PlatoEntity extends BaseEntity implements Serializable{
     public void setSucursal(SucursalEntity sucursal) {
         this.sucursal = sucursal;
     }
-    
-    
-    
+
     
 }
