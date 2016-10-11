@@ -138,7 +138,7 @@ public class PlatoPersistenceTest {
     }
 
     @Test
-    public void deleteDepartmentTest() {
+    public void deletePlatoTest() {
         PlatoEntity entity = data.get(0);
         platoPersistence.delete(entity.getId());
         PlatoEntity deleted = em.find(PlatoEntity.class, entity.getId());
@@ -146,7 +146,7 @@ public class PlatoPersistenceTest {
     }
     
     @Test
-    public void updateDepartmentTest() {
+    public void updatePlatoTest() {
         PlatoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         PlatoEntity newEntity = factory.manufacturePojo(PlatoEntity.class);
