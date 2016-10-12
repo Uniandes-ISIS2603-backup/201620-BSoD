@@ -21,18 +21,18 @@ public class SucursalEntity extends BaseEntity implements Serializable{
     
     private String direccion;
     
-    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MesaEntity> mesas = new ArrayList<MesaEntity>();
     
     private List<String> calificaciones;
     
-    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
     
 //    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<FacturaEntity> facturas = new ArrayList<FacturaEntity>();
     
-    @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlatoEntity> platos = new ArrayList<PlatoEntity>();
 
     public String getCiudad() {

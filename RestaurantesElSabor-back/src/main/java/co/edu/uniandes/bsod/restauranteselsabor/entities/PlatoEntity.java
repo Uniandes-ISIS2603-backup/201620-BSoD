@@ -8,7 +8,7 @@ package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -20,7 +20,7 @@ public class PlatoEntity extends BaseEntity implements Serializable{
     private int precio;
     private String descripcion;
     
-    @OneToMany( mappedBy = "sucursal")
+    @ManyToOne
     private SucursalEntity sucursal;
     
     public int getPrecio() {

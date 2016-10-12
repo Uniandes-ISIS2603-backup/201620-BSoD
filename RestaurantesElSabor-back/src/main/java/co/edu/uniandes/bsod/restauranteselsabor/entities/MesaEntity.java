@@ -22,7 +22,7 @@ public class MesaEntity extends BaseEntity implements Serializable{
     private boolean estado;
     
     @ManyToOne
-    private int idSucursal;
+    private SucursalEntity sucursal;
 
     public int getPiso() {
         return piso;
@@ -48,13 +48,15 @@ public class MesaEntity extends BaseEntity implements Serializable{
         this.estado = estado;
     }
 
-    public int getIdSucursal() {
-        return idSucursal;
+    public SucursalEntity getSucursal() {
+        return sucursal;
     }
 
-    public void setIdSucursal(int idSucursal) {
-        this.idSucursal = idSucursal;
+    public void setSucursal(SucursalEntity sucursal) {
+        this.sucursal = sucursal;
     }
+
+    
     
     
 }

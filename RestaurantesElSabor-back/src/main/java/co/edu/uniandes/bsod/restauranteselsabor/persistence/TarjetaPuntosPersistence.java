@@ -23,7 +23,7 @@ public class TarjetaPuntosPersistence
 {
     private static final Logger LOGGER = Logger.getLogger(TarjetaPuntosPersistence.class.getName());
 
-    @PersistenceContext(unitName = "TarjetaPuntosPU")
+    @PersistenceContext(unitName = "Bsod")
     protected EntityManager em;
     
     //  CREATE
