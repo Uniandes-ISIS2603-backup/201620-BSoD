@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.restauranteselsabor.test.persistance;
+package co.edu.uniandes.restauranteselsabor.test.persistence;
 
-import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
-import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.TarjetaPuntosPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,20 +29,20 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author jdguz
  */
 @RunWith(Arquillian.class)
-public class ClientePersistenceTest 
+public class TarjetaPuntosPersistenceTest 
 {
     @Deployment
     public static JavaArchive createDeployment() 
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(ClienteEntity.class.getPackage())
-                .addPackage(ClientePersistence.class.getPackage())
+                .addPackage(TarjetaPuntosEntity.class.getPackage())
+                .addPackage(TarjetaPuntosPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
     @Inject
-    private ClientePersistence clientePersistence;
+    private TarjetaPuntosPersistence tarjetaPuntosPersistence;
     
     @PersistenceContext
     private EntityManager em;
@@ -77,20 +77,20 @@ public class ClientePersistenceTest
 
     private void clearData() 
     {
-        em.createQuery("delete from ClienteEntity").executeUpdate();
+        em.createQuery("delete from TarjetaPuntosEntity").executeUpdate();
     }
 
     /**
      * 
      */
-    private List<ClienteEntity> listTest = new ArrayList<ClienteEntity>();
+    private List<TarjetaPuntosEntity> listTest = new ArrayList<TarjetaPuntosEntity>();
 
     private void insertData() 
     {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) 
         {
-            ClienteEntity newEntity = factory.manufacturePojo(ClienteEntity.class);
+            TarjetaPuntosEntity newEntity = factory.manufacturePojo(TarjetaPuntosEntity.class);
             em.persist(newEntity);
             listTest.add(newEntity);
         }
@@ -100,32 +100,31 @@ public class ClientePersistenceTest
     public void createTest() 
     {
         PodamFactory factory = new PodamFactoryImpl();
-        ClienteEntity newEntityTest = factory.manufacturePojo(ClienteEntity.class);
+        TarjetaPuntosEntity newEntityTest = factory.manufacturePojo(TarjetaPuntosEntity.class);
         
-        ClienteEntity createdEntity = clientePersistence.create(newEntityTest);
+        TarjetaPuntosEntity createdEntity = tarjetaPuntosPersistence.create(newEntityTest);
         Assert.assertNotNull(createdEntity);
 
-        ClienteEntity entityPersistence = em.find(ClienteEntity.class, createdEntity.getId());
+        TarjetaPuntosEntity entityPersistence = em.find(TarjetaPuntosEntity.class, createdEntity.getId());
         
         Assert.assertNotNull(entityPersistence);
-        Assert.assertEquals(newEntityTest.getDocumentoIdentidad(), entityPersistence.getDocumentoIdentidad());
-        Assert.assertEquals(newEntityTest.getTipoDocumentoIdentidad(), entityPersistence.getTipoDocumentoIdentidad());
+        Assert.assertEquals(newEntityTest.getCliente(), entityPersistence.getCliente());
+        Assert.assertEquals(newEntityTest.getFechaCaducidad(), entityPersistence.getFechaCaducidad());
+        Assert.assertEquals(newEntityTest.getAcumulado(), entityPersistence.getAcumulado());
+        
         Assert.assertEquals(newEntityTest.getName(), entityPersistence.getName());
-        Assert.assertEquals(newEntityTest.getApellidos(), entityPersistence.getApellidos());
-        Assert.assertEquals(newEntityTest.getDireccion(), entityPersistence.getDireccion());
-        Assert.assertEquals(newEntityTest.getTelefono(), entityPersistence.getTelefono());
     }
 
     @Test
     public void findAllTest() 
     {
-        List<ClienteEntity> listPersistence = clientePersistence.findAll();
+        List<TarjetaPuntosEntity> listPersistence = tarjetaPuntosPersistence.findAll();
         Assert.assertEquals(listTest.size(), listPersistence.size());
         
-        for (ClienteEntity entityPersistence : listPersistence) 
+        for (TarjetaPuntosEntity entityPersistence : listPersistence) 
         {
             boolean found = false;
-            for (ClienteEntity entityTest : listTest) 
+            for (TarjetaPuntosEntity entityTest : listTest) 
             {
                 if (entityPersistence.getId().equals(entityTest.getId())) 
                 {
@@ -139,46 +138,44 @@ public class ClientePersistenceTest
     @Test
     public void findTest() 
     {
-        ClienteEntity entityTest = listTest.get(0);
-        ClienteEntity entityPersistence = clientePersistence.find(entityTest.getId());
+        TarjetaPuntosEntity entityTest = listTest.get(0);
+        TarjetaPuntosEntity entityPersistence = tarjetaPuntosPersistence.find(entityTest.getId());
         
         Assert.assertNotNull(entityPersistence);
-        Assert.assertEquals(entityTest.getDocumentoIdentidad(), entityPersistence.getDocumentoIdentidad());
-        Assert.assertEquals(entityTest.getTipoDocumentoIdentidad(), entityPersistence.getTipoDocumentoIdentidad());
+        Assert.assertEquals(entityTest.getCliente(), entityPersistence.getCliente());
+        Assert.assertEquals(entityTest.getFechaCaducidad(), entityPersistence.getFechaCaducidad());
+        Assert.assertEquals(entityTest.getAcumulado(), entityPersistence.getAcumulado());
+        
         Assert.assertEquals(entityTest.getName(), entityPersistence.getName());
-        Assert.assertEquals(entityTest.getApellidos(), entityPersistence.getApellidos());
-        Assert.assertEquals(entityTest.getDireccion(), entityPersistence.getDireccion());
-        Assert.assertEquals(entityTest.getTelefono(), entityPersistence.getTelefono());
     }
 
     @Test
     public void deleteTest() 
     {
-        ClienteEntity entityTest = listTest.get(0);
-        clientePersistence.delete(entityTest.getId());
-        ClienteEntity deletedEntity = em.find(ClienteEntity.class, entityTest.getId());
+        TarjetaPuntosEntity entityTest = listTest.get(0);
+        tarjetaPuntosPersistence.delete(entityTest.getId());
+        TarjetaPuntosEntity deletedEntity = em.find(TarjetaPuntosEntity.class, entityTest.getId());
         Assert.assertNull(deletedEntity);
     }
     
     @Test
     public void updateTest() 
     {
-        ClienteEntity entityTest = listTest.get(0);
+        TarjetaPuntosEntity entityTest = listTest.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        ClienteEntity updatedEntityTest = factory.manufacturePojo(ClienteEntity.class);
+        TarjetaPuntosEntity updatedEntityTest = factory.manufacturePojo(TarjetaPuntosEntity.class);
 
         updatedEntityTest.setId(entityTest.getId());
         
-        clientePersistence.update(updatedEntityTest);
+        tarjetaPuntosPersistence.update(updatedEntityTest);
 
-        ClienteEntity entityPersistence = em.find(ClienteEntity.class, entityTest.getId());
+        TarjetaPuntosEntity entityPersistence = em.find(TarjetaPuntosEntity.class, entityTest.getId());
         
         Assert.assertNotNull(entityPersistence);
-        Assert.assertEquals(updatedEntityTest.getDocumentoIdentidad(), entityPersistence.getDocumentoIdentidad());
-        Assert.assertEquals(updatedEntityTest.getTipoDocumentoIdentidad(), entityPersistence.getTipoDocumentoIdentidad());
+        Assert.assertEquals(updatedEntityTest.getCliente(), entityPersistence.getCliente());
+        Assert.assertEquals(updatedEntityTest.getFechaCaducidad(), entityPersistence.getFechaCaducidad());
+        Assert.assertEquals(updatedEntityTest.getAcumulado(), entityPersistence.getAcumulado());
+        
         Assert.assertEquals(updatedEntityTest.getName(), entityPersistence.getName());
-        Assert.assertEquals(updatedEntityTest.getApellidos(), entityPersistence.getApellidos());
-        Assert.assertEquals(updatedEntityTest.getDireccion(), entityPersistence.getDireccion());
-        Assert.assertEquals(updatedEntityTest.getTelefono(), entityPersistence.getTelefono());
     }
 }

@@ -34,7 +34,7 @@ public class MesaPersistence {
         return q.getResultList();
     }
 
-    public List<MesaEntity> findAllInCompany(Long sucursalId) {
+    public List<MesaEntity> findAllInSucursal(Long sucursalId) {
         LOGGER.log(Level.INFO, "Consultando todas las mesas de la sucursal id={0}", sucursalId);
         TypedQuery q = em.createQuery("select d from MesaEntity d  where d.sucursal.id = :sucursalId", MesaEntity.class);
         q = q.setParameter("sucursalId", sucursalId);

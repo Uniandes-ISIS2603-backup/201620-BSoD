@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.uniandes.restauranteselsabor.test.persistance;
+package co.edu.uniandes.restauranteselsabor.test.persistence;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
