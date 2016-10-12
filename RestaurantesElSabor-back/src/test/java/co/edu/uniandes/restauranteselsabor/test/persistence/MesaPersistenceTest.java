@@ -9,7 +9,6 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.*;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.MesaPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -59,7 +58,7 @@ public class MesaPersistenceTest {
     @PersistenceContext
     private EntityManager em;
 
-    @Resource
+    @Inject
     UserTransaction utx;
 
     /**

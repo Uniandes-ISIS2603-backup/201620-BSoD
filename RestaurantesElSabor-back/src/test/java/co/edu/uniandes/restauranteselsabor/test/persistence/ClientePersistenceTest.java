@@ -9,7 +9,6 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -48,7 +47,7 @@ public class ClientePersistenceTest
     @PersistenceContext
     private EntityManager em;
 
-    @Resource
+    @Inject
     UserTransaction utx;
 
     @Before

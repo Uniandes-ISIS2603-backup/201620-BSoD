@@ -10,7 +10,6 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.PlatoPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,7 +53,7 @@ public class PlatoPersistenceTest {
     @PersistenceContext
     private EntityManager em;
     
-    @Resource
+    @Inject
     UserTransaction utx;
         
      
