@@ -21,6 +21,7 @@ public class ReservaEntity extends BaseEntity{
     @ManyToOne
     ClienteEntity cliente;
     
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     private int numPersonas;
     private int piso;

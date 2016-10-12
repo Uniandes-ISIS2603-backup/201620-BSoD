@@ -26,6 +26,7 @@ public class MedioPagoEntity extends BaseEntity implements Serializable
 
     private Long numerosTarjeta;
 
+    @Temporal(TemporalType.DATE)
     private Date fechaVencimiento;
 
     private Integer codigoSeguridad;

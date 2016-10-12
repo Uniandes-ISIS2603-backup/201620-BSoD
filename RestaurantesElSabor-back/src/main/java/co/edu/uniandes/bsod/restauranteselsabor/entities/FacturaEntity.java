@@ -21,6 +21,7 @@ public class FacturaEntity extends BaseEntity implements Serializable {
     @OneToOne
     private DomicilioEntity domicilio;
 
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     private double total;
 
