@@ -1,13 +1,14 @@
 package co.edu.uniandes.bsod.restauranteselsabor.persistence;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.*;
 import javax.ejb.Stateless;
 import javax.persistence.*;
 
 /**
- *
+ * cubrimiento: porcentaje de codigo que se ejecuta dado unas prubas, no mide calidad de codigo
  * @author aj.paredes10
  */
 @Stateless
@@ -23,13 +24,12 @@ public class ReservaPersistence {
         return em.find(ReservaEntity.class, id);
     }
     
-    //buscar reserva por nombre
-    public ReservaEntity findByName(String name) {
-        LOGGER.log(Level.INFO, "Consultando reserva con name = {0}", name);
-        TypedQuery<ReservaEntity> q
-                = em.createQuery("select u from ReservaEntity u where u.name = :name", ReservaEntity.class);
-        q = q.setParameter("name", name); 
-        return q.getSingleResult();
+    //buscar reserva por fecha
+    public List<ReservaEntity> findByDate(Date fecha) {
+        LOGGER.log(Level.INFO, "Consultando reserva con fehca = {0}", fecha);
+        Query q = em.createQuery("select u from ReservaEntity u where u.fecha = :fecha", ReservaEntity.class);
+        q = q.setParameter("fecha", fecha); 
+        return q.getResultList();
     }
     //busca todas las reservas
     public List<ReservaEntity> findAll() {
