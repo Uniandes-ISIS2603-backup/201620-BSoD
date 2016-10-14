@@ -7,6 +7,7 @@ package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.util.Date;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -15,9 +16,11 @@ import javax.persistence.*;
 @Entity
 public class ReservaEntity extends BaseEntity{
     
+    @PodamExclude
     @ManyToOne
     SucursalEntity sucursal;
     
+    @PodamExclude
     @ManyToOne
     ClienteEntity cliente;
     
