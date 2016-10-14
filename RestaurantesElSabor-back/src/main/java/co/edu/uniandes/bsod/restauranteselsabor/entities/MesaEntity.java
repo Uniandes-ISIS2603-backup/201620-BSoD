@@ -7,6 +7,7 @@ package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -21,6 +22,7 @@ public class MesaEntity extends BaseEntity implements Serializable{
     
     private boolean estado;
     
+    @PodamExclude
     @ManyToOne
     private SucursalEntity sucursal;
 

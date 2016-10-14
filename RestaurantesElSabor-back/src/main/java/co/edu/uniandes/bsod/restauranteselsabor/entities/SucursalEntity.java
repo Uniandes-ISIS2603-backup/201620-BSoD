@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -21,17 +22,21 @@ public class SucursalEntity extends BaseEntity implements Serializable{
     
     private String direccion;
     
+    @PodamExclude
     @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MesaEntity> mesas = new ArrayList<MesaEntity>();
     
     private List<String> calificaciones;
     
+    @PodamExclude
     @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservaEntity> reservas = new ArrayList<ReservaEntity>();
     
+    @PodamExclude
     @OneToMany(mappedBy = "Sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FacturaEntity> facturas = new ArrayList<FacturaEntity>();
     
+    @PodamExclude
     @OneToMany(mappedBy = "sucursal", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PlatoEntity> platos = new ArrayList<PlatoEntity>();
 
