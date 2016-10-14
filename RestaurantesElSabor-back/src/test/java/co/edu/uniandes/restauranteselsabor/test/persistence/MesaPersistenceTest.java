@@ -90,8 +90,8 @@ public class MesaPersistenceTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete  from mesaEntity").executeUpdate();
-        em.createQuery("delete  from sucursalEntity").executeUpdate();
+        em.createQuery("delete  from MesaEntity").executeUpdate();
+        em.createQuery("delete  from SucursalEntity").executeUpdate();
     }
 
     /**
