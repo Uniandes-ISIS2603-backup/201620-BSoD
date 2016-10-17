@@ -35,7 +35,7 @@ public class ReservaPersistenceTest {
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ReservaEntity.class.getPackage())
-                .addPackage(ReservaEntity.class.getPackage())
+                .addPackage(ReservaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -114,7 +114,7 @@ public class ReservaPersistenceTest {
      * Prueba para consultar la lista de reservas.
      */
     @Test
-    public void getCompaniesTest() {
+    public void getReservasTest() {
         List<ReservaEntity> list = reservaPersistence.findAll();
         Assert.assertEquals(data.size(), list.size());
         for (ReservaEntity ent : list) {
@@ -141,20 +141,20 @@ public class ReservaPersistenceTest {
     /**
      * Prueba para consultar una Reserva por fecha.
      */
-//    @Test
-//    public void getReservaByDateTest() {
-//        ReservaEntity entity1 = data.get(0);
-//        List<ReservaEntity> list = reservaPersistence.findByDate(entity1.getFecha());
-//        for (ReservaEntity ent : list) {
-//            boolean found = false;
-//            for (ReservaEntity entity : data) {
-//                if (ent.getFecha().compareTo(entity.getFecha()) == 0) {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//    }
+    @Test
+    public void getReservaByDateTest() {
+        ReservaEntity entity1 = data.get(0);
+        List<ReservaEntity> list = reservaPersistence.findByDate(entity1.getFecha());
+        
+        for (ReservaEntity ent : list) {
+            boolean found = false;
+            if(ent.getFecha().getYear()== entity1.getFecha().getYear() && ent.getFecha().getMonth()== entity1.getFecha().getMonth() && ent.getFecha().getDate()== entity1.getFecha().getDate())
+            {
+                found = true;
+            }
+            Assert.assertTrue(found);
+        }
+    }
     
     /**
      * Prueba para eliminar una reserva.

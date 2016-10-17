@@ -15,7 +15,6 @@ import javax.persistence.*;
 public class ReservaPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(ReservaPersistence.class.getName());
-    
     @PersistenceContext( unitName="Bsod")
     protected EntityManager em;
     
@@ -26,10 +25,11 @@ public class ReservaPersistence {
     }
     
     //buscar reserva por fecha
-    public List<ReservaEntity> findByDate(Date fecha) {
-        LOGGER.log(Level.INFO, "Consultando reserva con fehca = {0}", fecha);
-        Query q = em.createQuery("select u from ReservaEntity u where u.fecha = :fecha", ReservaEntity.class);
-        q = q.setParameter("fecha", fecha); 
+    public List<ReservaEntity> findByDate(Date pFecha) {
+        Date fecha = new Date(pFecha.getYear(), pFecha.getMonth(), pFecha.getDate());
+        LOGGER.log(Level.INFO, "Consultando reserva con fecha = {0}", fecha);
+        Query q = em.createQuery("select u from ReservaEntity u where u.fecha = :pFecha", ReservaEntity.class);
+        q = q.setParameter("pFecha", fecha); 
         return q.getResultList();
     }
     //busca todas las reservas

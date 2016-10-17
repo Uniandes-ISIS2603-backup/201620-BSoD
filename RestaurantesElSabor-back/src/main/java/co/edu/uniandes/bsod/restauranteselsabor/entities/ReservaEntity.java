@@ -24,8 +24,8 @@ public class ReservaEntity extends BaseEntity{
     @ManyToOne
     ClienteEntity cliente;
     
-//    @Temporal(TemporalType.DATE)
-//    private Date fecha;
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     
     private int numPersonas;
     private int piso;
@@ -50,13 +50,13 @@ public class ReservaEntity extends BaseEntity{
         this.cliente = cliente;
     }
 
- //   public Date getFecha() {
- //       return fecha;
- //   }
+    public Date getFecha() {
+        return fecha;
+    }
 
-//    public void setFecha(Date fecha) {
-//        this.fecha = fecha;
-//    }
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     public int getNumPersonas() {
         return numPersonas;
