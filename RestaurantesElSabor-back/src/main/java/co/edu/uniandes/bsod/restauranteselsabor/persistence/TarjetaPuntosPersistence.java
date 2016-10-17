@@ -47,7 +47,7 @@ public class TarjetaPuntosPersistence
     public List<TarjetaPuntosEntity> findAll() 
     {
         LOGGER.info("Consultando todas las TARJETAPUNTOS");
-        Query q = em.createQuery("select tarjetaPuntos from TarjetaPuntosEntity tarjetasPuntos");
+        Query q = em.createQuery("select tarjetasPuntos from TarjetaPuntosEntity tarjetasPuntos");
         return q.getResultList();
     }
     

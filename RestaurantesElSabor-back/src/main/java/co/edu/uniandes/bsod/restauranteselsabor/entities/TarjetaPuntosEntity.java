@@ -24,7 +24,7 @@ public class TarjetaPuntosEntity extends BaseEntity implements Serializable
     @OneToOne
     private ClienteEntity cliente;
     
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaCaducidad;
     
     private int acumulado;
