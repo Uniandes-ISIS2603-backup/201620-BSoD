@@ -18,8 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.sourceEncoding>${project.build.sourceEncoding}</sonar.sourceEncoding>
         <sonar.host.url>http://157.253.238.75:9000</sonar.host.url>
-    </properties>
-    <properties>
+    
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
