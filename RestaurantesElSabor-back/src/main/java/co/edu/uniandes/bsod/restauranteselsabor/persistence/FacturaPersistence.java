@@ -26,9 +26,9 @@ public class FacturaPersistence {
     @PersistenceContext( unitName="Bsod")
     protected EntityManager em;
     
-     public FacturaPersistence find(Long id) {
+     public FacturaEntity find(Long id) {
         LOGGER.log(Level.INFO, "Consultando factura con id={0}", id);
-        return em.find(FacturaPersistence.class, id);
+        return em.find(FacturaEntity.class, id);
     }
      
      

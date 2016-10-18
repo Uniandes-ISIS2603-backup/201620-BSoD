@@ -8,22 +8,27 @@ package co.edu.uniandes.bsod.restauranteselsabor.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 @Entity
 public class FacturaEntity extends BaseEntity implements Serializable {
 
+    @PodamExclude
     @ManyToOne
     private SucursalEntity sucursal;
 
+    @PodamExclude
     @ManyToOne
     private ClienteEntity cliente;
-    
+  
+    @PodamExclude
     @OneToOne
     private DomicilioEntity domicilio;
 
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    private double total;
+    
+    private int total;
 
     //
     public SucursalEntity getSucursal() {
@@ -58,11 +63,11 @@ public class FacturaEntity extends BaseEntity implements Serializable {
         this.fecha = fecha;
     }
 
-    public double getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

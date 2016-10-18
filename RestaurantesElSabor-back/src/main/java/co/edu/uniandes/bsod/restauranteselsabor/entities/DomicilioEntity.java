@@ -7,6 +7,7 @@ package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -15,10 +16,12 @@ import javax.persistence.*;
 @Entity
 public class DomicilioEntity extends BaseEntity implements Serializable {
 
+    @PodamExclude
+    
     @OneToOne
     private FacturaEntity factura;
 
-    private double precio;
+    private int precio;
     private String direccion;
 
     //
@@ -30,19 +33,19 @@ public class DomicilioEntity extends BaseEntity implements Serializable {
         this.factura = factura;
     }
 
-    public double getFecha() {
+    public int getPrecio() {
         return precio;
     }
 
-    public void setFecha(double precio) {
+    public void setPrecio(int precio) {
         this.precio = precio;
     }
 
-    public String getTotal() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public void setTotal(String direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
