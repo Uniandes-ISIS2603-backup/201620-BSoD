@@ -38,7 +38,7 @@ public class MesaPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(MesaEntity.class.getPackage())
                 .addPackage(MesaPersistence.class.getPackage())
-                /*.addPackage(SucursalEntity.class.getPackage())*/
+                .addPackage(SucursalEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -47,7 +47,7 @@ public class MesaPersistenceTest {
      * Sucursal que contiene las mesas. La relación entre sucursal y
      * mesa es "composite"
      */
-   // SucursalEntity fatherEntity;
+    SucursalEntity fatherEntity;
 
     /**
      * Lista de las mesas que serán utilizadas en las pruebas. La
@@ -91,7 +91,7 @@ public class MesaPersistenceTest {
      */
     private void clearData() {
         em.createQuery("delete  from MesaEntity").executeUpdate();
-       // em.createQuery("delete  from SucursalEntity").executeUpdate();
+        em.createQuery("delete  from SucursalEntity").executeUpdate();
     }
 
     /**
@@ -101,10 +101,10 @@ public class MesaPersistenceTest {
      * Crea una sucursal y luego le adiciona tres mesas.
      */
     private void insertData() {
-        PodamFactory factory = new PodamFactoryImpl();
-        //fatherEntity = factory.manufacturePojo(SucursalEntity.class);
-        //fatherEntity.setId(1L);
-       // em.persist(fatherEntity);
+       PodamFactory factory = new PodamFactoryImpl();
+       fatherEntity = factory.manufacturePojo(SucursalEntity.class);
+       fatherEntity.setId(1L);
+        em.persist(fatherEntity);
         for (int i = 0; i < 3; i++) {
             MesaEntity entity = factory.manufacturePojo(MesaEntity.class);
             //entity.setSucursal(fatherEntity);
@@ -136,7 +136,7 @@ public class MesaPersistenceTest {
      *
      *
      */
-    /*
+   /*
     @Test
     public void getMesasInSucursalesTest() {
         List<MesaEntity> list = mesaPersistence.findAllInSucursal(fatherEntity.getId());
