@@ -28,6 +28,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 /**
  *
  * @author zl.castaneda10
+ * 
  */
 @RunWith(Arquillian.class)
 public class PlatoPersistenceTest {
