@@ -16,6 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class MedioPagoEntity extends BaseEntity implements Serializable
 {    
+   //asd
     @PodamExclude
     @ManyToOne
     ClienteEntity cliente;
