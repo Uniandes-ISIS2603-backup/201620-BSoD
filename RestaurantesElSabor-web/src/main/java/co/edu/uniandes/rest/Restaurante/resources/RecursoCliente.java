@@ -38,7 +38,7 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<ClienteDTO> darClientes() throws LogicaRestauranteException 
+    public List<ClienteDTO> getClientes() throws LogicaRestauranteException 
     {
         return mockClientes.darClientes();
     }
@@ -51,7 +51,7 @@ public class RecursoCliente
      */
     @GET
     @Path("{idCliente}")
-    public ClienteDTO darCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
+    public ClienteDTO getCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
     {
         return mockClientes.darCliente(pId);
     }
@@ -63,7 +63,7 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
     @POST
-    public ClienteDTO crearCliente(ClienteDTO pNuevoCliente) throws LogicaRestauranteException
+    public ClienteDTO createCliente(ClienteDTO pNuevoCliente) throws LogicaRestauranteException
     {
         return mockClientes.crearCliente(pNuevoCliente);
     }
@@ -74,7 +74,7 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe un cliente con el id dado.
      */
     @PUT
-    public ClienteDTO actualizarCliente(ClienteDTO pClienteAActualizar) throws LogicaRestauranteException 
+    public ClienteDTO updateCliente(ClienteDTO pClienteAActualizar) throws LogicaRestauranteException 
     {
         return mockClientes.actualizarCliente(pClienteAActualizar);
     }
@@ -86,7 +86,7 @@ public class RecursoCliente
      */
     @DELETE
     @Path("{idCliente}")
-    public void eliminarCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
+    public void deleteCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
     {
         mockClientes.eliminarCliente(pId);
     }
