@@ -66,7 +66,23 @@ public class RecursoCliente
             
             List<MedioPagoEntity> mediosPagoLogica = clienteLogica.getMediosPago();
             ArrayList<MedioPagoDTO> mediosPagoWeb = new ArrayList<>();
+            for (MedioPagoEntity medioPagoLogica: mediosPagoLogica)
+            {
+                Long idMedioPagoWeb = medioPagoLogica.getId();
+                Long idClienteMedioPagoWeb = id;
+                Integer efectivoMedioPagoWeb = medioPagoLogica.getEfectivo();
+                String tarjetaMedioPagoWeb = medioPagoLogica.getTarjeta();
+                Long numerosTarjetaMedioPagoWeb = medioPagoLogica.getNumerosTarjeta();
+                Date fechaVencimientoMedioPagoWeb = medioPagoLogica.getFechaVencimiento();
+                Integer codigoSeguridadMedioPagoWeb = medioPagoLogica.getCodigoSeguridad();
+                String franquiciaMedioPagoWeb = medioPagoLogica.getFranquicia();
+                
+                MedioPagoDTO medioPagoWeb = new MedioPagoDTO(idMedioPagoWeb, idClienteMedioPagoWeb, efectivoMedioPagoWeb, 
+                tarjetaMedioPagoWeb, numerosTarjetaMedioPagoWeb, fechaVencimientoMedioPagoWeb, codigoSeguridadMedioPagoWeb, franquiciaMedioPagoWeb);
+                mediosPagoWeb.add(medioPagoWeb);
+            }
             ClienteDTO clienteWeb = new ClienteDTO(id, documentoIdentidad, tipoDocumentoIdentidad, name, apellidos, direccion, telefono, tarjetaPuntosWeb, mediosPagoWeb);
+            clientesWeb.add(clienteWeb);
         }
         return clientesWeb;
     }
