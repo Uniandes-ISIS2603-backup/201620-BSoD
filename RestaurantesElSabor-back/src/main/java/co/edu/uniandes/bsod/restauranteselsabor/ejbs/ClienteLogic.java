@@ -23,5 +23,25 @@ public class ClienteLogic
         return persistence.findAll();
     }
     
+        public ClienteEntity getCliente(Long id)
+    {
+        return persistence.find(id);
+    }
+        
+    public ClienteEntity createCliente(ClienteEntity clienteEntity)
+    {
+        return persistence.create(clienteEntity);
+    }
+    
+    public ClienteEntity update(ClienteEntity clienteEntity)
+    {
+        return persistence.update(clienteEntity);
+    }
+    
+    public void deleteCliente(Long id)
+    {
+        persistence.delete(id);
+    }
+    
     
 }

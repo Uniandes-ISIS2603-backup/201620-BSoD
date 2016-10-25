@@ -42,7 +42,7 @@ public class TarjetaPuntosPersistenceTest
     }
     
     @Inject
-    private TarjetaPuntosPersistence tarjetaPuntosPersistence;
+    private TarjetaPuntosPersistence persistence;
     
     @PersistenceContext
     private EntityManager em;
@@ -102,7 +102,7 @@ public class TarjetaPuntosPersistenceTest
         PodamFactory factory = new PodamFactoryImpl();
         TarjetaPuntosEntity newEntityTest = factory.manufacturePojo(TarjetaPuntosEntity.class);
         
-        TarjetaPuntosEntity createdEntity = tarjetaPuntosPersistence.create(newEntityTest);
+        TarjetaPuntosEntity createdEntity = persistence.create(newEntityTest);
         Assert.assertNotNull(createdEntity);
 
         TarjetaPuntosEntity entityPersistence = em.find(TarjetaPuntosEntity.class, createdEntity.getId());
@@ -118,7 +118,7 @@ public class TarjetaPuntosPersistenceTest
     @Test
     public void findAllTest() 
     {
-        List<TarjetaPuntosEntity> listPersistence = tarjetaPuntosPersistence.findAll();
+        List<TarjetaPuntosEntity> listPersistence = persistence.findAll();
         Assert.assertEquals(listTest.size(), listPersistence.size());
         
         for (TarjetaPuntosEntity entityPersistence : listPersistence) 
@@ -139,7 +139,7 @@ public class TarjetaPuntosPersistenceTest
     public void findTest() 
     {
         TarjetaPuntosEntity entityTest = listTest.get(0);
-        TarjetaPuntosEntity entityPersistence = tarjetaPuntosPersistence.find(entityTest.getId());
+        TarjetaPuntosEntity entityPersistence = persistence.find(entityTest.getId());
         
         Assert.assertNotNull(entityPersistence);
         Assert.assertEquals(entityTest.getCliente(), entityPersistence.getCliente());
@@ -153,7 +153,7 @@ public class TarjetaPuntosPersistenceTest
     public void deleteTest() 
     {
         TarjetaPuntosEntity entityTest = listTest.get(0);
-        tarjetaPuntosPersistence.delete(entityTest.getId());
+        persistence.delete(entityTest.getId());
         TarjetaPuntosEntity deletedEntity = em.find(TarjetaPuntosEntity.class, entityTest.getId());
         Assert.assertNull(deletedEntity);
     }
@@ -167,7 +167,7 @@ public class TarjetaPuntosPersistenceTest
 
         updatedEntityTest.setId(entityTest.getId());
         
-        tarjetaPuntosPersistence.update(updatedEntityTest);
+        persistence.update(updatedEntityTest);
 
         TarjetaPuntosEntity entityPersistence = em.find(TarjetaPuntosEntity.class, entityTest.getId());
         

@@ -42,7 +42,7 @@ public class ClientePersistenceTest
     }
     
     @Inject
-    private ClientePersistence clientePersistence;
+    private ClientePersistence persistence;
     
     @PersistenceContext
     private EntityManager em;
@@ -102,7 +102,7 @@ public class ClientePersistenceTest
         PodamFactory factory = new PodamFactoryImpl();
         ClienteEntity newEntityTest = factory.manufacturePojo(ClienteEntity.class);
         
-        ClienteEntity createdEntity = clientePersistence.create(newEntityTest);
+        ClienteEntity createdEntity = persistence.create(newEntityTest);
         Assert.assertNotNull(createdEntity);
 
         ClienteEntity entityPersistence = em.find(ClienteEntity.class, createdEntity.getId());
@@ -119,7 +119,7 @@ public class ClientePersistenceTest
     @Test
     public void findAllTest() 
     {
-        List<ClienteEntity> listPersistence = clientePersistence.findAll();
+        List<ClienteEntity> listPersistence = persistence.findAll();
         Assert.assertEquals(listTest.size(), listPersistence.size());
         
         for (ClienteEntity entityPersistence : listPersistence) 
@@ -140,7 +140,7 @@ public class ClientePersistenceTest
     public void findTest() 
     {
         ClienteEntity entityTest = listTest.get(0);
-        ClienteEntity entityPersistence = clientePersistence.find(entityTest.getId());
+        ClienteEntity entityPersistence = persistence.find(entityTest.getId());
         
         Assert.assertNotNull(entityPersistence);
         Assert.assertEquals(entityTest.getDocumentoIdentidad(), entityPersistence.getDocumentoIdentidad());
@@ -155,7 +155,7 @@ public class ClientePersistenceTest
     public void deleteTest() 
     {
         ClienteEntity entityTest = listTest.get(0);
-        clientePersistence.delete(entityTest.getId());
+        persistence.delete(entityTest.getId());
         ClienteEntity deletedEntity = em.find(ClienteEntity.class, entityTest.getId());
         Assert.assertNull(deletedEntity);
     }
@@ -169,7 +169,7 @@ public class ClientePersistenceTest
 
         updatedEntityTest.setId(entityTest.getId());
         
-        clientePersistence.update(updatedEntityTest);
+        persistence.update(updatedEntityTest);
 
         ClienteEntity entityPersistence = em.find(ClienteEntity.class, entityTest.getId());
         

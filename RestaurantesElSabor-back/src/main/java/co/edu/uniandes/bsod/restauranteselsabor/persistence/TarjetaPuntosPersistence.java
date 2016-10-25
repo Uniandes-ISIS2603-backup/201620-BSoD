@@ -51,6 +51,13 @@ public class TarjetaPuntosPersistence
         return q.getResultList();
     }
     
+    public TarjetaPuntosEntity findByCliente(Long id) 
+    {
+        LOGGER.log(Level.INFO, "Consultando TARJETAPUNTOS del cliente con id={0}", id);
+        Query q = em.createQuery("select tarjetasPuntos from TarjetaPuntosEntity tarjetasPuntos where tarjetaPuntos.");
+        return em.find(TarjetaPuntosEntity.class, id);
+    }
+    
     //  UPDATE
     
     public TarjetaPuntosEntity update(TarjetaPuntosEntity tarjetaPuntosEntity) 
