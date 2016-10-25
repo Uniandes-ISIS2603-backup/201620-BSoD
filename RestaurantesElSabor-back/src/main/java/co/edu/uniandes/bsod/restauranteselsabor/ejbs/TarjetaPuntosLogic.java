@@ -18,7 +18,7 @@ import javax.inject.Inject;
 public class TarjetaPuntosLogic 
 {
     //@Inject private TarjetaPuntosPersistence persistence;
-    private static ClientePersistence clientePersistence;
+    @Inject private ClientePersistence clientePersistence;
     
     public TarjetaPuntosEntity getTarjetaPuntos(Long idCliente)
     {
