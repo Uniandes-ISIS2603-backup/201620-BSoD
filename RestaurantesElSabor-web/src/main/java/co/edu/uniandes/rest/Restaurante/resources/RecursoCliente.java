@@ -9,7 +9,6 @@ import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
-import co.edu.uniandes.rest.Restaurante.mocks.MockClientes;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
