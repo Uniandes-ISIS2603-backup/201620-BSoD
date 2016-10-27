@@ -19,7 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class PlatoEntity extends BaseEntity implements Serializable{
     
     private int precio;
-    private String descripcion;
+    private String descripcion;                                                         
     
     @PodamExclude
     @ManyToOne
