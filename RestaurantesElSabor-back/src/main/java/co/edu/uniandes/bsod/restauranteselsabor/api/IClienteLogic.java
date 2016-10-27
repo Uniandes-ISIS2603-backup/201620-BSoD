@@ -5,10 +5,22 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.api;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
+import java.util.List;
+
 /**
  *
  * @author jdguz
  */
-public interface IClienteLogic {
+public interface IClienteLogic 
+{
+    public List<ClienteEntity> getClientes();
     
+    public ClienteEntity getCliente(Long id);
+    
+    public ClienteEntity createCliente(ClienteEntity clienteEntity);
+    
+    public ClienteEntity update(ClienteEntity clienteEntity);
+    
+    public void deleteCliente(Long id);
 }

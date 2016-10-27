@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.ejbs;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
 import java.util.List;
@@ -14,7 +15,7 @@ import javax.inject.Inject;
  *
  * @author jdguz
  */
-public class ClienteLogic 
+public class ClienteLogic implements IClienteLogic
 {
     @Inject private ClientePersistence persistence;
     
@@ -23,7 +24,7 @@ public class ClienteLogic
         return persistence.findAll();
     }
     
-        public ClienteEntity getCliente(Long id)
+    public ClienteEntity getCliente(Long id)
     {
         return persistence.find(id);
     }

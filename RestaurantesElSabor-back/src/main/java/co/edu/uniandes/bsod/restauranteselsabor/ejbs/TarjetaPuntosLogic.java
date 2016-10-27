@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.ejbs;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.ITarjetaPuntosLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
@@ -15,7 +16,7 @@ import javax.inject.Inject;
  *
  * @author jdguz
  */
-public class TarjetaPuntosLogic 
+public class TarjetaPuntosLogic implements ITarjetaPuntosLogic
 {
     //@Inject private TarjetaPuntosPersistence persistence;
     @Inject private ClientePersistence clientePersistence;
