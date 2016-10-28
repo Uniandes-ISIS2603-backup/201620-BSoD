@@ -39,7 +39,11 @@ public class ClienteEntity extends BaseEntity implements Serializable
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MedioPagoEntity> mediosPago = new ArrayList<>();
 
-    public int getDocumentoIdentidad() 
+    @PodamExclude
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ReservaEntity> reservas = new ArrayList<>();
+    
+    public int getDocumentoIdentidad()
     {
         return documentoIdentidad;
     }
@@ -108,5 +112,16 @@ public class ClienteEntity extends BaseEntity implements Serializable
     {
         this.mediosPago = mediosPago;
     }    
+
+    public List<ReservaEntity> getReservas() 
+    {
+        return reservas;
+    }
+
+    public void setReservas(List<ReservaEntity> reservas) 
+    {
+        this.reservas = reservas;
+    }
+    
     
 }
