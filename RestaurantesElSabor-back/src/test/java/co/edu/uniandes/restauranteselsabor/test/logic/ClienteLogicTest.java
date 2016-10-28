@@ -115,9 +115,37 @@ public class ClienteLogicTest
     }
     
     @Test
-    public void createClienteTest()
+    public void getClientesTest()
     {
         assertEquals(1, 1);
     }
     
+    @Test
+    public void getClienteTest()
+    {
+        assertEquals(1, 1);
+    }
+    
+    @Test
+    public void createClienteTest()
+    {
+        assertEquals(1, 1);
+        ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
+        clienteLogic.createCliente(nuevoCliente);
+        
+        ClienteEntity clienteAgregado = clienteLogic.getCliente(nuevoCliente.getId());
+        assertEquals(clienteAgregado, nuevoCliente);
+    }
+    
+    @Test
+    public void updateClienteTest()
+    {
+        assertEquals(1, 1);
+    }
+    
+    @Test
+    public void deleteClienteTest(Long id)
+    {
+        assertEquals(1, 1);
+    }
 }
