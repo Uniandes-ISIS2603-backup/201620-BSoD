@@ -23,6 +23,7 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
@@ -111,35 +112,70 @@ public class ClienteLogicTest
 //            entity.setTarjetaPuntos(d);
 //            em.persist(entity);
             data.add(entity);
+            try
+            {
+                clienteLogic.createCliente(entity);
+            }
+            catch(Exception e)
+            {
+                
+            }
         }
     }
     
     @Test
-    public void getClientesTest()
+    public void createClienteTest1()
     {
-        assertEquals(1, 1);
+        try
+        {
+            ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
+            clienteLogic.createCliente(nuevoCliente);
+            ClienteEntity clienteAgregado = clienteLogic.getCliente(nuevoCliente.getId());
+            assertEquals(clienteAgregado, nuevoCliente);
+        }
+        catch(Exception e)
+        {
+            Assert.fail(e.getMessage());
+        }
     }
     
     @Test
-    public void getClienteTest()
+    public void createClienteTest2()
     {
-        assertEquals(1, 1);
-    }
-    
-    @Test
-    public void createClienteTest()
-    {
-        assertEquals(1, 1);
-        ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
-        clienteLogic.createCliente(nuevoCliente);
-        
-        ClienteEntity clienteAgregado = clienteLogic.getCliente(nuevoCliente.getId());
-        assertEquals(clienteAgregado, nuevoCliente);
+        try
+        {
+            ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
+            nuevoCliente.setDocumentoIdentidad(0);
+            clienteLogic.createCliente(nuevoCliente);
+            ClienteEntity clienteAgregado = clienteLogic.getCliente(nuevoCliente.getId());
+            assertEquals(clienteAgregado, nuevoCliente);
+        }
+        catch(Exception e)
+        {
+            assertEquals(1, 1);
+        }
+        Assert.fail("Se debio haber generado exception.");
     }
     
     @Test
     public void updateClienteTest()
     {
+        try
+        {
+            List<ClienteEntity> clientes = clientePersistence.findAll();
+            ClienteEntity cliente = clientes.get(0);
+            cliente.setName("name");
+            cliente.setApellidos("apellidos");
+            cliente.setDocumentoIdentidad(1);
+            cliente.setTipoDocumentoIdentidad("tipo");
+            cliente.setTelefono(1);
+            cliente.setDireccion("direccion");
+            clienteLogic.update(cliente);
+        }
+        catch(Exception e)
+        {
+            Assert.fail(e.getMessage());
+        }        
         assertEquals(1, 1);
     }
     

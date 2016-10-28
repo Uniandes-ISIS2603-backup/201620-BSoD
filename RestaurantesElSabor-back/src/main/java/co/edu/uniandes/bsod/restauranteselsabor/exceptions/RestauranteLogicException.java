@@ -9,14 +9,14 @@ package co.edu.uniandes.bsod.restauranteselsabor.exceptions;
  *
  * @author jdguz
  */
-public class ClienteLogicException extends Exception
+public class RestauranteLogicException extends Exception
 {
-    public ClienteLogicException()
+    public RestauranteLogicException()
     {
         super();
     }
     
-    public ClienteLogicException(String message) 
+    public RestauranteLogicException(String message) 
     {
         super(message);
     }

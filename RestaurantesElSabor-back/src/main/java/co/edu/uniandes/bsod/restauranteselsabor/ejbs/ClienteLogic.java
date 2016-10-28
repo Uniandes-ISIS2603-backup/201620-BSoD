@@ -7,6 +7,7 @@ package co.edu.uniandes.bsod.restauranteselsabor.ejbs;
 
 import co.edu.uniandes.bsod.restauranteselsabor.api.IClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,13 +30,21 @@ public class ClienteLogic implements IClienteLogic
         return persistence.find(id);
     }
         
-    public ClienteEntity createCliente(ClienteEntity clienteEntity)
+    public ClienteEntity createCliente(ClienteEntity clienteEntity) throws RestauranteLogicException
     {
+        if(clienteEntity.getDocumentoIdentidad()<=0)
+        {
+            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo.");
+        }
         return persistence.create(clienteEntity);
     }
     
-    public ClienteEntity update(ClienteEntity clienteEntity)
+    public ClienteEntity update(ClienteEntity clienteEntity) throws RestauranteLogicException
     {
+        if(clienteEntity.getDocumentoIdentidad()<=0)
+        {
+            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo.");
+        }
         return persistence.update(clienteEntity);
     }
     

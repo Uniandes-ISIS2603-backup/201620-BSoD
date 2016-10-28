@@ -6,6 +6,7 @@
 package co.edu.uniandes.bsod.restauranteselsabor.api;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import java.util.List;
 
 /**
@@ -18,9 +19,9 @@ public interface IClienteLogic
     
     public ClienteEntity getCliente(Long id);
     
-    public ClienteEntity createCliente(ClienteEntity clienteEntity);
+    public ClienteEntity createCliente(ClienteEntity clienteEntity) throws RestauranteLogicException;
     
-    public ClienteEntity update(ClienteEntity clienteEntity);
+    public ClienteEntity update(ClienteEntity clienteEntity) throws RestauranteLogicException;
     
     public void deleteCliente(Long id);
 }
