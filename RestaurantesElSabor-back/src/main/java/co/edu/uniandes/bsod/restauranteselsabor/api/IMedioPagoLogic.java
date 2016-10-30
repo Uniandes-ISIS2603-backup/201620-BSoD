@@ -6,6 +6,7 @@
 package co.edu.uniandes.bsod.restauranteselsabor.api;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import java.util.List;
 
 /**
@@ -14,14 +15,14 @@ import java.util.List;
  */
 public interface IMedioPagoLogic {
     
-    public List<MedioPagoEntity> darMedios(Long idCliente);
+    public List<MedioPagoEntity> darMedios(Long idCliente)throws RestauranteLogicException;
     
-    public MedioPagoEntity darMedio(Long pId);
+    public MedioPagoEntity darMedio(Long pId)throws RestauranteLogicException;
     
-    public MedioPagoEntity crearMedio(MedioPagoEntity nuevoMedio);
+    public MedioPagoEntity crearMedio(MedioPagoEntity nuevoMedio)throws RestauranteLogicException;
     
-    public MedioPagoEntity actualizarMedio(MedioPagoEntity medioActualizado);
+    public MedioPagoEntity actualizarMedio(MedioPagoEntity medioActualizado)throws RestauranteLogicException;
     
-    public void eliminarMedio(Long pId);
+    public void eliminarMedio(Long pId)throws RestauranteLogicException;
     
 }

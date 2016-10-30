@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.restauranteselsabor.test.persistence;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ReservaPersistence;
 import java.util.ArrayList;
@@ -88,8 +89,13 @@ public class ReservaPersistenceTest {
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
+        
         for (int i = 0; i < 4; i++) {
+            ClienteEntity cliente = factory.manufacturePojo(ClienteEntity.class);
             ReservaEntity entity = factory.manufacturePojo(ReservaEntity.class);
+            entity.setCliente(cliente);
+          
+            em.persist(cliente);
             em.persist(entity);
             data.add(entity);
         }
@@ -133,8 +139,10 @@ public class ReservaPersistenceTest {
      */
     @Test
     public void getReservaTest() {
+        
         ReservaEntity entity = data.get(0);
-        ReservaEntity newEntity = reservaPersistence.find(entity.getId());
+        ClienteEntity cli = entity.getCliente();
+        ReservaEntity newEntity = reservaPersistence.find(cli.getId(), entity.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(entity.getId(), newEntity.getId());
     }

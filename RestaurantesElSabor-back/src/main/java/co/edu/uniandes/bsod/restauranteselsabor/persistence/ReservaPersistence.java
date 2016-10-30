@@ -19,7 +19,7 @@ public class ReservaPersistence {
     protected EntityManager em;
     
     //buscar reserva por id
-    public ReservaEntity find(Long id) {
+    public ReservaEntity find(Long idCliente, Long id) {
         LOGGER.log(Level.INFO, "Consultando reserva con id={0}", id);
         return em.find(ReservaEntity.class, id);
     }
