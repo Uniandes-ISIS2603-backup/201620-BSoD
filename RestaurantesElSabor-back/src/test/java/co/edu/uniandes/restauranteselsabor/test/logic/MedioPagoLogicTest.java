@@ -13,7 +13,6 @@ import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicExcep
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.MedioPagoPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import javax.enterprise.inject.ResolutionException;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -36,48 +35,23 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class MedioPagoLogicTest {
     
-    /**
-     *
-     */
     ClienteEntity fatherEntity;
-
-    /**
-     *
-     */
+    
     private PodamFactory factory = new PodamFactoryImpl();
-
-    /**
-     *
-     */
+    
     @Inject
     private IMedioPagoLogic medioLogic;
 
-    /**
-     *
-     */
     @PersistenceContext
     private EntityManager em;
 
-    /**
-     *
-     */
     @Inject
     private UserTransaction utx;
 
-    /**
-     *
-     */
     private List<MedioPagoEntity> medioData = new ArrayList<MedioPagoEntity>();
 
-    /**
-     *
-     */
     private List<ClienteEntity> clienteData = new ArrayList<ClienteEntity>();
 
-
-    /**
-     *
-     */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -92,8 +66,6 @@ public class MedioPagoLogicTest {
 
     /**
      * Configuración inicial de la prueba.
-     *
-     *
      */
     @Before
     public void setUp() {
@@ -114,8 +86,6 @@ public class MedioPagoLogicTest {
 
     /**
      * Limpia las tablas que están implicadas en la prueba.
-     *
-     *
      */
     private void clearData() {
         em.createQuery("delete from MedioPagoEntity").executeUpdate();
@@ -125,8 +95,6 @@ public class MedioPagoLogicTest {
     /**
      * Inserta los datos iniciales para el correcto funcionamiento de las
      * pruebas.
-     *
-     *
      */
     private void insertData() {
 
@@ -207,7 +175,7 @@ public class MedioPagoLogicTest {
      * Prueba para actualizar un medio de pago
      */
     @Test
-    public void updateDepartmentTest() throws RestauranteLogicException {
+    public void updateMedioPagoTest1() throws RestauranteLogicException {
         MedioPagoEntity entity = medioData.get(0);
         MedioPagoEntity newEntity = factory.manufacturePojo(MedioPagoEntity.class);
         newEntity.setId(entity.getId());
@@ -220,7 +188,7 @@ public class MedioPagoLogicTest {
      * Prueba para actualizar un medio de pago que no existe
      */
     @Test(expected = RestauranteLogicException.class)
-    public void updateDepartmentTest2() throws Exception {
+    public void updateMedioPagoTest2() throws Exception {
         MedioPagoEntity newEntity = factory.manufacturePojo(MedioPagoEntity.class);
         medioLogic.actualizarMedio(newEntity);
     }

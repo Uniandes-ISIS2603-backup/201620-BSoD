@@ -6,7 +6,7 @@
 package co.edu.uniandes.bsod.restauranteselsabor.api;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
-import co.edu.uniandes.bsod.restauranteselsabor.persistence.ReservaPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,15 +16,15 @@ import java.util.List;
  */
 public interface IReservaLogic {
     
-    public List<ReservaEntity> getReservas(Long idCliente);
+    public List<ReservaEntity> getReservas(Long idCliente)throws RestauranteLogicException;
     
-    public ReservaEntity getReserva(Long idCliente, Long id);
+    public ReservaEntity getReserva(Long idCliente, Long id)throws RestauranteLogicException;
     
-    public ReservaEntity createReserva(Long idCliente, ReservaEntity nuevaReserva);
+    public ReservaEntity createReserva(Long idCliente, ReservaEntity nuevaReserva)throws RestauranteLogicException;
     
-    public ReservaEntity updateReserva(Long idCliente, ReservaEntity reserva);
+    public ReservaEntity updateReserva(Long idCliente, ReservaEntity reserva)throws RestauranteLogicException;
     
-    public void deleteReserva(Long idCliente, Long id);
+    public void deleteReserva(Long idCliente, Long id)throws RestauranteLogicException;
     
-    public List<ReservaEntity> getreservasEnFecha(Date fecha);
+    public List<ReservaEntity> getReservasEnFecha(Date fecha);
 }
