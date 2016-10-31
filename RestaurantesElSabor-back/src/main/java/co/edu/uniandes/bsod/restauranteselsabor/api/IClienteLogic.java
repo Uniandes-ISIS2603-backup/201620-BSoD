@@ -21,7 +21,7 @@ public interface IClienteLogic
     
     public ClienteEntity createCliente(ClienteEntity clienteEntity) throws RestauranteLogicException;
     
-    public ClienteEntity update(ClienteEntity clienteEntity) throws RestauranteLogicException;
+    public ClienteEntity updateCliente(ClienteEntity clienteEntity) throws RestauranteLogicException;
     
     public void deleteCliente(Long id);
 }

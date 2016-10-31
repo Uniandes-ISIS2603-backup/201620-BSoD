@@ -6,13 +6,20 @@
 package co.edu.uniandes.restauranteselsabor.test.logic;
 
 import co.edu.uniandes.bsod.restauranteselsabor.api.IClienteLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.IReservaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.api.ITarjetaPuntosLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ClienteLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ReservaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.TarjetaPuntosLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.MedioPagoPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.ReservaPersistence;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.TarjetaPuntosPersistence;
+import static java.lang.Math.abs;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -54,8 +61,6 @@ public class ClienteLogicTest
     @Inject
     private UserTransaction utx;
     
-    private List<ClienteEntity> data = new ArrayList<ClienteEntity>();
- 
     @Deployment
     public static JavaArchive createDeployment() 
     {
@@ -68,6 +73,14 @@ public class ClienteLogicTest
                 .addPackage(TarjetaPuntosPersistence.class.getPackage())
                 .addPackage(TarjetaPuntosLogic.class.getPackage())
                 .addPackage(ITarjetaPuntosLogic.class.getPackage())
+//                .addPackage(MedioPagoEntity.class.getPackage())
+//                .addPackage(MedioPagoPersistence.class.getPackage())
+//                .addPackage(MedioPagoLogic.class.getPackage())
+//                .addPackage(IMedioPagoLogic.class.getPackage())
+                .addPackage(ReservaEntity.class.getPackage())
+                .addPackage(ReservaPersistence.class.getPackage())
+                .addPackage(ReservaLogic.class.getPackage())
+                .addPackage(IReservaLogic.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -104,21 +117,20 @@ public class ClienteLogicTest
     
     private void insertData() 
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 5; i++)
         {
-            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
-//            TarjetaPuntosEntity d = factory.manufacturePojo(TarjetaPuntosEntity.class);
-//            d.setCliente(entity);
-//            entity.setTarjetaPuntos(d);
-//            em.persist(entity);
-            data.add(entity);
             try
             {
+                ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+                if(entity.getDocumentoIdentidad()<=0)
+                {
+                    entity.setDocumentoIdentidad(Math.abs(entity.getDocumentoIdentidad()));
+                }
                 clienteLogic.createCliente(entity);
-            }
+           }
             catch(Exception e)
             {
-                
+                Assert.fail(e.getMessage());
             }
         }
     }
@@ -129,6 +141,10 @@ public class ClienteLogicTest
         try
         {
             ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
+            if(nuevoCliente.getDocumentoIdentidad()<=0)
+            {
+                nuevoCliente.setDocumentoIdentidad(Math.abs(nuevoCliente.getDocumentoIdentidad()));
+            }
             clienteLogic.createCliente(nuevoCliente);
             ClienteEntity clienteAgregado = clienteLogic.getCliente(nuevoCliente.getId());
             assertEquals(clienteAgregado, nuevoCliente);
@@ -145,24 +161,23 @@ public class ClienteLogicTest
         try
         {
             ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
-            nuevoCliente.setDocumentoIdentidad(0);
+            nuevoCliente.setDocumentoIdentidad(-1);
             clienteLogic.createCliente(nuevoCliente);
-            ClienteEntity clienteAgregado = clienteLogic.getCliente(nuevoCliente.getId());
-            assertEquals(clienteAgregado, nuevoCliente);
+            Assert.fail("Se debio haber generado exception.");
         }
         catch(Exception e)
         {
             assertEquals(1, 1);
         }
-        Assert.fail("Se debio haber generado exception.");
+        
     }
     
     @Test
-    public void updateClienteTest()
+    public void updateClienteTest1()
     {
         try
         {
-            List<ClienteEntity> clientes = clientePersistence.findAll();
+            List<ClienteEntity> clientes = clienteLogic.getClientes();
             ClienteEntity cliente = clientes.get(0);
             cliente.setName("name");
             cliente.setApellidos("apellidos");
@@ -170,18 +185,36 @@ public class ClienteLogicTest
             cliente.setTipoDocumentoIdentidad("tipo");
             cliente.setTelefono(1);
             cliente.setDireccion("direccion");
-            clienteLogic.update(cliente);
+            clienteLogic.updateCliente(cliente);
+            assertEquals(1, 1);
         }
         catch(Exception e)
         {
             Assert.fail(e.getMessage());
         }        
-        assertEquals(1, 1);
+    }
+    
+    @Test
+    public void updateClienteTest2()
+    {
+        try
+        {
+            List<ClienteEntity> clientes = clienteLogic.getClientes();
+            ClienteEntity cliente = clientes.get(0);
+            cliente.setDocumentoIdentidad(-8);
+            clienteLogic.updateCliente(cliente);
+            Assert.fail("Se debio haber generado una excepcion.");
+        }
+        catch(Exception e)
+        {
+            assertEquals(1, 1);
+        }        
     }
     
     @Test
     public void deleteClienteTest(Long id)
     {
         assertEquals(1, 1);
+        // No hay restricciones de la logica del negocio que se puedan probar.
     }
 }

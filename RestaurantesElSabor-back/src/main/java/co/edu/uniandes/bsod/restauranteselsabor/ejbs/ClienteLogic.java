@@ -34,16 +34,16 @@ public class ClienteLogic implements IClienteLogic
     {
         if(clienteEntity.getDocumentoIdentidad()<=0)
         {
-            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo.");
+            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo, se intento crear un cliente con documento de identidad de: "+clienteEntity.getDocumentoIdentidad());
         }
         return persistence.create(clienteEntity);
     }
     
-    public ClienteEntity update(ClienteEntity clienteEntity) throws RestauranteLogicException
+    public ClienteEntity updateCliente(ClienteEntity clienteEntity) throws RestauranteLogicException
     {
         if(clienteEntity.getDocumentoIdentidad()<=0)
         {
-            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo.");
+            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo, se intento actualizar el documento de identidad de un cliente a: "+clienteEntity.getDocumentoIdentidad());
         }
         return persistence.update(clienteEntity);
     }

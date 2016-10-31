@@ -6,6 +6,7 @@
 package co.edu.uniandes.bsod.restauranteselsabor.api;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 
 /**
  *
@@ -15,12 +16,12 @@ public interface ITarjetaPuntosLogic
 {
     public TarjetaPuntosEntity getTarjetaPuntos(Long idCliente);
     
-    public TarjetaPuntosEntity createTarjetaPuntos(Long idCliente);
+    public TarjetaPuntosEntity createTarjetaPuntos(Long idCliente) throws RestauranteLogicException;
     
-    public TarjetaPuntosEntity updateTarjetaPuntos(Long idCliente, TarjetaPuntosEntity tarjetaPuntos);
+    public TarjetaPuntosEntity updateTarjetaPuntos(Long idCliente, TarjetaPuntosEntity tarjetaPuntos) throws RestauranteLogicException;
     
-    public TarjetaPuntosEntity sumarPuntosTarjetaPuntos(Long idCliente, int compra);
+    public TarjetaPuntosEntity sumarPuntosTarjetaPuntos(Long idCliente, int compra) throws RestauranteLogicException;
     
-    public void deleteTarjetaPuntos(Long idCliente);
+    public void deleteTarjetaPuntos(Long idCliente) throws RestauranteLogicException;
     
 }
