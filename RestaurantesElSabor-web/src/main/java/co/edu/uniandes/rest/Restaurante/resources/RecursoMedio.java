@@ -7,10 +7,10 @@ import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicExcep
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -83,9 +83,7 @@ public class RecursoMedio
       public MedioPagoDTO darMedio(@PathParam("id") Long pId) throws RestauranteLogicException
     {
         existsCliente(idCliente);
-        LOGGER.log(Level.INFO, "Consultando cliente con idCliente = {0}", idCliente);
         MedioPagoEntity entity = medioLogic.darMedio(pId);
-        LOGGER.log(Level.INFO, "Consultando cliente con id = {0}", entity.getCliente().getId());
         if (entity.getCliente() != null && !idCliente.equals(entity.getCliente().getId())) {
             throw new WebApplicationException(404);
         }
