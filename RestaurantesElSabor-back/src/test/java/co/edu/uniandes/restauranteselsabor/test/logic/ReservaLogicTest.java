@@ -113,86 +113,86 @@ public class ReservaLogicTest {
     //Metodos de prueba
     //*****************************
     
-//    /**
-//     * Prueba para consultar la lista de reservas de un cliente
-//     */
-//    @Test
-//    public void getReservasTest() throws RestauranteLogicException {
-//        List<ReservaEntity> list = reservaLogic.getReservas(fatherEntity.getId());
-//        Assert.assertEquals(reservaData.size(), list.size());
-//        for (ReservaEntity entity : list) {
-//            boolean found = false;
-//            for (ReservaEntity ent : reservaData) {
-//                if (entity.getId().equals(ent.getId())) {
-//                    found = true;
-//                }
-//            }
-//            Assert.assertTrue(found);
-//        }
-//    }
-//     /**
-//     * Prueba para consultar una reserva que existe
-//     */
-//    @Test
-//    public void getReservaTest1() throws RestauranteLogicException {
-//        ReservaEntity entity = reservaData.get(0);
-//        ReservaEntity resultEntity = reservaLogic.getReserva(fatherEntity.getId(), entity.getId());
-//        Assert.assertNotNull(resultEntity);
-//        Assert.assertEquals(entity.getName(), resultEntity.getName());
-//        Assert.assertEquals(entity.getId(), resultEntity.getId());
-//    }
-//     /**
-//     * Prueba para consultar un medio de pago que no existe
-//     */
-//    @Test
-//    public void getReservaTest2() throws RestauranteLogicException {
-//        ReservaEntity entity = factory.manufacturePojo(ReservaEntity.class);
-//        ReservaEntity resultEntity = reservaLogic.getReserva(fatherEntity.getId(), entity.getId());
-//        Assert.assertNull(resultEntity);
-//    }
-//    /**
-//     * Prueba para crear una reserva nueva
-//     */
-//    @Test
-//    public void createReservaTest1() throws RestauranteLogicException{
-//        ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
-//        ReservaEntity result = reservaLogic.createReserva(fatherEntity.getId(), newEntity);
-//        Assert.assertNotNull(result);
-//        ReservaEntity entity = em.find(ReservaEntity.class, result.getId());
-//        Assert.assertEquals(newEntity.getName(), entity.getName());
-//        Assert.assertEquals(newEntity.getId(), entity.getId());
-//    }
-//    /**
-//     * Prueba para crear una reserva que ya existe
-//     */
-//    @Test(expected = RestauranteLogicException.class)
-//    public void createReservaTest2() throws Exception {
-//        ReservaEntity res = factory.manufacturePojo(ReservaEntity.class);
-//        res.setCliente(fatherEntity);
-//        res.setId(reservaData.get(0).getId());
-//        ReservaEntity result = reservaLogic.createReserva(fatherEntity.getId(), res);
-//    }
-//     /**
-//     * Prueba para actualizar una reserva
-//     */
-//    @Test
-//    public void updateReservaTest1() throws RestauranteLogicException {
-//        ReservaEntity entity = reservaData.get(0);
-//        ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
-//        newEntity.setId(entity.getId());
-//        reservaLogic.updateReserva(fatherEntity.getId(), newEntity);
-//        ReservaEntity resp = em.find(ReservaEntity.class, entity.getId());
-//        Assert.assertEquals(newEntity.getName(), resp.getName());
-//        Assert.assertEquals(newEntity.getId(), resp.getId());
-//    }
-//    /**
-//     * Prueba para actualizar una reserva que no existe
-//     */
-//    @Test(expected = RestauranteLogicException.class)
-//    public void updateReservaest2() throws Exception {
-//        ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
-//        reservaLogic.updateReserva(fatherEntity.getId(), newEntity);
-//    }
+    /**
+     * Prueba para consultar la lista de reservas de un cliente
+     */
+    @Test
+    public void getReservasTest() throws RestauranteLogicException {
+        List<ReservaEntity> list = reservaLogic.getReservas(fatherEntity.getId());
+        Assert.assertEquals(reservaData.size(), list.size());
+        for (ReservaEntity entity : list) {
+            boolean found = false;
+            for (ReservaEntity ent : reservaData) {
+                if (entity.getId().equals(ent.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+     /**
+     * Prueba para consultar una reserva que existe
+     */
+    @Test
+    public void getReservaTest1() throws RestauranteLogicException {
+        ReservaEntity entity = reservaData.get(0);
+        ReservaEntity resultEntity = reservaLogic.getReserva(fatherEntity.getId(), entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getName(), resultEntity.getName());
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+    }
+     /**
+     * Prueba para consultar un medio de pago que no existe
+     */
+    @Test
+    public void getReservaTest2() throws RestauranteLogicException {
+        ReservaEntity entity = factory.manufacturePojo(ReservaEntity.class);
+        ReservaEntity resultEntity = reservaLogic.getReserva(fatherEntity.getId(), entity.getId());
+        Assert.assertNull(resultEntity);
+    }
+    /**
+     * Prueba para crear una reserva nueva
+     */
+    @Test
+    public void createReservaTest1() throws RestauranteLogicException{
+        ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
+        ReservaEntity result = reservaLogic.createReserva(fatherEntity.getId(), newEntity);
+        Assert.assertNotNull(result);
+        ReservaEntity entity = em.find(ReservaEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+    }
+    /**
+     * Prueba para crear una reserva que ya existe
+     */
+    @Test(expected = RestauranteLogicException.class)
+    public void createReservaTest2() throws Exception {
+        ReservaEntity res = factory.manufacturePojo(ReservaEntity.class);
+        res.setCliente(fatherEntity);
+        res.setId(reservaData.get(0).getId());
+        ReservaEntity result = reservaLogic.createReserva(fatherEntity.getId(), res);
+    }
+     /**
+     * Prueba para actualizar una reserva
+     */
+    @Test
+    public void updateReservaTest1() throws RestauranteLogicException {
+        ReservaEntity entity = reservaData.get(0);
+        ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
+        newEntity.setId(entity.getId());
+        reservaLogic.updateReserva(fatherEntity.getId(), newEntity);
+        ReservaEntity resp = em.find(ReservaEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getName(), resp.getName());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
+    }
+    /**
+     * Prueba para actualizar una reserva que no existe
+     */
+    @Test(expected = RestauranteLogicException.class)
+    public void updateReservaest2() throws Exception {
+        ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
+        reservaLogic.updateReserva(fatherEntity.getId(), newEntity);
+    }
      /**
      * Prueba para eliminar una reserva que existe
      */
@@ -238,5 +238,23 @@ public class ReservaLogicTest {
             }
             Assert.assertTrue(found);
         }
+    }
+    /**
+     * Prueba para buscar las reservas en una fecha dada
+     */
+    @Test
+    public void getReservasEnFechaTest2() {
+       Date fecha = new Date(2016, 10, 25);
+       Date fecha2 = new Date(1990, 6, 11);
+       for (int i=0; i<reservaData.size(); i++) {
+            if (i==0 || i==2) {
+                reservaData.get(i).setFecha(fecha);
+            }
+            else{
+                reservaData.get(i).setFecha(fecha2);
+            }
+        }
+        List<ReservaEntity> lista = reservaLogic.getReservasEnFecha(fecha);
+        Assert.assertEquals(lista.size(), 0);
     }
 }

@@ -27,9 +27,10 @@ public class ReservaPersistence {
     //buscar reserva por fecha
     public List<ReservaEntity> findByDate(Date pFecha) {
         Date fecha2 = new Date(pFecha.getYear(), pFecha.getMonth(), pFecha.getDate());
-        LOGGER.log(Level.INFO, "Consultando reserva con fecha = {0}", fecha2);
+        java.sql.Date sqlDate = new java.sql.Date(fecha2.getTime());
+        LOGGER.log(Level.INFO, "Consultando reserva con fecha = {0}", sqlDate);
         Query q = em.createQuery("select u from ReservaEntity u where u.fecha = :fecha2", ReservaEntity.class);
-        q = q.setParameter("fecha2", fecha2); 
+        q = q.setParameter("fecha2", sqlDate); 
         return q.getResultList();
     }
     //busca todas las reservas
