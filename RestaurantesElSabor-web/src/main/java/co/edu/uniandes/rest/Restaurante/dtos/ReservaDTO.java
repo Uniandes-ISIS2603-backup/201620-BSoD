@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
 import java.util.Date;
 
 /**
@@ -19,8 +20,6 @@ public class ReservaDTO {
     private Date fecha;
     private int numPersonas;
     private int piso;
-    private Long idCliente;
-    private SucursalDTO idSucursal;
    
     /**
      * Constructor por defecto
@@ -34,17 +33,23 @@ public class ReservaDTO {
      * @param fecha
      * @param numPersonas
      * @param piso
-     * @param idMesa
-     * @param idCliente
-     * @param idSucursal
      */
-    public ReservaDTO(Long id, Date fecha, int numPersonas, int piso, Long idCliente, SucursalDTO idSucursal){
-        this.id = id;
-        this.fecha = fecha;
-        this.numPersonas = numPersonas;
-        this.piso = piso;
-        this.idCliente = idCliente;
-        this.idSucursal = idSucursal;
+    public ReservaDTO(ReservaEntity entity){
+        if(entity != null){
+        this.id = entity.getId();
+        this.fecha = entity.getFecha();
+        this.numPersonas = entity.getNumPersonas();
+        this.piso = entity.getPiso();
+        }
+    }
+    public ReservaEntity toEntity() {
+        ReservaEntity entity = new ReservaEntity();
+        entity.setId(this.getId());
+        entity.setFecha(this.getFecha());
+        entity.setNumPersonas(this.getNumPersonas());
+        entity.setPiso(this.getPiso());
+        
+        return entity;
     }
     
     //METODOS
@@ -75,21 +80,5 @@ public class ReservaDTO {
     }
     public void setPiso(int piso){
         this.piso =piso;
-    }
-    
-    public Long getIdCliente(){
-        return idCliente;
-    }
-    
-    public void setIdCliente(Long idCliente){
-        this.idCliente = idCliente;
-    }
-    
-    public SucursalDTO getIdSucursal(){
-        return idSucursal;
-    }
-    
-    public void setIdSucursal(SucursalDTO idSucursal){
-        this.idSucursal = idSucursal;
     }
 }
