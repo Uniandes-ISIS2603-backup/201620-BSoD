@@ -10,12 +10,14 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author jdguz
  */
+@Stateless
 public class ClienteLogic implements IClienteLogic
 {
     @Inject private ClientePersistence persistence;
@@ -32,18 +34,18 @@ public class ClienteLogic implements IClienteLogic
         
     public ClienteEntity createCliente(ClienteEntity clienteEntity) throws RestauranteLogicException
     {
-        if(clienteEntity.getDocumentoIdentidad()<=0)
+        if(clienteEntity.getDocumentoIdentidad()<0)
         {
-            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo, se intento crear un cliente con documento de identidad de: "+clienteEntity.getDocumentoIdentidad());
+            throw new RestauranteLogicException("El documento de identidad no puede ser 0 negativo, se intento crear un cliente con documento de identidad de: "+clienteEntity.getDocumentoIdentidad());
         }
         return persistence.create(clienteEntity);
     }
     
     public ClienteEntity updateCliente(ClienteEntity clienteEntity) throws RestauranteLogicException
     {
-        if(clienteEntity.getDocumentoIdentidad()<=0)
+        if(clienteEntity.getDocumentoIdentidad()<0)
         {
-            throw new RestauranteLogicException("El documento de identidad no puede ser 0 ni negativo, se intento actualizar el documento de identidad de un cliente a: "+clienteEntity.getDocumentoIdentidad());
+            throw new RestauranteLogicException("El documento de identidad no puede ser 0 negativo, se intento actualizar el documento de identidad de un cliente a: "+clienteEntity.getDocumentoIdentidad());
         }
         return persistence.update(clienteEntity);
     }

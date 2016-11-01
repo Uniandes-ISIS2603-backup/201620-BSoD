@@ -34,6 +34,8 @@ import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
+import java.util.Date;
+
 /**
  *
  * @author jdguz
@@ -122,7 +124,7 @@ public class TarjetaPuntosLogicTest
             try
             {
                 ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
-                if(entity.getDocumentoIdentidad()<=0)
+                if(entity.getDocumentoIdentidad()<0)
                 {
                     entity.setDocumentoIdentidad(Math.abs(entity.getDocumentoIdentidad()));
                 }
@@ -141,10 +143,13 @@ public class TarjetaPuntosLogicTest
     {
         try
         {
-            List<ClienteEntity> clientes = clientePersistence.findAll();
-            ClienteEntity cliente = clientes.get(0);
-            tarjetaPuntosLogic.deleteTarjetaPuntos(cliente.getId());
-            tarjetaPuntosLogic.createTarjetaPuntos(cliente.getId());
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            if(entity.getDocumentoIdentidad()<0)
+            {
+                entity.setDocumentoIdentidad(Math.abs(entity.getDocumentoIdentidad()));
+            }
+            clienteLogic.createCliente(entity);
+            tarjetaPuntosLogic.createTarjetaPuntos(entity.getId());
             Assert.assertEquals(1, 1);
         }
         catch(RestauranteLogicException e)
@@ -161,7 +166,6 @@ public class TarjetaPuntosLogicTest
             List<ClienteEntity> clientes = clienteLogic.getClientes();
             ClienteEntity cliente = clientes.get(0);
             tarjetaPuntosLogic.createTarjetaPuntos(cliente.getId());
-            tarjetaPuntosLogic.createTarjetaPuntos(cliente.getId());
             Assert.fail("No deberia dejar crearle una tarjeta de puntos a un cliente que ya tiene una.");
         }
         catch(RestauranteLogicException e)
@@ -171,20 +175,128 @@ public class TarjetaPuntosLogicTest
     }
     
     @Test
-    public void updateTarjetaPuntosTest()
+    public void updateTarjetaPuntosTest1()
     {
-        Assert.assertEquals(1, 1);
+        try
+        {
+            List<ClienteEntity> clientes = clienteLogic.getClientes();
+            ClienteEntity cliente = clientes.get(0);
+            TarjetaPuntosEntity tarjetaPuntos = cliente.getTarjetaPuntos();
+            tarjetaPuntos.setFechaCaducidad(new Date());
+            tarjetaPuntosLogic.updateTarjetaPuntos(cliente.getId(), tarjetaPuntos);
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.assertEquals(1, 1);
+        }
     }
     
     @Test
-    public void sumarPuntosTarjetaPuntosTest()
+    public void updateTarjetaPuntosTest2()
     {
-         Assert.assertEquals(1, 1);
+         try
+        {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            if(entity.getDocumentoIdentidad()<0)
+            {
+                entity.setDocumentoIdentidad(Math.abs(entity.getDocumentoIdentidad()));
+            }
+            clienteLogic.createCliente(entity);
+            TarjetaPuntosEntity tarjetaPuntos = factory.manufacturePojo(TarjetaPuntosEntity.class);
+            tarjetaPuntosLogic.updateTarjetaPuntos(entity.getId(), tarjetaPuntos);
+            Assert.fail("Se debio haber generado una excepcion porque el cliente no tenia tarjeta de puntos y se intengo actualizarle la suya.");
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.assertEquals(1, 1);
+        }
     }
     
     @Test
-    public void deleteTarjetaPuntosTest()
+    public void sumarPuntosTarjetaPuntosTest1()
     {
-        Assert.assertEquals(1, 1);
+        try
+        {
+            List<ClienteEntity> clientes = clienteLogic.getClientes();
+            ClienteEntity cliente = clientes.get(0);
+            tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(cliente.getId(), 7464654);
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.assertEquals(1, 1);
+        }
+    }
+    
+    @Test
+    public void sumarPuntosTarjetaPuntosTest2()
+    {
+        try
+        {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            if(entity.getDocumentoIdentidad()<0)
+            {
+                entity.setDocumentoIdentidad(Math.abs(entity.getDocumentoIdentidad()));
+            }
+            clienteLogic.createCliente(entity);
+            tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(entity.getId(), 45646);
+            Assert.fail("Se debio haber generado una excepcion porque el cliente no tenia tarjeta de puntos y se intento sumarle puntos.");
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.assertEquals(1, 1);
+        }
+    }
+       
+    @Test
+    public void sumarPuntosTarjetaPuntosTest3()
+    {
+        try
+        {
+            List<ClienteEntity> clientes = clienteLogic.getClientes();
+            ClienteEntity cliente = clientes.get(0);
+            tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(cliente.getId(), -465465);
+            Assert.fail("Se debio haber generado una excepcion porque el cliente se intento sumar puntos de una compra negativa.");
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.assertEquals(1, 1);
+        }
+    }
+    
+    @Test
+    public void deleteTarjetaPuntosTest1()
+    {
+         try
+        {
+            List<ClienteEntity> clientes = clienteLogic.getClientes();
+            ClienteEntity cliente = clientes.get(0);
+            tarjetaPuntosLogic.deleteTarjetaPuntos(cliente.getId());
+            Assert.assertEquals(1, 1);
+
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.fail(e.getMessage());
+        }
+    }
+    
+    @Test
+    public void deleteTarjetaPuntosTest2()
+    {
+        try
+        {
+            ClienteEntity entity = factory.manufacturePojo(ClienteEntity.class);
+            if(entity.getDocumentoIdentidad()<0)
+            {
+                entity.setDocumentoIdentidad(Math.abs(entity.getDocumentoIdentidad()));
+            }
+            clienteLogic.createCliente(entity);
+            tarjetaPuntosLogic.deleteTarjetaPuntos(entity.getId());
+            Assert.fail("Se debio haber generado una excepcion porque el cliente no tenia tarjeta de puntos y se intengo eliminarle la suya.");
+        }
+        catch(RestauranteLogicException e)
+        {
+            Assert.assertEquals(1, 1);
+        }
     }
 }

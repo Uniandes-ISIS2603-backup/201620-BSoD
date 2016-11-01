@@ -112,7 +112,7 @@ public class ClienteLogicTest
     private void clearData() 
     {
         em.createQuery("delete from TarjetaPuntosEntity").executeUpdate();
-        em.createQuery("delete from TarjetaPuntosEntity").executeUpdate();
+        em.createQuery("delete from ClienteEntity").executeUpdate();
     }    
     
     private void insertData() 
@@ -141,7 +141,7 @@ public class ClienteLogicTest
         try
         {
             ClienteEntity nuevoCliente = factory.manufacturePojo(ClienteEntity.class);
-            if(nuevoCliente.getDocumentoIdentidad()<=0)
+            if(nuevoCliente.getDocumentoIdentidad()<0)
             {
                 nuevoCliente.setDocumentoIdentidad(Math.abs(nuevoCliente.getDocumentoIdentidad()));
             }
@@ -209,12 +209,5 @@ public class ClienteLogicTest
         {
             assertEquals(1, 1);
         }        
-    }
-    
-    @Test
-    public void deleteClienteTest(Long id)
-    {
-        assertEquals(1, 1);
-        // No hay restricciones de la logica del negocio que se puedan probar.
     }
 }

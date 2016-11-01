@@ -11,12 +11,14 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.TarjetaPuntosPersistence;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author jdguz
  */
+@Stateless
 public class TarjetaPuntosLogic implements ITarjetaPuntosLogic
 {
     @Inject private TarjetaPuntosPersistence persistence;
@@ -65,7 +67,7 @@ public class TarjetaPuntosLogic implements ITarjetaPuntosLogic
         }
         if(compra<0)
         {
-            throw new RestauranteLogicException("Se intento sumar puntos a la tarjeta de puntos de un cliente de una compra gratis.");
+            throw new RestauranteLogicException("Se intento sumar puntos a la tarjeta de puntos de un cliente de una compra negativa.");
         }
         int puntos = compra/10000;
         int acumulado = tarjeta.getAcumulado();
@@ -82,8 +84,7 @@ public class TarjetaPuntosLogic implements ITarjetaPuntosLogic
         {
             throw new RestauranteLogicException("Se intento eliminar la tarjeta de puntos de un cliente que no tenia una.");
         }
-        //persistence.delete(tarjetaPuntosAEliminar.getId());
+        persistence.delete(tarjetaPuntosAEliminar.getId());
         cliente.setTarjetaPuntos(null);
-        //persistence.delete(tarjetaPuntosAEliminar.getId());
     }
 }
