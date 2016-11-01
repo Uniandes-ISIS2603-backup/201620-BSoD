@@ -14,6 +14,7 @@ import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;        
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDetailDTO;
 import java.util.ArrayList;
+import java.util.Date;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -87,6 +88,13 @@ public class RecursoReserva {
     public List<ReservaDetailDTO> getReservas() throws RestauranteLogicException {
         existsCliente(idCliente);
         List<ReservaEntity> reservas = reservaLogic.getReservas(idCliente);
+        return listEntityDTO(reservas);
+    }
+    @GET
+    @Path ("{dia: \\d+}/{mes: \\d+}/{anho: \\d+}")
+    public List<ReservaDetailDTO> getReservasByDate(@PathParam ("dia")int dia, @PathParam ("mes")int mes, @PathParam ("anho")int anho) throws RestauranteLogicException {
+        Date fecha = new Date(anho, mes, dia);
+        List<ReservaEntity> reservas = reservaLogic.getReservasEnFecha(fecha);
         return listEntityDTO(reservas);
     }
     /**
