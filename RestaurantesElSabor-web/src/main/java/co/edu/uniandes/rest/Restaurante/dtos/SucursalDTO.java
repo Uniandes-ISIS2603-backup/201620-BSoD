@@ -5,12 +5,16 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author af.pinzon10
  */
+@XmlRootElement
 public class SucursalDTO {
 
     private Long id;
@@ -19,26 +23,27 @@ public class SucursalDTO {
 
     private String direccion;
 
-    private int mesas;
-
-    private int calificacion;
-
-    private ArrayList<ReservaDTO> reservas;
-
-    private ArrayList<FacturaDTO> facturas;
+    private List<String> calificacion;
 
     public SucursalDTO() {
     }
 
-    public SucursalDTO(Long pId, String pCiudad, String pDireccion, int pMesas, int pCalificacion) {
+    public SucursalDTO(SucursalEntity p) {
+        
         super();
-        this.id = pId;
-        this.ciudad = pCiudad;
-        this.direccion = pDireccion;
-        this.mesas = pMesas;
-        this.calificacion = pCalificacion;
-        this.reservas = new ArrayList();
-        this.facturas = new ArrayList<>();
+        this.id = p.getId();
+        this.ciudad = p.getCiudad();
+        this.direccion = p.getDireccion();
+        this.calificacion = p.getCalificaciones();
+    }
+    
+    public SucursalEntity toEntity() {
+        SucursalEntity entity = new SucursalEntity();
+        entity.setCiudad(this.getCiudad());
+        entity.setDireccion(this.getDireccion());
+        entity.setCalificaciones(this.getCalificacion());
+        entity.setId(this.getId());
+        return entity;
     }
 
     public Long getId() {
@@ -65,36 +70,15 @@ public class SucursalDTO {
         this.direccion = direccion;
     }
 
-    public int getMesas() {
-        return mesas;
-    }
 
-    public void setMesas(int mesas) {
-        this.mesas = mesas;
-    }
 
-    public int getCalificacion() {
+
+    public List<String> getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(int calificacion) {
+    public void setCalificacion(List<String> calificacion) {
         this.calificacion = calificacion;
-    }
-
-    public ArrayList getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(ArrayList reservas) {
-        this.reservas = reservas;
-    }
-
-    public ArrayList getFacturas() {
-        return facturas;
-    }
-
-    public void setFacturas(ArrayList facturas) {
-        this.facturas = facturas;
     }
 
     /**
@@ -104,7 +88,7 @@ public class SucursalDTO {
      */
     @Override
     public String toString() {
-        return "{ id : " + id + ", ciudad : \"" + ciudad + "\", direccion : \"" + direccion + "\", mesas : \"" + mesas + "\", calificacion : \"" + calificacion + "\" }";
+        return "{ id : " + id + ", ciudad : \"" + ciudad + "\", direccion : \"" + direccion + "\", mesas : \"" + "\", calificacion : \"" + calificacion + "\" }";
     }
 
 }

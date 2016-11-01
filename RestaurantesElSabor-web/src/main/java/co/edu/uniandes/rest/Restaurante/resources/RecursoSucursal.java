@@ -5,14 +5,18 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.ISucursalLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.SucursalDTO;
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
-import co.edu.uniandes.rest.Restaurante.mocks.MockSucursales;
+import co.edu.uniandes.rest.Restaurante.dtos.SucursalDetailDTO;
+import java.util.ArrayList;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,6 +26,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
@@ -32,72 +37,121 @@ import javax.ws.rs.QueryParam;
 @Consumes("application/json")
 public class RecursoSucursal 
 {
-    MockSucursales mockSucursales = new MockSucursales();
     
+    @Inject
+    private ISucursalLogic sucursalLogic;
+
     /**
-     * Obtiene una lista con tados las sucursales.
-     * @return lista de sucursales.
-     * @throws LogicaRestauranteException Si no existe una lista de sucursales en el sistema.
+     * Convierte una lista de SucursalEntity a una lista de SucursalDetailDTO.
+     *
+     * @param entityList Lista de SucursalEntity a convertir.
+     * @return Lista de SucursalDetailDTO convertida.
+     *
+     */
+    private List<SucursalDetailDTO> listEntity2DTO(List<SucursalEntity> entityList) {
+        List<SucursalDetailDTO> list = new ArrayList<>();
+        for (SucursalEntity entity : entityList) {
+            list.add(new SucursalDetailDTO(entity));
+        }
+        return list;
+    }
+
+    /**
+     * Obtiene la lista de los registros de Sucursal
+     *
+     * @return Colección de objetos de SucursalDetailDTO
+     *
      */
     @GET
-    public List<SucursalDTO> darSucursales() throws LogicaRestauranteException 
-    {
-        return mockSucursales.darSucursales();
+    public List<SucursalDetailDTO> darSucursales() {
+
+        return listEntity2DTO(sucursalLogic.getSucursales());
     }
-    
-     /**
-     * Obtiene la sucursal con el identificador buscado.
-     * @param pId Identificador de la sucursal buscada
-     * @return SucursalDTO Sucursal buscada.
-     * @throws LogicaRestauranteException Si no existe una sucursal con el identificador dado.
+
+    /**
+     * Obtiene los datos de una instancia de Sucursal a partir de su ID
+     *
+     * @param id Identificador de la instancia a consultar
+     * @return Instancia de SucursalDetailDTO con los datos del Sucursal
+     * consultado
+     *
      */
     @GET
     @Path("{id: \\d+}")
-    public SucursalDTO darSucursal(@PathParam("id") Long pId) throws LogicaRestauranteException 
-    {
-        return mockSucursales.darSucursal(pId);
+    public SucursalDetailDTO darSucursal(@PathParam("id") Long id) {
+        return new SucursalDetailDTO(sucursalLogic.getSucursal(id));
     }
-    
-    
-     /**
-     * Crea una nueva instancia de Sucursal.
-     * @param pId Identificacion de la sucursal a crear.
-     * @param pCiudad Nombre de la sucursal a crear.
-     * @param pDireccion Direccion del sucursal a crear.
-     * @param pMesas Numero de mesas de la sucursal a crear.
-     * @param pCalificacion Calificacion de la sucursal a crear.
-     * @return SucursalDTO sucursal creada.
-     * @throws LogicaRestauranteException Si ya existe un sucursal con ese id.
+
+    /**
+     * Obtiene los datos de una instancia de Sucursal a partir de su ID
+     *
+     * @param id Identificador de la instancia a consultar
+     * @return Instancia de SucursalDetailDTO con los datos del Sucursal
+     * consultado
+     *
+     */
+    @GET
+    @Path("name")
+    public SucursalDetailDTO darSucursalPorNombre(@QueryParam("name") String name) {
+        SucursalEntity sucursalE = sucursalLogic.getSucursalByName(name);
+        if (sucursalE == null) {
+            throw new WebApplicationException("La compañía no existe", 404);
+        } else {
+            return new SucursalDetailDTO(sucursalE);
+        }
+    }
+
+    /**
+     * Se encarga de crear un Sucursal en la base de datos
+     *
+     * @param dto Objeto de SucursalDetailDTO con los datos nuevos
+     * @return Objeto de SucursalDetailDTOcon los datos nuevos y su ID
+     *
      */
     @POST
-    public SucursalDTO crearSucursal(SucursalDTO nuevaSucursal) throws LogicaRestauranteException
-    {
-        return mockSucursales.crearSucursal(nuevaSucursal);
+    public SucursalDetailDTO crearSucursal(SucursalDetailDTO dto) throws RestauranteLogicException {
+        return new SucursalDetailDTO(sucursalLogic.createSucursal(dto.toEntity()));
     }
-    
+
     /**
+     * Actualiza la información de una instancia de Sucursal
      *
-     * @param SucursalDTO Sucursal a actualizar.
-     * @throws LogicaRestauranteException Si no existe una sucursal con el id dado.
+     * @param id Identificador de la instancia de Sucursal a modificar
+     * @param dto Instancia de SucursalDetailDTO con los nuevos datos
+     * @return Instancia de SucursalDetailDTO con los datos actualizados
+     *
      */
     @PUT
     @Path("{id: \\d+}")
-    public SucursalDTO actualizarSucursal(@PathParam("id") Long pId, SucursalDTO sucursalActualizada) throws LogicaRestauranteException 
-    {
-        return mockSucursales.actualizarSucursal(sucursalActualizada);
+    public SucursalDetailDTO actualizarSucursal(@PathParam("id") Long id, SucursalDetailDTO dto) {
+        SucursalEntity entity = dto.toEntity();
+        entity.setId(id);
+        return new SucursalDetailDTO(sucursalLogic.updateSucursal(entity));
     }
-    
+
     /**
-     * Elimina la sucursal con el identificador indicado
-     * @param pId Identificador de la sucursal que se quiere eliminar.
-     * @throws LogicaRestauranteException Si no existe ninguna sucursal con el id dado.
+     * Elimina una instancia de Sucursal de la base de datos
+     *
+     * @param id Identificador de la instancia a eliminar
+     *
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void eliminarSucursal(@PathParam("id") Long pId) throws LogicaRestauranteException 
-    {
-        mockSucursales.eliminarSucursal(pId);
+    public void eliminarSucursal(@PathParam("id") Long id) {
+        sucursalLogic.deleteSucursal(id);
     }
+/*
+    @GET
+    @Path("{id: \\d+}/numberofemployees")
+    public Integer getNumberOfEmployeesSucursal(@PathParam("id") Long id) {
+        return sucursalLogic.getNumberOfEmployeesSucursal(id);
+    }
+    @Inject 
+    private ISucursalLogic sucursalLogic;
+
+
+    
+
     
     @GET
     @Path("{id: \\d+}/mesasDisponibles/{ano}/{mes}/{dia}")
@@ -109,5 +163,5 @@ public class RecursoSucursal
         Date pFecha = calendario.getTime();
         
         return mockSucursales.mesasFecha(pId, pFecha);
-    }
+    }*/
 }

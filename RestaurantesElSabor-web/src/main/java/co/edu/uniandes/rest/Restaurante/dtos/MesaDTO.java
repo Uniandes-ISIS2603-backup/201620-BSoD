@@ -5,6 +5,8 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.MesaEntity;
+
 /**
  *
  * @author zl.castaneda
@@ -19,19 +21,16 @@ public class MesaDTO
     
     private boolean estado;
     
-    private Long idSucursal;
-    
     public MesaDTO()
     {   }
     
-    public MesaDTO(Long pId, int pPiso, int pCantSillas, Long idSucursal)
+    public MesaDTO(MesaEntity p)
     {
         super();
-        this.id = pId;
-        this.piso = pPiso;
-        this.cantSillas = pCantSillas;
-        this.estado = false;
-        this.idSucursal = idSucursal;
+        this.id = p.getId();
+        this.piso = p.getPiso();
+        this.cantSillas = p.getCantSillas();
+        this.estado = p.isEstado();
     }
 
     public Long getId() 
@@ -83,16 +82,23 @@ public class MesaDTO
     {
     	return "{ id : " + id +", piso : \""+ piso +"\", cantSillas : \""+cantSillas+"\", estado : \""+estado+"\" }" ;  
     }
+
     
-    public Long getidSucursal() 
-    {
-        return idSucursal;
+    /**
+     * Convierte un objeto MesaDTO a MesaEntity.
+     *
+     * @return Nueva objeto MesaEntity.
+     * 
+     */
+    public MesaEntity toEntity() {
+        MesaEntity entity = new MesaEntity();
+        entity.setCantSillas(cantSillas);
+        entity.setEstado(estado);
+        entity.setPiso(piso);
+        entity.setId(this.getId());
+        return entity;
     }
 
-    public void setidSucursal(Long id) 
-    {
-         this.idSucursal = id;
-    }
       
     
     

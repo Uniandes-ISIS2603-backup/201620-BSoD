@@ -11,7 +11,6 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.PlatoDTO;
 
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 
 import co.edu.uniandes.rest.Restaurante.dtos.PlatoDetailDTO;
@@ -61,7 +60,7 @@ public class RecursoPlato
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<PlatoDetailDTO> darPlatos(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
+    public List<PlatoDetailDTO> darPlatos(@PathParam("idSucursal") Long idSucursal) throws RestauranteLogicException 
     {
         return listEntity2DTO(platoLogic.darPlatos(idSucursal));
     }
@@ -74,7 +73,7 @@ public class RecursoPlato
      */
     @GET
     @Path("{id: \\d+}")
-    public PlatoDetailDTO darPlato(@PathParam("id") Long pId) throws LogicaRestauranteException 
+    public PlatoDetailDTO darPlato(@PathParam("id") Long pId) throws RestauranteLogicException 
     {
         return  new PlatoDetailDTO(platoLogic.darPlato(pId));
     }
@@ -90,7 +89,7 @@ public class RecursoPlato
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
     @POST
-    public PlatoDetailDTO crearPlato(@PathParam("idSucursal") Long idSucursal, PlatoDTO nuevoPlato) throws LogicaRestauranteException, RestauranteLogicException
+    public PlatoDetailDTO crearPlato(@PathParam("idSucursal") Long idSucursal, PlatoDTO nuevoPlato) throws RestauranteLogicException
     {
         return new PlatoDetailDTO(platoLogic.crearPlato(nuevoPlato.toEntity()));
     }
@@ -102,7 +101,7 @@ public class RecursoPlato
      */
     @PUT
      @Path("{id: \\d+}")
-    public PlatoDetailDTO actualizarPlato(@PathParam("id") Long id, PlatoDetailDTO plato) throws LogicaRestauranteException 
+    public PlatoDetailDTO actualizarPlato(@PathParam("id") Long id, PlatoDetailDTO plato) throws RestauranteLogicException
     {
         PlatoEntity entity = plato.toEntity();
         entity.setId(id);
@@ -116,7 +115,7 @@ public class RecursoPlato
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void eliminarPlato(@PathParam("id") Long pId) throws LogicaRestauranteException 
+    public void eliminarPlato(@PathParam("id") Long pId) throws RestauranteLogicException
     {
        platoLogic.eliminarPlato(pId);
     }

@@ -5,12 +5,15 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IMesaLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.MesaEntity;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MesaDTO;
-import co.edu.uniandes.rest.Restaurante.mocks.MockMesas;
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
+import co.edu.uniandes.rest.Restaurante.dtos.MesaDetailDTO;
+import java.util.ArrayList;
 
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +22,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -29,65 +33,92 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class RecursoMesa 
 {
-    MockMesas mockMesas = new MockMesas();
+
+
     
+    
+    @Inject
+    private IMesaLogic mesaLogic;
+
     /**
-     * Retorna la lista de mesas.
-     * @return lista de mesas.
-     * @throws LogicaRestauranteException Si no existe una lista de mesas en el sistema.
+     * Convierte una lista de MesaEntity a una lista de MesaDetailDTO.
+     *
+     * @param entityList Lista de MesaEntity a convertir.
+     * @return Lista de MesaDetailDTO convertida.
+     *
+     */
+    private List<MesaDetailDTO> listEntity2DTO(List<MesaEntity> entityList) {
+        List<MesaDetailDTO> list = new ArrayList<>();
+        for (MesaEntity entity : entityList) {
+            list.add(new MesaDetailDTO(entity));
+        }
+        return list;
+    }
+
+    /**
+     * Obtiene todos los Mesas 
+     * @return la lista de mesas 
+     *
      */
     @GET
-    public List<MesaDTO> darMesas(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
-    {
-        return mockMesas.darMesas(idSucursal);
+    public List<MesaDetailDTO> darMesas() {
+        return listEntity2DTO(mesaLogic.getMesas());
     }
-    
-     /**
-     * Obtiene la mesa con el identificador buscado.
-     * @param pId Identificador de la mesa buscada.
-     * @return MesaDTO Mesa buscada.
-     * @throws LogicaRestauranteException Si no existe una mesa con el identificador dado.
+
+    /**
+     * Obtiene los datos de una instancia de Mesa a partir de su ID
+     *
+     * @param id Identificador de la instancia a consultar
+     * @return Instancia de MesaDetailDTO con los datos del Mesa
+     * consultado
+     *
      */
     @GET
     @Path("{id: \\d+}")
-    public MesaDTO darMesa(@PathParam("id") Long pId) throws LogicaRestauranteException 
-    {
-        return mockMesas.darMesa(pId);
+    public MesaDetailDTO darMesa(@PathParam("id") Long id) {
+        return new MesaDetailDTO(mesaLogic.getMesa(id));
     }
-    
-     /**
-     * Crea una mesa con la información enviada como parámetro.
-     * @param pNuevaMesa La instancia mesa que se quiere crear.
-     * @return MesaDTO mesa creada.
-     * @throws LogicaRestauranteException Si ya existe una mesa con ese id.
-     */
-    @POST
-    public MesaDTO crearMesa(@PathParam("idSucursal") Long idSucursal, MesaDTO pNuevaMesa) throws LogicaRestauranteException
-    {
-        return mockMesas.crearMesa(idSucursal, pNuevaMesa);
-    }
+
     
     /**
-     * Actualiza la información de la mesa.
-     * @param pMesaAActualizar Cliente a actualizar.
-     * @throws LogicaRestauranteException Si no existe un cliente con el id dado.
+     * Se encarga de crear un Mesa en la base de datos
+     *
+     * @param dto Objeto de MesaDetailDTO con los datos nuevos
+     * @return Objeto de MesaDetailDTOcon los datos nuevos y su ID
+     *
+     */
+    @POST
+    public MesaDetailDTO crearMesa(MesaDetailDTO dto) {
+        return new MesaDetailDTO(mesaLogic.createMesa(dto.toEntity()));
+    }
+
+    /**
+     * Actualiza la información de una instancia de Mesa
+     *
+     * @param id Identificador de la instancia de Mesa a modificar
+     * @param dto Instancia de MesaDetailDTO con los nuevos datos
+     * @return Instancia de MesaDetailDTO con los datos actualizados
+     *
      */
     @PUT
     @Path("{id: \\d+}")
-    public MesaDTO actualizarMesa(@PathParam("id") Long id, MesaDTO pMesaAActualizar) throws LogicaRestauranteException 
-    {
-        return mockMesas.actualizarMesa(id, pMesaAActualizar);
+    public MesaDetailDTO actualizarMesa(@PathParam("id") Long id, MesaDetailDTO dto) {
+        MesaEntity entity = dto.toEntity();
+        entity.setId(id);
+        
+        return new MesaDetailDTO(mesaLogic.updateMesa(entity));
     }
-    
+
     /**
-     * Elimina la mesa con el identificador indicado
-     * @param pId Identificador de la misa que se quiere eliminar.
-     * @throws LogicaRestauranteException Si no existe ninguna mesa con el id dado.
+     * Elimina una instancia de Mesa de la base de datos
+     *
+     * @param id Identificador de la instancia a eliminar
+     *
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void eliminarMesa(@PathParam("id") Long pId) throws LogicaRestauranteException 
-    {
-        mockMesas.eliminarMesa(pId);
+    public void eliminarMesa(@PathParam("id") Long id) {
+        mesaLogic.deleteMesa(id);
     }
+
 }
