@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.rest.Restaurante.resources;
-import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
+import co.edu.uniandes.bsod.restauranteselsabor.ejbs.TarjetaPuntosLogic;
+import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDetailDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
+import javax.inject.Inject;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -25,26 +27,29 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class RecursoTarjetaPuntos 
 {   
+    @Inject
+    TarjetaPuntosLogic tarjetaPuntosLogic;
+    
     @GET
-    public TarjetaPuntosDTO getTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
+    public TarjetaPuntosDetailDTO getTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
     {
         return null;
     }
     
     @POST
-    public TarjetaPuntosDTO createTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException
+    public TarjetaPuntosDetailDTO createTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException
     {
         return null;
     }
     
     @PUT
-    public TarjetaPuntosDTO updateTarjetaPuntos(@PathParam("idCliente") Long idCliente, TarjetaPuntosDTO pTarjetaPuntosAActualziar) throws LogicaRestauranteException 
+    public TarjetaPuntosDetailDTO updateTarjetaPuntos(@PathParam("idCliente") Long idCliente, TarjetaPuntosDetailDTO pTarjetaPuntosAActualziar) throws LogicaRestauranteException 
     {
         return null;
     }
     
     @PUT
-    public TarjetaPuntosDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws LogicaRestauranteException 
+    public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws LogicaRestauranteException 
     {
         return null;
     }

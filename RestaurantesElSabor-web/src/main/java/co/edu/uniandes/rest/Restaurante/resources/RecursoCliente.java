@@ -9,10 +9,11 @@ import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
-import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDetailDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,6 +21,7 @@ import java.util.Date;
 //
 
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -38,7 +40,9 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class RecursoCliente 
 {
-    ClienteLogic logica = new ClienteLogic();
+    @Inject
+    ClienteLogic logica;
+    
     /**
      * Retorna la lista de clientes.
      * @return lista de clientes.
@@ -47,43 +51,12 @@ public class RecursoCliente
     @GET
     public List<ClienteDetailDTO> getClientes() throws LogicaRestauranteException 
     {
-        List<ClienteEntity> clientesLogica = logica.getClientes();
         ArrayList<ClienteDetailDTO> clientesWeb = new ArrayList<>();
+        List<ClienteEntity> clientesLogica = logica.getClientes();
+        
         for(ClienteEntity clienteLogica: clientesLogica)
         {
-            Long id = clienteLogica.getId();
-            int documentoIdentidad = clienteLogica.getDocumentoIdentidad();
-            String tipoDocumentoIdentidad = clienteLogica.getTipoDocumentoIdentidad();
-            String name = clienteLogica.getName();
-            String apellidos = clienteLogica.getApellidos();
-            String direccion = clienteLogica.getDireccion();
-            int telefono = clienteLogica.getTelefono();
             
-            TarjetaPuntosEntity tarjetaPuntosLogica = clienteLogica.getTarjetaPuntos();
-            Long idTarjetaPuntos = tarjetaPuntosLogica.getId();
-            Date fechaCaducidadTarjetaPuntos = tarjetaPuntosLogica.getFechaCaducidad();
-            int acumuladoTarjetaPuntos = tarjetaPuntosLogica.getAcumulado();
-            TarjetaPuntosDTO tarjetaPuntosWeb = new TarjetaPuntosDTO(idTarjetaPuntos, fechaCaducidadTarjetaPuntos, acumuladoTarjetaPuntos);
-            
-            List<MedioPagoEntity> mediosPagoLogica = clienteLogica.getMediosPago();
-            ArrayList<MedioPagoDTO> mediosPagoWeb = new ArrayList<>();
-            for (MedioPagoEntity medioPagoLogica: mediosPagoLogica)
-            {
-                Long idMedioPagoWeb = medioPagoLogica.getId();
-                Long idClienteMedioPagoWeb = id;
-                Integer efectivoMedioPagoWeb = medioPagoLogica.getEfectivo();
-                String tarjetaMedioPagoWeb = medioPagoLogica.getTarjeta();
-                Long numerosTarjetaMedioPagoWeb = medioPagoLogica.getNumerosTarjeta();
-                Date fechaVencimientoMedioPagoWeb = medioPagoLogica.getFechaVencimiento();
-                Integer codigoSeguridadMedioPagoWeb = medioPagoLogica.getCodigoSeguridad();
-                String franquiciaMedioPagoWeb = medioPagoLogica.getFranquicia();
-                
-                MedioPagoDTO medioPagoWeb = new MedioPagoDTO(idMedioPagoWeb, idClienteMedioPagoWeb, efectivoMedioPagoWeb, 
-                tarjetaMedioPagoWeb, numerosTarjetaMedioPagoWeb, fechaVencimientoMedioPagoWeb, codigoSeguridadMedioPagoWeb, franquiciaMedioPagoWeb);
-                mediosPagoWeb.add(medioPagoWeb);
-            }
-            ClienteDetailDTO clienteWeb = new ClienteDetailDTO(id, documentoIdentidad, tipoDocumentoIdentidad, name, apellidos, direccion, telefono, tarjetaPuntosWeb, mediosPagoWeb);
-            clientesWeb.add(clienteWeb);
         }
         return clientesWeb;
     }
@@ -131,9 +104,9 @@ public class RecursoCliente
      */
     @DELETE
     @Path("{idCliente}")
-    public void deleteCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
+    public void deleteCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException
     {
-       
+       logica.deleteCliente(pId);
     }
     
 }

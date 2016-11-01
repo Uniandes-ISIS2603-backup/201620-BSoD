@@ -14,9 +14,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author jdguz
  */
 @XmlRootElement
-public class MedioPagoDTO
+public class MedioPagoDetailDTO extends MedioPagoDTO
 {
     private Long id;
+
+    private ClienteDTO idCliente;
     
     private Integer efectivo;
 
@@ -30,34 +32,8 @@ public class MedioPagoDTO
 
     private String franquicia;
     
-    public MedioPagoDTO()
+    public MedioPagoDetailDTO()
     {   }
-    
-    public MedioPagoDTO(MedioPagoEntity medioPagoEntity)
-    {
-        this.id = medioPagoEntity.getId();
-        this.efectivo = medioPagoEntity.getEfectivo();
-        this.tarjeta = medioPagoEntity.getTarjeta();
-        this.numerosTarjeta = medioPagoEntity.getNumerosTarjeta();
-        this.fechaVencimiento = medioPagoEntity.getFechaVencimiento();
-        this.codigoSeguridad = medioPagoEntity.getCodigoSeguridad();
-        this.franquicia = medioPagoEntity.getFranquicia();
-    }
-    
-    public MedioPagoEntity toEntity()
-    {
-        MedioPagoEntity medioPagoEntity = new MedioPagoEntity();
-        
-        medioPagoEntity.setId(this.id);
-        medioPagoEntity.setEfectivo(this.efectivo);
-        medioPagoEntity.setTarjeta(this.tarjeta);
-        medioPagoEntity.setNumerosTarjeta(this.numerosTarjeta);
-        medioPagoEntity.setFechaVencimiento(this.fechaVencimiento);
-        medioPagoEntity.setCodigoSeguridad(this.codigoSeguridad);
-        medioPagoEntity.setFranquicia(this.franquicia);
-        
-        return medioPagoEntity;
-    }
     
     public Long getId() {
         return id;
@@ -65,6 +41,14 @@ public class MedioPagoDTO
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ClienteDTO getCliente() {
+        return idCliente;
+    }
+
+    public void setCliente(ClienteDTO cliente) {
+        this.idCliente = idCliente;
     }
 
     public Integer getEfectivo() {
@@ -119,6 +103,7 @@ public class MedioPagoDTO
     public String toString()
     {
     	return "{ id : " + getId() +","+
+                "cliente :" + getCliente() +", "+
                 "efectivo : \""+ getEfectivo() +"\", "+
                 "tarjeta : \""+getTarjeta()+"\", "+
                 "numeros de Tarjeta : \""+getNumerosTarjeta()+"\", "+

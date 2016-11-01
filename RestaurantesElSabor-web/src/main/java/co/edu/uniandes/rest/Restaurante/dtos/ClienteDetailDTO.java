@@ -5,13 +5,18 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
 import java.util.ArrayList;
+import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author jdguz
  */
-public class ClienteDetailDTO 
+@XmlRootElement
+public class ClienteDetailDTO extends ClienteDTO
 {
     private Long id;
     
@@ -32,18 +37,33 @@ public class ClienteDetailDTO
     private ArrayList<MedioPagoDTO> mediosPago;
     
     public ClienteDetailDTO()
-    {   }
-
-    public ClienteDetailDTO(Long id, int documentoIdentidad, String tipoDocumentoIdentidad, String name, String apellidos, String direccion, int telefono, TarjetaPuntosDTO tarjetaPuntos, ArrayList<MedioPagoDTO> mediosPago) {
-        this.id = id;
-        this.documentoIdentidad = documentoIdentidad;
-        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-        this.name = name;
-        this.apellidos = apellidos;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.tarjetaPuntos = tarjetaPuntos;
-        this.mediosPago = mediosPago;
+    {   super();    }
+    
+    public ClienteDetailDTO(ClienteEntity clienteEntity) 
+    {
+        super(clienteEntity);
+        
+        this.tarjetaPuntos = new TarjetaPuntosDTO(clienteEntity.getTarjetaPuntos());
+        
+        List<MedioPagoEntity> mediosPagoLogic = clienteEntity.getMediosPago();
+        for(MedioPagoEntity medioPagoLogic : mediosPagoLogic) 
+        {
+            this.mediosPago.add(new MedioPagoDTO(medioPagoLogic));
+        }
+    }
+    
+    public ClienteEntity toEntity()
+    {
+        ClienteEntity clienteEntity = super.toEntity();
+        
+        clienteEntity.setTarjetaPuntos(this.tarjetaPuntos.toEntity());
+        
+        for(MedioPagoDTO medioPagoDTO: mediosPago)
+        {
+            clienteEntity.getMediosPago().add(medioPagoDTO.toEntity());
+        }
+        
+        return clienteEntity;
     }
 
     public Long getId() 

@@ -50,8 +50,13 @@ public class ClienteLogic implements IClienteLogic
         return persistence.update(clienteEntity);
     }
     
-    public void deleteCliente(Long id)
+    public void deleteCliente(Long id) throws RestauranteLogicException
     {
+        ClienteEntity cliente = persistence.find(id);
+        if(cliente!=null)
+        {
+            throw new RestauranteLogicException("Se intento eliminar un cliente que no existe.");
+        }
         persistence.delete(id);
     }
     

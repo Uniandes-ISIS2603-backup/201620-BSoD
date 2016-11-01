@@ -5,13 +5,16 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author jdguz
  */
-public class TarjetaPuntosDTO 
+@XmlRootElement
+public class TarjetaPuntosDTO
 {   
     private Long id;
     
@@ -22,13 +25,24 @@ public class TarjetaPuntosDTO
     public TarjetaPuntosDTO()
     {   }
 
-    public TarjetaPuntosDTO(Long id, Date fechaCaducidad, int acumulado) 
+    public TarjetaPuntosDTO(TarjetaPuntosEntity tarjetaPuntosEntity)
     {
-        this.id = id;
-        this.fechaCaducidad = fechaCaducidad;
-        this.acumulado = acumulado;
+        this.id = tarjetaPuntosEntity.getId();
+        this.fechaCaducidad = tarjetaPuntosEntity.getFechaCaducidad();
+        this.acumulado = tarjetaPuntosEntity.getAcumulado();
     }
-
+    
+    public TarjetaPuntosEntity toEntity()
+    {
+        TarjetaPuntosEntity tarjetaPuntosEntity = new TarjetaPuntosEntity();
+        
+        tarjetaPuntosEntity.setId(this.id);
+        tarjetaPuntosEntity.setFechaCaducidad(this.fechaCaducidad);
+        tarjetaPuntosEntity.setAcumulado(this.acumulado);
+        
+        return tarjetaPuntosEntity;
+    }
+    
     public Long getId() 
     {
         return id;

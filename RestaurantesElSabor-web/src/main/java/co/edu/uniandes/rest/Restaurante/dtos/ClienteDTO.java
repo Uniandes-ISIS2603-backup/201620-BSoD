@@ -5,12 +5,15 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author jdguz
  */
+@XmlRootElement
 public class ClienteDTO 
 {
     private Long id;
@@ -29,15 +32,31 @@ public class ClienteDTO
     
     public ClienteDTO()
     {   }
-
-    public ClienteDTO(Long id, int documentoIdentidad, String tipoDocumentoIdentidad, String name, String apellidos, String direccion, int telefono) {
-        this.id = id;
-        this.documentoIdentidad = documentoIdentidad;
-        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-        this.name = name;
-        this.apellidos = apellidos;
-        this.direccion = direccion;
-        this.telefono = telefono;
+    
+    public ClienteDTO(ClienteEntity clienteEntity)
+    {
+        this.id = clienteEntity.getId();
+        this.documentoIdentidad = clienteEntity.getDocumentoIdentidad();
+        this.tipoDocumentoIdentidad = clienteEntity.getTipoDocumentoIdentidad();
+        this.name = clienteEntity.getName();
+        this.apellidos = clienteEntity.getApellidos();
+        this.direccion = clienteEntity.getDireccion();
+        this.telefono = clienteEntity.getTelefono();
+    }
+    
+    public ClienteEntity toEntity()
+    {
+        ClienteEntity clienteEntity = new ClienteEntity();
+        
+        clienteEntity.setId(this.id);
+        clienteEntity.setDocumentoIdentidad(this.documentoIdentidad);
+        clienteEntity.setTipoDocumentoIdentidad(this.tipoDocumentoIdentidad);
+        clienteEntity.setName(this.name);
+        clienteEntity.setApellidos(this.apellidos);
+        clienteEntity.setDireccion(this.direccion);
+        clienteEntity.setTelefono(this.telefono);
+        
+        return clienteEntity;
     }
 
     public Long getId() 
