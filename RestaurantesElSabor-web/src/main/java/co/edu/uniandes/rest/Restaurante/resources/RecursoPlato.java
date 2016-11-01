@@ -6,11 +6,16 @@
 package co.edu.uniandes.rest.Restaurante.resources;
 
 import co.edu.uniandes.bsod.restauranteselsabor.api.IPlatoLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.ejbs.PlatoLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.PlatoDTO;
 
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
-import co.edu.uniandes.csw.company.api.IPlatoLogic;
+
+import co.edu.uniandes.rest.Restaurante.dtos.PlatoDetailDTO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -33,7 +38,22 @@ public class RecursoPlato
 {
     @Inject
     private IPlatoLogic platoLogic;
-    MockPlato mockPlato = new MockPlato();
+   
+     /**
+     * Convierte una lista de PlatoEntity a una lista de PlatoDetailDTO.
+     *
+     * @param entityList Lista de PlatoEntity a convertir.
+     * @return Lista de PlatoDetailDTO convertida.
+     *
+     */
+      private List<PlatoDetailDTO> listEntity2DTO(List<PlatoEntity> entityList) {
+        List<PlatoDetailDTO> list = new ArrayList<>();
+        for (PlatoEntity entity : entityList) {
+            list.add(new PlatoDetailDTO(entity));
+        }
+        return list;
+    }
+
     
     /**
      * Obtiene una lista con todos los platos.
@@ -41,9 +61,9 @@ public class RecursoPlato
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<PlatoDTO> darPlatos(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
+    public List<PlatoDetailDTO> darPlatos(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
     {
-        return mockPlato.darPlatos(idSucursal);
+        return listEntity2DTO(platoLogic.darPlatos(idSucursal));
     }
     
      /**
@@ -54,9 +74,9 @@ public class RecursoPlato
      */
     @GET
     @Path("{id: \\d+}")
-    public PlatoDTO darPlato(@PathParam("id") Long pId) throws LogicaRestauranteException 
+    public PlatoDetailDTO darPlato(@PathParam("id") Long pId) throws LogicaRestauranteException 
     {
-        return mockPlato.darPlato(pId);
+        return  new PlatoDetailDTO(platoLogic.darPlato(pId));
     }
     
     
@@ -70,9 +90,9 @@ public class RecursoPlato
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
     @POST
-    public PlatoDTO crearPlato(@PathParam("idSucursal") Long idSucursal, PlatoDTO nuevoPlato) throws LogicaRestauranteException
+    public PlatoDetailDTO crearPlato(@PathParam("idSucursal") Long idSucursal, PlatoDTO nuevoPlato) throws LogicaRestauranteException, RestauranteLogicException
     {
-        return mockPlato.crearPlato(idSucursal, nuevoPlato);
+        return new PlatoDetailDTO(platoLogic.crearPlato(nuevoPlato.toEntity()));
     }
     
     /**
@@ -82,9 +102,11 @@ public class RecursoPlato
      */
     @PUT
      @Path("{id: \\d+}")
-    public PlatoDTO actualizarPlato(@PathParam("id") Long id, PlatoDTO plato) throws LogicaRestauranteException 
+    public PlatoDetailDTO actualizarPlato(@PathParam("id") Long id, PlatoDetailDTO plato) throws LogicaRestauranteException 
     {
-        return mockPlato.actualizarPlato(id, plato);
+        PlatoEntity entity = plato.toEntity();
+        entity.setId(id);
+        return new PlatoDetailDTO(platoLogic.actualizarPlato(entity));
     }
     
     /**
@@ -96,6 +118,6 @@ public class RecursoPlato
     @Path("{id: \\d+}")
     public void eliminarPlato(@PathParam("id") Long pId) throws LogicaRestauranteException 
     {
-        mockPlato.eliminarPlato(pId);
+       platoLogic.eliminarPlato(pId);
     }
 }
