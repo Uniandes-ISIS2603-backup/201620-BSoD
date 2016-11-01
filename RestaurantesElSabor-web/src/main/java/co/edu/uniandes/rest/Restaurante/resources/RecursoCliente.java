@@ -10,6 +10,7 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.TarjetaPuntosEntity;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
@@ -44,10 +45,10 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<ClienteDTO> getClientes() throws LogicaRestauranteException 
+    public List<ClienteDetailDTO> getClientes() throws LogicaRestauranteException 
     {
         List<ClienteEntity> clientesLogica = logica.getClientes();
-        ArrayList<ClienteDTO> clientesWeb = new ArrayList<>();
+        ArrayList<ClienteDetailDTO> clientesWeb = new ArrayList<>();
         for(ClienteEntity clienteLogica: clientesLogica)
         {
             Long id = clienteLogica.getId();
@@ -81,7 +82,7 @@ public class RecursoCliente
                 tarjetaMedioPagoWeb, numerosTarjetaMedioPagoWeb, fechaVencimientoMedioPagoWeb, codigoSeguridadMedioPagoWeb, franquiciaMedioPagoWeb);
                 mediosPagoWeb.add(medioPagoWeb);
             }
-            ClienteDTO clienteWeb = new ClienteDTO(id, documentoIdentidad, tipoDocumentoIdentidad, name, apellidos, direccion, telefono, tarjetaPuntosWeb, mediosPagoWeb);
+            ClienteDetailDTO clienteWeb = new ClienteDetailDTO(id, documentoIdentidad, tipoDocumentoIdentidad, name, apellidos, direccion, telefono, tarjetaPuntosWeb, mediosPagoWeb);
             clientesWeb.add(clienteWeb);
         }
         return clientesWeb;
