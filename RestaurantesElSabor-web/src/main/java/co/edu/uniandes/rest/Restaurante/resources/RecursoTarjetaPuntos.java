@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.TarjetaPuntosLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDetailDTO;
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import javax.inject.Inject;
 
 import javax.ws.rs.Consumes;
@@ -31,32 +31,32 @@ public class RecursoTarjetaPuntos
     TarjetaPuntosLogic tarjetaPuntosLogic;
     
     @GET
-    public TarjetaPuntosDetailDTO getTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
+    public TarjetaPuntosDetailDTO getTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException  
     {
-        return null;
+        return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.getTarjetaPuntos(idCliente));
     }
     
     @POST
-    public TarjetaPuntosDetailDTO createTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException
+    public TarjetaPuntosDetailDTO createTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException 
     {
-        return null;
+        return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.createTarjetaPuntos(idCliente));
     }
     
     @PUT
-    public TarjetaPuntosDetailDTO updateTarjetaPuntos(@PathParam("idCliente") Long idCliente, TarjetaPuntosDetailDTO pTarjetaPuntosAActualziar) throws LogicaRestauranteException 
+    public TarjetaPuntosDetailDTO updateTarjetaPuntos(@PathParam("idCliente") Long idCliente, TarjetaPuntosDetailDTO pTarjetaPuntosAActualziar) throws RestauranteLogicException  
     {
-        return null;
+        return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.updateTarjetaPuntos(idCliente, pTarjetaPuntosAActualziar.toEntity()));
     }
     
     @PUT
-    public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws LogicaRestauranteException 
+    public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws RestauranteLogicException  
     {
-        return null;
+        return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(idCliente, pCompra));
     }
     
     @DELETE
-    public void deleteTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
+    public void deleteTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException 
     {
-        
+        tarjetaPuntosLogic.deleteTarjetaPuntos(idCliente);
     }
 }

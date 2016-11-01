@@ -14,7 +14,6 @@ import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDetailDTO;
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,7 +40,7 @@ import javax.ws.rs.Produces;
 public class RecursoCliente 
 {
     @Inject
-    ClienteLogic logica;
+    ClienteLogic clienteLogic;
     
     /**
      * Retorna la lista de clientes.
@@ -49,14 +48,15 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<ClienteDetailDTO> getClientes() throws LogicaRestauranteException 
+    public List<ClienteDetailDTO> getClientes() throws RestauranteLogicException 
     {
         ArrayList<ClienteDetailDTO> clientesWeb = new ArrayList<>();
-        List<ClienteEntity> clientesLogica = logica.getClientes();
+        List<ClienteEntity> clientesLogica = clienteLogic.getClientes();
         
         for(ClienteEntity clienteLogica: clientesLogica)
         {
-            
+            ClienteDetailDTO clienteDetailDTO = new ClienteDetailDTO(clienteLogica);
+            clientesWeb.add(clienteDetailDTO);
         }
         return clientesWeb;
     }
@@ -69,9 +69,10 @@ public class RecursoCliente
      */
     @GET
     @Path("{idCliente}")
-    public ClienteDTO getCliente(@PathParam("idCliente") Long pId) throws LogicaRestauranteException 
+    public ClienteDetailDTO getCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException 
     {
-        return null;
+        ClienteEntity clienteEntity = clienteLogic.getCliente(pId);
+        return new ClienteDetailDTO(clienteEntity);
     }
     
      /**
@@ -81,9 +82,10 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
     @POST
-    public ClienteDTO createCliente(ClienteDTO pNuevoCliente) throws LogicaRestauranteException
+    public ClienteDetailDTO createCliente(ClienteDTO pNuevoCliente) throws RestauranteLogicException
     {
-        return null;
+        ClienteEntity clienteEntity = pNuevoCliente.toEntity();
+        return new ClienteDetailDTO(clienteLogic.createCliente(clienteEntity));
     }
     
     /**
@@ -92,9 +94,9 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe un cliente con el id dado.
      */
     @PUT
-    public ClienteDTO updateCliente(ClienteDTO pClienteAActualizar) throws LogicaRestauranteException 
+    public ClienteDTO updateCliente(ClienteDTO pClienteAActualizar) throws RestauranteLogicException
     {
-        return null;
+        return new ClienteDetailDTO(clienteLogic.updateCliente(pClienteAActualizar.toEntity()));
     }
     
     /**
@@ -106,7 +108,7 @@ public class RecursoCliente
     @Path("{idCliente}")
     public void deleteCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException
     {
-       logica.deleteCliente(pId);
+       clienteLogic.deleteCliente(pId);
     }
     
 }
