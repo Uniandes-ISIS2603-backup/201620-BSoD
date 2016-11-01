@@ -1,22 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
 import java.util.Date;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author jdguz
+ * @author aj.paredes10
  */
-@XmlRootElement
+
+
 public class MedioPagoDTO
 {
+    //ATRIBUTOS ATRIBUTOS ATRIBUTOS ATRIBUTOS ----------
+
     private Long id;
+
+    //private Long idCliente;
     
     private Integer efectivo;
 
@@ -32,89 +31,96 @@ public class MedioPagoDTO
     
     public MedioPagoDTO()
     {   }
-    
-    public MedioPagoDTO(MedioPagoEntity medioPagoEntity)
+
+    //CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR CONSTRUCTOR-----------
+
+    public MedioPagoDTO(MedioPagoEntity entity)
     {
-        this.id = medioPagoEntity.getId();
-        this.efectivo = medioPagoEntity.getEfectivo();
-        this.tarjeta = medioPagoEntity.getTarjeta();
-        this.numerosTarjeta = medioPagoEntity.getNumerosTarjeta();
-        this.fechaVencimiento = medioPagoEntity.getFechaVencimiento();
-        this.codigoSeguridad = medioPagoEntity.getCodigoSeguridad();
-        this.franquicia = medioPagoEntity.getFranquicia();
+        if(entity != null){
+        this.id = entity.getId();
+        this.efectivo = entity.getEfectivo();
+        this.tarjeta = entity.getTarjeta();
+        this.numerosTarjeta = entity.getNumerosTarjeta();
+        this.fechaVencimiento=entity.getFechaVencimiento();
+        this.codigoSeguridad=entity.getCodigoSeguridad();
+        this.franquicia=entity.getFranquicia();
+        }
+        
     }
     
-    public MedioPagoEntity toEntity()
-    {
-        MedioPagoEntity medioPagoEntity = new MedioPagoEntity();
-        
-        medioPagoEntity.setId(this.id);
-        medioPagoEntity.setEfectivo(this.efectivo);
-        medioPagoEntity.setTarjeta(this.tarjeta);
-        medioPagoEntity.setNumerosTarjeta(this.numerosTarjeta);
-        medioPagoEntity.setFechaVencimiento(this.fechaVencimiento);
-        medioPagoEntity.setCodigoSeguridad(this.codigoSeguridad);
-        medioPagoEntity.setFranquicia(this.franquicia);
-        
-        return medioPagoEntity;
+     public MedioPagoEntity toEntity() {
+        MedioPagoEntity entity = new MedioPagoEntity();
+        entity.setId(this.getId());
+        entity.setEfectivo(this.getEfectivo());
+        entity.setTarjeta(this.getTarjeta());
+        entity.setNumerosTarjeta(this.getNumerosTarjeta());
+        entity.setFechaVencimiento(this.getFechaVencimiento());
+        entity.setCodigoSeguridad(this.getCodigoSeguridad());
+        entity.setFranquicia(this.getFranquicia());
+        return entity;
     }
-    
+
+    //ASIGNAR ASIGNAR ASIGNAR ASIGNAR---------------------
+
+    public void setId(Long pId)
+    {
+        id = pId;
+    }
+   // public void setIdCliente(Long pIdCliente)
+   // {
+   //     idCliente=pIdCliente;
+   // }
+    public void setEfectivo(Integer pEfectivo)
+    {
+      efectivo=pEfectivo;
+    }
+    public void setTarjeta(String pTarjeta)
+    {
+      tarjeta=pTarjeta;
+    }
+    public void setNumerosTarjeta(Long pNumerosTarjeta)
+    {
+      numerosTarjeta=pNumerosTarjeta;
+    }
+    public void setFechaVencimiento(Date pFechaVencimiento)
+    {
+      fechaVencimiento=pFechaVencimiento;
+    }
+    public void setCodigoSeguridad(Integer pCodigoSeguridad)
+    {
+      codigoSeguridad=pCodigoSeguridad;
+    }
+    public void setFranquicia(String pFranquicia)
+    {
+      franquicia=pFranquicia;
+    }
+
+    //DAR DAR DAR DAR DAR----------------------------------
+
     public Long getId() {
         return id;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+//    public Long getIdCliente(){
+//        return idCliente;
+//    }
+    public Integer getEfectivo(){
+      return efectivo;
     }
-
-    public Integer getEfectivo() {
-        return efectivo;
+    public String getTarjeta(){
+      return tarjeta;
     }
-
-    public void setEfectivo(Integer efectivo) {
-        this.efectivo = efectivo;
+    public Long getNumerosTarjeta(){
+      return numerosTarjeta;
     }
-
-    public String getTarjeta() {
-        return tarjeta;
+    public Date getFechaVencimiento(){
+      return fechaVencimiento;
     }
-
-    public void setTarjeta(String tarjeta) {
-        this.tarjeta = tarjeta;
+    public Integer getCodigoSeguridad(){
+      return codigoSeguridad;
     }
-
-    public Long getNumerosTarjeta() {
-        return numerosTarjeta;
+    public String getFranquicia(){
+      return franquicia;
     }
-
-    public void setNumerosTarjeta(Long numerosTarjeta) {
-        this.numerosTarjeta = numerosTarjeta;
-    }
-
-    public Date getFechaVencimiento() {
-        return fechaVencimiento;
-    }
-
-    public void setFechaVencimiento(Date fechaVencimiento) {
-        this.fechaVencimiento = fechaVencimiento;
-    }
-
-    public Integer getCodigoSeguridad() {
-        return codigoSeguridad;
-    }
-
-    public void setCodigoSeguridad(Integer codigoSeguridad) {
-        this.codigoSeguridad = codigoSeguridad;
-    }
-
-    public String getFranquicia() {
-        return franquicia;
-    }
-
-    public void setFranquicia(String franquicia) {
-        this.franquicia = franquicia;
-    }
-
     @Override
     public String toString()
     {
