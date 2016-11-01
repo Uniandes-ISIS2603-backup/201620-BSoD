@@ -19,12 +19,6 @@
     <dependencies>
         <dependency>
             <groupId>co.edu.uniandes.bsod</groupId>
-            <artifactId>restauranteselsabor-back</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>co.edu.uniandes.bsod</groupId>
             <artifactId>RestaurtantesElSabor-back</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
