@@ -5,36 +5,53 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.ejbs;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IPlatoLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.PlatoPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author zl.castaneda10
  */
-public class PlatoLogic {
+@Stateless
+public class PlatoLogic implements IPlatoLogic{
     
-    @Inject private PlatoPersistence persistence;
-    
-    public List<PlatoEntity> getPlatos(){
+    @Inject 
+    private PlatoPersistence persistence;
+
+    @Override
+    public List<PlatoEntity> darPlatos(Long idSucursal) {
         return persistence.findAll();
     }
-    
-    public PlatoEntity getPlato(Long id){
+
+    @Override
+    public PlatoEntity darPlato(Long id) {
         return persistence.find(id);
     }
-    
-    public PlatoEntity createPlato(PlatoEntity platoEntity){
-        return persistence.create(platoEntity);
+
+    //los precios de los platos no peuden superar los $100.000
+    @Override
+    public PlatoEntity crearPlato(PlatoEntity plato) throws RestauranteLogicException
+    {
+        
+       if (plato.getPrecio() > 100000){
+           throw new RestauranteLogicException("No se peuden crear paltos con valor superior a los $100.000");
+       }else{
+           return persistence.create(plato);
+       } 
     }
-    
-    public PlatoEntity update (PlatoEntity platoEntity){
-            return persistence.update(platoEntity);
+
+    @Override
+    public PlatoEntity actualizarPlato(PlatoEntity plato) {
+        return persistence.update(plato);
     }
-    
-    public void deletePlato(Long id){
+
+    @Override
+    public void eliminarPlato(Long id) {
         persistence.delete(id);
     }
     

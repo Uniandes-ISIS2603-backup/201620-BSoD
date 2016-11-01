@@ -5,10 +5,14 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author zl.castaneda
  */
+@XmlRootElement
 public class PlatoDTO 
 {
     private Long id;
@@ -26,14 +30,26 @@ public class PlatoDTO
     public PlatoDTO()
     {   }
     
-    public PlatoDTO(Long pId, String pNombre, int pPrecio, String pDescripcion, Long idSucursal)
+    public PlatoDTO(PlatoEntity entity)
     {
-        super();
-        this.id = pId;
-        this.nombre = pNombre;
-        this.precio = pPrecio;
-        this.descripcion = pDescripcion;
-        this.idSucursal = idSucursal;
+     if(entity != null){
+        this.id = entity.getId();
+        this.nombre = entity.getName();
+        this.precio = entity.getPrecio();
+        this.descripcion = entity.getDescripcion();
+        this.idSucursal = entity.getSucursal().getId();
+     }
+       
+    }
+    
+    
+    public PlatoEntity toEntity(){
+       PlatoEntity entity = new PlatoEntity();
+       entity.setId(this.getId());
+       entity.setName(this.getNombre());
+       entity.setPrecio(this.getPrecio());
+       entity.setDescripcion(this.getDescripcion());
+       return entity;
     }
 
     public Long getId() 

@@ -5,10 +5,12 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IPlatoLogic;
 import co.edu.uniandes.rest.Restaurante.dtos.PlatoDTO;
-import co.edu.uniandes.rest.Restaurante.mocks.MockPlato;
+
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
+import co.edu.uniandes.csw.company.api.IPlatoLogic;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -18,6 +20,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.inject.Inject;
 
 /**
  *
@@ -28,6 +31,8 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 public class RecursoPlato 
 {
+    @Inject
+    private IPlatoLogic platoLogic;
     MockPlato mockPlato = new MockPlato();
     
     /**
