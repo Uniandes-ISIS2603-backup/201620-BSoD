@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDTO;
-import co.edu.uniandes.rest.Restaurante.mocks.MockTarjetasPuntos;
 import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
 
 import javax.ws.rs.Consumes;
@@ -25,37 +24,34 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoTarjetaPuntos 
-{
-    MockTarjetasPuntos mockTarjetasPuntos = new MockTarjetasPuntos();
-    
+{   
     @GET
     public TarjetaPuntosDTO getTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
     {
-        return mockTarjetasPuntos.darTarjetaPuntos(idCliente);
+        return null;
     }
     
     @POST
     public TarjetaPuntosDTO createTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException
     {
-        return mockTarjetasPuntos.crearTarjetaPuntos(idCliente);
+        return null;
     }
     
     @PUT
     public TarjetaPuntosDTO updateTarjetaPuntos(@PathParam("idCliente") Long idCliente, TarjetaPuntosDTO pTarjetaPuntosAActualziar) throws LogicaRestauranteException 
     {
-        return mockTarjetasPuntos.actualizarTarjetaPuntos(idCliente, pTarjetaPuntosAActualziar);
+        return null;
     }
     
     @PUT
     public TarjetaPuntosDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws LogicaRestauranteException 
     {
-        return mockTarjetasPuntos.sumarPuntosTarjetaPuntos(idCliente, pCompra);
+        return null;
     }
-    
     
     @DELETE
     public void deleteTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException 
     {
-        mockTarjetasPuntos.eliminarTarjetaPuntos(idCliente);
+        
     }
 }

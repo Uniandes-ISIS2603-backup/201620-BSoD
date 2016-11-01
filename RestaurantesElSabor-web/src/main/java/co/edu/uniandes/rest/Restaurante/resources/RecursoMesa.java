@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
-import co.edu.uniandes.rest.Restaurante.mocks.MockClientes;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MesaDTO;
 import co.edu.uniandes.rest.Restaurante.mocks.MockMesas;

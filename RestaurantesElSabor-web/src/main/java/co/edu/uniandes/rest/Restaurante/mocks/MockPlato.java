@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class MockPlato 
 {	
     // Objeto para presentar logs de las operaciones
-    private final static Logger logger = Logger.getLogger(MockClientes.class.getName());
+    private final static Logger logger = Logger.getLogger(MockPlato.class.getName());
 	
     // Arreglo de platos.
     private static ArrayList<PlatoDTO> platos;
