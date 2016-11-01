@@ -6,7 +6,6 @@
 package co.edu.uniandes.bsod.restauranteselsabor.persistence;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
-import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +25,7 @@ public class FacturaPersistence {
     @PersistenceContext( unitName="Bsod")
     protected EntityManager em;
     
-     public FacturaEntity find(Long id) {
+     public FacturaEntity find(Long idSucursal, Long id) {
         LOGGER.log(Level.INFO, "Consultando factura con id={0}", id);
         return em.find(FacturaEntity.class, id);
     }

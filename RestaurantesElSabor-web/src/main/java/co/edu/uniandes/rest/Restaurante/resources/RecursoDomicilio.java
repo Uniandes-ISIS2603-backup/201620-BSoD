@@ -1,9 +1,13 @@
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IDomicilioLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.IFacturaLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.DomicilioEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.DomicilioDTO;
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
-import co.edu.uniandes.rest.Restaurante.mocks.MockDomicilios;
+import co.edu.uniandes.rest.Restaurante.dtos.DomicilioDetailDTO;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -21,20 +25,14 @@ import javax.ws.rs.Produces;
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoDomicilio {
+    
+    @Inject
+    private IFacturaLogic facturaLogic;
+    
+    @Inject
+    private IDomicilioLogic domicilioLogic;
 
-    MockDomicilios mockDomicilio = new MockDomicilios();
 
-    /**
-     * Retorna la lista de domicilios.
-     *
-     * @return lista de domicilios.
-     * @throws LogicaRestauranteException Si no existe una lista de domicilios
-     * en el sistema.
-     */
-    @GET
-    public List<DomicilioDTO> getDomicilios(@PathParam("idCliente") Long idCliente) throws LogicaRestauranteException {
-        return mockDomicilio.getDomicilios(idCliente);
-    }
 
     /**
      * Obtiene el domicilio con el identificador buscado.
@@ -46,8 +44,9 @@ public class RecursoDomicilio {
      */
     @GET
     @Path("{id: \\d+}")
-    public DomicilioDTO getDomicilio(@PathParam("idCliente") Long idCliente,@PathParam("id") Long id ) throws LogicaRestauranteException {
-        return mockDomicilio.getDomicilio(idCliente, id);
+    public DomicilioDTO getDomicilio(@PathParam("id") Long id ) throws RestauranteLogicException {
+        DomicilioEntity entity = domicilioLogic.getDomicilio(id);
+        return new DomicilioDTO(entity);
     }
 
     /**
@@ -58,8 +57,8 @@ public class RecursoDomicilio {
      * @throws LogicaRestauranteException Si ya existe un domicilio con ese id.
      */
     @POST
-    public DomicilioDTO createDomicilio(@PathParam("idCliente") Long idCliente, DomicilioDTO domi) throws LogicaRestauranteException {
-        return mockDomicilio.createDomicilio(idCliente, domi);
+    public DomicilioDetailDTO createDomicilio(DomicilioDTO domi) throws RestauranteLogicException {
+        return new DomicilioDetailDTO(domicilioLogic.createDomicilio(domi.toEntity()));
     }
 
     /**
@@ -70,8 +69,8 @@ public class RecursoDomicilio {
      */
     @PUT
     @Path("{id: \\d+}")
-    public DomicilioDTO uptadeDomicilio(@PathParam("idCliente") Long idCliente,@PathParam("id") Long id, DomicilioDTO domi) throws LogicaRestauranteException {
-        return mockDomicilio.updateDomicilio(idCliente, id, domi);
+    public DomicilioDetailDTO uptadeDomicilio(DomicilioDTO domi) throws RestauranteLogicException {
+        return new DomicilioDetailDTO(domicilioLogic.updateDomicilio(domi.toEntity()));
     }
 
     /**
@@ -82,7 +81,7 @@ public class RecursoDomicilio {
      */
     @DELETE
     @Path("{id: \\d+}")
-    public void deleteDomicilio(@PathParam("idCliente") Long idCliente, @PathParam("id") Long id) throws LogicaRestauranteException {
-        mockDomicilio.deleteDomicilio(idCliente, id);
+    public void deleteDomicilio(@PathParam("id") Long id) throws RestauranteLogicException {
+        domicilioLogic.deleteDomicilio(id);
     }
 }

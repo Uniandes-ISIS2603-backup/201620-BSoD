@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
 import java.util.Date;
 
 /**
@@ -19,6 +20,7 @@ public class FacturaDTO
     private Long id;
     private Long idCliente;
     private Long idsucursal;
+    private Long idDomicilio;
     private Date fecha;
     private int total;
     
@@ -29,17 +31,25 @@ public class FacturaDTO
     {   }
     /**
      * Constructor por con parámetros dados
-     * @param pId
-     * @param pTotal
+     * @param entity
      */
-    public FacturaDTO(Long pId,Long pIdCliente,Long pIdSucursal,Date fecha, int pTotal)
+    public FacturaDTO(FacturaEntity entity)
     {
         super();
-        this.id = pId;
-        this.idCliente = pIdCliente;
-        this.idsucursal = pIdSucursal;
-        this.fecha = fecha;
-        this.total = pTotal;
+        this.id = entity.getId();
+        this.idCliente = entity.getCliente().getId();
+        this.idsucursal = entity.getSucursal().getId();
+        this.idDomicilio = entity.getDomicilio().getId();
+        this.fecha = entity.getFecha();
+        this.total = entity.getTotal();
+    }
+    
+       public FacturaEntity toEntity(){
+       FacturaEntity entity = new FacturaEntity();
+       entity.setId(this.getId());
+       entity.setTotal(this.getTotal());
+       entity.setFecha(this.getFecha());
+       return entity;
     }
     
     /**
@@ -131,6 +141,21 @@ public class FacturaDTO
     public void setIdSucursal(Long idSucursal) 
     {
         this.idsucursal = idSucursal;
+    }
+    
+    public Long getIdDomicilio() 
+    {
+        return idDomicilio;
+    }
+    
+    /**
+     * Asignar un nuevo id.
+     * @param idDomicilio 
+     */
+
+    public void setIdDomicilio(Long idDomicilio) 
+    {
+        this.idDomicilio = idDomicilio;
     }
         
     /**

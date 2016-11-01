@@ -5,7 +5,9 @@
  */
 package co.edu.uniandes.restauranteselsabor.test.persistence;
 
+
 import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.FacturaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -141,17 +143,16 @@ public class FacturaPersistenceTest {
     public void findTest() 
     {
         FacturaEntity entityTest = listTest.get(0);
-        FacturaEntity entityPersistence = facturaPersistence.find(entityTest.getId());
+        SucursalEntity suc = entityTest.getSucursal();
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        System.out.println(suc.getCiudad());
+        FacturaEntity entityPersistence = facturaPersistence.find(suc.getId(), entityTest.getId());
         
         Assert.assertNotNull(entityPersistence);
-        Assert.assertEquals(entityTest.getCliente(), entityPersistence.getCliente());
-        Assert.assertEquals(entityTest.getDomicilio(), entityPersistence.getDomicilio());
-        Assert.assertEquals(entityTest.getFecha(), entityPersistence.getFecha());
+        Assert.assertEquals(entityTest.getId(), entityPersistence.getId());
         Assert.assertEquals(entityTest.getSucursal(), entityPersistence.getSucursal());
         Assert.assertEquals(entityTest.getTotal(), entityPersistence.getTotal());
-        
-        Assert.assertEquals(entityTest.getName(), entityPersistence.getName());
-    }
+            }
 
     @Test
     public void deleteTest() 

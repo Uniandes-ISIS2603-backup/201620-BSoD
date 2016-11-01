@@ -1,5 +1,7 @@
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.DomicilioEntity;
+
 /**
  *
  * @author cc.novoa11
@@ -27,13 +29,22 @@ public class DomicilioDTO {
 
 
 
-    public DomicilioDTO(Long pId, String pDir, String pPlato, int pPrecio, Long pIdCliente) {
-        super();
-        this.id = pId;
-        this.direccion = pDir;
-        this.plato = pPlato;
-        this.precio = pPrecio;
-        this.idCliente = pIdCliente;
+    public DomicilioDTO(DomicilioEntity entity) {
+        if (entity != null){
+        this.id = entity.getId();
+        this.direccion = entity.getDireccion();
+        this.plato = entity.getPlato();
+        this.precio = entity.getPrecio();
+        }
+    }
+    
+    public DomicilioEntity toEntity(){
+       DomicilioEntity entity = new DomicilioEntity();
+       entity.setId(this.getId());
+       entity.setPrecio(this.getPrecio());
+       entity.setDireccion(this.getDireccion());
+       entity.setPlato(this.getPlato());
+       return entity;
     }
 
     /**
@@ -122,15 +133,5 @@ public class DomicilioDTO {
     public String toString() {
         return "{ id : " + id + ", idCliente : \"" + idCliente +", direccion : \"" + direccion + "\", plato : \"" + plato + "\", "
                 + "precio : \"" + precio + "\" }";
-    }
-
-    public Long getidCliente() 
-    {
-        return idCliente;
-    }
-
-    public void setidCliente(Long id) 
-    {
-         this.idCliente = id;
     }
 }

@@ -23,6 +23,7 @@ public class DomicilioEntity extends BaseEntity implements Serializable {
 
     private int precio;
     private String direccion;
+    private String plato;
 
     //
     public FacturaEntity getFactura() {
@@ -47,6 +48,13 @@ public class DomicilioEntity extends BaseEntity implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+    public String getPlato() {
+        return plato;
+    }
+
+    public void setPlato(String plato) {
+        this.direccion = plato;
     }
 
 }

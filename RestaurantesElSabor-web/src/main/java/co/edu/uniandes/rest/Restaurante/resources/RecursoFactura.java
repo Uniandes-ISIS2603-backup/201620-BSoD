@@ -5,10 +5,16 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IClienteLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.IFacturaLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.ISucursalLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.FacturaDTO;
-import co.edu.uniandes.rest.Restaurante.exceptions.LogicaRestauranteException;
-import co.edu.uniandes.rest.Restaurante.mocks.MockFactura;
+import co.edu.uniandes.rest.Restaurante.dtos.FacturaDetailDTO;
+import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -17,17 +23,47 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 
 /**
  *
  * @author cc.novoa11
  */
-@Path("sucursal/{idSucursal: \\d+}/facturas ")
+@Path("sucursal/{idSucursal: \\d+}/factura ")
 @Produces("application/json")
 @Consumes("application/json")
 public class RecursoFactura 
 {
-    MockFactura mockFactura = new MockFactura();
+    @Inject
+    private IClienteLogic clienteLogic;
+    
+    @Inject
+    private ISucursalLogic sucursalLogic;
+    
+    @Inject
+    private IFacturaLogic facturaLogic;
+    
+    @PathParam("idSucursal")
+    private Long idSucursal;
+    
+    private List<FacturaDetailDTO> listEntityDTO(List<FacturaEntity> entityList){
+            List<FacturaDetailDTO> list = new ArrayList<>();
+            for (FacturaEntity entity : entityList){
+                list.add(new FacturaDetailDTO(entity));
+            }
+            return list;
+        }
+    
+        public void existsFactura(Long facturaId) {
+            try{
+            FacturaDetailDTO res = new FacturaDetailDTO(facturaLogic.getFactura(idSucursal, facturaId));
+            if (res == null) {
+            throw new WebApplicationException("factura no existe", 404);
+            }
+            }catch(RestauranteLogicException e){
+                throw new WebApplicationException("factura no existe", 404);
+            }
+        }
     
     /**
      * Retorna la lista de facturas.
@@ -36,9 +72,10 @@ public class RecursoFactura
      */
    
     @GET
-    public List<FacturaDTO> getFacturas(@PathParam("idSucursal") Long idSucursal) throws LogicaRestauranteException 
+    public List<FacturaDetailDTO> getFacturas(@PathParam("idSucursal") Long idSucursal) throws RestauranteLogicException 
     {
-        return mockFactura.getFacturas(idSucursal);
+        List<FacturaEntity> facturas = facturaLogic.getFacturas(idSucursal);
+        return listEntityDTO(facturas);
     }
    
     /**
@@ -49,9 +86,10 @@ public class RecursoFactura
      */
     @GET
     @Path ("{id: \\d+}")
-    public FacturaDTO getFactura (@PathParam("idSucursal") Long idSucursal, @PathParam ("id")Long id) throws LogicaRestauranteException 
+    public FacturaDTO getFactura (@PathParam ("id")Long id) throws RestauranteLogicException 
     {
-     return mockFactura.getFactura(idSucursal, id);
+        FacturaEntity entity= facturaLogic.getFactura(idSucursal, id);
+        return new FacturaDTO(entity);
     }   
     
     /**
@@ -61,9 +99,9 @@ public class RecursoFactura
      * @throws LogicaRestauranteException Si ya existe factura con ese id.
      */
    @POST
-    public FacturaDTO createFactura(@PathParam("idSucursal") Long idSucursal, FacturaDTO fac) throws LogicaRestauranteException
+    public FacturaDTO createFactura(FacturaDTO nFactura) throws RestauranteLogicException
     {
-        return mockFactura.createFactura(idSucursal, fac);
+        return new FacturaDetailDTO(facturaLogic.createFactura(idSucursal, nFactura.toEntity()));
     }
  
     /**
@@ -74,9 +112,10 @@ public class RecursoFactura
    
     @PUT
     @Path ("{id: \\d+}")
-    public FacturaDTO uptadeFactura (@PathParam("idSucursal") Long idSucursal, FacturaDTO fact) throws LogicaRestauranteException 
+    public FacturaDTO uptadeFactura (FacturaDTO factura) throws RestauranteLogicException 
     {
-     return mockFactura.updateFactura(idSucursal,fact);
+        FacturaEntity entity = factura.toEntity();
+        return new FacturaDetailDTO(facturaLogic.updateFactura(idSucursal,entity));
     }
     
      /**
@@ -87,8 +126,8 @@ public class RecursoFactura
     
     @DELETE
     @Path ("{id: \\d+}")
-    public void deleteFactura (@PathParam("idSucursal") Long idSucursal, @PathParam ("id")Long id) throws LogicaRestauranteException {
-       mockFactura.deleteFactura(idSucursal,id);  
+    public void deleteFactura (@PathParam ("id")Long id) throws RestauranteLogicException {
+       facturaLogic.deleteFactura(idSucursal, id);
     } 
 }
 
