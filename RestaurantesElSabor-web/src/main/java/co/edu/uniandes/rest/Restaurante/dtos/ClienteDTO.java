@@ -26,15 +26,11 @@ public class ClienteDTO
     private String direccion;
     
     private int telefono;
-
-    private TarjetaPuntosDTO tarjetaPuntos;
-    
-    private ArrayList<MedioPagoDTO> mediosPago;
     
     public ClienteDTO()
     {   }
 
-    public ClienteDTO(Long id, int documentoIdentidad, String tipoDocumentoIdentidad, String name, String apellidos, String direccion, int telefono, TarjetaPuntosDTO tarjetaPuntos, ArrayList<MedioPagoDTO> mediosPago) {
+    public ClienteDTO(Long id, int documentoIdentidad, String tipoDocumentoIdentidad, String name, String apellidos, String direccion, int telefono) {
         this.id = id;
         this.documentoIdentidad = documentoIdentidad;
         this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
@@ -42,8 +38,6 @@ public class ClienteDTO
         this.apellidos = apellidos;
         this.direccion = direccion;
         this.telefono = telefono;
-        this.tarjetaPuntos = tarjetaPuntos;
-        this.mediosPago = mediosPago;
     }
 
     public Long getId() 
@@ -115,26 +109,6 @@ public class ClienteDTO
     {
         this.telefono = telefono;
     }
-
-    public TarjetaPuntosDTO getTarjetaPuntos() 
-    {
-        return tarjetaPuntos;
-    }
-
-    public void setTarjetaPuntos(TarjetaPuntosDTO tarjetaPuntos) 
-    {
-        this.tarjetaPuntos = tarjetaPuntos;
-    }
-
-    public ArrayList<MedioPagoDTO> getMediosPago() 
-    {
-        return mediosPago;
-    }
-
-    public void setMediosPago(ArrayList<MedioPagoDTO> mediosPago) 
-    {
-        this.mediosPago = mediosPago;
-    }
     
     @Override
     public String toString() 
@@ -145,9 +119,7 @@ public class ClienteDTO
                 "name : \""+name+"\", "+
                 "apellidos : \""+apellidos+"\", "+
                 "direccion : \""+direccion+"\", "+
-                "telefono : "+ telefono + ", "+
-                "tarjetaPuntos : "+ tarjetaPuntos + ", "+
-                "mediosPago : "+ mediosPago +" }";
+                "telefono : "+ telefono + " }";
     }
     
 }
