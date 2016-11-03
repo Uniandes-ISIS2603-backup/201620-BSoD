@@ -53,13 +53,13 @@ public class PlatoLogicTest {
     
     private List<PlatoEntity> platoData = new ArrayList<PlatoEntity>();
     
-    private List<SucursalEntity> sucursalData = new ArrayList<>();
+    private List<SucursalEntity> sucursalData = new ArrayList<SucursalEntity>();
     
     @Deployment 
     public static JavaArchive createDeployment(){
         return ShrinkWrap.create(JavaArchive.class)
-                 .addPackage(PlatoEntity.class.getPackage())
-                 .addPackage(PlatoLogic.class.getPackage())
+                .addPackage(PlatoEntity.class.getPackage())
+                .addPackage(PlatoLogic.class.getPackage())
                 .addPackage(IPlatoLogic.class.getPackage())
                 .addPackage(PlatoPersistence.class.getPackage())
                 .addPackage(SucursalEntity.class.getPackage())
@@ -96,27 +96,24 @@ public class PlatoLogicTest {
   
     
     private void insertData(){
-        for (int i=0; i< 3; i++){
-            PlatoEntity newPlato = factory.manufacturePojo(PlatoEntity.class);
-            em.persist(newPlato);
-            platoData.add(newPlato);
+        
+       for (int i = 0; i < 3; i++) {
+            SucursalEntity sucursal = factory.manufacturePojo(SucursalEntity.class);
+            System.out.println(sucursal+"++++++++"); 
+           em.persist(sucursal);
+            sucursalData.add(sucursal);
+        }  
+       
+        fatherEntity=sucursalData.get(0);
+        
+          for (int i = 0; i < 3; i++) {
+            PlatoEntity entity = factory.manufacturePojo(PlatoEntity.class);
+            entity.setSucursal(sucursalData.get(0));
             
-        }
-        
-        fatherEntity = factory.manufacturePojo(SucursalEntity.class);
-        fatherEntity.setId(1L);
-        em.persist(fatherEntity);
-        
-            for (int i = 0; i < 3; i++) {
-                SucursalEntity entity = factory.manufacturePojo(SucursalEntity.class);
-           //hacer el metodo
-            //entity.setSucursal(fatherEntity);
-            em.persist(entity);
-            sucursalData.add(entity);
+           
 
-            if (i == 0) {
-                platoData.get(i).setSucursal(entity);
-            }
+            em.persist(entity);
+            platoData.add(entity);
         }
     }
     
@@ -136,7 +133,7 @@ public class PlatoLogicTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
  /**
-     * Prueba para crear un plato con un precio superior a 200000
+     * Prueba para crear un plato con un precio superior a 100000
      */
     @Test(expected = RestauranteLogicException.class)
     public void createPlatoTest2() throws Exception {
@@ -152,6 +149,7 @@ public class PlatoLogicTest {
      */
     @Test
     public void getPlatoTest() {
+        Assert.fail(""+sucursalData.get(0)+";"+sucursalData.get(1)+";"+sucursalData.get(2));
         List<PlatoEntity> list = platoLogic.darPlatos(fatherEntity.getId());
         Assert.assertEquals(platoData.size(), list.size());
         for (PlatoEntity entity : list) {
