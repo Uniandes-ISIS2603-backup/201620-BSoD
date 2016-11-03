@@ -1,6 +1,7 @@
 package co.edu.uniandes.bsod.restauranteselsabor.persistence;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.*;
@@ -25,13 +26,27 @@ public class ReservaPersistence {
     }
     
     //buscar reserva por fecha
-    public List<ReservaEntity> findByDate(Date pFecha) {
+    public List<ReservaEntity> findByDate1(Date pFecha) {
         Date fecha2 = new Date(pFecha.getYear(), pFecha.getMonth(), pFecha.getDate());
         java.sql.Date sqlDate = new java.sql.Date(fecha2.getTime());
         LOGGER.log(Level.INFO, "Consultando reserva con fecha = {0}", sqlDate);
         Query q = em.createQuery("select u from ReservaEntity u where u.fecha = :fecha2", ReservaEntity.class);
         q = q.setParameter("fecha2", sqlDate); 
         return q.getResultList();
+    }
+    public List<ReservaEntity> findByDate(Date pFecha) {
+        java.sql.Date sqlDate = new java.sql.Date(pFecha.getTime());
+        LOGGER.log(Level.INFO, "Consultando reserva con fecha = {0}", sqlDate);
+        List<ReservaEntity> rta = new ArrayList();
+        List<ReservaEntity> todas = findAll();
+        for( ReservaEntity entity : todas){
+           Date f= entity.getFecha();
+            System.out.println("fecha reserva: "+ f);
+            if(f.getYear() == pFecha.getYear() && f.getMonth()==pFecha.getMonth() && f.getDate()==pFecha.getDate()){
+                rta.add(entity);
+            }
+        }
+        return rta;
     }
     //busca todas las reservas
     public List<ReservaEntity> findAll() {
