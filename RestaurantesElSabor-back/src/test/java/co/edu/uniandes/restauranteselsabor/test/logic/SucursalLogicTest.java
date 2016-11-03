@@ -5,16 +5,27 @@
  */
 package co.edu.uniandes.restauranteselsabor.test.logic;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IFacturaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.api.IMesaLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.IPlatoLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.IReservaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.api.ISucursalLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.ejbs.FacturaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.MesaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.PlatoLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ReservaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.SucursalLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MesaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.FacturaPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.MesaPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.PlatoPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.ReservaPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.SucursalPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -67,22 +78,26 @@ public class SucursalLogicTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
+                .addPackage(SucursalPersistence.class.getPackage())
                 .addPackage(SucursalEntity.class.getPackage())
                 .addPackage(SucursalLogic.class.getPackage())
                 .addPackage(ISucursalLogic.class.getPackage())
+                .addPackage(MesaPersistence.class.getPackage())
                 .addPackage(MesaEntity.class.getPackage())
                 .addPackage(MesaLogic.class.getPackage())
                 .addPackage(IMesaLogic.class.getPackage())
-                //.addPackage(ReservaEntity.class.getPackage())
-                //.addPackage(ReservaLogic.class.getPackage())
-                //.addPackage(ILogic.class.getPackage())
-                //.addPackage(FacturaEntity.class.getPackage())
-                //.addPackage(FacturaLogic.class.getPackage())
-                //.addPackage(IFacturaLogic.class.getPackage())
-                //.addPackage(PlatoEntity.class.getPackage())
-                //.addPackage(PlatoLogic.class.getPackage())
-                //.addPackage(IPlatoLogic.class.getPackage())
-                .addPackage(Persistence.class.getPackage())
+                .addPackage(ReservaPersistence.class.getPackage())
+                .addPackage(ReservaEntity.class.getPackage())
+                .addPackage(ReservaLogic.class.getPackage())
+                .addPackage(IReservaLogic.class.getPackage())
+                .addPackage(FacturaPersistence.class.getPackage())
+                .addPackage(FacturaEntity.class.getPackage())
+                .addPackage(FacturaLogic.class.getPackage())
+                .addPackage(IFacturaLogic.class.getPackage())
+                .addPackage(PlatoPersistence.class.getPackage())
+                .addPackage(PlatoEntity.class.getPackage())
+                .addPackage(PlatoLogic.class.getPackage())
+                .addPackage(IPlatoLogic.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
