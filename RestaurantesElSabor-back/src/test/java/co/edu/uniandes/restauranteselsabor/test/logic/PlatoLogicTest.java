@@ -13,6 +13,7 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.PlatoPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.SucursalPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -65,6 +66,7 @@ public class PlatoLogicTest {
                 .addPackage(SucursalEntity.class.getPackage())
                 .addPackage(SucursalLogic.class.getPackage())
                 .addPackage(ISucursalLogic.class.getPackage())
+                .addPackage(SucursalPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml"); 
     }
@@ -98,8 +100,9 @@ public class PlatoLogicTest {
     private void insertData(){
         
        for (int i = 0; i < 3; i++) {
+           
             SucursalEntity sucursal = factory.manufacturePojo(SucursalEntity.class);
-            System.out.println(sucursal+"++++++++"); 
+           
            em.persist(sucursal);
             sucursalData.add(sucursal);
         }  
@@ -125,13 +128,22 @@ public class PlatoLogicTest {
      */
     @Test
     public void createPlatoTest1() throws RestauranteLogicException{
+        
         PlatoEntity newEntity = factory.manufacturePojo(PlatoEntity.class);
         PlatoEntity result = platoLogic.crearPlato(newEntity);
         Assert.assertNotNull(result);
-        PlatoEntity entity = em.find(PlatoEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
+        
+        while (result.getPrecio() >=100000){
+            newEntity = factory.manufacturePojo(PlatoEntity.class);
+            result = platoLogic.crearPlato(newEntity);
+            Assert.assertNotNull(result);
+        }
+            
+            PlatoEntity entity = em.find(PlatoEntity.class, result.getId());
+            Assert.assertEquals(newEntity.getName(), entity.getName());
+            Assert.assertEquals(newEntity.getId(), entity.getId());
     }
+    
  /**
      * Prueba para crear un plato con un precio superior a 100000
      */
