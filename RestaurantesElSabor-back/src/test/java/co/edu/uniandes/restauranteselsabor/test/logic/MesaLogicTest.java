@@ -6,10 +6,13 @@
 package co.edu.uniandes.restauranteselsabor.test.logic;
 
 import co.edu.uniandes.bsod.restauranteselsabor.api.IMesaLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.ISucursalLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.MesaLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.ejbs.SucursalLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MesaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.MesaPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.SucursalPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -78,6 +81,10 @@ public class MesaLogicTest {
                 .addPackage(MesaLogic.class.getPackage())
                 .addPackage(IMesaLogic.class.getPackage())
                 .addPackage(MesaPersistence.class.getPackage())
+                .addPackage(SucursalEntity.class.getPackage())
+                .addPackage(SucursalLogic.class.getPackage())
+                .addPackage(ISucursalLogic.class.getPackage())
+                .addPackage(SucursalPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }

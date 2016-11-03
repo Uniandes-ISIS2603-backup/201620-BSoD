@@ -6,6 +6,7 @@
 package co.edu.uniandes.bsod.restauranteselsabor.api;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public interface ISucursalLogic {
 
     public SucursalEntity getSucursalByName(String name);
 
-    public SucursalEntity createSucursal(SucursalEntity entity);
+    public SucursalEntity createSucursal(SucursalEntity entity) throws RestauranteLogicException;
 
     public SucursalEntity updateSucursal(SucursalEntity entity);
 

@@ -28,6 +28,8 @@ import co.edu.uniandes.bsod.restauranteselsabor.persistence.ReservaPersistence;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.SucursalPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -165,28 +167,36 @@ public class SucursalLogicTest {
             d.setSucursal(newEntity);
         }
 
-        SucursalEntity result = sucursalLogic.createSucursal(newEntity);
-        Assert.assertNotNull(result);
+        SucursalEntity result;
+        try {
+            result = sucursalLogic.createSucursal(newEntity);
+            Assert.assertNotNull(result);
+            SucursalEntity entity = em.find(SucursalEntity.class, result.getId());
+            Assert.assertEquals(newEntity.getName(), entity.getName());
+            Assert.assertEquals(newEntity.getId(), entity.getId());
+            Assert.assertNotNull(entity.getMesas());
+            Assert.assertNotNull(result.getMesas());
+            Assert.assertEquals(result.getMesas().size(), entity.getMesas().size());
 
-        SucursalEntity entity = em.find(SucursalEntity.class, result.getId());
-
-        Assert.assertEquals(newEntity.getName(), entity.getName());
-        Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertNotNull(entity.getMesas());
-        Assert.assertNotNull(result.getMesas());
-        Assert.assertEquals(result.getMesas().size(), entity.getMesas().size());
-
-        for (MesaEntity d : result.getMesas()) {
-            boolean found = false;
-            for (MesaEntity oracle : entity.getMesas()) {
-                if (d.getName().equals(oracle.getName())) {
-                    found = true;
+            for (MesaEntity d : result.getMesas()) {
+                boolean found = false;
+                for (MesaEntity oracle : entity.getMesas()) {
+                    if (d.getName().equals(oracle.getName())) {
+                        found = true;
+                    }
                 }
-            }
             Assert.assertTrue(found);
 
-        }
+            }
 
+        } catch (RestauranteLogicException ex) {
+            Assert.fail("exeption");
+        }
+        
+
+        
+
+        
     }
 
     /**

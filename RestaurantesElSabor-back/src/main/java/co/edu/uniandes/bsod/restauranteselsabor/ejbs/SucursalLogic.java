@@ -7,6 +7,7 @@ package co.edu.uniandes.bsod.restauranteselsabor.ejbs;
 
 import co.edu.uniandes.bsod.restauranteselsabor.api.ISucursalLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.SucursalPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -55,10 +56,18 @@ public class SucursalLogic implements ISucursalLogic{
      *
      * @param entity Objeto de SucursalEntity con los datos nuevos
      * @return Objeto de SucursalEntity con los datos nuevos y su ID.
+     * @throws co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException
      *
      */
     @Override
-    public SucursalEntity createSucursal(SucursalEntity entity) {
+    public SucursalEntity createSucursal(SucursalEntity entity) throws RestauranteLogicException{
+        List<SucursalEntity> all = persistence.findAll();
+        for (SucursalEntity sucursalEntity : all) {
+               if(sucursalEntity.getName().equals(entity.getName())){
+                throw new RestauranteLogicException("Ya hay una sucursal con este nombre");
+            } 
+        }
+        
         return persistence.create(entity);
     }
 
