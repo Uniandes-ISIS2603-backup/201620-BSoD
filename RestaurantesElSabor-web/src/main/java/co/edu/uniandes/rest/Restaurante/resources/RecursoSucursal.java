@@ -139,21 +139,10 @@ public class RecursoSucursal
     @Path("{id: \\d+}")
     public void eliminarSucursal(@PathParam("id") Long id) {
         sucursalLogic.deleteSucursal(id);
-    }
-/*
-    @GET
-    @Path("{id: \\d+}/numberofemployees")
-    public Integer getNumberOfEmployeesSucursal(@PathParam("id") Long id) {
-        return sucursalLogic.getNumberOfEmployeesSucursal(id);
-    }
-    @Inject 
-    private ISucursalLogic sucursalLogic;
-
+    }   
 
     
-
-    
-    @GET
+    /*@GET
     @Path("{id: \\d+}/mesasDisponibles/{ano}/{mes}/{dia}")
     @Produces("text/plain")
     public String darMesasFecha(@PathParam("id") Long pId, @PathParam("ano") int ano, @PathParam("mes") int mes, @PathParam("dia") int dia )throws LogicaRestauranteException

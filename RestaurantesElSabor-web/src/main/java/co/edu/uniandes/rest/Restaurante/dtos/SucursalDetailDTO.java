@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.rest.Restaurante.dtos;
 
+import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MesaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.PlatoEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,8 @@ public class SucursalDetailDTO extends SucursalDTO {
      
     private List<MesaDTO> mesas = new ArrayList<>();
     private List<PlatoDTO> platos = new ArrayList<>();
+    private List<FacturaDTO> facturas = new ArrayList<>();
+    private List<ReservaDTO> reservas = new ArrayList<>();
 
     public SucursalDetailDTO() {
         super();
@@ -43,6 +47,14 @@ public class SucursalDetailDTO extends SucursalDTO {
         for (PlatoEntity plato : platosList) {
             this.platos.add(new PlatoDTO(plato));
         }
+        List<FacturaEntity> facturasList = entity.getFacturas();
+        for (FacturaEntity factura : facturasList) {
+            this.facturas.add(new FacturaDTO(factura));
+        }
+        List<ReservaEntity> reservasList = entity.getReservas();
+        for (ReservaEntity reserva : reservasList) {
+            this.reservas.add(new ReservaDTO(reserva));
+        }
     }
 
     /**
@@ -56,12 +68,20 @@ public class SucursalDetailDTO extends SucursalDTO {
     public SucursalEntity toEntity() {
         SucursalEntity entity = super.toEntity();
          List<MesaDTO> mesas = this.getMesas();
-        for (MesaDTO dept : this.mesas) {         
-            entity.getMesas().add(dept.toEntity());
+        for (MesaDTO mesa : this.mesas) {         
+            entity.getMesas().add(mesa.toEntity());
         }
          List<PlatoDTO> platos = this.getPlatos();
         for (PlatoDTO plato : this.platos) {         
             entity.getPlatos().add(plato.toEntity());
+        }
+         List<FacturaDTO> facturas = this.getFacturas();
+        for (FacturaDTO factura : this.facturas) {         
+            entity.getFacturas().add(factura.toEntity());
+        }
+         List<ReservaDTO> reservas = this.getReservas();
+        for (ReservaDTO reserva : this.reservas) {         
+            entity.getReservas().add(reserva.toEntity());
         }
         return entity;
     }
@@ -92,5 +112,33 @@ public class SucursalDetailDTO extends SucursalDTO {
      */
     public void setPlatos(List<PlatoDTO> platos) {
         this.platos = platos;
+    }
+    
+    /**
+     * @return the facturas
+     */
+    public List<FacturaDTO> getFacturas() {
+        return facturas;
+    }
+
+    /**
+     * @param facturas the facturas to set
+     */
+    public void setFacturas(List<FacturaDTO> facturas) {
+        this.facturas = facturas;
+    }
+
+    /**
+     * @return the reservas
+     */
+    public List<ReservaDTO> getReservas() {
+        return reservas;
+    }
+
+    /**
+     * @param reservas the reservas to set
+     */
+    public void setReservas(List<ReservaDTO> reservas) {
+        this.reservas = reservas;
     }
 }
