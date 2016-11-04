@@ -11,6 +11,7 @@ import co.edu.uniandes.bsod.restauranteselsabor.entities.FacturaEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.FacturaPersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.SucursalPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -60,6 +61,7 @@ public class FacturaLogicTest {
                 .addPackage(IFacturaLogic.class.getPackage())
                 .addPackage(FacturaPersistence.class.getPackage())
                 .addPackage(SucursalEntity.class.getPackage())
+                .addPackage(SucursalPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -165,7 +167,7 @@ public class FacturaLogicTest {
      * Prueba para crear una factura que ya existe
      */
     @Test(expected = RestauranteLogicException.class)
-    public void createReservaTest2() throws Exception {
+    public void createFacturaTest2() throws Exception {
         FacturaEntity res = factory.manufacturePojo(FacturaEntity.class);
         res.setSucursal(fatherEntity);
         res.setId(facturaData.get(0).getId());

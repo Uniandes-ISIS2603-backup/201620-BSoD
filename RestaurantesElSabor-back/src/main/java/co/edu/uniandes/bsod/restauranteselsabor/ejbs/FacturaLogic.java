@@ -26,11 +26,11 @@ public class FacturaLogic implements IFacturaLogic{
     @Inject
     private FacturaPersistence persistence;
     @Inject
-    private ISucursalLogic clienteLogic;
+    private ISucursalLogic sucursalLogic;
           
     @Override
     public List<FacturaEntity> getFacturas(Long idSucursal) throws RestauranteLogicException {
-        SucursalEntity suc = clienteLogic.getSucursal(idSucursal);
+        SucursalEntity suc = sucursalLogic.getSucursal(idSucursal);
         return suc.getFacturas();
     }
 
@@ -41,7 +41,7 @@ public class FacturaLogic implements IFacturaLogic{
 
     @Override
     public FacturaEntity createFactura(Long idSucursal,FacturaEntity nFactura) throws RestauranteLogicException {
-        SucursalEntity suc = clienteLogic.getSucursal(idSucursal);
+        SucursalEntity suc = sucursalLogic.getSucursal(idSucursal);
         nFactura.setSucursal(suc);
         nFactura= persistence.create(nFactura); 
         return nFactura;
@@ -49,7 +49,7 @@ public class FacturaLogic implements IFacturaLogic{
 
     @Override
     public FacturaEntity updateFactura(Long idSucursal,FacturaEntity factura) throws RestauranteLogicException {
-        SucursalEntity suc = clienteLogic.getSucursal(idSucursal);
+        SucursalEntity suc = sucursalLogic.getSucursal(idSucursal);
         factura.setSucursal(suc);
         return persistence.update(factura); 
     }
