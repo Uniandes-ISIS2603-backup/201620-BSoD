@@ -150,8 +150,10 @@ public class MesaLogicTest {
      */
     @Test
     public void createMesaTest() {
+        SucursalEntity fatherEntity = factory.manufacturePojo(SucursalEntity.class);
         MesaEntity newEntity = factory.manufacturePojo(MesaEntity.class);
         MesaEntity result = mesaLogic.createMesa(newEntity);
+        result.setSucursal(fatherEntity);
         Assert.assertNotNull(result);
         MesaEntity entity = em.find(MesaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getName(), entity.getName());

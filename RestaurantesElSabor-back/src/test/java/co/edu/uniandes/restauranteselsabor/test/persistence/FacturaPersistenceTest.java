@@ -39,6 +39,8 @@ public class FacturaPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(FacturaEntity.class.getPackage())
                 .addPackage(FacturaPersistence.class.getPackage())
+                .addPackage(SucursalEntity.class.getPackage())
+                .addPackage(SucursalPersistenceTest.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -89,10 +91,14 @@ public class FacturaPersistenceTest {
 
     private void insertData() 
     {
+        
         PodamFactory factory = new PodamFactoryImpl();
+        SucursalEntity sucursal = factory.manufacturePojo(SucursalEntity.class);
+        em.persist(sucursal);
         for (int i = 0; i < 3; i++) 
         {
             FacturaEntity newEntity = factory.manufacturePojo(FacturaEntity.class);
+            newEntity.setSucursal(sucursal);
             em.persist(newEntity);
             listTest.add(newEntity);
         }

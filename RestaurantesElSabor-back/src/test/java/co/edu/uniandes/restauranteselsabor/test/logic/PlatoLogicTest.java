@@ -25,8 +25,6 @@ import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,7 +90,7 @@ public class PlatoLogicTest {
     
     private void clearData (){
         em.createQuery("delete from PlatoEntity").executeUpdate();
-        em.createQuery("dellete from sucursalEntity").executeUpdate();
+        //em.createQuery("delete from sucursalEntity").executeUpdate();
         
     }
   
@@ -130,18 +128,12 @@ public class PlatoLogicTest {
     public void createPlatoTest1() throws RestauranteLogicException{
         
         PlatoEntity newEntity = factory.manufacturePojo(PlatoEntity.class);
+        newEntity.setPrecio(10);
         PlatoEntity result = platoLogic.crearPlato(newEntity);
         Assert.assertNotNull(result);
-        
-        while (result.getPrecio() >=100000){
-            newEntity = factory.manufacturePojo(PlatoEntity.class);
-            result = platoLogic.crearPlato(newEntity);
-            Assert.assertNotNull(result);
-        }
-            
-            PlatoEntity entity = em.find(PlatoEntity.class, result.getId());
-            Assert.assertEquals(newEntity.getName(), entity.getName());
-            Assert.assertEquals(newEntity.getId(), entity.getId());
+        PlatoEntity entity = em.find(PlatoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getName(), entity.getName());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
     
  /**
@@ -161,7 +153,6 @@ public class PlatoLogicTest {
      */
     @Test
     public void getPlatoTest() {
-        Assert.fail(""+sucursalData.get(0)+";"+sucursalData.get(1)+";"+sucursalData.get(2));
         List<PlatoEntity> list = platoLogic.darPlatos(fatherEntity.getId());
         Assert.assertEquals(platoData.size(), list.size());
         for (PlatoEntity entity : list) {
