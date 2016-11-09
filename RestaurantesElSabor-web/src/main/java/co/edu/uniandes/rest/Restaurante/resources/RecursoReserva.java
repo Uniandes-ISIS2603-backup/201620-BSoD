@@ -13,6 +13,7 @@ import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicExcep
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDTO;        
 import co.edu.uniandes.rest.Restaurante.dtos.ReservaDetailDTO;
+import co.edu.uniandes.rest.Restaurante.dtos.SucursalDetailDTO;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -53,7 +54,7 @@ public class RecursoReserva {
     
     @PathParam("idCliente")
     private Long idCliente;
-    
+       
     private List<ReservaDetailDTO> listEntityDTO(List<ReservaEntity> entityList){
             List<ReservaDetailDTO> list = new ArrayList<>();
             for (ReservaEntity entity : entityList){
@@ -67,15 +68,21 @@ public class RecursoReserva {
             throw new WebApplicationException("El cliente no existe", 404);
         }
         }
+        public void existsSucursal(Long sucursalId) {
+        SucursalDetailDTO suc = new SucursalDetailDTO(sucursalLogic.getSucursal(sucursalId));
+        if (suc == null) {
+            throw new WebApplicationException("La sucursal no existe", 404);
+        }
+        }
         
         public void existsReserva(Long reservaId) {
             try{
             ReservaDetailDTO res = new ReservaDetailDTO(reservaLogic.getReserva(idCliente, reservaId));
             if (res == null) {
-            throw new WebApplicationException("El medio de pago no existe", 404);
+            throw new WebApplicationException("La reserva no existe", 404);
             }
             }catch(RestauranteLogicException e){
-                throw new WebApplicationException("El medio de pago no existe", 404);
+                throw new WebApplicationException("La reserva no existe", 404);
             }
         }
     /**
@@ -91,7 +98,7 @@ public class RecursoReserva {
         return listEntityDTO(reservas);
     }
     @GET
-    @Path ("{dia: \\d+}/{mes: \\d+}/{anho: \\d+}")
+    @Path ("/{dia: \\d+}/{mes: \\d+}/{anho: \\d+}")
     public List<ReservaDetailDTO> getReservasByDate(@PathParam ("dia")int dia, @PathParam ("mes")int mes, @PathParam ("anho")int anho) throws RestauranteLogicException {
         Date fecha = new Date(anho, mes, dia);
         List<ReservaEntity> reservas = reservaLogic.getReservasEnFecha(fecha);
@@ -104,9 +111,11 @@ public class RecursoReserva {
      * @throws LogicaRestauranteException si la reserva ya existe.
      */
     @POST
-    public ReservaDTO createReserva( ReservaDTO nuevaReserva) throws RestauranteLogicException  {
+    @Path("/sucursal/{idSucursal: \\d+}/")
+    public ReservaDTO createReserva(@PathParam ("idSucursal")Long idSucursal, ReservaDTO nuevaReserva) throws RestauranteLogicException  {
+        existsSucursal(idSucursal);
         existsCliente(idCliente);
-        return new ReservaDetailDTO(reservaLogic.createReserva(idCliente, nuevaReserva.toEntity()));
+        return new ReservaDetailDTO(reservaLogic.createReserva(idSucursal,idCliente, nuevaReserva.toEntity()));
     }
     /**
      * Obtiene una reserva.
