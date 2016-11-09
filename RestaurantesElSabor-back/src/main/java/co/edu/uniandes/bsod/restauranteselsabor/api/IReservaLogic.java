@@ -21,11 +21,13 @@ public interface IReservaLogic {
     
     public ReservaEntity getReserva(Long idCliente, Long id)throws RestauranteLogicException;
     
-    public ReservaEntity createReserva(Long idCliente, ReservaEntity nuevaReserva)throws RestauranteLogicException;
+    public ReservaEntity createReserva(Long idSucursal,Long idCliente, ReservaEntity nuevaReserva)throws RestauranteLogicException;
     
     public ReservaEntity updateReserva(Long idCliente, ReservaEntity reserva)throws RestauranteLogicException;
     
     public void deleteReserva(Long idCliente, Long id)throws RestauranteLogicException;
     
     public List<ReservaEntity> getReservasEnFecha(Date fecha);
+    
+    public List<ReservaEntity> getReservasSucursal(Long idSucursal) throws RestauranteLogicException;
 }

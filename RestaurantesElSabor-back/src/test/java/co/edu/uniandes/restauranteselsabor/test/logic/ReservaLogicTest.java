@@ -10,6 +10,7 @@ import co.edu.uniandes.bsod.restauranteselsabor.api.IReservaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ReservaLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.SucursalEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ReservaPersistence;
 import java.util.ArrayList;
@@ -37,6 +38,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class ReservaLogicTest {
     ClienteEntity fatherEntity;
+    SucursalEntity fatherEntity2;
     
     private PodamFactory factory = new PodamFactoryImpl();
     
@@ -61,6 +63,7 @@ public class ReservaLogicTest {
                 .addPackage(IReservaLogic.class.getPackage())
                 .addPackage(ReservaPersistence.class.getPackage())
                 .addPackage(ClienteEntity.class.getPackage())
+                .addPackage(SucursalEntity.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -91,6 +94,7 @@ public class ReservaLogicTest {
     private void clearData() {
         em.createQuery("delete from ReservaEntity").executeUpdate();
         em.createQuery("delete from ClienteEntity").executeUpdate();
+        em.createQuery("delete from SucursalEntity").executeUpdate();
     }
 
     /**
@@ -100,11 +104,15 @@ public class ReservaLogicTest {
     private void insertData() {
 
         fatherEntity = factory.manufacturePojo(ClienteEntity.class);
+        fatherEntity2 = factory.manufacturePojo(SucursalEntity.class);
         fatherEntity.setId(1L);
+        fatherEntity2.setId(2L);
         em.persist(fatherEntity);
+        em.persist(fatherEntity2);
         for (int i = 0; i < 4; i++) {
             ReservaEntity entity = factory.manufacturePojo(ReservaEntity.class);
             entity.setCliente(fatherEntity);
+            entity.setSucursal(fatherEntity2);
             em.persist(entity);
             reservaData.add(entity);
         }
@@ -156,7 +164,7 @@ public class ReservaLogicTest {
     @Test
     public void createReservaTest1() throws RestauranteLogicException{
         ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
-        ReservaEntity result = reservaLogic.createReserva(fatherEntity.getId(), newEntity);
+        ReservaEntity result = reservaLogic.createReserva(fatherEntity2.getId(),fatherEntity.getId(), newEntity);
         Assert.assertNotNull(result);
         ReservaEntity entity = em.find(ReservaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getName(), entity.getName());
@@ -170,7 +178,7 @@ public class ReservaLogicTest {
         ReservaEntity res = factory.manufacturePojo(ReservaEntity.class);
         res.setCliente(fatherEntity);
         res.setId(reservaData.get(0).getId());
-        ReservaEntity result = reservaLogic.createReserva(fatherEntity.getId(), res);
+        ReservaEntity result = reservaLogic.createReserva(fatherEntity2.getId(),fatherEntity.getId(), res);
     }
      /**
      * Prueba para actualizar una reserva
@@ -180,6 +188,7 @@ public class ReservaLogicTest {
         ReservaEntity entity = reservaData.get(0);
         ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
         newEntity.setId(entity.getId());
+        newEntity.setSucursal(fatherEntity2);
         reservaLogic.updateReserva(fatherEntity.getId(), newEntity);
         ReservaEntity resp = em.find(ReservaEntity.class, entity.getId());
         Assert.assertEquals(newEntity.getName(), resp.getName());
@@ -191,6 +200,7 @@ public class ReservaLogicTest {
     @Test(expected = RestauranteLogicException.class)
     public void updateReservaest2() throws Exception {
         ReservaEntity newEntity = factory.manufacturePojo(ReservaEntity.class);
+        newEntity.setSucursal(fatherEntity2);
         reservaLogic.updateReserva(fatherEntity.getId(), newEntity);
     }
      /**
@@ -227,7 +237,7 @@ public class ReservaLogicTest {
             }
         }
         List<ReservaEntity> lista = reservaLogic.getReservasEnFecha(fecha);
-        //Assert.assertEquals(lista.size(), 2);
+     //   Assert.assertEquals(lista.size(), 2);
         System.out.println("size"+lista.size());
         for (ReservaEntity ent : lista) {
             boolean found = false;
