@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.rest.Restaurante.resources;
 
+import co.edu.uniandes.bsod.restauranteselsabor.api.IClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.ejbs.ClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
@@ -40,7 +41,7 @@ import javax.ws.rs.Produces;
 public class RecursoCliente 
 {
     @Inject
-    ClienteLogic clienteLogic;
+    IClienteLogic clienteLogic;
     
     /**
      * Retorna la lista de clientes.
