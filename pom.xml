@@ -9,7 +9,6 @@
     
     <modules>
         <module>RestaurantesElSabor-web</module>
-        <module>RestaurantesElSabor-back</module>
     </modules>
 	
         <properties>

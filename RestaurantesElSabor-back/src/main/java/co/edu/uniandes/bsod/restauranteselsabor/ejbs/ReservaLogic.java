@@ -19,7 +19,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
- *
  * @author aj.paredes10
  */
 @Stateless
