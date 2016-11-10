@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>RestaurtantesElSabor-back</artifactId>
+    <artifactId>RestaurantesElSabor-back</artifactId>
     <packaging>jar</packaging>
 	
     <dependencies>

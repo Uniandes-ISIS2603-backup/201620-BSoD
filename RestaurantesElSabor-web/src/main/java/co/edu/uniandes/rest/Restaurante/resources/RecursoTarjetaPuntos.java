@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.rest.Restaurante.resources;
-import co.edu.uniandes.bsod.restauranteselsabor.ejbs.TarjetaPuntosLogic;
+import co.edu.uniandes.bsod.restauranteselsabor.api.ITarjetaPuntosLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDetailDTO;
 import javax.inject.Inject;
@@ -28,7 +28,7 @@ import javax.ws.rs.Produces;
 public class RecursoTarjetaPuntos 
 {   
     @Inject
-    TarjetaPuntosLogic tarjetaPuntosLogic;
+    ITarjetaPuntosLogic tarjetaPuntosLogic;
     
     @GET
     public TarjetaPuntosDetailDTO getTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException  
@@ -48,11 +48,13 @@ public class RecursoTarjetaPuntos
         return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.updateTarjetaPuntos(idCliente, pTarjetaPuntosAActualziar.toEntity()));
     }
     
+    /*
     @PUT
     public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws RestauranteLogicException  
     {
         return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(idCliente, pCompra));
     }
+    */
     
     @DELETE
     public void deleteTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException 
