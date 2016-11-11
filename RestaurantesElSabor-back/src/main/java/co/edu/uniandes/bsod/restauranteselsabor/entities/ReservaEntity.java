@@ -25,8 +25,7 @@ public class ReservaEntity extends BaseEntity{
     ClienteEntity cliente;
     
     @Temporal(TemporalType.DATE)
-    private Date fecha;
-    
+    private Date fecha;    
     private int numPersonas;
     private int piso;
     

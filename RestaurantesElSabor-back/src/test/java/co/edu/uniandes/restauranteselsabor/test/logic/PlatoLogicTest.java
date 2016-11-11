@@ -111,6 +111,7 @@ public class PlatoLogicTest {
             PlatoEntity entity = factory.manufacturePojo(PlatoEntity.class);
             entity.setSucursal(sucursalData.get(0));
             
+            
            
 
             em.persist(entity);
