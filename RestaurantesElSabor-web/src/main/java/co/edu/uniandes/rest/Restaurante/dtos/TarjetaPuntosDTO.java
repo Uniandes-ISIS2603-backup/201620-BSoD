@@ -27,9 +27,13 @@ public class TarjetaPuntosDTO
 
     public TarjetaPuntosDTO(TarjetaPuntosEntity tarjetaPuntosEntity)
     {
-        this.id = tarjetaPuntosEntity.getId();
-        this.fechaCaducidad = tarjetaPuntosEntity.getFechaCaducidad();
-        this.acumulado = tarjetaPuntosEntity.getAcumulado();
+        if(tarjetaPuntosEntity!=null)
+        {
+            this.id = tarjetaPuntosEntity.getId();
+            this.fechaCaducidad = tarjetaPuntosEntity.getFechaCaducidad();
+            this.acumulado = tarjetaPuntosEntity.getAcumulado();
+    
+        }
     }
     
     public TarjetaPuntosEntity toEntity()

@@ -31,6 +31,7 @@ public class ClientePersistence
     public ClienteEntity create(ClienteEntity clienteEntity)
     {
         LOGGER.info("Creando un CLIENTE nuevo");
+        LOGGER.info(clienteEntity.toString());
         em.persist(clienteEntity);
         LOGGER.info("CLIENTE creado");
         return clienteEntity;
@@ -56,6 +57,7 @@ public class ClientePersistence
     public ClienteEntity update(ClienteEntity clienteEntity) 
     {
         LOGGER.log(Level.INFO, "Actualizando CLIENTE con id={0}", clienteEntity.getId());
+        LOGGER.info(clienteEntity.toString());
         return em.merge(clienteEntity);
     }
     

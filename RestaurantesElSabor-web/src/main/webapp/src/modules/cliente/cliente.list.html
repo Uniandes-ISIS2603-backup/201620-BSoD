@@ -4,6 +4,7 @@
     <table class="table table-bordered table-hover">            <!--Tabla-->
         <thead>                                                     <!--Headers de la tabla-->
             <tr>
+                <th>id</th>
                 <th>Documento de identidad</th>
                 <th>Tipo de documento de identidad</th>
                 <th>Nombre</th>
@@ -17,6 +18,7 @@
         
         <tbody>                                                     <!--Cuerpo de la tabla-->
             <tr ng-repeat="record in records">
+                <td id="{{$index}}-documentoIdentidad">{{record.id}}</td>
                 <td id="{{$index}}-documentoIdentidad">{{record.documentoIdentidad}}</td>
                 <td id="{{$index}}-tipoDocumentoIdentidad">{{record.tipoDocumentoIdentidad}}</td>
                 <td id="{{$index}}-nombre">{{record.name}}</td>

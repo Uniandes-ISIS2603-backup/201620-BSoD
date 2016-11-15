@@ -48,7 +48,7 @@
         {
             currentRecord = $scope.currentRecord;        
             if(currentRecord.id==null)
-            {
+            {   
                 return $http.post(clienteContext, currentRecord).then(function() 
                     {
                         $state.go('clienteList');

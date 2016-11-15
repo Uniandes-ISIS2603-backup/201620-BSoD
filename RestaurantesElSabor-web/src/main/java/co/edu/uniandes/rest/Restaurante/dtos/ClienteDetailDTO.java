@@ -43,12 +43,18 @@ public class ClienteDetailDTO extends ClienteDTO
     {
         super(clienteEntity);
         
-        this.tarjetaPuntos = new TarjetaPuntosDTO(clienteEntity.getTarjetaPuntos());
-        
-        List<MedioPagoEntity> mediosPagoLogic = clienteEntity.getMediosPago();
-        for(MedioPagoEntity medioPagoLogic : mediosPagoLogic) 
+        if(clienteEntity.getTarjetaPuntos()!=null)
         {
-            this.mediosPago.add(new MedioPagoDTO(medioPagoLogic));
+            this.tarjetaPuntos = new TarjetaPuntosDTO(clienteEntity.getTarjetaPuntos());
+        }
+        
+        if(clienteEntity.getMediosPago()!=null)
+        {
+            List<MedioPagoEntity> mediosPagoLogic = clienteEntity.getMediosPago();
+            for(MedioPagoEntity medioPagoLogic : mediosPagoLogic) 
+            {
+              this.mediosPago.add(new MedioPagoDTO(medioPagoLogic));
+            }
         }
     }
     
@@ -56,8 +62,11 @@ public class ClienteDetailDTO extends ClienteDTO
     {
         ClienteEntity clienteEntity = super.toEntity();
         
-        clienteEntity.setTarjetaPuntos(this.tarjetaPuntos.toEntity());
-        
+        if(tarjetaPuntos!=null)
+        {
+            clienteEntity.setTarjetaPuntos(this.tarjetaPuntos.toEntity());
+        }  
+         
         for(MedioPagoDTO medioPagoDTO: mediosPago)
         {
             clienteEntity.getMediosPago().add(medioPagoDTO.toEntity());
