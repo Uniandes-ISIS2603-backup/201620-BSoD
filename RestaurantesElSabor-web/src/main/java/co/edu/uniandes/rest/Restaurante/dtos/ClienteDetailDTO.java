@@ -7,6 +7,7 @@ package co.edu.uniandes.rest.Restaurante.dtos;
 
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.MedioPagoEntity;
+import co.edu.uniandes.bsod.restauranteselsabor.entities.ReservaEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,23 +19,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class ClienteDetailDTO extends ClienteDTO
 {
-    private Long id;
-    
-    private int documentoIdentidad;
-    
-    private String tipoDocumentoIdentidad;
-    
-    private String name;
-    
-    private String apellidos;
-    
-    private String direccion;
-    
-    private int telefono;
-
     private TarjetaPuntosDTO tarjetaPuntos;
     
     private ArrayList<MedioPagoDTO> mediosPago;
+
+    private ArrayList<ReservaDTO> reservas;    
     
     public ClienteDetailDTO()
     {   super();    }
@@ -56,6 +45,15 @@ public class ClienteDetailDTO extends ClienteDTO
               this.mediosPago.add(new MedioPagoDTO(medioPagoLogic));
             }
         }
+        
+        if(clienteEntity.getReservas()!=null)
+        {
+            List<ReservaEntity> reservasLogic = clienteEntity.getReservas();
+            for(ReservaEntity reservaLogic : reservasLogic) 
+            {
+              this.reservas.add(new ReservaDTO(reservaLogic));
+            }
+        }
     }
     
     public ClienteEntity toEntity()
@@ -72,79 +70,14 @@ public class ClienteDetailDTO extends ClienteDTO
             clienteEntity.getMediosPago().add(medioPagoDTO.toEntity());
         }
         
+        for(ReservaDTO reservaDTO: reservas)
+        {
+            clienteEntity.getReservas().add(reservaDTO.toEntity());
+        }
+        
         return clienteEntity;
     }
-
-    public Long getId() 
-    {
-        return id;
-    }
-
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public int getDocumentoIdentidad() 
-    {
-        return documentoIdentidad;
-    }
-
-    public void setDocumentoIdentidad(int documentoIdentidad) 
-    {
-        this.documentoIdentidad = documentoIdentidad;
-    }
-
-    public String getTipoDocumentoIdentidad() 
-    {
-        return tipoDocumentoIdentidad;
-    }
-
-    public void setTipoDocumentoIdentidad(String tipoDocumentoIdentidad) 
-    {
-        this.tipoDocumentoIdentidad = tipoDocumentoIdentidad;
-    }
     
-    public String getName() 
-    {
-        return name;
-    }
-
-    public void setName(String name) 
-    {
-        this.name = name;
-    }
-
-    public String getApellidos() 
-    {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) 
-    {
-        this.apellidos = apellidos;
-    }
-
-    public String getDireccion() 
-    {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) 
-    {
-        this.direccion = direccion;
-    }
-
-    public int getTelefono() 
-    {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) 
-    {
-        this.telefono = telefono;
-    }
-
     public TarjetaPuntosDTO getTarjetaPuntos() 
     {
         return tarjetaPuntos;
@@ -164,19 +97,30 @@ public class ClienteDetailDTO extends ClienteDTO
     {
         this.mediosPago = mediosPago;
     }
+
+    public ArrayList<ReservaDTO> getReservas() {
+        return reservas;
+    }
+
+    public void setReservas(ArrayList<ReservaDTO> reservas) {
+        this.reservas = reservas;
+    }
+    
+    
     
     @Override
     public String toString() 
     {
-    	return "{ \"id\" : " + id + ", "+
-                "documentoIdentidad : "+ documentoIdentidad +", "+
-                "tipoDocumentoIdentidad : \""+tipoDocumentoIdentidad+"\", "+
-                "name : \""+name+"\", "+
-                "apellidos : \""+apellidos+"\", "+
-                "direccion : \""+direccion+"\", "+
-                "telefono : "+ telefono + ", "+
+    	return "{ id : " + getId() + ", "+
+                "documentoIdentidad : "+ getDocumentoIdentidad() +", "+
+                "tipoDocumentoIdentidad : \""+getTipoDocumentoIdentidad()+"\", "+
+                "name : \""+getName()+"\", "+
+                "apellidos : \""+getApellidos()+"\", "+
+                "direccion : \""+getDireccion()+"\", "+
+                "telefono : "+ getTelefono()+ ", "+
                 "tarjetaPuntos : "+ tarjetaPuntos + ", "+
-                "mediosPago : "+ mediosPago +" }";
+                "mediosPago : "+ mediosPago +", "+
+                "reservas : "+ reservas+ "}";
     }
     
 }

@@ -50,15 +50,15 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<ClienteDTO> getClientes() throws RestauranteLogicException 
+    public List<ClienteDetailDTO> getClientes() throws RestauranteLogicException 
     {
-        ArrayList<ClienteDTO> clientesWeb = new ArrayList<>();
+        ArrayList<ClienteDetailDTO> clientesWeb = new ArrayList<>();
         List<ClienteEntity> clientesLogica = clienteLogic.getClientes();
         
         for(ClienteEntity clienteLogica: clientesLogica)
         {
-            ClienteDTO clienteDTO = new ClienteDTO(clienteLogica);
-            clientesWeb.add(clienteDTO);
+            ClienteDetailDTO clienteDetailDTO = new ClienteDetailDTO(clienteLogica);
+            clientesWeb.add(clienteDetailDTO);
         }
         return clientesWeb;
     }
@@ -71,7 +71,7 @@ public class RecursoCliente
      */
     @GET
     @Path("{idCliente}")
-    public ClienteDTO getCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException 
+    public ClienteDetailDTO getCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException 
     {
         ClienteEntity clienteEntity = clienteLogic.getCliente(pId);
         return new ClienteDetailDTO(clienteEntity);
@@ -96,7 +96,7 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe un cliente con el id dado.
      */
     @PUT
-    public ClienteDTO updateCliente(ClienteDTO pClienteAActualizar) throws RestauranteLogicException
+    public ClienteDetailDTO updateCliente(ClienteDTO pClienteAActualizar) throws RestauranteLogicException
     {
         return new ClienteDetailDTO(clienteLogic.updateCliente(pClienteAActualizar.toEntity()));
     }
