@@ -31,7 +31,6 @@ public class ClientePersistence
     public ClienteEntity create(ClienteEntity clienteEntity)
     {
         LOGGER.info("Creando un CLIENTE nuevo");
-        LOGGER.info(clienteEntity.toString());
         em.persist(clienteEntity);
         LOGGER.info("CLIENTE creado");
         return clienteEntity;

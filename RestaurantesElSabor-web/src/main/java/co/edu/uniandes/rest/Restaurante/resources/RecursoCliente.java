@@ -15,6 +15,7 @@ import co.edu.uniandes.rest.Restaurante.dtos.ClienteDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.ClienteDetailDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.MedioPagoDTO;
 import co.edu.uniandes.rest.Restaurante.dtos.TarjetaPuntosDetailDTO;
+import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -49,15 +50,15 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si no existe una lista de clientes en el sistema.
      */
     @GET
-    public List<ClienteDetailDTO> getClientes() throws RestauranteLogicException 
+    public List<ClienteDTO> getClientes() throws RestauranteLogicException 
     {
-        ArrayList<ClienteDetailDTO> clientesWeb = new ArrayList<>();
+        ArrayList<ClienteDTO> clientesWeb = new ArrayList<>();
         List<ClienteEntity> clientesLogica = clienteLogic.getClientes();
         
         for(ClienteEntity clienteLogica: clientesLogica)
         {
-            ClienteDetailDTO clienteDetailDTO = new ClienteDetailDTO(clienteLogica);
-            clientesWeb.add(clienteDetailDTO);
+            ClienteDTO clienteDTO = new ClienteDTO(clienteLogica);
+            clientesWeb.add(clienteDTO);
         }
         return clientesWeb;
     }
@@ -70,7 +71,7 @@ public class RecursoCliente
      */
     @GET
     @Path("{idCliente}")
-    public ClienteDetailDTO getCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException 
+    public ClienteDTO getCliente(@PathParam("idCliente") Long pId) throws RestauranteLogicException 
     {
         ClienteEntity clienteEntity = clienteLogic.getCliente(pId);
         return new ClienteDetailDTO(clienteEntity);
@@ -83,10 +84,10 @@ public class RecursoCliente
      * @throws LogicaRestauranteException Si ya existe un cliente con ese id.
      */
     @POST
-    public ClienteDetailDTO createCliente(ClienteDTO pNuevoCliente) throws RestauranteLogicException
+    public ClienteDTO createCliente(ClienteDTO pNuevoCliente) throws RestauranteLogicException
     {
         ClienteEntity clienteEntity = pNuevoCliente.toEntity();
-        return new ClienteDetailDTO(clienteLogic.createCliente(clienteEntity));
+        return new ClienteDTO(clienteLogic.createCliente(clienteEntity));
     }
     
     /**

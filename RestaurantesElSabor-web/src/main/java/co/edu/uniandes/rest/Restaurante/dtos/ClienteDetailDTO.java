@@ -168,7 +168,7 @@ public class ClienteDetailDTO extends ClienteDTO
     @Override
     public String toString() 
     {
-    	return "{ id : " + id + ","+
+    	return "{ \"id\" : " + id + ", "+
                 "documentoIdentidad : "+ documentoIdentidad +", "+
                 "tipoDocumentoIdentidad : \""+tipoDocumentoIdentidad+"\", "+
                 "name : \""+name+"\", "+
