@@ -17,6 +17,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 /**
  *
@@ -48,13 +49,14 @@ public class RecursoTarjetaPuntos
         return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.updateTarjetaPuntos(idCliente, pTarjetaPuntosAActualziar.toEntity()));
     }
     
-    /*
+    
     @PUT
-    public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws RestauranteLogicException  
+    @Path("sumaPuntos")
+    public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, @QueryParam("compra") int pCompra) throws RestauranteLogicException  
     {
         return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(idCliente, pCompra));
     }
-    */
+    
     
     @DELETE
     public void deleteTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException 

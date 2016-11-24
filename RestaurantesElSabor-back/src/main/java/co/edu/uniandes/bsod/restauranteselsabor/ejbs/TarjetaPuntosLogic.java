@@ -38,11 +38,13 @@ public class TarjetaPuntosLogic implements ITarjetaPuntosLogic
         {
             throw new RestauranteLogicException("Se intento crear la tarjeta de puntos de un cliente que ya tenia una.");
         }
+        System.out.println("SI ENTRO AL MOMETNO DE LA VERDAD");
         
         TarjetaPuntosEntity tarjetaPuntos = new TarjetaPuntosEntity();
         tarjetaPuntos.setCliente(cliente);
         cliente.setTarjetaPuntos(tarjetaPuntos);
         persistence.create(tarjetaPuntos);
+        
         return cliente.getTarjetaPuntos();
     }
     

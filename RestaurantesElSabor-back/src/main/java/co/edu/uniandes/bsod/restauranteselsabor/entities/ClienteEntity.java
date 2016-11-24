@@ -5,11 +5,15 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -32,7 +36,8 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private int telefono;
     
     @PodamExclude
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private TarjetaPuntosEntity tarjetaPuntos;
     
     @PodamExclude
@@ -40,7 +45,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private List<MedioPagoEntity> mediosPago = new ArrayList<>();
 
     @PodamExclude
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservaEntity> reservas = new ArrayList<>();
     
     public int getDocumentoIdentidad()

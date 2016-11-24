@@ -21,7 +21,7 @@ import javax.inject.Inject;
 public class ClienteLogic implements IClienteLogic
 {
     @Inject private ClientePersistence persistence;
-    
+   
     public List<ClienteEntity> getClientes()
     {
         return persistence.findAll();
@@ -53,10 +53,9 @@ public class ClienteLogic implements IClienteLogic
     public void deleteCliente(Long id) throws RestauranteLogicException
     {
         ClienteEntity cliente = persistence.find(id);
-        if(cliente==null)
-        {
-            throw new RestauranteLogicException("Se intento eliminar un cliente que no existe.");
-        }
+        if(cliente==null) throw new RestauranteLogicException("Se intento eliminar un cliente que no existe.");
+        
+        if(cliente.getTarjetaPuntos()!=null) throw new RestauranteLogicException("Primero elimine la tarjeta de puntos del cliente.");
         persistence.delete(id);
     }
     
