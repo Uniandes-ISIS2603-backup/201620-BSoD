@@ -45,7 +45,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     private List<MedioPagoEntity> mediosPago = new ArrayList<>();
 
     @PodamExclude
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente" , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservaEntity> reservas = new ArrayList<>();
     
     public int getDocumentoIdentidad()

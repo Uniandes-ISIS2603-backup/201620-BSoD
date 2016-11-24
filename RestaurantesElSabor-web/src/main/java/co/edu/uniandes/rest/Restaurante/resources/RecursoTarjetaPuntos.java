@@ -48,13 +48,13 @@ public class RecursoTarjetaPuntos
         return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.updateTarjetaPuntos(idCliente, pTarjetaPuntosAActualziar.toEntity()));
     }
     
-    /*
+    
     @PUT
     public TarjetaPuntosDetailDTO sumarPuntosTarjetaPuntos(@PathParam("idCliente") Long idCliente, int pCompra) throws RestauranteLogicException  
     {
         return new TarjetaPuntosDetailDTO(tarjetaPuntosLogic.sumarPuntosTarjetaPuntos(idCliente, pCompra));
     }
-    */
+    
     
     @DELETE
     public void deleteTarjetaPuntos(@PathParam("idCliente") Long idCliente) throws RestauranteLogicException 
