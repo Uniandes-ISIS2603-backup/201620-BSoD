@@ -9,6 +9,7 @@ import co.edu.uniandes.bsod.restauranteselsabor.api.IClienteLogic;
 import co.edu.uniandes.bsod.restauranteselsabor.entities.ClienteEntity;
 import co.edu.uniandes.bsod.restauranteselsabor.exceptions.RestauranteLogicException;
 import co.edu.uniandes.bsod.restauranteselsabor.persistence.ClientePersistence;
+import co.edu.uniandes.bsod.restauranteselsabor.persistence.TarjetaPuntosPersistence;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -21,6 +22,8 @@ import javax.inject.Inject;
 public class ClienteLogic implements IClienteLogic
 {
     @Inject private ClientePersistence persistence;
+    
+    @Inject private TarjetaPuntosLogic tarjetaPuntosLogic;
     
     public List<ClienteEntity> getClientes()
     {
@@ -53,10 +56,9 @@ public class ClienteLogic implements IClienteLogic
     public void deleteCliente(Long id) throws RestauranteLogicException
     {
         ClienteEntity cliente = persistence.find(id);
-        if(cliente==null)
-        {
-            throw new RestauranteLogicException("Se intento eliminar un cliente que no existe.");
-        }
+        if(cliente==null) throw new RestauranteLogicException("Se intento eliminar un cliente que no existe.");
+        
+        if(cliente.getTarjetaPuntos()!=null) tarjetaPuntosLogic.deleteTarjetaPuntos(id);
         persistence.delete(id);
     }
     
