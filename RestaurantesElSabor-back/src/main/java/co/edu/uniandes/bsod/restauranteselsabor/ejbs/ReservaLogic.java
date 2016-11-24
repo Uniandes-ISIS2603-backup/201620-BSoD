@@ -70,17 +70,19 @@ public class ReservaLogic implements IReservaLogic{
 
     @Override
     public ReservaEntity createReserva(Long idSucursal,Long idCliente, ReservaEntity nuevaReserva) throws RestauranteLogicException {
-       ReservaEntity alreadyExist = getReserva(idCliente, nuevaReserva.getId());
-        if (alreadyExist != null) {
-            throw new RestauranteLogicException("Ya existe una reserva con ese id");
-        } else {
+        try{
+       getReserva(idCliente, nuevaReserva.getId());
+       throw new RestauranteLogicException("Ya existe una reserva con ese id");
+        }
+        catch(RestauranteLogicException e){
+       
             SucursalEntity suc = sucursalLogic.getSucursal(idSucursal);
             ClienteEntity  cli = clienteLogic.getCliente(idCliente);
             nuevaReserva.setCliente(cli);
             nuevaReserva.setSucursal(suc);
             nuevaReserva = persistence.create(nuevaReserva);
+            return nuevaReserva;
         }
-        return nuevaReserva;
     }
 
     @Override

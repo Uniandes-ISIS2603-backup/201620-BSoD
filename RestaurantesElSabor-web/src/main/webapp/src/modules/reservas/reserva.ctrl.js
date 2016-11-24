@@ -49,7 +49,7 @@
                 if (id == null) {
                     
                     // ejecuta POST en el recurso REST
-                    return $http.post(clienteContext+ "/" + $stateParams.clienteId + $scope.reservaContext + "/sucursal/" + currentRecord.sucursal., currentRecord)
+                    return $http.post(clienteContext+ "/" + $stateParams.clienteId + $scope.reservaContext + "/sucursal/" + $stateParams.clienteId, currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
