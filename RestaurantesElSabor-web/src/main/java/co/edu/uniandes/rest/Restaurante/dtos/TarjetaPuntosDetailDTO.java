@@ -18,12 +18,6 @@ public class TarjetaPuntosDetailDTO extends TarjetaPuntosDTO
 {   
     private ClienteDTO cliente;
     
-    private Long id;
-    
-    private Date fechaCaducidad;
-    
-    private int acumulado;
-    
     public TarjetaPuntosDetailDTO()
     {   super();    }
     
@@ -51,50 +45,22 @@ public class TarjetaPuntosDetailDTO extends TarjetaPuntosDTO
     {
         this.cliente = cliente;
     }
-
-    public Long getId() 
-    {
-        return id;
-    }
-
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Date getFechaCaducidad() 
-    {
-        return fechaCaducidad;
-    }
-
-    public void setFechaCaducidad(Date fechaCaducidad) 
-    {
-        this.fechaCaducidad = fechaCaducidad;
-    }
-
-    public int getAcumulado() 
-    {
-        return acumulado;
-    }
-
-    public void setAcumulado(int acumulado) 
-    {
-        this.acumulado = acumulado;
-    }
     
     public void sumarAcumulado(int pCompra)
     {
+        int acum = getAcumulado();
         int suma = pCompra/10000;
-        this.acumulado += suma;
+        acum += suma;
+        setAcumulado(acum);
     }
     
     @Override
     public String toString() 
     {
     	return "{ cliente : "+ cliente +","+
-                "id : "+ id +","+
-                "fechaCaducidad : "+fechaCaducidad+", "+
-                "acumulado: "+acumulado+" }";
+                "id : "+ getId() +","+
+                "fechaCaducidad : "+getFechaCaducidad()+", "+
+                "acumulado: "+getAcumulado()+" }";
     }
     
 }

@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,7 @@ public class ClienteEntity extends BaseEntity implements Serializable
     
     @PodamExclude
     @OneToOne
+    @JsonBackReference
     private TarjetaPuntosEntity tarjetaPuntos;
     
     @PodamExclude

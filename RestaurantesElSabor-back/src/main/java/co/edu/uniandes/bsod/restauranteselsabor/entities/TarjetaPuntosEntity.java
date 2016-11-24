@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.bsod.restauranteselsabor.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
@@ -22,6 +25,7 @@ public class TarjetaPuntosEntity extends BaseEntity implements Serializable
 {
     @PodamExclude
     @OneToOne
+    @JsonManagedReference
     private ClienteEntity cliente;
     
     @Temporal(TemporalType.TIMESTAMP)
