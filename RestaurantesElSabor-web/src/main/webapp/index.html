@@ -69,11 +69,38 @@
         <!--FAVICON-->
         
         <link rel='icon' type='image/x-icon' href='images/favicon.ico'/>
+        <script src="particulas/particles.min.js"></script>
+        <style>
+            html,
+            body {
+                margin: 0;
+            }
+
+            #myCanvas {
+                position: absolute;
+                display: block;
+                top: 0;
+                left: 0;
+                z-index: 0;
+            }
+
+        </style>
         
+        <script>
+            window.onload = function() {
+  Particles.init({
+    selector: '#myCanvas',
+    color: '#0f9976',
+    sizeVariations: '3',
+    maxParticles: '300'
+  });
+};
+        </script>
+            
     </head>
  <body>
 
-
+<canvas id="myCanvas"></canvas>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -97,12 +124,7 @@
                 <li><a ui-sref="sucursalList">Listar</a></li>
             </ul></li>
             
-      <!--reserva-->
-      <li class="active dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Reserva <span class="caret"></span></a>
-       <ul class="dropdown-menu">
-                <li><a ui-sref="reservaCreate">Agregar</a></li>
-                <li><a ui-sref="reservaList">Listar</a></li>
-            </ul></li>
+      
             
        <!--plato-->
     

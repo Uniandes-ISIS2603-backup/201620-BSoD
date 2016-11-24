@@ -34,7 +34,7 @@ import javax.ws.rs.WebApplicationException;
  *Clase que implementa el recurso REST correspondiente a "reservas".
  *
  * Este recurso tiene la ruta "reservas". Al ejecutar la aplicación, el recurse
- * será accesibe a través de la ruta "/api/reservas"
+ * será accesibe a través de la ruta "/api/clientes/{idCliente}/reservas"
  * @author aj.paredes10
  */
 
@@ -99,10 +99,10 @@ public class RecursoReserva {
     }
     @GET
     @Path ("/{dia: \\d+}/{mes: \\d+}/{anho: \\d+}")
-    public List<ReservaDetailDTO> getReservasByDate(@PathParam ("dia")int dia, @PathParam ("mes")int mes, @PathParam ("anho")int anho) throws RestauranteLogicException {
+    public int getReservasByDate(@PathParam ("dia")int dia, @PathParam ("mes")int mes, @PathParam ("anho")int anho) throws RestauranteLogicException {
         Date fecha = new Date(anho, mes, dia);
         List<ReservaEntity> reservas = reservaLogic.getReservasEnFecha(fecha);
-        return listEntityDTO(reservas);
+        return listEntityDTO(reservas).size();
     }
     /**
      * Crea una reserva.
@@ -111,7 +111,7 @@ public class RecursoReserva {
      * @throws LogicaRestauranteException si la reserva ya existe.
      */
     @POST
-    @Path("/sucursal/{idSucursal: \\d+}/")
+    @Path("/sucursal/{idSucursal: \\d+}")
     public ReservaDTO createReserva(@PathParam ("idSucursal")Long idSucursal, ReservaDTO nuevaReserva) throws RestauranteLogicException  {
         existsSucursal(idSucursal);
         existsCliente(idCliente);

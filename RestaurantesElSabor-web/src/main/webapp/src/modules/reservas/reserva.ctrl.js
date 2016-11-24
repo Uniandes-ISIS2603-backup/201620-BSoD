@@ -47,9 +47,9 @@
                 
                 // si el id es null, es un registro nuevo, entonces lo crea
                 if (id == null) {
-
+                    
                     // ejecuta POST en el recurso REST
-                    return $http.post(clienteContext, currentRecord)
+                    return $http.post(clienteContext+ "/" + $stateParams.clienteId + $scope.reservaContext + "/sucursal/" + currentRecord.sucursal., currentRecord)
                         .then(function () {
                             // $http.post es una promesa
                             // cuando termine bien, cambie de estado
