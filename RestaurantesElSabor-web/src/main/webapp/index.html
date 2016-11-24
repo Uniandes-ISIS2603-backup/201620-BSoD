@@ -81,7 +81,17 @@
                 display: block;
                 top: 0;
                 left: 0;
-                z-index: 0;
+                z-index: -1;
+            }
+            
+            #img{
+                 background-image: url(http://www.restaurantemartinfierro.com/sites/restaurantemartinfierro.com/files/restaurantes-orense-comedor-principal.jpg);
+               
+                 height: 600px;
+            }
+            
+            p1{
+                font-size: 16;
             }
 
         </style>
@@ -90,8 +100,8 @@
             window.onload = function() {
   Particles.init({
     selector: '#myCanvas',
-    color: '#0f9976',
-    sizeVariations: '3',
+    color: '#ff9523',
+    sizeVariations: '5',
     maxParticles: '300'
   });
 };
@@ -134,7 +144,9 @@
 
       <div ui-view="mainView">
           <div class="container"><h1>Restaurantes el Sabor</h1>
-              <p1>Bienvenido</p1>
+              <p1>Bienvenido a nuestro restaurante, en esta pagina podras realizar reservas para nuestras exclusivas sucursales, ademas de solicitar domcilios </p1>
+              <br><br>
+              <div id ="img" ></div>
       </div>
 
       </div>
