@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +25,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class TarjetaPuntosEntity extends BaseEntity implements Serializable
 {
     @PodamExclude
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JsonManagedReference
     private ClienteEntity cliente;
     
